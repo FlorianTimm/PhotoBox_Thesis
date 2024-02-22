@@ -84,29 +84,29 @@
 \begin{document}
 \pagenumbering{Roman}
 \begin{titlepage}
-\begin{center}
-\renewcommand{\arraystretch}{0.7}
-\begin{tabular}{lr}
-\begin{tabular}{l}
-\includegraphics[width=0.35\textwidth]{img/hculogo_grau.png}
-\end{tabular} \hspace{1.2cm} &
-\begin{tabular}{r}
-Universität für \\Baukunst und Metropolenentwicklung\\
-Henning-Voscherau-Platz 1\\
-20457 Hamburg\\
-\end{tabular}
-\end{tabular}\\\vspace{5cm}
-\doublespacing 
-{\huge\bfseries Aufbau eines photogrammetrischen Messsystems unter Verwendung von Rasberry-Pi-Kameras als Low-Cost-Sensoren }\vspace{0.5cm}\\
+    \begin{center}
+        \renewcommand{\arraystretch}{0.7}
+        \begin{tabular}{lr}
+            \begin{tabular}{l}
+                \includegraphics[width=0.35\textwidth]{img/hculogo_grau.png}
+            \end{tabular} \hspace{1.2cm} &
+            \begin{tabular}{r}
+                Universität für           \\Baukunst und Metropolenentwicklung\\
+                Henning-Voscherau-Platz 1 \\
+                20457 Hamburg             \\
+            \end{tabular}
+        \end{tabular}\\\vspace{5cm}
+        \doublespacing
+        {\huge\bfseries Aufbau eines photogrammetrischen Messsystems unter Verwendung von Rasberry-Pi-Kameras als Low-Cost-Sensoren }\vspace{0.5cm}\\
 
-{\large\bfseries Geodäsie und Geoinformatik\\Masterthesis\\Sommersemester 2024}\vspace{2cm}\\
-{\large Florian Timm}
+        {\large\bfseries Geodäsie und Geoinformatik\\Masterthesis\\Sommersemester 2024}\vspace{2cm}\\
+        {\large Florian Timm}
 
-% hspace und vspace bedeutet horizontaler bzw. vertikaler Abstand
-\vspace{7cm}
-Abgabedatum: 01. August 2024
-\end{center}
-\setcounter{page}{0} % Seitenzahl wird auf 0 gesetzt 
+        % hspace und vspace bedeutet horizontaler bzw. vertikaler Abstand
+        \vspace{7cm}
+        Abgabedatum: 01. August 2024
+    \end{center}
+    \setcounter{page}{0} % Seitenzahl wird auf 0 gesetzt 
 \end{titlepage}
 
 
@@ -143,8 +143,8 @@ Photogrammetry offers the possibility of creating 3D models with relatively simp
 This paper explores the solution of using multiple low-cost cameras mounted on a frame. Cameras for the Raspberry Pi are used to build a photogrammetric measurement system for small objects. This involves programming an interface to synchronise the cameras and developing a way to calibrate the cameras. The end result should ideally enable even a photogrammetric layman to produce 3D models of acceptable resolution and quality quickly and without a long training period.
 
 % Mehrere gleichzeitig zitieren
-\providecommand{\citeTwo}[4]{\citep[{\citealp[#1]{#2};}][#3]{#4}} 
-\providecommand{\citeThree}[6]{\citep[{\citealp[#1]{#2}; \citealp[#3]{#4};}][#5]{#6}} 
+\providecommand{\citeTwo}[4]{\citep[{\citealp[#1]{#2};}][#3]{#4}}
+\providecommand{\citeThree}[6]{\citep[{\citealp[#1]{#2}; \citealp[#3]{#4};}][#5]{#6}}
 \providecommand{\citeFour}[8]{\citep[{\citealp[#1]{#2}; \citealp[#3]{#4}; \citealp[#5]{#6};}][#7]{#8}}
 
 \newpage
@@ -153,11 +153,11 @@ This paper explores the solution of using multiple low-cost cameras mounted on a
 \newpage
 
 \pagenumbering{arabic}
-\setcounter{page}{1} 
+\setcounter{page}{1}
 
 \chapter{Konzept}
 In Museen besteht vielfach der Wunsch, ihre Exponate zu digitalisieren. Entsprechende Handreichungen des Deutschen Museumsbundes legen auch die Digitalisierung als 3D-Modelle nahe, verweisen aber auf Aufwand und Format-Probleme \citep[S. 43]{handreichung_digital}.
-Auch bei Ausgrabungen aber auch in anderen Bereichen besteht der Bedarf dreidimensionale Modelle einfach und kostengünstig zu erfassen. 
+Auch bei Ausgrabungen aber auch in anderen Bereichen besteht der Bedarf dreidimensionale Modelle einfach und kostengünstig zu erfassen.
 
 Diese Möglichkeit soll das im Rahmen dieser Arbeit entwickelte Kamerasystem bieten. Es soll mittels Photogrammetrie ermöglichen, mit geringen personellen Aufwand kleine Objekte bis etwa 40~cm Durchmesser zu erfassen. Die Bedienung soll dabei laiensicher und mit nur kurzer Einarbeitungszeit möglich sein, dass System also die meisten Schritte selbstständig durchführen. Auch der Nachbau soll mit etwas handwerklichen Geschick möglich sein. Um Lizenzkosten zu sparen, soll die Möglichkeit auf OpenSource-Software zu setzen geprüft werden.
 
@@ -170,29 +170,29 @@ Das Erzeugen des 3D-Modelles basiert auf der Verknüpfung von Bildern aus versch
 Dieses Kapitel beschreibt die hierfür notwendigen Bedingungen und die Grundlagen der Rekonstruktion des Objektes als 3D-Modell.
 
 \begin{figure}
- \centering
- \includegraphics[width=0.8\textwidth]{./img/Ablauf.pdf}
-\centering
- \caption{Ablauf der Bildverknüpfung, nach \citealt[S. 492]{luhmann}} %Bildunterschrift
- \label{img:ablauf} %ID fürs Bild
+    \centering
+    \includegraphics[width=0.8\textwidth]{./img/Ablauf.pdf}
+    \centering
+    \caption{Ablauf der Bildverknüpfung, nach \citealt[S. 492]{luhmann}} %Bildunterschrift
+    \label{img:ablauf} %ID fürs Bild
 \end{figure}
 
 \section{Innere Orientierung}
 \label{s:innereorientierung}
 Aus der Position eines Punktes in einem Bild kann vereinfacht gedacht ähnlich einer Messung mit einem Theodolit die Richtung des Punktes in Relation zu der Kamera bestimmt werden. Damit diese Berechnung möglich wird, müssen die Parameter der Kamera bekannt sein, die sogenannte innere Orientierung. Sie beschreibt die Abbildung der Kamera mathematisch. Wichtigste Parameter sind hierbei die Lage des Bildhauptpunktes und die Kamerakonstante. Außerdem zählen hierzu auch die Parameter, die die Bildfehler wie die Verzeichnung, beschreiben. \citep[S. 179f]{luhmann}
 
-Die innere Orientierung kann während der Messung beispielsweise mittels Bündel\-block\-ausgleichung bestimmt werden. Bedingung hierfür ist jedoch, dass die innere Orientierung stabil ist und sich nicht während der Messung ändert \citep[S. 181f]{luhmann}. 
+Die innere Orientierung kann während der Messung beispielsweise mittels Bündel\-block\-ausgleichung bestimmt werden. Bedingung hierfür ist jedoch, dass die innere Orientierung stabil ist und sich nicht während der Messung ändert \citep[S. 181f]{luhmann}.
 
-Jede Einstellung der Kameraoptik verändert die innere Orientierung und auch jede Kamera,auch einer Modellreihe, kann je nach Genauigkeitsanspruch als unterschiedlich angesehen werden.
-Änderungen können sich beispielsweise durch Umfokussierung oder die Nutzung eines optischen Zoom ergeben, aber auch durch einen mechanisch instabilen Aufbau der Kameras. Daher sollten die Bilder möglichst mit einer Kamera mit festen Einstellungen (Brennweite, Fokus, Blende, Objektiv) aufgenommen werden. Änderungen der Empfindlichkeit (ISO-Zahl) oder Belichtungszeit sind unproblematisch für die innere Orientierung \citep[S. 176]{luhmann}. 
+Jede Einstellung der Kameraoptik verändert die innere Orientierung und auch jede Kamera,auch einer Modellreihe, kann je nach Genauigkeitsanspruch als unterschiedlich angesehen werden. Änderungen können sich beispielsweise durch Umfokussierung oder die Nutzung eines optischen Zoom ergeben, aber auch durch einen mechanisch instabilen Aufbau der Kameras. Daher sollten die Bilder möglichst mit einer Kamera mit festen Einstellungen (Brennweite, Fokus, Blende, Objektiv) aufgenommen werden. Änderungen der Empfindlichkeit (ISO-Zahl) oder Belichtungszeit sind unproblematisch für die innere Orientierung \citep[S. 176]{luhmann}.
 
 
 \section{Bilder}
-Die Berechnung der Tiefeninformationen ist bei Structure-from-Motion nur möglich aufgrund der Bewegung der Kamera zwischen den Bildern. Um möglichst gute Schnitte zur Verfügung zu haben und die innere und äußere Orientierung möglichst gut berechnen zu können, müssen diese Bilder einige Bedingungen erfüllen.
+\label{s:bilder}
+
+Die Berechnung der Tiefeninformationen ist nur möglich, sofern der Punkt in mindestens einem weiteren Bild abgebildet ist. Die Genauigkeit der Berechnung ist vom Schnittwinkel dieser beiden Strahlen abhängig. Um möglichst gute Schnitte zur Verfügung zu haben und die innere und äußere Orientierung möglichst gut berechnen zu können, müssen diese Bilder einige Bedingungen erfüllen.
 
 \subsubsection{Überlappung und Bildinhalte}
-Da die Bilder durch identische Punkte verbunden werden, müssen die Bildinhalte sich überlappen. Außerdem sollten alle Bilder strukturierte Bereiche aufweisen. \citep[S. 146f]{opendronemap}
-
+Da die Bilder durch identische Punkte verbunden werden, müssen die Bildinhalte sich überlappen. Die automatische Identifikation von identischen Punkten ist auf verschiedene Weisen möglich: Entweder durch die Nutzung von codierten Passpunkten wie ArUco-Markern oder konzentrischen Passpunkten nach \cite{schneider}. Alternativ können auch eine Merkmalsextraktion zur Indentifikation von gemeinsamen Punkten genutzt werden, beispielsweise durch die SIFT-Methode. Hierfür muss die oberfläche aber genügend Texturen aufweisen. \citep[S. 478]{luhmann}
 
 \subsubsection{Belichtung}
 und bei sich stark ändernden Helligkeitsverhältnissen auch hilfreich, jedoch wird hierdurch auch die Helligkeit der Verknüpfungspunkte verändert, was wiederum problematisch sein kann. Entsprechend ist es empfehlenswert bei gleichmäßiger Beleuchtung, die sich auch nicht ändern sollte, die Bilder zu erstellen - also beispielsweise bei bedeckten Himmel.
@@ -232,19 +232,21 @@ grobe Filterung
 Die Abbildung eines Punktes auf einem Bild wird durch die Abbildungsgleichung beschrieben. In der Matrizenrechnung ergibt sich dieser aus der Multiplikation mit der Projektionsmatrix $P$. Diese ergibt sich aus der Kameramatrix $K$, der Rotation $R$ und dem Projektionszentrum $X_0$. (siehe \autoref{abbildungsgleichung}, nach \citealp[S. 244]{hartley} und \citealp[S. 288]{luhmann4})
 
 \begin{align}
-\label{abbildungsgleichung}
-    x' &= P \cdot X\\
-    P &= K \cdot [R|X_0] \\
-    P &= 
+    \label{abbildungsgleichung}
+    x' & = P \cdot X       \\
+    P  & = K \cdot [R|X_0] \\
+    P  & =
     \begin{bmatrix}
-    c_x & 0 & x'_0 \\
-    0 & c_y & y'_0 \\
-    0 & 0 & 1
-    \end{bmatrix} \cdot \begin{bmatrix}
-    r_11 & r_21 & r_31 & X_0 \\
-    r_12 & r_22 & r_32 & Y_0 \\
-    r_13 & r_23 & r_33 & Z_0 \\
-    \end{bmatrix} 
+        c_x & 0   & x'_0 \\
+        0   & c_y & y'_0 \\
+        0   & 0   & 1
+    \end{bmatrix}
+    \cdot
+    \begin{bmatrix}
+        r_11 & r_21 & r_31 & X_0 \\
+        r_12 & r_22 & r_32 & Y_0 \\
+        r_13 & r_23 & r_33 & Z_0 \\
+    \end{bmatrix}
 \end{align}
 
 Um die Beziehung zwischen zwei Bildern aufzustellen, kann man die Abbildungsgleichung nutzen. Da es hier nur um die Beziehung zwischen zwei Bildern geht, kann die Rotation und Translation des ersten Bildes auf 0 gesetzt werden ($R$ ist dann eine 3x3-Einheitsmatrix und $X_0$ ein Nullvektor). $X_0$ des zweiten Bildes wird zur Translation zwischen den beiden Bildern. \citep[S. 326]{luhmann4}
@@ -252,7 +254,7 @@ Um die Beziehung zwischen zwei Bildern aufzustellen, kann man die Abbildungsglei
 \subsubsection{Fundamental-/Essentielle Matrix}
 Die Fundamentalmatrix beschreibt das Verhältnis von identischen Punkten in zwei Bildern zueinander. Sie kann genutzt werden, um die Drehung und Verschiebung zwischen zwei Aufnahmeorten zu bestimmen. Die Formel für die Fundamentalmatrix lautet:
 \begin{align}
-x'^T \cdot F \cdot x'' &= 0
+    x'^T \cdot F \cdot x'' & = 0
 \end{align}
 Sie unterscheidet sich nur von der Essentiellen Matrix in der Eigenschaft, dass bei der Essentiellen Matrix die Kameraparameter bekannt sein müssen. Diese werden dann auf die Bildkoordinaten angewendet und $x'$ und $x''$ werden so unabhängig (normalisiert) von den Kameraeinstellungen. Mittels Singulärwertzerlegung lässt sich dann die Rotation und Translation aus der Essentiellen Matrix bestimmen. Im Falle von Bildern die mit Digitalkameras aufgenommen wurden sind die Kameraparameter zumindest näherungsweise aus den EXIF-Daten der Bilder bekannt, sodass dieser Weg hier genutzt werden kann. \citep[S. 257]{hartley}
 
@@ -261,7 +263,7 @@ In der entstandenen Software wurde die Methode verwendet, um die Verknüpfung de
 \subsection{Fundamental-/Essentielle Matrix}
 Die Fundamentalmatrix beschreibt das Verhältnis von identischen Punkten in zwei Bildern zueinander. Sie kann genutzt werden, um die Drehung und Verschiebung zwischen zwei Aufnahmeorten zu bestimmen. Die Formel für die Fundamentalmatrix lautet:
 \begin{align}
-x'^T \cdot F \cdot x'' &= 0
+    x'^T \cdot F \cdot x'' & = 0
 \end{align}
 Sie unterscheidet sich nur von der Essentiellen Matrix in der Eigenschaft, dass bei der Essentiellen Matrix die Kameraparameter bekannt sein müssen. Diese werden dann auf die Bildkoordinaten angewendet und $x'$ und $x''$ werden so unabhängig (normalisiert) von den Kameraeinstellungen. Mittels Singulärwertzerlegung lässt sich dann die Rotation und Translation aus der Essentiellen Matrix bestimmen. Im Falle von Bildern die mit Digitalkameras aufgenommen wurden sind die Kameraparameter zumindest näherungsweise aus den EXIF-Daten der Bilder bekannt, sodass dieser Weg hier genutzt werden kann. \citep[S. 257]{hartley}
 
@@ -279,19 +281,19 @@ Mittels Bündelblockausgleichung können die grob mit den vorher genannten Verfa
 
 \chapter{Aufbau des Messsystemes}
 Die Kameras sollten eine höhe geometrische Auflösung und möglichst stabile innere Orientierung aufweisen. Außerdem sollen sie während einer Messkampagne nicht in ihrer Lage zueinander verändert werden, damit die äußere Orientierung größtenteils unverändert bleibt. Daher ist ein stabiler Rahmen notwendig, an welchem die Kameras verdrehsicher angebracht werden können. Kleinere Restfehler in den Orientierungen können mit ausgeglichen werden.
-Um Ungenauigkeiten durch Bewegungen zu verhindern, müssen die Kameras möglichst zeitgleich auslösen. Daher ist eine gemeinsame Steuerung und Kommunikation zwischen den Kameras notwendig. Außerdem sollen alle Bilder dann auf das Steuerungssystem übertragen werden, hierfür wir eine Form der Datenübertragung benötigt. Damit die Bilder möglichst schattenfrei ausgeleuchtet werden, muss Beleuchtung mit eingeplant werden. Außerdem muss die Stromversorgung der einzelnen Kameras sichergestellt sein. 
+Um Ungenauigkeiten durch Bewegungen zu verhindern, müssen die Kameras möglichst zeitgleich auslösen. Daher ist eine gemeinsame Steuerung und Kommunikation zwischen den Kameras notwendig. Außerdem sollen alle Bilder dann auf das Steuerungssystem übertragen werden, hierfür wir eine Form der Datenübertragung benötigt. Damit die Bilder möglichst schattenfrei ausgeleuchtet werden, muss Beleuchtung mit eingeplant werden. Außerdem muss die Stromversorgung der einzelnen Kameras sichergestellt sein.
 
 Aus diesen Anforderungen ergeben sich die einzelnen Abschnitte dieses Kapitels.
 
 \section{Kameras}
-Als Kameras würde sich für das Raspberry Pi Camera Module 3, gesteuert durch Raspberry Pi Zero W, entschieden. Im Vergleich zu anderen günstigen Kameras wie Webcams oder der ESP32 CAM haben die Kameras eine hohe geometrische Auflösung von 12 Megapixeln und dennoch mit $1,4~\mu m$ relativ große Pixel \citep{raspi_cam_datasheet}, was im subjektiven Eindruck eine sehr gute Bildqualität ergibt. 
+Als Kameras würde sich für das Raspberry Pi Camera Module 3, gesteuert durch Raspberry Pi Zero W, entschieden. Im Vergleich zu anderen günstigen Kameras wie Webcams oder der ESP32 CAM haben die Kameras eine hohe geometrische Auflösung von 12 Megapixeln und dennoch mit $1,4~\mu m$ relativ große Pixel \citep{raspi_cam_datasheet}, was im subjektiven Eindruck eine sehr gute Bildqualität ergibt.
 
 Nachteil und Vorteil zugleich ist, dass die Kamera über einen Autofokus verfügt, der aber auch elektronisch gesteuert manuell fokussieren kann. Dieser verschlechtert die Stabilität der inneren Orientierung (vgl. \autoref{s:innereorientierung}) weiter und wurde daher auch besonders im \todo{Verweis zu Fokusexperimenten} analysiert. Da die Bilder aber Nahbereich zwischen $20$ und $70~\text{cm}$ benötigt werden, ist hier die Schärfentiefe niedrig. Der elektronische Fokus, eine wiederholgenaue und damit mathematisch modellierbare Fokussierung vorausgesetzt, ermöglicht hier, Fokusstacking zu nutzen um den Schärfebereich zu vergrößern.
 
 Weiterer Vorteil der Lösung mit einzelnen Raspberry Pis ist es, dass hierdurch bereits die einzelnen Kameraeinheiten Berechnungen wie das identifizieren von Passpunkten übernehmen könnten und auch durch die Nutzung von Netzwerkverbindungen für die Steuerung das System skalierbar im Sinne der Anzahl der Kameras aber auch der Größenordnung der Abstände zwischen den Kameras.
 
 \section{Rahmen}
-Der Rahmen muss möglichst stabil sein, damit die Kameras sich nicht in ihrer Lage verändern können. Jedoch sollte das System auch weiterhin transportabel - also nicht zu schwer - und veränderbar bleiben, beispielsweise Kameras für Messreihen in ihrer Lage verändert werden. Der Aufbau aus genormten Bauteilen bietet sich an, um hier ggf. den Nachbau einfach ermöglichen zu können. 
+Der Rahmen muss möglichst stabil sein, damit die Kameras sich nicht in ihrer Lage verändern können. Jedoch sollte das System auch weiterhin transportabel - also nicht zu schwer - und veränderbar bleiben, beispielsweise Kameras für Messreihen in ihrer Lage verändert werden. Der Aufbau aus genormten Bauteilen bietet sich an, um hier ggf. den Nachbau einfach ermöglichen zu können.
 
 Als mögliche Materialien kamen Holz, Stahl und Aluminum in Frage. Aufgrund der einfachen Bearbeitung und der genormten Profile, wurde sich für Aluminiumprofile entschieden. Diese gibt es in verschiedenen Ausführungen mit Nuten an den Seitenflächen, so dass eine einfache Montage, aber auch eine Demontage zu Transportzwecken, möglich wird. Außerdem sind diese sehr stabil bei leichtem Gewicht.
 
@@ -299,14 +301,14 @@ Als mögliche Materialien kamen Holz, Stahl und Aluminum in Frage. Aufgrund der 
 
 
 \section{Beleuchtung}
-Um möglichst gute Bilder zu erzeugen, sollte das Objekt gut ausgeleuchtet sein. Eine dunkle Umgebung verlängert die Belichtungszeit, wodurch die Gefahr von unscharfen Aufnahmen steigt und dunklere Bereiche (ungeleichmäßige Ausleuchtung) verursacht Rauschen in diesen Bildbereichen. Daher soll das System eine gleichmäßige Ausleuchtung ermöglichen. Problematisch ist hierbei, dass die Kameras ggf. auch die Lichtquellen mit im Bildbereich haben können, wodurch Linsenreflexionen oder Ausbrennen der Bildbereiche möglich sind. 
+Um möglichst gute Bilder zu erzeugen, sollte das Objekt gut ausgeleuchtet sein. Eine dunkle Umgebung verlängert die Belichtungszeit, wodurch die Gefahr von unscharfen Aufnahmen steigt und dunklere Bereiche (ungeleichmäßige Ausleuchtung) verursacht Rauschen in diesen Bildbereichen. Daher soll das System eine gleichmäßige Ausleuchtung ermöglichen. Problematisch ist hierbei, dass die Kameras ggf. auch die Lichtquellen mit im Bildbereich haben können, wodurch Linsenreflexionen oder Ausbrennen der Bildbereiche möglich sind.
 
 Es wurde sich zur Beleuchtung für einzeln steuerbare LED-Lichtstreifen entschieden. Diese können einfach an den Aluprofilen montiert werden und ermöglichen es, einzelne Bereiche und so ggf. blendende Bereiche abzuschalten.
 
 \section{Stromversorgung}
 Die Raspberry Pis werden mit 5~Volt betrieben. Der Raspberry Pi Zero mit Kamera hatte dabei in Messungen einen maximalen Stromverbrauch von 270~mA aufgezeigt, der Raspberry Pi \todo{Raspi Version/Verbrauch}. Hieraus ergibt sich ein Gesamtstromverbrauch von maximal rund 7~Ampere.
 
-Dieser relativ hohe Strom verursacht bereits starke Spannungsabfälle, wenn dieser über 
+Dieser relativ hohe Strom verursacht bereits starke Spannungsabfälle, wenn dieser über
 
 
 \chapter {Software-Entwicklung}
@@ -343,53 +345,53 @@ Für die Steuerung der Kameras und die anschließende Berechnung des 3D-Modelles
 Entsprechend der benötigten Schritte aus \autoref{c:photogrammmetrie} und \autoref{img:ablauf} wurde die Anwendungsfälle, die die Benutzeroberfläche ermöglichen soll, im Anwendungsfall-Diagramm in \autoref{img:anwendungsfall} zusammengetragen.
 
 \begin{figure}[!htbp]
- \centering
- \includegraphics[width=1\textwidth]{./img/UseCase.pdf}
-\centering
- \caption{Anwendungsfall-Diagramm} %Bildunterschrift
- \label{img:anwendungsfall} %ID fürs Bild
+    \centering
+    \includegraphics[width=1\textwidth]{./img/UseCase.pdf}
+    \centering
+    \caption{Anwendungsfall-Diagramm} %Bildunterschrift
+    \label{img:anwendungsfall} %ID fürs Bild
 \end{figure}
 
 Aus den benötigten Daten wurde das Domänen-Klassendiagramm aus \autoref{img:dokladia} erzeugt. Dieses zeigt vor allem die Abhängigkeiten der einzelnen Datensätze untereinander.
 
 \begin{figure}[!htbp]
- \centering
- \includegraphics[width=1\textwidth]{./img/DomaenenKlassendiagramm.pdf}
-\centering
- \caption{Domänen-Klassendiagramm} %Bildunterschrift
- \label{img:dokladia} %ID fürs Bild
+    \centering
+    \includegraphics[width=1\textwidth]{./img/DomaenenKlassendiagramm.pdf}
+    \centering
+    \caption{Domänen-Klassendiagramm} %Bildunterschrift
+    \label{img:dokladia} %ID fürs Bild
 \end{figure}
 
 \section{Implementierung}
 \label{sec:Implementierung}
-Dieses ist dann auch Grundlage für die Implementierung der SQLite-Datenbank. Der Datenbankaufbau ist \autoref{img:datenbank} zu entnehmen. Die Datenbank dient der Zwischenspeicherung der Passpunkte und der durchgeführten Berechnungen. 
+Dieses ist dann auch Grundlage für die Implementierung der SQLite-Datenbank. Der Datenbankaufbau ist \autoref{img:datenbank} zu entnehmen. Die Datenbank dient der Zwischenspeicherung der Passpunkte und der durchgeführten Berechnungen.
 
 \begin{figure}[!htbp]
- \centering
- \includegraphics[width=1\textwidth]{./img/datenbank.pdf}
-\centering
- \caption{Datenbank-Struktur} %Bildunterschrift
- \label{img:datenbank} %ID fürs Bild
+    \centering
+    \includegraphics[width=1\textwidth]{./img/datenbank.pdf}
+    \centering
+    \caption{Datenbank-Struktur} %Bildunterschrift
+    \label{img:datenbank} %ID fürs Bild
 \end{figure}
 
 Das Backend wurde in Python entwickelt. Die Pakete orientieren sich an den Arbeitsschritten aus dem Ablaufdiagramm (\autoref{img:ablauf}). Die einzelnen Python-Module greifen auf die oben beschriebene SQLite-Datenbank zu. Die einzelnen Module sind der Übersicht in \autoref{img:python} zu entnehmen.
 
 \begin{figure}[!htbp]
- \centering
- \includegraphics[width=1\textwidth]{./img/python.pdf}
-\centering
- \caption{Implementierung der Python-Pakete} %Bildunterschrift
- \label{img:python} %ID fürs Bild
+    \centering
+    \includegraphics[width=1\textwidth]{./img/python.pdf}
+    \centering
+    \caption{Implementierung der Python-Pakete} %Bildunterschrift
+    \label{img:python} %ID fürs Bild
 \end{figure}
 
 Über das Webstart-Modul werden dann die einzelnen Module über eine Website mit TypeScript angesprochen. Die einzelnen TypeScript-Klassen sind der \autoref{img:typescript} zu entnehmen. Hierbei wurde darauf Wert gelegt, die einzelnen Funktionen modular zu halten, sodass die Möglichkeit besteht, das System mit weiteren Modulen zu erweitern.
 
 \begin{figure}[!htbp]
- \centering
- \includegraphics[width=1\textwidth]{./img/typescript.pdf}
-\centering
- \caption{Implementierung der TypeScript-Klassen} %Bildunterschrift
- \label{img:typescript} %ID fürs Bild
+    \centering
+    \includegraphics[width=1\textwidth]{./img/typescript.pdf}
+    \centering
+    \caption{Implementierung der TypeScript-Klassen} %Bildunterschrift
+    \label{img:typescript} %ID fürs Bild
 \end{figure}
 
 \section{Untersuchungen}
@@ -426,17 +428,22 @@ Das Backend wurde in Python entwickelt. Die Pakete orientieren sich an den Arbei
 Die Programmierung des Systemes erfolgte iterativ. Einzelne Arbeitspakete wurden in einem Jupyter-Notebook ausprobiert und dann, wenn dieser Schritt erfolgreich war, in den Gesamtworkflow integriert. Größtenteils wurden der Python-Code objektorientiert und typisiert geschrieben, einzelne Module sind jedoch noch aus der Prototyp-Phase funktionsbasierend programmiert.
 
 \subsection{Python-Bibliotheken}
-Es wurde, wenn möglich, auf Python-Bibliotheken zurückgegriffen. Hierdurch sollte der Programmieraufwand verringert und auf bereits getesteten Code gesetzt werden. Wo dieses nicht möglich war, wurden Funktionen entsprechend Code-Beispielen aus GitHub oder \glqq Rezepten\grqq{} aus dem Werk von \citeauthor{hartley} programmiert. 
+Es wurde, wenn möglich, auf Python-Bibliotheken zurückgegriffen. Hierdurch sollte der Programmieraufwand verringert und auf bereits getesteten Code gesetzt werden. Wo dieses nicht möglich war, wurden Funktionen entsprechend Code-Beispielen aus GitHub oder \glqq Rezepten\grqq{} aus dem Werk von \citeauthor{hartley} programmiert.
 
-\subsubsection{OpenCV} ist eine Bibliothek für Bildbearbeitung und maschinelles Sehen. Sie ist weit verbreitet und bietet viele photogrammetrische Funktionen. Viele der unter \autoref{s:photogramm} beschriebenen Schritte wurden mit dieser Bibliothek durchgeführt. \citep{opencv} Es zeigten sich jedoch Probleme bei der Berechnung der Essentiellen Matrix, sodass diese mit Hilfe eines Codebeispieles von \cite{3drec} auf Grundlagen von \cite{hartley} berechnet wurde.
+\subsubsection{OpenCV}
+ist eine Bibliothek für Bildbearbeitung und maschinelles Sehen. Sie ist weit verbreitet und bietet viele photogrammetrische Funktionen. Viele der unter \autoref{s:photogramm} beschriebenen Schritte wurden mit dieser Bibliothek durchgeführt. \citep{opencv} Es zeigten sich jedoch Probleme bei der Berechnung der Essentiellen Matrix, sodass diese mit Hilfe eines Codebeispieles von \cite{3drec} auf Grundlagen von \cite{hartley} berechnet wurde.
 
-\subsubsection{NumPy} bietet neben vielen weiteren Funktionen die Möglichkeit der Matrizenrechnung. Diese wurde für viele Berechnungen benötigt.
+\subsubsection{NumPy}
+bietet neben vielen weiteren Funktionen die Möglichkeit der Matrizenrechnung. Diese wurde für viele Berechnungen benötigt.
 
-\subsubsection{SciPy} wurde für die Berechnung der Bündelblockausgleichung verwendet. Der manuelle Ansatz mit den Formeln aus \cite{luhmann4} unter Nutzung von NumPy war sehr ressourcenlastig. Unter Verwendung von SciPy und der Projektionsgleichung konnte die Berechnungsdauer stark dezimiert werden.
+\subsubsection{SciPy}
+wurde für die Berechnung der Bündelblockausgleichung verwendet. Der manuelle Ansatz mit den Formeln aus \cite{luhmann4} unter Nutzung von NumPy war sehr ressourcenlastig. Unter Verwendung von SciPy und der Projektionsgleichung konnte die Berechnungsdauer stark dezimiert werden.
 
-\subsubsection{Flask} wurde genutzt um die Weboberfläche bereitzustellen und die Kommunikation zwischen dem Python und dem HTML/TypeScript-Modulen sicherzustellen. Die Weboberfläche selber muss nur einmalig kompiliert werden und wird dann von einen Flask-Webserver zur Verfügung gestellt. Per REST-Abfragen werden dann Daten zwischen TypeScript (bzw. nach dem Kompilieren eigentlich JavaScript) und Python ausgetauscht.
+\subsubsection{Flask}
+wurde genutzt um die Weboberfläche bereitzustellen und die Kommunikation zwischen dem Python und dem HTML/TypeScript-Modulen sicherzustellen. Die Weboberfläche selber muss nur einmalig kompiliert werden und wird dann von einen Flask-Webserver zur Verfügung gestellt. Per REST-Abfragen werden dann Daten zwischen TypeScript (bzw. nach dem Kompilieren eigentlich JavaScript) und Python ausgetauscht.
 
-\subsubsection{OpenSFM} wurde zwischenzeitlich verwendet um photogrammetrische Berechnung durchzuführen. Jedoch wurde dieses aufgrund mangelnder Anpassungsmöglichkeiten wieder verworfen. OpenSFM basiert aber auch unter anderem auf OpenCV. Der Code von OpenSFM wurde in der Prototyping-Phase zur Ideenfindung genutzt.
+\subsubsection{OpenSFM}
+wurde zwischenzeitlich verwendet um photogrammetrische Berechnung durchzuführen. Jedoch wurde dieses aufgrund mangelnder Anpassungsmöglichkeiten wieder verworfen. OpenSFM basiert aber auch unter anderem auf OpenCV. Der Code von OpenSFM wurde in der Prototyping-Phase zur Ideenfindung genutzt.
 
 Erstaunlicherweise wurde kein brauchbares Paket zur Durchführung einer Helmert-Transformation mittels identischer Punkte gefunden. Daher wurde hier eine Funktion geschrieben, die eine Abbildungsmatrix mit Hilfe der Methode der kleinsten Quadrate errechnet. Nachteilig ist bei dieser Lösung jedoch, dass diese Ausgleichung auch Scherungen und unterschiedliche Maßstäbe für die einzelnen Koordinatenkomponenten unterstützt. Eigentlich wäre jedoch eine Transformation mit einem festen Maßstab sinnvoller, da die errechnete Struktur durch die Bündelblockausgleichung bereits deutlich besser der Realität entspricht als die GNSS-Koordinaten, die zur Transformation genutzt wurden. So werden die Daten aktuell an dieser Stelle wieder verschlechtert.
 
@@ -465,7 +472,7 @@ Wie bereits erläutert wurde die GUI in Form einer Webseite entwickelt. Entsprec
 \chapter{Ausblick und Fazit}
 Vor allem das Erzeugen der Näherungswerte in Vorbereitung der Bündelblockausgleich\-ung benötigte deutlich mehr Zeit und Theorieverständnis als gedacht. Daher wurde leider nicht alle ursprünglich geplanten Features umgesetzt. Aufgrund von Krankheit und anderen Uni-Projekten konnte dann zusätzlich auch nicht so viel Zeit in der zweiten Semesterhälfte in das Projekt gesteckt werden, wie eigentlich ursprünglich gedacht. Es sind bisher beispielsweise keine Nebenbedingungen möglich - ein Festlegen eines Maßstabes aufgrund einer bekannten Strecke ist so nicht möglich und auch nicht die Optimierung der Ausrichtung durch die Angabe gleich hoher Punkte. Auch wird aktuell nur die Position, nicht jedoch die bereits errechnete Drehung in den EXIF-Daten gespeichert. Hierfür müsste noch eine Umrechnung der Drehung aus dem System der ECEF-Koordinaten in die für EXIF-Daten übliche Ausrichtung an der Lotrichtung der Ortes des Bildes erfolgen. Ein weiteres offenes Problem ist die bereits erwähnte Transformation des lokalen Koordinatensystemes. Hier müsste noch die Ausgleichung so optimiert werden, dass nur ein Maßstab und keine Scherung verwendet wird.
 
-Neben den erwähnten fehlenden Funktionen wäre als weitere Erweiterungen eine Berechnung einer dichten Punktwolke denkbar. Entsprechende Bibliotheken wurden währ\-end der Entwicklung entdeckt und schienen relativ leicht einbaubar. So würde die Software zu einer Komplettlösung für Structure-from-Motion-Punktwolken aus Bildern werden. 
+Neben den erwähnten fehlenden Funktionen wäre als weitere Erweiterungen eine Berechnung einer dichten Punktwolke denkbar. Entsprechende Bibliotheken wurden währ\-end der Entwicklung entdeckt und schienen relativ leicht einbaubar. So würde die Software zu einer Komplettlösung für Structure-from-Motion-Punktwolken aus Bildern werden.
 
 Im Gesamten sorgte das Projekt dafür, ein tiefergehendes Verständnis von Photogrammmetrie im Allgemeinen und Structure-from-Motion im Speziellen zu erarbeiten sowie vor allem die Probleme und Schwierigkeiten kennenzulernen.
 \clearpage
@@ -479,53 +486,53 @@ Im Gesamten sorgte das Projekt dafür, ein tiefergehendes Verständnis von Photo
 %\lstlistoflistings
 
 
-\renewcommand{\appendixpagename}{\appendixname} 
-\renewcommand{\appendixtocname}{\appendixname} 
+\renewcommand{\appendixpagename}{\appendixname}
+\renewcommand{\appendixtocname}{\appendixname}
 \begin{appendices}
 
-\chapter{Teileliste}
-\section{Mechanische Bauteile}
+    \chapter{Teileliste}
+    \section{Mechanische Bauteile}
 
-\begin{table}[h]
-    \centering
-    \begin{tabular}{l|c|r|r|r}
-        Bezeichnung & Anzahl & Einheit & pro Einheit & Gesamtpreis\\
-        \hline
-        Aluminium Strebenprofil Nut 6 Typ B & $5,8~$m & $0,1~$m & $0,44~$EUR & $25,52~$EUR\\
-        Eckwürfel & 8 & 1 & $5,00~$EUR & $40,00~$EUR\\
-        90-Grad-Winkel & 16 &1& $1,40~$EUR & $22,40~$EUR\\
-        45-Grad-Winkel & 16 &10& $23,00~$EUR & $46,00~$EUR\\
-        Hammerkopf-Mutter M4 & 40 &1& $1,40~$EUR & $56,00~$EUR\\
-        Zylinderschraube M4 & 40 &100& $3,80~$EUR & $3,80~$EUR\\
-        Scheibe M4 & 40 &100& $1,85~$EUR & $1,85~$EUR\\
-        Winkelprofil 30 x 500mm & $2~$m & $2~$m & $23,96~$EUR & $23,96~$EUR\\
-        &&&& $219,53~$EUR\\
-    \end{tabular}
-    \caption{Mechanische Bauteile mit Preisen (Stand: September 2023)}
-    \label{tab:bauteile_mechanisch}
-\end{table}
-\section{Elektronische Bauteile}
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{l|c|r|r|r}
+            Bezeichnung                         & Anzahl  & Einheit & pro Einheit & Gesamtpreis  \\
+            \hline
+            Aluminium Strebenprofil Nut 6 Typ B & $5,8~$m & $0,1~$m & $0,44~$EUR  & $25,52~$EUR  \\
+            Eckwürfel                           & 8       & 1       & $5,00~$EUR  & $40,00~$EUR  \\
+            90-Grad-Winkel                      & 16      & 1       & $1,40~$EUR  & $22,40~$EUR  \\
+            45-Grad-Winkel                      & 16      & 10      & $23,00~$EUR & $46,00~$EUR  \\
+            Hammerkopf-Mutter M4                & 40      & 1       & $1,40~$EUR  & $56,00~$EUR  \\
+            Zylinderschraube M4                 & 40      & 100     & $3,80~$EUR  & $3,80~$EUR   \\
+            Scheibe M4                          & 40      & 100     & $1,85~$EUR  & $1,85~$EUR   \\
+            Winkelprofil 30 x 500mm             & $2~$m   & $2~$m   & $23,96~$EUR & $23,96~$EUR  \\
+                                                &         &         &             & $219,53~$EUR \\
+        \end{tabular}
+        \caption{Mechanische Bauteile mit Preisen (Stand: September 2023)}
+        \label{tab:bauteile_mechanisch}
+    \end{table}
+    \section{Elektronische Bauteile}
 
-\begin{table}[h]
-    \centering
-    \begin{tabular}{l|c|r|r|r}
-        Bezeichnung & Anzahl & Einheit & pro Einheit & Gesamtpreis\\
-        \hline
-        Raspberry Pi Zero W & 18 & 1 & $17,90~$EUR & $429,60~$EUR\\
-        Raspberry Pi Camera 3 & 8 & 1 & $29,15~$EUR & $699,61~$EUR\\
-        Raspberry Pi 4 & 1 & 1 & $66,80~$EUR & $66,80~$EUR\\
-        RPi Zero Gehäuse + Flachbandkabel & 24 & 1 & $3,60~$EUR & $~86,40$EUR\\
-        Speicherkarte 32 GB & 24 & 1 & $5,95~$EUR & $142,80~$EUR\\
-        LED-Streifen & 1 & 1 & $31,10~$EUR & $31,10~$EUR\\
-        Stromversorgung 12V 3,5 A & 1 & 1 & $11,70~$EUR & $11,70~$EUR\\
-        Stromversorgung 5V 7 A & 2 & 1 & $18,20~$EUR & $36,40~$EUR\\
-        Buchse für Netzteile & 3 & 1 & $2,30~$EUR & $6,90~$EUR\\
-        Litze 2*0,75 & & 10 & $2,50~$EUR & $2,50~$EUR\\
-         & & & & $1447,01~$EUR\\
-    \end{tabular}
-    \caption{Elektronische Bauteile mit Preisen (Stand: September 2023)}
-    \label{tab:bauteile_elektronisch}
-\end{table}
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{l|c|r|r|r}
+            Bezeichnung                       & Anzahl & Einheit & pro Einheit & Gesamtpreis   \\
+            \hline
+            Raspberry Pi Zero W               & 24     & 1       & $17,90~$EUR & $429,60~$EUR  \\
+            Raspberry Pi Camera 3             & 24     & 1       & $29,15~$EUR & $699,61~$EUR  \\
+            Raspberry Pi 4                    & 1      & 1       & $66,80~$EUR & $66,80~$EUR   \\
+            RPi Zero Gehäuse + Flachbandkabel & 24     & 1       & $3,60~$EUR  & $86,40$EUR    \\
+            Speicherkarte 32 GB               & 25     & 1       & $5,95~$EUR  & $142,80~$EUR  \\
+            LED-Streifen                      & 1      & 1       & $31,10~$EUR & $31,10~$EUR   \\
+            Stromversorgung 12V 3,5 A         & 1      & 1       & $11,70~$EUR & $11,70~$EUR   \\
+            Stromversorgung 5V 7 A            & 2      & 1       & $18,20~$EUR & $36,40~$EUR   \\
+            Buchse für Netzteile              & 3      & 1       & $2,30~$EUR  & $6,90~$EUR    \\
+            Litze 2*0,75                      &        & 10      & $2,50~$EUR  & $2,50~$EUR    \\
+                                              &        &         &             & $1447,01~$EUR \\
+        \end{tabular}
+        \caption{Elektronische Bauteile mit Preisen (Stand: September 2023)}
+        \label{tab:bauteile_elektronisch}
+    \end{table}
 \end{appendices}
 
 \newpage
@@ -533,7 +540,7 @@ Im Gesamten sorgte das Projekt dafür, ein tiefergehendes Verständnis von Photo
 \noindent\textbf{\large Erklärung}\\
 Hiermit versichere ich, dass ich die beiliegende Master-Thesis ohne fremde Hilfe selbst\-stän\-dig verfasst und nur die angegebenen Quellen und Hilfsmittel benutzt habe.\\
 \\
-Wörtlich oder dem Sinn nach aus anderen Werken entnommene Stellen sind unter Angabe der Quellen kenntlich gemacht. 
+Wörtlich oder dem Sinn nach aus anderen Werken entnommene Stellen sind unter Angabe der Quellen kenntlich gemacht.
 \\
 \\
 \\

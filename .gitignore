@@ -6,3 +6,11 @@ photoBox.out
 photoBox.pdf
 photoBox.synctex.gz
 photoBox.toc
+photoBox.bbl
+photoBox.bib
+photoBox.blg
+photoBox.dvi
+photoBox.fdb_latexmk
+photoBox.fls
+photoBox.out.ps
+texput.log
