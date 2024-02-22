@@ -99,12 +99,12 @@ Henning-Voscherau-Platz 1\\
 \doublespacing 
 {\huge\bfseries Aufbau eines photogrammetrischen Messsystems unter Verwendung von Rasberry-Pi-Kameras als Low-Cost-Sensoren }\vspace{0.5cm}\\
 
-{\large\bfseries Geodäsie und Geoinformatik\\Masterthesis\\Sommersemester 2023}\vspace{2cm}\\
+{\large\bfseries Geodäsie und Geoinformatik\\Masterthesis\\Wintersemester 2023/2024}\vspace{2cm}\\
 {\large Florian Timm}
 
 % hspace und vspace bedeutet horizontaler bzw. vertikaler Abstand
 \vspace{7cm}
-Abgabedatum: 01. Februar 2024
+Abgabedatum: 01. April 2024
 \end{center}
 \setcounter{page}{0} % Seitenzahl wird auf 0 gesetzt 
 \end{titlepage}
@@ -126,11 +126,11 @@ HafenCity Universität Hamburg\\
 E-Mail: thomas.kersten@hcu-hamburg.de\\
 \vspace{3cm}\\
 \textbf{\large Zweitprüfer}\\
--- noch zu klären --\\
+Dipl.-Ing. Kay Zobel\\
 HafenCity Universität Hamburg\\
 Überseeallee 16, 20457 Hamburg\\
 \\
-E-Mail: @hcu-hamburg.de\\
+E-Mail: kay.zobel@hcu-hamburg.de\\
 \newpage
 \noindent\textbf{\large Kurzzusammenfassung}\\
 Die Photogrammetrie bietet die Möglichkeit, mit relativ einfacher Technik 3D-Modelle zu erstellen. Die Aufnahme der Bilder ist jedoch sehr zeitaufwendig und daher für die Erfassung vieler Objekte, z.B. bei der Digitalisierung von Museumsobjekten, nicht praktikabel. Systeme mit mehreren fest installierten Kameras setzen in der Regel auf hochwertige Kameras, die jedoch die Hardwarekosten stark in die Höhe treiben.
@@ -157,14 +157,10 @@ This paper explores the solution of using multiple low-cost cameras mounted on a
 
 \chapter{Konzept}
 
-Structure-from-Motion bietet die Möglichkeit mit einfachsten (Hardware-)Mitteln 3D-Modelle bzw. farbige Punktwolken zu erzeugen - beispielsweise aus Luftbildern von unbemannten Luftfahrzeugen (Unmanned Aerial Vehicles, UAV). Die meisten, vorallem die Open-Source-Lösungen, nutzen hierbei die automatische Detektion von Verknüpfungspunkten. Das Setzen des Maßstabes oder anderen festen Bedingungen ist hier nicht möglich. Es werden maximal die GNSS-Koordinaten des Bildes und ggf. die Ausrichtung aus den EXIF-Daten der Bilder genutzt. 
-
-Zur Verbesserung des Matchings von Punkten ist es daher geplant, ein Tool zu entwickeln, mit dem das manuelle Erzeugen von Passpunkten möglich ist. Außerdem sollen auch vor Ort angebrachte ArUco-Marker erkannt und verwendet werden, um den Aufwand der Nachbearbeitung zu verkleinern. Eine Angabe von Abständen zwischen zwei Verknüpfungspunkten bzw. das Setzen von Nebenbedingungen, wie z.B. das zwei Punkte  übereinander liegen, die gleiche Höhe haben oder die X-Achse bilden, sind weitere Erweiterungsideen. Die ausgeglichenen Daten sollen dann den Eingangsbildern als EXIF-Tags angehängt werden. So wird eine Weiterverarbeitung in verschiedensten Softwarepaketen (OpenDroneMap, VisualSFM, Agisoft MetaShape) ermöglicht.
-
 
 \chapter{Photogrammmetrischer Hintergrund}
 \label{c:photogrammmetrie}
-Das Programm stellt einen Teil einer Structure-from-Motion-Pipeline dar (siehe \autoref{img:ablauf}, vgl. \citealt[S. 491]{luhmann}). Auf die einzelnen Schritte wird in den folgenden Absätzen eingegangen.
+Das Erzeugen des 3D-Modelles basiert auf der Technik einer Structure-from-Motion-Pipeline (siehe \autoref{img:ablauf}, vgl. \citealt[S. 491]{luhmann}). Auf die einzelnen Schritte wird in den folgenden Absätzen eingegangen.
 
 \begin{figure}
  \centering
@@ -265,12 +261,64 @@ Mittels Bündelblockausgleichung können die grob mit den vorher genannten Verfa
 \section{Transformation}
 Die Berechnungen erfolgen alle in einem lokalen Koordinatensystem. Die GNSS-Koordi\-naten der Bilder werden nur genutzt, um potentielle Nachbarbilder zu identifizieren. Daher muss zum Schluss eine 3D-Transformation der lokalen Daten in ein weltweites Koordinatensystem erfolgen. Diese Transformation erfolgt erst in ein geozentrisches, kartesisches Koordinatensystem (ECEF), welches dann in Längen- und Breitengrade sowie Höhen über dem Ellipsoid umgerechnet werden. Die letztgenannten Angaben sind für die EXIF-Daten der Bilder notwendig.
 
-\chapter{Aufbau des Messystemes}
+\chapter{Aufbau des Messsystemes}
+Die Kameras sollten eine höhe geometrische Auflösung und möglichst stabile innere Orientierung aufweisen. Außerdem sollen sie während einer Messkampagne nicht in ihrer Lage zueinander verändert werden, damit die äußere Orientierung größtenteils unverändert bleibt. Daher ist ein stabiler Rahmen notwendig, an welchem die Kameras verdrehsicher angebracht werden können. Kleinere Restfehler in den Orientierungen können mit ausgeglichen werden.
+Um Ungenauigkeiten durch Bewegungen zu verhindern, müssen die Kameras möglichst zeitgleich auslösen. Daher ist eine gemeinsame Steuerung und Kommunikation zwischen den Kameras notwendig. Außerdem sollen alle Bilder dann auf das Steuerungssystem übertragen werden, hierfür wir eine Form der Datenübertragung benötigt. Damit die Bilder möglichst schattenfrei ausgeleuchtet werden, muss Beleuchtung mit eingeplant werden. Außerdem muss die Stromversorgung der einzelnen Kameras sichergestellt sein. 
+
+Aus diesen Anforderungen ergeben sich die einzelnen Abschnitte dieses Kapitels.
+
+\section{Kameras}
+Als Kameras würde sich für das Raspberry Pi Camera Module 3 entschieden. 
+
+\section{Rahmen}
+Der Rahmen muss möglichst stabil sein, damit die Kameras sich nicht in ihrer Lage verändern können. Jedoch sollte das System auch weiterhin transportabel - also nicht zu schwer - und veränderbar bleiben, beispielsweise Kameras für Messreihen in ihrer Lage verändert werden. Der Aufbau aus genormten Bauteilen bietet sich an, um hier ggf. den Nachbau ermöglichen zu können.
+
+Als mögliche Materialien kamen Holz, Stahl und Aluminum in Frage. Aufgrund der einfachen Bearbeitung und der genormten Profile, wurde sich für Aluminiumprofile entschieden. Diese gibt es in verschiedenen Ausführungen mit Nuten an den Seitenflächen, so dass eine einfache Montage, aber auch eine Demontage zu Transportzwecken, möglich wird. Außerdem sind diese sehr stabil bei leichtem Gewicht.
+
+
+\section{Kommunikation und Datenübertragung}
+
+\section{Beleuchtung}
+Um möglichst gute Bilder zu erzeugen, sollte das Objekt gut ausgeleuchtet sein. Eine dunkle Umgebung verlängert die Belichtungszeit, wodurch die Gefahr von unscharfen Aufnahmen steigt und dunklere Bereiche (ungeleichmäßige Ausleuchtung) verursacht Rauschen in diesen Bildbereichen. Daher soll das System eine gleichmäßige Ausleuchtung ermöglichen. Problematisch ist hierbei, dass die Kameras ggf. auch die Lichtquellen mit im Bildbereich haben können, wodurch Linsenreflexionen oder Ausbrennen der Bildbereiche möglich sind. 
+
+Es wurde sich zur Beleuchtung für einzeln steuerbare LED-Lichtstreifen entschieden. Diese können einfach an den Aluprofilen montiert werden und ermöglichen es, einzelne Bereiche und so ggf. blendende Bereiche abzuschalten.
+
+\section{Stromversorgung}
+Die Raspberry Pis werden mit 5~Volt betrieben. Der Raspberry Pi Zero mit Kamera hatte dabei in Messungen einen maximalen Stromverbrauch von 270~mA aufgezeigt, der Raspberry Pi \todo{Raspi Version/Verbrauch}. Hieraus ergibt sich ein Gesamtstromverbrauch von maximal rund 7~Ampere.
+
+Dieser relativ hohe Strom verursacht bereits starke Spannungsabfälle, wenn dieser über 
+
 
 \chapter {Software-Entwicklung}
-Die Entwicklung erfolgte mittels Prototyping. Die einzelnen Arbeitspakete wurden als eigenständige Jupyter-Notebooks programmiert und jeweils immer weiter bis zu der gewünschten Funktionalität entwickelt. Anschließend wurden die einzelnen Module zu einem Gesamtprogramm zusammengeführt und eine Weboberfläche zur Steuerung und Kontrolle erzeugt. Auf die einzelnen Problemstellungen wird im \autoref{ss:vorgehen} eingegangen.
+Für die Steuerung der Kameras und die anschließende Berechnung des 3D-Modelles muss ein Betriebssystem für das Kamerasystem und eine entsprechende Schnittstelle zu einer SfM-Software geschaffen werden. Diese Entwicklung erfolgte hauptsächlich in Python in Form von Prototyping. Das Kapitel beschreibt die Anforderungen an die Software in \autoref{sec:Anforderungsanalyse}. Anschließend werden hieraus die Anwendungsfälle (\autoref{sec:Anwendungsfallmodellierung}) erarbeitet und abschließend die Implementation (\autoref{sec:Implementierung}) beschrieben.
 
-\section{Konzeption}
+\section{Anforderungsanalyse}
+\label{sec:Anforderungsanalyse}
+
+\subsection{Funktionale Anforderungen}
+\begin{itemize}
+    \item Die Kameras sollen zeitgleich auslösbar sein. Die Auslösung soll möglichst ver\-zögerungs\-frei erfolgen.
+    \item Die Steuerung soll auch unabhängig von anderen Geräten möglich sein, beispielsweise per Tastensteuerung.
+    \item Der Status des Systemes soll für den Nutzer erkennbar sein - auch ohne Anschluss eines Computers etc..
+    \item Es sollen Passpunkte automatisch gefunden und und für die Bestimmung der äußeren Orientierung genutzt werden.
+    \item Die Bilder sollen scharf und fokussiert sein.
+\end{itemize}
+
+\subsection{Schnittstellen}
+\begin{itemize}
+    \item Die Daten sollen intern gespeichert werden.
+    \item Eine Speicherung auf tragbaren Speichermedien wie USB-Sticks soll möglich sein.
+    \item Eine direkte Übertragung an SfM-Software soll möglich sein.
+\end{itemize}
+
+\subsection{Nicht-funktionale Anforderungen}
+\begin{itemize}
+    \item Die Erfassung soll ohne weitere Hardware möglich sein. Das System soll unabhängig von Netzwerkanschlüssen etc. sein.
+    \item Alle Kommunikation soll über WLAN erfolgen.
+\end{itemize}
+
+\section{Anwendungsfallmodellierung}
+\label{sec:Anwendungsfallmodellierung}
 
 Entsprechend der benötigten Schritte aus \autoref{c:photogrammmetrie} und \autoref{img:ablauf} wurde die Anwendungsfälle, die die Benutzeroberfläche ermöglichen soll, im Anwendungsfall-Diagramm in \autoref{img:anwendungsfall} zusammengetragen.
 
@@ -293,6 +341,7 @@ Aus den benötigten Daten wurde das Domänen-Klassendiagramm aus \autoref{img:do
 \end{figure}
 
 \section{Implementierung}
+\label{sec:Implementierung}
 Dieses ist dann auch Grundlage für die Implementierung der SQLite-Datenbank. Der Datenbankaufbau ist \autoref{img:datenbank} zu entnehmen. Die Datenbank dient der Zwischenspeicherung der Passpunkte und der durchgeführten Berechnungen. 
 
 \begin{figure}[!htbp]
@@ -323,6 +372,32 @@ Das Backend wurde in Python entwickelt. Die Pakete orientieren sich an den Arbei
  \label{img:typescript} %ID fürs Bild
 \end{figure}
 
+\section{Untersuchungen}
+
+\subsection{3D-Modell aus Fokusstacking}
+\begin{itemize}
+    \item Automatisierter Fokusstacking
+    \item keine Beachtung der festen Ausrichtung
+    \item Transformation über SIRF und Homographie
+\end{itemize}
+
+
+\subsection{Brennweitenänderung durch Fokussierung}
+\begin{itemize}
+    \item Charuco-Kalibriermuster
+    \item Kamera und Board unbewegt
+    \item 11 verschiedene Fokussierungen [0,5; 1; 2; 3; 4; 5; 6; 7; 8; 9; 10]
+    \item Fokussierung nacheinander und 4 Wiederhoungen
+    \item Erkennung des Musters
+    \item Analyse der Unterschiede/Vergrößerung
+\end{itemize}
+
+\subsection{Änderung der Verzeichnung}
+\begin{itemize}
+    \item Kamera fest positioniert (keine Änderungen durch Schwerkraft)
+    \item jeweils festen Fokus
+    \item ChAruco-Board wird bewegt
+\end{itemize}
 
 
 \section{Vorgehen}
@@ -352,6 +427,20 @@ Wie bereits erläutert wurde die GUI in Form einer Webseite entwickelt. Entsprec
 
 \subsubsection{Three.JS} ist eine Bibliothek zur Darstellung von 3D-Inhalten. Diese wurde hier genutzt um eine Vorschau der errechneten 3D-Koordinaten bereitzustellen.
 
+\chapter{Systemkalibrierung}
+\begin{itemize}
+    \item Kameramodellierung
+    \item Kamerakalibrierung
+    \item Kameraausrichtung
+\end{itemize}
+
+\chapter{Anwendungsversuche}
+\begin{itemize}
+    \item Kameraanzahl
+    \item Drehteller
+    \item Vergleichsmessung
+    \item
+\end{itemize}
 
 \chapter{Ausblick und Fazit}
 Vor allem das Erzeugen der Näherungswerte in Vorbereitung der Bündelblockausgleich\-ung benötigte deutlich mehr Zeit und Theorieverständnis als gedacht. Daher wurde leider nicht alle ursprünglich geplanten Features umgesetzt. Aufgrund von Krankheit und anderen Uni-Projekten konnte dann zusätzlich auch nicht so viel Zeit in der zweiten Semesterhälfte in das Projekt gesteckt werden, wie eigentlich ursprünglich gedacht. Es sind bisher beispielsweise keine Nebenbedingungen möglich - ein Festlegen eines Maßstabes aufgrund einer bekannten Strecke ist so nicht möglich und auch nicht die Optimierung der Ausrichtung durch die Angabe gleich hoher Punkte. Auch wird aktuell nur die Position, nicht jedoch die bereits errechnete Drehung in den EXIF-Daten gespeichert. Hierfür müsste noch eine Umrechnung der Drehung aus dem System der ECEF-Koordinaten in die für EXIF-Daten übliche Ausrichtung an der Lotrichtung der Ortes des Bildes erfolgen. Ein weiteres offenes Problem ist die bereits erwähnte Transformation des lokalen Koordinatensystemes. Hier müsste noch die Ausgleichung so optimiert werden, dass nur ein Maßstab und keine Scherung verwendet wird.
@@ -368,5 +457,69 @@ Im Gesamten sorgte das Projekt dafür, ein tiefergehendes Verständnis von Photo
 \listoffigures
 \listoftables
 %\lstlistoflistings
+
+
+\renewcommand{\appendixpagename}{\appendixname} 
+\renewcommand{\appendixtocname}{\appendixname} 
+\begin{appendices}
+
+\chapter{Teileliste}
+\section{Mechanische Bauteile}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l|c|r|r|r}
+        Bezeichnung & Anzahl & Einheit & pro Einheit & Gesamtpreis\\
+        \hline
+        Aluminium Strebenprofil Nut 6 Typ B & $5,8~$m & $0,1~$m & $0,44~$EUR & $25,52~$EUR\\
+        Eckwürfel & 8 & 1 & $5,00~$EUR & $40,00~$EUR\\
+        90-Grad-Winkel & 16 &1& $1,40~$EUR & $22,40~$EUR\\
+        45-Grad-Winkel & 16 &10& $23,00~$EUR & $46,00~$EUR\\
+        Hammerkopf-Mutter M4 & 40 &1& $1,40~$EUR & $56,00~$EUR\\
+        Zylinderschraube M4 & 40 &100& $3,80~$EUR & $3,80~$EUR\\
+        Scheibe M4 & 40 &100& $1,85~$EUR & $1,85~$EUR\\
+        Winkelprofil 30 x 500mm & $2~$m & $2~$m & $23,96~$EUR & $23,96~$EUR\\
+        &&&& $219,53~$EUR\\
+    \end{tabular}
+    \caption{Mechanische Bauteile mit Preisen (Stand: September 2023)}
+    \label{tab:bauteile_mechanisch}
+\end{table}
+\section{Elektronische Bauteile}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l|c|r|r|r}
+        Bezeichnung & Anzahl & Einheit & pro Einheit & Gesamtpreis\\
+        \hline
+        Raspberry Pi Zero W & 18 & 1 & $17,90~$EUR & $429,60~$EUR\\
+        Raspberry Pi Camera 3 & 8 & 1 & $29,15~$EUR & $699,61~$EUR\\
+        Raspberry Pi 4 & 1 & 1 & $66,80~$EUR & $66,80~$EUR\\
+        RPi Zero Gehäuse + Flachbandkabel & 24 & 1 & $3,60~$EUR & $~86,40$EUR\\
+        Speicherkarte 32 GB & 24 & 1 & $5,95~$EUR & $142,80~$EUR\\
+        LED-Streifen & 1 & 1 & $31,10~$EUR & $31,10~$EUR\\
+        Stromversorgung 12V 3,5 A & 1 & 1 & $11,70~$EUR & $11,70~$EUR\\
+        Stromversorgung 5V 7 A & 2 & 1 & $18,20~$EUR & $36,40~$EUR\\
+        Buchse für Netzteile & 3 & 1 & $2,30~$EUR & $6,90~$EUR\\
+        Litze 2*0,75 & & 10 & $2,50~$EUR & $2,50~$EUR\\
+         & & & & $1447,01~$EUR\\
+    \end{tabular}
+    \caption{Elektronische Bauteile mit Preisen (Stand: September 2023)}
+    \label{tab:bauteile_elektronisch}
+\end{table}
+\end{appendices}
+
+\newpage
+\thispagestyle{empty}
+\noindent\textbf{\large Erklärung}\\
+Hiermit versichere ich, dass ich die beiliegende Master-Thesis ohne fremde Hilfe selbst\-stän\-dig verfasst und nur die angegebenen Quellen und Hilfsmittel benutzt habe.\\
+\\
+Wörtlich oder dem Sinn nach aus anderen Werken entnommene Stellen sind unter Angabe der Quellen kenntlich gemacht. 
+\\
+\\
+\\
+\\
+\noindent{\underline{Hamburg, den 01. April. 2024~\hspace{10cm}}}\\
+\noindent{\small Ort, Datum \hspace{4.5cm} Florian Timm}
+
 
 \end{document}
