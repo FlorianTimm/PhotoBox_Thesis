@@ -99,12 +99,12 @@ Henning-Voscherau-Platz 1\\
 \doublespacing 
 {\huge\bfseries Aufbau eines photogrammetrischen Messsystems unter Verwendung von Rasberry-Pi-Kameras als Low-Cost-Sensoren }\vspace{0.5cm}\\
 
-{\large\bfseries Geodäsie und Geoinformatik\\Masterthesis\\Wintersemester 2023/2024}\vspace{2cm}\\
+{\large\bfseries Geodäsie und Geoinformatik\\Masterthesis\\Sommersemester 2024}\vspace{2cm}\\
 {\large Florian Timm}
 
 % hspace und vspace bedeutet horizontaler bzw. vertikaler Abstand
 \vspace{7cm}
-Abgabedatum: 01. April 2024
+Abgabedatum: 01. August 2024
 \end{center}
 \setcounter{page}{0} % Seitenzahl wird auf 0 gesetzt 
 \end{titlepage}
@@ -135,12 +135,12 @@ E-Mail: kay.zobel@hcu-hamburg.de\\
 \noindent\textbf{\large Kurzzusammenfassung}\\
 Die Photogrammetrie bietet die Möglichkeit, mit relativ einfacher Technik 3D-Modelle zu erstellen. Die Aufnahme der Bilder ist jedoch sehr zeitaufwendig und daher für die Erfassung vieler Objekte, z.B. bei der Digitalisierung von Museumsobjekten, nicht praktikabel. Systeme mit mehreren fest installierten Kameras setzen in der Regel auf hochwertige Kameras, die jedoch die Hardwarekosten stark in die Höhe treiben.
 
-In dieser Arbeit soll der Lösungsansatz untersucht werden, mehrere kostengünstige Kameras, die fest auf einem Rahmen montiert sind, zu verwenden. Mit Kameras für den Rasberry Pi soll ein photogrammetrisches Messsystem für kleine Objekte aufgebaut werden. Dazu soll eine Schnittstelle zur Synchronisation der Kameras programmiert und eine Möglichkeit zur Kalibrierung der Kameras entwickelt werden. Das Endergebnis soll es im Idealfall auch einem photogrammetrischen Laien ermöglichen, schnell und ohne lange Einarbeitungszeit 3D-Modelle in akzeptabler Auflösung und Qualität zu erzeugen.
+In dieser Arbeit soll der Lösungsansatz untersucht werden, mehrere kostengünstige Kameras, die fest auf einem Rahmen montiert sind, zu verwenden. Mit Kameras für den Raspberry Pi soll ein photogrammetrisches Messsystem für kleine Objekte aufgebaut werden. Dazu soll eine Schnittstelle zur Synchronisation der Kameras programmiert und eine Möglichkeit zur Kalibrierung der Kameras entwickelt werden. Das Endergebnis soll es im Idealfall auch einem photogrammetrischen Laien ermöglichen, schnell und ohne lange Einarbeitungszeit 3D-Modelle in akzeptabler Auflösung und Qualität zu erzeugen.
 \vspace{2cm}\\
 \noindent\textbf{\large Abstract}\\
 Photogrammetry offers the possibility of creating 3D models with relatively simple technology. However, capturing the images is very time consuming and therefore not practical for many objects, such as museum digitisation. Systems using multiple fixed cameras usually rely on high quality cameras, which significantly increases hardware costs.
 
-This paper explores the solution of using multiple low-cost cameras mounted on a frame. Cameras for the Rasberry Pi are used to build a photogrammetric measurement system for small objects. This involves programming an interface to synchronise the cameras and developing a way to calibrate the cameras. The end result should ideally enable even a photogrammetric layman to produce 3D models of acceptable resolution and quality quickly and without a long training period.
+This paper explores the solution of using multiple low-cost cameras mounted on a frame. Cameras for the Raspberry Pi are used to build a photogrammetric measurement system for small objects. This involves programming an interface to synchronise the cameras and developing a way to calibrate the cameras. The end result should ideally enable even a photogrammetric layman to produce 3D models of acceptable resolution and quality quickly and without a long training period.
 
 % Mehrere gleichzeitig zitieren
 \providecommand{\citeTwo}[4]{\citep[{\citealp[#1]{#2};}][#3]{#4}} 
@@ -156,34 +156,53 @@ This paper explores the solution of using multiple low-cost cameras mounted on a
 \setcounter{page}{1} 
 
 \chapter{Konzept}
+In Museen besteht vielfach der Wunsch, ihre Exponate zu digitalisieren. Entsprechende Handreichungen des Deutschen Museumsbundes legen auch die Digitalisierung als 3D-Modelle nahe, verweisen aber auf Aufwand und Format-Probleme \citep[S. 43]{handreichung_digital}.
+Auch bei Ausgrabungen aber auch in anderen Bereichen besteht der Bedarf dreidimensionale Modelle einfach und kostengünstig zu erfassen. 
 
+Diese Möglichkeit soll das im Rahmen dieser Arbeit entwickelte Kamerasystem bieten. Es soll mittels Photogrammetrie ermöglichen, mit geringen personellen Aufwand kleine Objekte bis etwa 40~cm Durchmesser zu erfassen. Die Bedienung soll dabei laiensicher und mit nur kurzer Einarbeitungszeit möglich sein, dass System also die meisten Schritte selbstständig durchführen. Auch der Nachbau soll mit etwas handwerklichen Geschick möglich sein. Um Lizenzkosten zu sparen, soll die Möglichkeit auf OpenSource-Software zu setzen geprüft werden.
+
+Neben der eigentlichen Entwicklung eines funktionsfähigen Systemes soll abschließend die Anzahl der Kameras und die Nutzung eines Drehtellers evaluiert werden, um hiermit gegebenenfalls die Hardwarekosten zu senken oder die Auflösung und Genauigkeit zu steigern.
 
 \chapter{Photogrammmetrischer Hintergrund}
 \label{c:photogrammmetrie}
-Das Erzeugen des 3D-Modelles basiert auf der Technik einer Structure-from-Motion-Pipeline (siehe \autoref{img:ablauf}, vgl. \citealt[S. 491]{luhmann}). Auf die einzelnen Schritte wird in den folgenden Absätzen eingegangen.
+Das Erzeugen des 3D-Modelles basiert auf der Verknüpfung von Bildern aus verschiedenen Positionen über identische Punkte. Hieraus können dann die Orientierung der Kameras zueinander und die Koordinaten der Punkte in einem lokalen Koordinatensystem ohne bekannten Maßstab berechnet werden. Durch die Nutzung von bekannten Größen beispielsweise durch Maßstäbe kann dieses System transformiert werden.
+
+Dieses Kapitel beschreibt die hierfür notwendigen Bedingungen und die Grundlagen der Rekonstruktion des Objektes als 3D-Modell.
 
 \begin{figure}
  \centering
  \includegraphics[width=0.8\textwidth]{./img/Ablauf.pdf}
 \centering
- \caption{Ablauf der Bildverknüpfung} %Bildunterschrift
+ \caption{Ablauf der Bildverknüpfung, nach \citealt[S. 492]{luhmann}} %Bildunterschrift
  \label{img:ablauf} %ID fürs Bild
 \end{figure}
+
+\section{Innere Orientierung}
+\label{s:innereorientierung}
+Aus der Position eines Punktes in einem Bild kann vereinfacht gedacht ähnlich einer Messung mit einem Theodolit die Richtung des Punktes in Relation zu der Kamera bestimmt werden. Damit diese Berechnung möglich wird, müssen die Parameter der Kamera bekannt sein, die sogenannte innere Orientierung. Sie beschreibt die Abbildung der Kamera mathematisch. Wichtigste Parameter sind hierbei die Lage des Bildhauptpunktes und die Kamerakonstante. Außerdem zählen hierzu auch die Parameter, die die Bildfehler wie die Verzeichnung, beschreiben. \citep[S. 179f]{luhmann}
+
+Die innere Orientierung kann während der Messung beispielsweise mittels Bündel\-block\-ausgleichung bestimmt werden. Bedingung hierfür ist jedoch, dass die innere Orientierung stabil ist und sich nicht während der Messung ändert \citep[S. 181f]{luhmann}. 
+
+Jede Einstellung der Kameraoptik verändert die innere Orientierung und auch jede Kamera,auch einer Modellreihe, kann je nach Genauigkeitsanspruch als unterschiedlich angesehen werden.
+Änderungen können sich beispielsweise durch Umfokussierung oder die Nutzung eines optischen Zoom ergeben, aber auch durch einen mechanisch instabilen Aufbau der Kameras. Daher sollten die Bilder möglichst mit einer Kamera mit festen Einstellungen (Brennweite, Fokus, Blende, Objektiv) aufgenommen werden. Änderungen der Empfindlichkeit (ISO-Zahl) oder Belichtungszeit sind unproblematisch für die innere Orientierung \citep[S. 176]{luhmann}. 
+
 
 \section{Bilder}
 Die Berechnung der Tiefeninformationen ist bei Structure-from-Motion nur möglich aufgrund der Bewegung der Kamera zwischen den Bildern. Um möglichst gute Schnitte zur Verfügung zu haben und die innere und äußere Orientierung möglichst gut berechnen zu können, müssen diese Bilder einige Bedingungen erfüllen.
 
-\subsubsection{Kameraeinstellungen}
-Jede Einstellung der Kameraoptik verändert die innere Orientierung und auch jede Kamera (auch einer Modellreihe) ist unterschiedlich. Daher sollten die Bilder möglichst mit einer Kamera mit festen Einstellungen (Brennweite, Blende, Objektiv) aufgenommen werden. Bei der Empfindlichkeit (ISO-Zahl) oder Belichtungszeit wären Änderungen unproblematisch für die innere Orientierung und bei sich stark ändernden Helligkeitsverhältnissen auch hilfreich, jedoch wird hierdurch auch die Helligkeit der Verknüpfungspunkte verändert, was wiederum problematisch sein kann. Entsprechend ist es empfehlenswert bei gleichmäßiger Beleuchtung, die sich auch nicht ändern sollte, die Bilder zu erstellen - also beispielsweise bei bedeckten Himmel.
-
 \subsubsection{Überlappung und Bildinhalte}
 Da die Bilder durch identische Punkte verbunden werden, müssen die Bildinhalte sich überlappen. Außerdem sollten alle Bilder strukturierte Bereiche aufweisen. \citep[S. 146f]{opendronemap}
 
-\subsubsection{Bewegungen der Kamera}
+
+\subsubsection{Belichtung}
+und bei sich stark ändernden Helligkeitsverhältnissen auch hilfreich, jedoch wird hierdurch auch die Helligkeit der Verknüpfungspunkte verändert, was wiederum problematisch sein kann. Entsprechend ist es empfehlenswert bei gleichmäßiger Beleuchtung, die sich auch nicht ändern sollte, die Bilder zu erstellen - also beispielsweise bei bedeckten Himmel.
+
+\subsubsection{Position und Ausrichtung der Kamera}
 Bilder, die vom gleichen Standpunkt aufgenommen wurden, sind oft nur ungenau verknüpfbar. Daher empfiehlt es sich, eher um Objekte herum zu gehen, statt beispielsweise bei Innenräumen sich nur in die Mitte zu stellen und sich zu drehen. Während der Aufnahmen sollte die Kamera natürlich möglichst ruhig gehalten werden, um möglichst scharfe Bilder zu generieren. Dies ist vor allem bei UAV-Flügen relevant, die auch aus hoher Geschwindigkeit Bilder aufnehmen könnten. Jedoch weisen die meisten Digitalkamera einen Rolling-Shutter-Effekt auf, dass heißt die Bildreihen werden nicht alle zeitgleich aufgenommen, sondern die oberen vor den unteren. Daher ist es sinnvoll, das UAV kurz schweben zu lassen und dann ein Bild zu machen. \citep[S. 147]{opendronemap}
 
-\subsubsection{Abstand bzw. Höhe}
 Umso weiter die Kamera vom Objekt entfernt ist, umso mehr Inhalte und entsprechend mehr Verknüpfungsmöglichkeiten sind im Bild enthalten. Daher sollte sich immer klar gemacht werden, welche Auflösung benötigt wird und entsprechend die Entfernung bzw. bei UAV-Aufnahmen die Höhe zu wählen. Der Abstand sollte außerdem variiert werden, da dieses bei der Ausgleichung der inneren Orientierung hilft. \citep[S. 144f]{opendronemap}
+
+\subsubsection{Schärfentiefe und Fokussierung}
 
 
 \section{Verknüpfungspunkte}
@@ -193,10 +212,10 @@ Um die einzelnen Bilder verknüpfen zu können, werden identische Punkte zwische
 Eine Variante der automatischen Verknüpfungspunkte sind die sogenannten ArUco-Marker. Diese werden häufig für die Orientierung bei Augmented-Reality-Anwend\-ungen genutzt. OpenCV unterstützt die Erkennung dieser Marker. Sie werden als codierte Messmarken verwendet und können automatisch im Subpixelbereich erkannt werden. Jede Ecke kann hier einzeln identifiziert werden, sodass ein erkannter Marker vier Verknüpfungspunkte liefern kann.
 
 \subsection{SIFT}
-Die SIFT-Methode liefert Verknüpfungspunkte aus Mustern auf den fotografierten Oberflächen. Es ist meist nicht notwendig explizit Marker an dem aufzunehmenden Objekt anzubringen, sofern seine Oberfläche nicht strukturlos ist (glatte weiße Wände etc.) oder in Bewegung ist.
+Die SIFT-Methode liefert Verknüpfungspunkte aus Mustern auf den photographierten Oberflächen. Es ist meist nicht notwendig explizit Marker an dem aufzunehmenden Objekt anzubringen, sofern seine Oberfläche nicht strukturlos ist (glatte weiße Wände etc.) oder in Bewegung ist.
 
-Zur Erkennung von Merkmalen setzt das Verfahren auf die Detektion von Kanten. Diese werden in verschiedenen Stufen einer Bildpyramide erkannt und ihre Extrema berechnet. Es werden diese Merkmale weiter ausgedünnt, beispielsweise über den Kontrast. Sofern ein möglicher Marker identifiziert wurde, wird eine Beschreibung erzeugt. Diese erfolgt  durch Analyse der Helligkeitsabweichungen zu den Nachbar-Pixeln und wird an der stärksten Abweichung ausgerichtet. Hierdurch wird die Beschreibung dann richtungsunabhängig. Mit diesen kann dann die Übereinstimmung von zwei Markern in zwei Bildern bestimmt werden, auch wenn die Bilder zueinander gekippt oder gedreht sind.
-\citep[S. 483]{luhmann}
+Zur Erkennung von Merkmalen setzt das Verfahren auf die Detektion von Kanten. Diese werden in verschiedenen Stufen einer Bildpyramide erkannt und ihre Extrema berechnet. Es werden diese Merkmale weiter ausgedünnt, beispielsweise über den Kontrast. Sofern ein möglicher Marker identifiziert wurde, wird eine Beschreibung erzeugt. Diese erfolgt  durch Analyse der Helligkeitsabweichungen zu den Nachbar-Pixeln und wird an der stärksten Abweichung ausgerichtet. Hierdurch wird die Beschreibung dann richtungsunabhängig. Mit diesen kann dann die Übereinstimmung von zwei Markern in zwei Photos bestimmt werden, auch wenn die Bilder zueinander gekippt oder gedreht sind.
+\citep[S. 483]{luhmann4}
 
 \section{Verknüpfung von Bildern}
 \label{s:photogramm}
@@ -210,7 +229,7 @@ grobe Filterung
 
 \subsubsection{Abbildungsgleichung}
 \label{ss:abbildungsgleichung}
-Die Abbildung eines Punktes auf einem Bild wird durch die Abbildungsgleichung beschrieben. In der Matrizenrechnung ergibt sich dieser aus der Multiplikation mit der Projektionsmatrix $P$. Diese ergibt sich aus der Kameramatrix $K$, der Rotation $R$ und dem Projektionszentrum $X_0$. (siehe \autoref{abbildungsgleichung}, nach \citealp[S. 244]{hartley} und \citealp[S. 288]{luhmann})
+Die Abbildung eines Punktes auf einem Bild wird durch die Abbildungsgleichung beschrieben. In der Matrizenrechnung ergibt sich dieser aus der Multiplikation mit der Projektionsmatrix $P$. Diese ergibt sich aus der Kameramatrix $K$, der Rotation $R$ und dem Projektionszentrum $X_0$. (siehe \autoref{abbildungsgleichung}, nach \citealp[S. 244]{hartley} und \citealp[S. 288]{luhmann4})
 
 \begin{align}
 \label{abbildungsgleichung}
@@ -228,7 +247,7 @@ Die Abbildung eines Punktes auf einem Bild wird durch die Abbildungsgleichung be
     \end{bmatrix} 
 \end{align}
 
-Um die Beziehung zwischen zwei Bildern aufzustellen, kann man die Abbildungsgleichung nutzen. Da es hier nur um die Beziehung zwischen zwei Bildern geht, kann die Rotation und Translation des ersten Bildes auf 0 gesetzt werden ($R$ ist dann eine 3x3-Einheitsmatrix und $X_0$ ein Nullvektor). $X_0$ des zweiten Bildes wird zur Translation zwischen den beiden Bildern. \citep[S. 326]{luhmann}
+Um die Beziehung zwischen zwei Bildern aufzustellen, kann man die Abbildungsgleichung nutzen. Da es hier nur um die Beziehung zwischen zwei Bildern geht, kann die Rotation und Translation des ersten Bildes auf 0 gesetzt werden ($R$ ist dann eine 3x3-Einheitsmatrix und $X_0$ ein Nullvektor). $X_0$ des zweiten Bildes wird zur Translation zwischen den beiden Bildern. \citep[S. 326]{luhmann4}
 
 \subsubsection{Fundamental-/Essentielle Matrix}
 Die Fundamentalmatrix beschreibt das Verhältnis von identischen Punkten in zwei Bildern zueinander. Sie kann genutzt werden, um die Drehung und Verschiebung zwischen zwei Aufnahmeorten zu bestimmen. Die Formel für die Fundamentalmatrix lautet:
@@ -256,10 +275,7 @@ Entsprechend lässt sich auch aus der Position von Punkten mit bekannten lokalen
 
 
 \section{Bündelblockausgleichung}
-Mittels Bündelblockausgleichung können die grob mit den vorher genannten Verfahren bestimmten Positionen und Drehungen in einer Ausgleichung optimiert werden. Hierzu gehen alle Parameter der Bilder und die Positionen der Passpunkte in die gemeinsame Ausgleichung ein. Grundlage der Ausgleichung ist die in \autoref{ss:abbildungsgleichung} beschriebene Abbildungsgleichung. Als Ergebnis erhält man die ausgeglichenen Parameter und Genauigkeitsangaben für diese. \citep[S. 340]{luhmann}
-
-\section{Transformation}
-Die Berechnungen erfolgen alle in einem lokalen Koordinatensystem. Die GNSS-Koordi\-naten der Bilder werden nur genutzt, um potentielle Nachbarbilder zu identifizieren. Daher muss zum Schluss eine 3D-Transformation der lokalen Daten in ein weltweites Koordinatensystem erfolgen. Diese Transformation erfolgt erst in ein geozentrisches, kartesisches Koordinatensystem (ECEF), welches dann in Längen- und Breitengrade sowie Höhen über dem Ellipsoid umgerechnet werden. Die letztgenannten Angaben sind für die EXIF-Daten der Bilder notwendig.
+Mittels Bündelblockausgleichung können die grob mit den vorher genannten Verfahren bestimmten Positionen und Drehungen in einer Ausgleichung optimiert werden. Hierzu gehen alle Parameter der Bilder und die Positionen der Passpunkte in die gemeinsame Ausgleichung ein. Grundlage der Ausgleichung ist die in \autoref{ss:abbildungsgleichung} beschriebene Abbildungsgleichung. Als Ergebnis erhält man die ausgeglichenen Parameter und Genauigkeitsangaben für diese. \citep[S. 340]{luhmann4}
 
 \chapter{Aufbau des Messsystemes}
 Die Kameras sollten eine höhe geometrische Auflösung und möglichst stabile innere Orientierung aufweisen. Außerdem sollen sie während einer Messkampagne nicht in ihrer Lage zueinander verändert werden, damit die äußere Orientierung größtenteils unverändert bleibt. Daher ist ein stabiler Rahmen notwendig, an welchem die Kameras verdrehsicher angebracht werden können. Kleinere Restfehler in den Orientierungen können mit ausgeglichen werden.
@@ -268,15 +284,19 @@ Um Ungenauigkeiten durch Bewegungen zu verhindern, müssen die Kameras möglichs
 Aus diesen Anforderungen ergeben sich die einzelnen Abschnitte dieses Kapitels.
 
 \section{Kameras}
-Als Kameras würde sich für das Raspberry Pi Camera Module 3 entschieden. 
+Als Kameras würde sich für das Raspberry Pi Camera Module 3, gesteuert durch Raspberry Pi Zero W, entschieden. Im Vergleich zu anderen günstigen Kameras wie Webcams oder der ESP32 CAM haben die Kameras eine hohe geometrische Auflösung von 12 Megapixeln und dennoch mit $1,4~\mu m$ relativ große Pixel \citep{raspi_cam_datasheet}, was im subjektiven Eindruck eine sehr gute Bildqualität ergibt. 
+
+Nachteil und Vorteil zugleich ist, dass die Kamera über einen Autofokus verfügt, der aber auch elektronisch gesteuert manuell fokussieren kann. Dieser verschlechtert die Stabilität der inneren Orientierung (vgl. \autoref{s:innereorientierung}) weiter und wurde daher auch besonders im \todo{Verweis zu Fokusexperimenten} analysiert. Da die Bilder aber Nahbereich zwischen $20$ und $70~\text{cm}$ benötigt werden, ist hier die Schärfentiefe niedrig. Der elektronische Fokus, eine wiederholgenaue und damit mathematisch modellierbare Fokussierung vorausgesetzt, ermöglicht hier, Fokusstacking zu nutzen um den Schärfebereich zu vergrößern.
+
+Weiterer Vorteil der Lösung mit einzelnen Raspberry Pis ist es, dass hierdurch bereits die einzelnen Kameraeinheiten Berechnungen wie das identifizieren von Passpunkten übernehmen könnten und auch durch die Nutzung von Netzwerkverbindungen für die Steuerung das System skalierbar im Sinne der Anzahl der Kameras aber auch der Größenordnung der Abstände zwischen den Kameras.
 
 \section{Rahmen}
-Der Rahmen muss möglichst stabil sein, damit die Kameras sich nicht in ihrer Lage verändern können. Jedoch sollte das System auch weiterhin transportabel - also nicht zu schwer - und veränderbar bleiben, beispielsweise Kameras für Messreihen in ihrer Lage verändert werden. Der Aufbau aus genormten Bauteilen bietet sich an, um hier ggf. den Nachbau ermöglichen zu können.
+Der Rahmen muss möglichst stabil sein, damit die Kameras sich nicht in ihrer Lage verändern können. Jedoch sollte das System auch weiterhin transportabel - also nicht zu schwer - und veränderbar bleiben, beispielsweise Kameras für Messreihen in ihrer Lage verändert werden. Der Aufbau aus genormten Bauteilen bietet sich an, um hier ggf. den Nachbau einfach ermöglichen zu können. 
 
 Als mögliche Materialien kamen Holz, Stahl und Aluminum in Frage. Aufgrund der einfachen Bearbeitung und der genormten Profile, wurde sich für Aluminiumprofile entschieden. Diese gibt es in verschiedenen Ausführungen mit Nuten an den Seitenflächen, so dass eine einfache Montage, aber auch eine Demontage zu Transportzwecken, möglich wird. Außerdem sind diese sehr stabil bei leichtem Gewicht.
 
-
 \section{Kommunikation und Datenübertragung}
+
 
 \section{Beleuchtung}
 Um möglichst gute Bilder zu erzeugen, sollte das Objekt gut ausgeleuchtet sein. Eine dunkle Umgebung verlängert die Belichtungszeit, wodurch die Gefahr von unscharfen Aufnahmen steigt und dunklere Bereiche (ungeleichmäßige Ausleuchtung) verursacht Rauschen in diesen Bildbereichen. Daher soll das System eine gleichmäßige Ausleuchtung ermöglichen. Problematisch ist hierbei, dass die Kameras ggf. auch die Lichtquellen mit im Bildbereich haben können, wodurch Linsenreflexionen oder Ausbrennen der Bildbereiche möglich sind. 
@@ -412,7 +432,7 @@ Es wurde, wenn möglich, auf Python-Bibliotheken zurückgegriffen. Hierdurch sol
 
 \subsubsection{NumPy} bietet neben vielen weiteren Funktionen die Möglichkeit der Matrizenrechnung. Diese wurde für viele Berechnungen benötigt.
 
-\subsubsection{SciPy} wurde für die Berechnung der Bündelblockausgleichung verwendet. Der manuelle Ansatz mit den Formeln aus \cite{luhmann} unter Nutzung von NumPy war sehr ressourcenlastig. Unter Verwendung von SciPy und der Projektionsgleichung konnte die Berechnungsdauer stark dezimiert werden.
+\subsubsection{SciPy} wurde für die Berechnung der Bündelblockausgleichung verwendet. Der manuelle Ansatz mit den Formeln aus \cite{luhmann4} unter Nutzung von NumPy war sehr ressourcenlastig. Unter Verwendung von SciPy und der Projektionsgleichung konnte die Berechnungsdauer stark dezimiert werden.
 
 \subsubsection{Flask} wurde genutzt um die Weboberfläche bereitzustellen und die Kommunikation zwischen dem Python und dem HTML/TypeScript-Modulen sicherzustellen. Die Weboberfläche selber muss nur einmalig kompiliert werden und wird dann von einen Flask-Webserver zur Verfügung gestellt. Per REST-Abfragen werden dann Daten zwischen TypeScript (bzw. nach dem Kompilieren eigentlich JavaScript) und Python ausgetauscht.
 
