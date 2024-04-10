@@ -9,7 +9,6 @@
         "*.synctex.gz": true,
         "*.toc": true,
         "*.bbl": true,
-        "*.bib": true,
         "*.blg": true,
         "*.dvi": true,
         "*.fdb_latexmk": true,
