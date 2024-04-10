@@ -1,0 +1,40 @@
+\documentclass[./00_PhotoBox.tex]{subfiles}
+\graphicspath{{\subfix{./img/}}}
+
+\begin{document}
+
+\chapter{Bedienungsanleitung}
+
+\section{Zweck}
+Ziel des Systemes ist es, 3D-Modelle von Objekten bis zu einer Größe von 40~cm Durchmesser zu erstellen. Die Bedienung soll dabei möglichst einfach und selbsterklärend sein, um auch Laien die Möglichkeit zu geben, das System zu bedienen.
+
+\section{Inbetriebnahme}
+Beim Aufstellen ist darauf zu achten, keine starke, seitliche Lichtquellen um das System herum zu haben, wie beispielsweise auch Fensterflächen. Diese könnten die Belichtung der Bilder beeinflussen und so die Qualität der 3D-Modelle negativ beeinflussen. Gegebenenfalls muss für Verschattung gesorgt werden.
+
+Die Berechnung des 3D-Modelles erfolgt auf einem externen Rechner. Hier kann wahlweise Agisoft Metashape oder OpenDroneMap genutzt werden. Die Software muss auf dem Rechner installiert sein und die Bilder müssen auf diesen übertragen werden. Die Übertragung kann über USB-Sticks oder automatisch über eine Netzwerkverbindungen erfolgen. Hierfür muss das System Java installiert haben und die mitgelieferte Verbindungssoftware auf dem Rechner gestartet sein (siehe \autoref{sec:SoftwareEinrichtung}).
+
+Das System startet bei Anschluss an eine Stromversorgung selbstständig. Da die Gefahr besteht, dass die kamerasteuernden Raspberry Pi Zero Daten verlieren, wenn die Stromversorgung unterbrochen wird, sollte das System immer ordnungsgemäß heruntergefahren werden und auf eine zuverlässige Stromversorgung geachtet werden.
+Das Abschalten erfolgt durch langes Drücken auf den roten Taster. Das System fährt dann selbstständig herunter - erkennbar an dem Erlöschen der LEDs der Raspberry Pi Zero und der Beleuchtung - und die Stromversorgung kann getrennt werden.
+
+\section{Software-Einrichtung}
+\label{sec:SoftwareEinrichtung}
+Die Software zur Steuerung der Kameras und zur Übertragung der Bilder auf den Rechner ist in Java geschrieben. Sie kann unter Linux, Windows und MacOS genutzt werden. Auf dem Rechner muss entsprechend Java installiert sein. Für die Nutzung von Metashape muss eine Lizenz vorhanden sein und neben der ausführbaren jar-Datei abgelegt werden. Für OpenDroneMap muss die Software in Form von NodeODM auf dem Rechner installiert sein. Die Verbindung zu einem Server ist nicht implementiert.
+
+\section{Kalibrierung}
+Die letzten Koordinaten der Passpunkte wird im System gespeichert - daher sollten diese möglichst nicht verändert werden. Falls diese dennoch verändert werden, kann das System einzelne Veränderungen berechnen und nutzen. Bei Änderung einer Vielzahl muss das System jedoch extern neu kalibriert werden, beispielsweise durch Bilder mit einer externen Kamera, wo durch dann die Koordinaten der Passpunkte neu bestimmt werden können.
+
+Eine Kalibrierung mit Bordmitteln ist bisher nicht umgesetzt.
+
+\section{Durchführung}
+
+
+
+\section{Auswertung}
+
+\section{Wartung}
+
+\section{Fehlerbehebung}
+
+
+
+\end{document}
