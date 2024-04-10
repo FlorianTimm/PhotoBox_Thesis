@@ -1,0 +1,19 @@
+{
+    "files.exclude": {
+        "*.aux": true,
+        "*.lof": true,
+        "*.log": true,
+        "*.lot": true,
+        "*.out": true,
+        "*.pdf": true,
+        "*.synctex.gz": true,
+        "*.toc": true,
+        "*.bbl": true,
+        "*.bib": true,
+        "*.blg": true,
+        "*.dvi": true,
+        "*.fdb_latexmk": true,
+        "*.fls": true,
+        "*.out.ps": true
+    }
+}
