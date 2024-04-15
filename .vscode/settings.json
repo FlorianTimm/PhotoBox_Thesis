@@ -5,7 +5,6 @@
         "*.log": true,
         "*.lot": true,
         "*.out": true,
-        "*.pdf": true,
         "*.synctex.gz": true,
         "*.toc": true,
         "*.bbl": true,

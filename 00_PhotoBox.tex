@@ -7,7 +7,7 @@
 \usepackage{graphicx}
 \graphicspath{{img/}}
 \usepackage{color}
-\usepackage[dvipsnames,usenames,dvipsnames,table,xcdraw]{xcolor}
+\usepackage[dvipsnames,dvipsnames,table,xcdraw]{xcolor}
 \usepackage[toc,page]{appendix}
 \usepackage[printonlyused]{acronym}
 %\usepackage[scaled]{berasans}
@@ -27,6 +27,7 @@
 \usepackage{todonotes}
 \usepackage{amsmath}
 \usepackage{cancel}
+\usepackage{scrhack}
 
 % Kommentare mit \begin{comment}
 \usepackage{verbatim}
@@ -81,6 +82,7 @@
 %\bibliography{Thesis.bib}
 \usepackage[round]{natbib}
 \bibliographystyle{hcu}
+\def\biblio{\bibliographystyle{amsalpha}\bibliography{photoBox}}
 
 \usepackage{subfiles}
 
@@ -90,6 +92,7 @@
 
 
 \begin{document}
+\def\biblio{}
 \pagenumbering{Roman}
 \begin{titlepage}
     \begin{center}
