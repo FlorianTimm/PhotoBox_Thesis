@@ -1,14 +1,18 @@
-
 \documentclass[./00_PhotoBox.tex]{subfiles}
 \graphicspath{{\subfix{./img/}}}
 \begin{document}
 
 
-\chapter{Photogrammmetrischer Hintergrund}
+\chapter{Photogrammmetrischer Grundlagen}
 \label{c:photogrammmetrie}
-Das Erzeugen des 3D-Modelles basiert auf der Verknüpfung von Bildern aus verschiedenen Positionen über identische Punkte. Hieraus können dann die Orientierung der Kameras zueinander und die Koordinaten der Punkte in einem lokalen Koordinatensystem ohne bekannten Maßstab berechnet werden. Durch die Nutzung von bekannten Größen beispielsweise durch Maßstäbe kann dieses System transformiert werden.
+Das zu entwickelnde System soll 3D-Modelle von Objekten erstellen. Hierfür wird die Photogrammmetrie genutzt.
+vereinfacht basiert das genutzte Verfahren auf der Verknüpfung von Bildern aus verschiedenen Positionen über identische Punkte. Hieraus können dann die Orientierung der Kameras zueinander und die Koordinaten der Punkte in einem lokalen Koordinatensystem ohne bekannten Maßstab berechnet werden. Durch die Nutzung von bekannten Größen beispielsweise durch Maßstäbe kann dieses System transformiert werden.
 
 Dieses Kapitel beschreibt die hierfür notwendigen Bedingungen und die Grundlagen der Rekonstruktion des Objektes als 3D-Modell.
+
+\section{Ablauf}
+\label{s:ablauf}
+Der Ablauf der Erzeugung des 3D-Modelles ist in \autoref{img:ablauf} dargestellt. Zunächst werden die Bilder aufgenommen. Hierbei ist es wichtig, dass die Bilder überlappen und die Bildinhalte sich ähneln. Die Bilder werden dann verknüpft, indem identische Punkte in den Bildern identifiziert werden. Hierfür können beispielsweise ArUco-Marker oder die SIFT-Methode genutzt werden. Aus den identifizierten Punkten werden dann die Positionen der Kameras zueinander berechnet. Hierfür wird die Abbildungsgleichung genutzt. Die so berechneten Positionen werden dann mittels Bündelblockausgleichung optimiert. \citep[S. 492]{luhmann}
 
 \begin{figure}
     \centering

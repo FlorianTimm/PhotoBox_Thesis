@@ -13,5 +13,6 @@
         "*.fdb_latexmk": true,
         "*.fls": true,
         "*.out.ps": true
-    }
+    },
+    "latex-workshop.latex.recipe.default": "lastUsed",
 }
