@@ -10,9 +10,9 @@ jobs:
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v3
         with:
-          root_file: 00_PhotoBox.tex
+          root_file: 00PhotoBox.tex
       - name: Upload PDF file
         uses: actions/upload-artifact@v4
         with:
           name: PDF
-          path: 00_PhotoBox.pdf
+          path: 00PhotoBox.pdf
