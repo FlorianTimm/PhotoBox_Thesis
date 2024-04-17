@@ -3,16 +3,14 @@
 \begin{document}
 
 
-\chapter{Photogrammmetrischer Grundlagen}
+\chapter{Photogrammmetrische Grundlagen}
 \label{c:photogrammmetrie}
-Das zu entwickelnde System soll 3D-Modelle von Objekten erstellen. Hierfür wird die Photogrammmetrie genutzt.
-Der allgemeine Ablauf der Erzeugung des 3D-Modelles ist in \autoref{img:ablauf} dargestellt. Zunächst werden die Bilder aufgenommen. Hierbei ist es wichtig, dass die Bildinhalte sich überlappen. Die Bilder werden dann verknüpft, indem identische Punkte in den Bildern identifiziert werden. Hierfür können beispielsweise ArUco-Marker oder die SIFT-Methode genutzt werden. Aus den identifizierten Punkten werden dann die Positionen und Ausrichtung der Kameras und Verknüpfungspunkte in einem lokalen Koordinatensystem ohne bekannten Maßstab berechnet werden. Die berechneten Daten werden anschließend in einer Bündelblockausgleichung gemeinsam optimiert. Durch die Nutzung von bekannten Größen beispielsweise durch Maßstäbe kann dieses System transformiert werden.
+Das zu entwickelnde System soll 3D-Modelle von Objekten erstellen. Hierfür wird Photogrammmetrie in Form einer Structure-from-Motion-Pipeline genutzt.
+Der allgemeine Ablauf ist in \autoref{img:ablauf} dargestellt. Zunächst werden die Bilder aufgenommen (siehe \autoref{s:bilder}). Hierbei ist es wichtig, dass die Bildinhalte sich überlappen. 
+Die Bilder werden dann verknüpft, indem identische Punkte in den Bildern identifiziert werden  (siehe \autoref{s:verknuepfung}). Hierfür können beispielsweise ArUco-Marker oder die SIFT-Methode genutzt werden. 
+Aus den identifizierten Punkten werden dann die Positionen und Ausrichtung der Kameras und Verknüpfungspunkte in einem lokalen Koordinatensystem ohne bekannten Maßstab berechnet werden. Die berechneten Daten werden anschließend in einer Bündelblockausgleichung gemeinsam optimiert (siehe \autoref{s:buendelblock}). Durch die Nutzung von bekannten Größen beispielsweise durch Maßstäbe kann dieses System transformiert werden.
 
 Dieses Kapitel beschreibt die hierfür notwendigen Bedingungen und die Grundlagen der Rekonstruktion des Objektes als 3D-Modell.
-
-\section{Ablauf}
-\label{s:ablauf}
-
 
 \begin{figure}
     \centering
@@ -22,39 +20,46 @@ Dieses Kapitel beschreibt die hierfür notwendigen Bedingungen und die Grundlage
     \label{img:ablauf} %ID fürs Bild
 \end{figure}
 
-\section{Innere Orientierung}
-\label{s:innereorientierung}
-Aus der Position eines Punktes in einem Bild kann vereinfacht gedacht ähnlich einer Messung mit einem Theodolit die Richtung des Punktes in Relation zu der Kamera bestimmt werden. Damit diese Berechnung möglich wird, müssen die Parameter der Kamera bekannt sein, die sogenannte innere Orientierung. Sie beschreibt die Abbildung der Kamera mathematisch. Wichtigste Parameter sind hierbei die Lage des Bildhauptpunktes und die Kamerakonstante. Außerdem zählen hierzu auch die Parameter, die die Bildfehler wie die Verzeichnung, beschreiben. \citep[S. 179f]{luhmann}
-
-Die innere Orientierung kann während der Messung beispielsweise mittels Bündel\-block\-ausgleichung bestimmt werden. Bedingung hierfür ist jedoch, dass die innere Orientierung stabil ist und sich nicht während der Messung ändert \citep[S. 181f]{luhmann}.
-
-Jede Einstellung der Kameraoptik verändert die innere Orientierung und auch jede Kamera,auch einer Modellreihe, kann je nach Genauigkeitsanspruch als unterschiedlich angesehen werden. Änderungen können sich beispielsweise durch Umfokussierung oder die Nutzung eines optischen Zoom ergeben, aber auch durch einen mechanisch instabilen Aufbau der Kameras. Daher sollten die Bilder möglichst mit einer Kamera mit festen Einstellungen (Brennweite, Fokus, Blende, Objektiv) aufgenommen werden. Änderungen der Empfindlichkeit (ISO-Zahl) oder Belichtungszeit sind unproblematisch für die innere Orientierung \citep[S. 176]{luhmann}.
-
 
 \section{Bilder}
 \label{s:bilder}
 
 Die Berechnung der Tiefeninformationen ist nur möglich, sofern der Punkt in mindestens einem weiteren Bild abgebildet ist. Die Genauigkeit der Berechnung ist vom Schnittwinkel dieser beiden Strahlen abhängig. Um möglichst gute Schnitte zur Ver\-fügung zu haben und die innere und äußere Orientierung möglichst gut berechnen zu können, müssen diese Bilder einige Bedingungen erfüllen.
 
-\subsubsection{Überlappung und Bildinhalte}
+\subsection{Überlappung und Bildinhalte}
 Da die Bilder durch identische Punkte verbunden werden, müssen die Bildinhalte sich überlappen. Die automatische Identifikation von identischen Punkten ist auf verschiedene Weisen möglich: Entweder durch die Nutzung von codierten Passpunkten wie ArUco-Markern oder konzentrischen Passpunkten nach \cite{schneider}. Alternativ können auch eine Merkmalsextraktion zur Indentifikation von gemeinsamen Punkten genutzt werden, beispielsweise durch die SIFT-Methode. Hierfür muss die oberfläche aber genügend Texturen aufweisen. \citep[S. 478]{luhmann}
 
-\subsubsection{Belichtung}
+\subsection{Belichtung}
 und bei sich stark ändernden Helligkeitsverhältnissen auch hilfreich, jedoch wird hierdurch auch die Helligkeit der Verknüpfungspunkte verändert, was wiederum problematisch sein kann. Entsprechend ist es empfehlenswert bei gleichmäßiger Beleuchtung, die sich auch nicht ändern sollte, die Bilder zu erstellen - also beispielsweise bei bedeckten Himmel.
 
-\subsubsection{Position und Ausrichtung der Kamera}
-Bilder, die vom gleichen Standpunkt aufgenommen wurden, sind oft nur ungenau verknüpfbar. Daher empfiehlt es sich, eher um Objekte herum zu gehen, statt beispielsweise bei Innenräumen sich nur in die Mitte zu stellen und sich zu drehen. Während der Aufnahmen sollte die Kamera natürlich möglichst ruhig gehalten werden, um möglichst scharfe Bilder zu generieren. Dies ist vor allem bei UAV-Flügen relevant, die auch aus hoher Geschwindigkeit Bilder aufnehmen könnten. Jedoch weisen die meisten Digitalkamera einen Rolling-Shutter-Effekt auf, dass heißt die Bildreihen werden nicht alle zeitgleich aufgenommen, sondern die oberen vor den unteren. Daher ist es sinnvoll, das UAV kurz schweben zu lassen und dann ein Bild zu machen. \citep[S. 147]{opendronemap}
+\subsection{Position und Ausrichtung der Kamera}
+Bilder, die vom gleichen Standpunkt aufgenommen wurden, sind oft nur ungenau verknüpfbar. Daher empfiehlt es sich, Bilder aus verschiedensten Richtungen zu machen, also bei der manuellen Photographie um das Objekt herumzugehen - eine Mehrbildaufnahme im Rundum-Verband zu erzeugen. \citep[S. 170]{luhmann}
+Entsprechend müssen die Kameras an dem Trägern auch gleichmäßig um das Objekt verteilt positioniert werden und dabei auch an die Form des Objektes wie Einschnitte anpassbar sein.
 
-Umso weiter die Kamera vom Objekt entfernt ist, umso mehr Inhalte und entsprechend mehr Verknüpfungsmöglichkeiten sind im Bild enthalten. Daher sollte sich immer klar gemacht werden, welche Auflösung benötigt wird und entsprechend die Entfernung bzw. bei UAV-Aufnahmen die Höhe zu wählen. Der Abstand sollte außerdem variiert werden, da dieses bei der Ausgleichung der inneren Orientierung hilft. \citep[S. 144f]{opendronemap}
+%\subsection{Schärfentiefe und Fokussierung}
 
-\subsubsection{Schärfentiefe und Fokussierung}
+\subsection{Innere Orientierung}
+\label{s:innereorientierung}
+Aus der Position eines Punktes in einem Bild kann vereinfacht gedacht ähnlich einer Messung mit einem Theodolit die Richtung des Punktes in Relation zu der Kamera bestimmt werden. Damit diese Berechnung möglich wird, müssen die Parameter der Kamera bekannt sein, die sogenannte innere Orientierung. Sie beschreibt die Abbildung der Kamera mathematisch. Wichtigste Parameter sind hierbei die Lage des Bildhauptpunktes und die Kamerakonstante. Außerdem zählen hierzu auch die Parameter, die die Verzeichnung beschreiben. \citep[S. 179f]{luhmann}
 
+Die innere Orientierung kann während der Messung beispielsweise mittels Bündel\-block\-ausgleichung bestimmt werden. Bedingung hierfür ist jedoch, dass die innere Orientierung stabil ist und sich nicht während der Messung ändert \citep[S. 181f]{luhmann}.
+
+Jede Einstellung der Kameraoptik verändert die innere Orientierung und auch jede Kamera, auch einer Modellreihe, kann je nach Genauigkeitsanspruch als unterschiedlich angesehen werden. Änderungen können sich beispielsweise durch Umfokussierung oder die Nutzung eines optischen Zoom ergeben, aber auch durch einen mechanisch instabilen Aufbau der Kameras. Daher sollten die Bilder möglichst mit einer Kamera mit festen Einstellungen (Brennweite, Fokus, Blende, Objektiv) aufgenommen werden. Änderungen der Empfindlichkeit (ISO-Zahl) oder Belichtungszeit sind unproblematisch für die innere Orientierung \citep[S. 176]{luhmann}.
 
 \section{Verknüpfungspunkte}
+\label{s:verknuepfung}
 Um die einzelnen Bilder verknüpfen zu können, werden identische Punkte zwischen zwei oder mehr Bildern benötigt. Diese können klassisch per Hand erfasst werden, jedoch ist dieses schon bei kleineren Projekten sehr zeitaufwändig. Daher wurde zusätzlich die Möglichkeit genutzt, automatisch Verknüpfungspunkte zu erzeugen.
 
-\subsection{ArUco-Marker}
+\subsection{Codierte Zielmarker}
+Es gibt verschiedenste Formen von Markern, die automatisch erfasst werden können. Grob unterschieden werden kann in codierte und nicht codierte Zielmarker. Beispiele für nicht codierte sind beispielsweise einfache kreisförmige Klebepunkte oder Marker, die aus dem Linien bestehen und ihren Mittelpunkt durch dessen Schnitt definieren. 
+Vorteilhaft ist jedoch die Verwendung von codierten Zielmarken. Hier können die Punkte ihren Nummern direkt zugeordnet werden. 
+\citep[S.535ff]{luhmann}
+
+\subsubsection{ArUco-Marker}
 Eine Variante der automatischen Verknüpfungspunkte sind die sogenannten ArUco-Marker. Diese werden häufig für die Orientierung bei Augmented-Reality-Anwend\-ungen genutzt. OpenCV unterstützt die Erkennung dieser Marker. Sie werden als codierte Messmarken verwendet und können automatisch im Subpixelbereich erkannt werden. Jede Ecke kann hier einzeln identifiziert werden, sodass ein erkannter Marker vier Verknüpfungspunkte liefern kann.
+
+\subsubsection{Zielmarken nach Schneider}
+\citep[S. 541]{luhmann}
 
 \subsection{SIFT}
 Die SIFT-Methode liefert Verknüpfungspunkte aus Mustern auf den photographierten Oberflächen. Es ist meist nicht notwendig explizit Marker an dem aufzunehmenden Objekt anzubringen, sofern seine Oberfläche nicht strukturlos ist (glatte weiße Wände etc.) oder in Bewegung ist.
@@ -122,6 +127,7 @@ Entsprechend lässt sich auch aus der Position von Punkten mit bekannten lokalen
 
 
 \section{Bündelblockausgleichung}
+\label{s:buendelblock}
 Mittels Bündelblockausgleichung können die grob mit den vorher genannten Verfahren bestimmten Positionen und Drehungen in einer Ausgleichung optimiert werden. Hierzu gehen alle Parameter der Bilder und die Positionen der Passpunkte in die gemeinsame Ausgleichung ein. Grundlage der Ausgleichung ist die in \autoref{ss:abbildungsgleichung} beschriebene Abbildungsgleichung. Als Ergebnis erhält man die ausgeglichenen Parameter und Genauigkeitsangaben für diese. \citep[S. 340]{luhmann4}
 
 \biblio
