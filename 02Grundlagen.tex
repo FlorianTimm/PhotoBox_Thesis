@@ -6,8 +6,8 @@
 \chapter{Photogrammmetrische Grundlagen}
 \label{c:photogrammmetrie}
 Das zu entwickelnde System soll 3D-Modelle von Objekten erstellen. Hierfür wird Photogrammmetrie in Form einer Structure-from-Motion-Pipeline genutzt.
-Der allgemeine Ablauf ist in \autoref{img:ablauf} dargestellt. Zunächst werden die Bilder aufgenommen (siehe \autoref{s:bilder}). Hierbei ist es wichtig, dass die Bildinhalte sich überlappen. 
-Die Bilder werden dann verknüpft, indem identische Punkte in den Bildern identifiziert werden  (siehe \autoref{s:verknuepfung}). Hierfür können beispielsweise ArUco-Marker oder die SIFT-Methode genutzt werden. 
+Der allgemeine Ablauf ist in \autoref{img:ablauf} dargestellt. Zunächst werden die Bilder aufgenommen (siehe \autoref{s:bilder}). Hierbei ist es wichtig, dass die Bildinhalte sich überlappen.
+Die Bilder werden dann verknüpft, indem identische Punkte in den Bildern identifiziert werden  (siehe \autoref{s:verknuepfung}). Hierfür können beispielsweise ArUco-Marker oder die SIFT-Methode genutzt werden.
 Aus den identifizierten Punkten werden dann die Positionen und Ausrichtung der Kameras und Verknüpfungspunkte in einem lokalen Koordinatensystem ohne bekannten Maßstab berechnet werden. Die berechneten Daten werden anschließend in einer Bündelblockausgleichung gemeinsam optimiert (siehe \autoref{s:buendelblock}). Durch die Nutzung von bekannten Größen beispielsweise durch Maßstäbe kann dieses System transformiert werden.
 
 Dieses Kapitel beschreibt die hierfür notwendigen Bedingungen und die Grundlagen der Rekonstruktion des Objektes als 3D-Modell.
@@ -51,8 +51,8 @@ Jede Einstellung der Kameraoptik verändert die innere Orientierung und auch jed
 Um die einzelnen Bilder verknüpfen zu können, werden identische Punkte zwischen zwei oder mehr Bildern benötigt. Diese können klassisch per Hand erfasst werden, jedoch ist dieses schon bei kleineren Projekten sehr zeitaufwändig. Daher wurde zusätzlich die Möglichkeit genutzt, automatisch Verknüpfungspunkte zu erzeugen.
 
 \subsection{Codierte Zielmarker}
-Es gibt verschiedenste Formen von Markern, die automatisch erfasst werden können. Grob unterschieden werden kann in codierte und nicht codierte Zielmarker. Beispiele für nicht codierte sind beispielsweise einfache kreisförmige Klebepunkte oder Marker, die aus dem Linien bestehen und ihren Mittelpunkt durch dessen Schnitt definieren. 
-Vorteilhaft ist jedoch die Verwendung von codierten Zielmarken. Hier können die Punkte ihren Nummern direkt zugeordnet werden. 
+Es gibt verschiedenste Formen von Markern, die automatisch erfasst werden können. Grob unterschieden werden kann in codierte und nicht codierte Zielmarker. Beispiele für nicht codierte sind beispielsweise einfache kreisförmige Klebepunkte oder Marker, die aus dem Linien bestehen und ihren Mittelpunkt durch dessen Schnitt definieren.
+Vorteilhaft ist jedoch die Verwendung von codierten Zielmarken. Hier können die Punkte ihren Nummern direkt zugeordnet werden.
 \citep[S.535ff]{luhmann}
 
 \subsubsection{ArUco-Marker}
@@ -65,21 +65,16 @@ Eine Variante der automatischen Verknüpfungspunkte sind die sogenannten ArUco-M
 Die SIFT-Methode liefert Verknüpfungspunkte aus Mustern auf den photographierten Oberflächen. Es ist meist nicht notwendig explizit Marker an dem aufzunehmenden Objekt anzubringen, sofern seine Oberfläche nicht strukturlos ist (glatte weiße Wände etc.) oder in Bewegung ist.
 
 Zur Erkennung von Merkmalen setzt das Verfahren auf die Detektion von Kanten. Diese werden in verschiedenen Stufen einer Bildpyramide erkannt und ihre Extrema berechnet. Es werden diese Merkmale weiter ausgedünnt, beispielsweise über den Kontrast. Sofern ein möglicher Marker identifiziert wurde, wird eine Beschreibung erzeugt. Diese erfolgt  durch Analyse der Helligkeitsabweichungen zu den Nachbar-Pixeln und wird an der stärksten Abweichung ausgerichtet. Hierdurch wird die Beschreibung dann richtungsunabhängig. Mit diesen kann dann die Übereinstimmung von zwei Markern in zwei Photos bestimmt werden, auch wenn die Bilder zueinander gekippt oder gedreht sind.
-\citep[S. 483]{luhmann4}
+\citep[S. 484f]{luhmann}
 
 \section{Verknüpfung von Bildern}
 \label{s:photogramm}
-Durch die drei beschriebenen Verfahren und die hieraus entstandenen Verknüpfungs\-punkte können die Bilder miteinander verknüpft werden. Da durch GNSS nur eine sehr grobe und ggf. auch falsche Vorausrichtung besteht, kann diese nur als sehr grobes Hilfsmittel genutzt werden. In diesen Ansatz wird es nur für die Beschränkung der SIFT-Detektion auf Bilder, die nahe beieinander sind oder sich ArUco- oder manuelle Punkte teilen, genutzt.
-Für die eigentliche Verknüpfung werden dann nur photogrammmetrische Verfahren genutzt. Über diese wird im Folgenden ein kurzer Überblick gegeben.
+Durch die drei beschriebenen Verfahren und die hieraus entstandenen Verknüpfungs\-punkte können die Bilder miteinander verknüpft werden. Da die Kamerapositionen am Rahmen veränderlich sind und die Fixierung auch keine ausreichend genaue Fixierung garantiert, können die bekannten Positionen aus vorherigen Messungen nur als Näherungswerte genutzt werden. Die genaue Bestimmung erfolgt der Position und Ausrichtung - die äußere Orientierung - erfolgt dann Über ein Photogrammmetrische Verfahren. Dieses wird im Folgenden vorgestellt.
 
-\begin{comment}
-\subsection{Homographie}
-grobe Filterung
-\end{comment}
 
 \subsubsection{Abbildungsgleichung}
 \label{ss:abbildungsgleichung}
-Die Abbildung eines Punktes auf einem Bild wird durch die Abbildungsgleichung beschrieben. In der Matrizenrechnung ergibt sich dieser aus der Multiplikation mit der Projektionsmatrix $P$. Diese ergibt sich aus der Kameramatrix $K$, der Rotation $R$ und dem Projektionszentrum $X_0$. (siehe \autoref{abbildungsgleichung}, nach \citealp[S. 244]{hartley} und \citealp[S. 288]{luhmann4})
+Die Abbildung eines Punktes auf einem Bild wird durch die Abbildungsgleichung beschrieben. In der Matrizenrechnung ergibt sich dieser aus der Multiplikation mit der Projektionsmatrix $P$. Diese ergibt sich aus der Kameramatrix $K$, der Rotation $R$ und dem Projektionszentrum $X_0$. (siehe \autoref{abbildungsgleichung}, nach \citealp[S. 244]{hartley} und \citealp[S. 290]{luhmann})
 
 \begin{align}
     \label{abbildungsgleichung}
@@ -99,36 +94,20 @@ Die Abbildung eines Punktes auf einem Bild wird durch die Abbildungsgleichung be
     \end{bmatrix}
 \end{align}
 
-Um die Beziehung zwischen zwei Bildern aufzustellen, kann man die Abbildungsgleichung nutzen. Da es hier nur um die Beziehung zwischen zwei Bildern geht, kann die Rotation und Translation des ersten Bildes auf 0 gesetzt werden ($R$ ist dann eine 3x3-Einheitsmatrix und $X_0$ ein Nullvektor). $X_0$ des zweiten Bildes wird zur Translation zwischen den beiden Bildern. \citep[S. 326]{luhmann4}
+Um die Beziehung zwischen zwei Bildern aufzustellen, kann man die Abbildungsgleichung nutzen. Da es hier nur um die Beziehung zwischen zwei Bildern geht, kann die Rotation und Translation des ersten Bildes auf 0 gesetzt werden ($R$ ist dann eine 3x3-Einheitsmatrix und $X_0$ ein Nullvektor). $X_0$ des zweiten Bildes wird zur Translation zwischen den beiden Bildern. \citep[S. 330]{luhmann}
 
-\subsubsection{Fundamental-/Essentielle Matrix}
-Die Fundamentalmatrix beschreibt das Verhältnis von identischen Punkten in zwei Bildern zueinander. Sie kann genutzt werden, um die Drehung und Verschiebung zwischen zwei Aufnahmeorten zu bestimmen. Die Formel für die Fundamentalmatrix lautet:
-\begin{align}
-    x'^T \cdot F \cdot x'' & = 0
-\end{align}
-Sie unterscheidet sich nur von der Essentiellen Matrix in der Eigenschaft, dass bei der Essentiellen Matrix die Kameraparameter bekannt sein müssen. Diese werden dann auf die Bildkoordinaten angewendet und $x'$ und $x''$ werden so unabhängig (normalisiert) von den Kameraeinstellungen. Mittels Singulärwertzerlegung lässt sich dann die Rotation und Translation aus der Essentiellen Matrix bestimmen. Im Falle von Bildern die mit Digitalkameras aufgenommen wurden sind die Kameraparameter zumindest näherungsweise aus den EXIF-Daten der Bilder bekannt, sodass dieser Weg hier genutzt werden kann. \citep[S. 257]{hartley}
-
-In der entstandenen Software wurde die Methode verwendet, um die Verknüpfung des Startpaares zu errechnen.
-
-\subsection{Fundamental-/Essentielle Matrix}
-Die Fundamentalmatrix beschreibt das Verhältnis von identischen Punkten in zwei Bildern zueinander. Sie kann genutzt werden, um die Drehung und Verschiebung zwischen zwei Aufnahmeorten zu bestimmen. Die Formel für die Fundamentalmatrix lautet:
-\begin{align}
-    x'^T \cdot F \cdot x'' & = 0
-\end{align}
-Sie unterscheidet sich nur von der Essentiellen Matrix in der Eigenschaft, dass bei der Essentiellen Matrix die Kameraparameter bekannt sein müssen. Diese werden dann auf die Bildkoordinaten angewendet und $x'$ und $x''$ werden so unabhängig (normalisiert) von den Kameraeinstellungen. Mittels Singulärwertzerlegung lässt sich dann die Rotation und Translation aus der Essentiellen Matrix bestimmen. Im Falle von Bildern die mit Digitalkameras aufgenommen wurden sind die Kameraparameter zumindest näherungsweise aus den EXIF-Daten der Bilder bekannt, sodass dieser Weg hier genutzt werden kann. \citep[S. 257]{hartley}
-
-In der entstandenen Software wurde die Methode verwendet, um die Verknüpfung des Startpaares zu errechnen.
-
-\subsection{Vorwärtsschnitt}
-Aus den zwei Projektionsmatrizen zweier Bilder und der Position eines identischen Punktes in beiden Bildern lassen sich dann lokale (Modell-)Koordinaten des Punktes berechnen. Da auch dieses nicht fehlerfrei ist, wurde hierfür die Methode der linearen Triangulation verwendet. Hierbei wird der entstehende Fehler ausgeglichen. \citep[S.312]{hartley}
 
 \subsection{Rückwärtsschnitt}
-Entsprechend lässt sich auch aus der Position von Punkten mit bekannten lokalen Koordinaten die Position und Drehung eines Bildes berechnen. Dieses wurde genutzt, um weitere Bilder an das Startpaar heranzuknüpfen. Hierfür werden mindestens 5 Punkte benötigt. \citep[S. 533ff]{hartley}
+Die Koordinaten der ArUco-Marker sind aus einer Kalibrierung und aus vorherigen Messungen bekannt. Aus diesen und den Bildkoordinaten der Marker kann die Position und Ausrichtung der Kamera berechnet werden. Hierfür wird der sogenannte Rückwärtsschnitt genutzt. Die Berechung erfolgt auf Basis der Abbildungsgleichung, die die Position eines Punktes in einem Bild in Beziehung zur Kamera setzt. Für die Berechnung selbst gibt es verschiedene Methoden. Verwendet wurde hier der von OpenCV genutzte Ansatz von \citeauthor{Lepetit2008} in Kombination mit einem RANSAC-Ansatz. Durch die Nutzung des RANSAC-Ansatzes können veränderte Passpunkte identifiziert und als Ausreißer markiert werden.
+
+
+\subsection{Vorwärtsschnitt}
+Die Koordinaten der Passpunkt-Ausreißer aus der Berechung der Kamerapositionen werden anschließend neu berechnet. Hierfür wird der Vorwärtsschnitt genutzt. Auch hier wird OpenCV zur Berechnung genutzt. Die Berechnung der Passpunkte erfolgt für jedes Bildpaar einzeln. Für alle Koordinaten wird dann pro Passpunkt der Z-Score berechnet. Passpunkte, die einen Z-Score von über 2 haben, werden als Ausreißer markiert und nicht weiter betrachtet.
 
 
 \section{Bündelblockausgleichung}
 \label{s:buendelblock}
-Mittels Bündelblockausgleichung können die grob mit den vorher genannten Verfahren bestimmten Positionen und Drehungen in einer Ausgleichung optimiert werden. Hierzu gehen alle Parameter der Bilder und die Positionen der Passpunkte in die gemeinsame Ausgleichung ein. Grundlage der Ausgleichung ist die in \autoref{ss:abbildungsgleichung} beschriebene Abbildungsgleichung. Als Ergebnis erhält man die ausgeglichenen Parameter und Genauigkeitsangaben für diese. \citep[S. 340]{luhmann4}
+Mittels Bündelblockausgleichung können die grob mit den vorher genannten Verfahren bestimmten Positionen und Drehungen in einer Ausgleichung optimiert werden. Hierzu gehen alle Parameter der Bilder und die Positionen der Passpunkte in die gemeinsame Ausgleichung ein. Grundlage der Ausgleichung ist die in \autoref{ss:abbildungsgleichung} beschriebene Abbildungsgleichung. Als Ergebnis erhält man die ausgeglichenen Parameter und Genauigkeitsangaben für diese. \citep[S. 343ff]{luhmann}
 
 \biblio
 \end{document}
