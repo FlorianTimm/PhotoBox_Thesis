@@ -2,7 +2,6 @@
 \graphicspath{{\subfix{./img/}}}
 \begin{document}
 
-
 \chapter{Software-Entwicklung}
 Für die Steuerung der Kameras und die anschließende Berechnung des 3D-Modelles muss ein Betriebssystem für das Kamerasystem und eine entsprechende Schnittstelle zu einer SfM-Software geschaffen werden. Diese Entwicklung erfolgte hauptsächlich in Python in Form von Prototyping. Das Kapitel beschreibt die Anforderungen an die Software in \autoref{sec:Anforderungsanalyse}. Anschließend werden hieraus die Anwendungsfälle (\autoref{sec:Anwendungsfallmodellierung}) erarbeitet und abschließend die Implementation (\autoref{sec:Implementierung}) beschrieben.
 
@@ -60,58 +59,41 @@ Dieses ist dann auch Grundlage für die Implementierung der SQLite-Datenbank. De
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=1\textwidth]{./img/datenbank.pdf}
+    \includegraphics[width=1\textwidth]{./img/uml/uml_master_classdiagramm.pdf}
     \centering
-    \caption{Datenbank-Struktur} %Bildunterschrift
-    \label{img:datenbank} %ID fürs Bild
+    \caption{Master} %Bildunterschrift
+    \label{img:master} %ID fürs Bild
+\end{figure}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{./img/uml/uml_camera_classdiagramm.pdf}
+    \centering
+    \caption{Camera} %Bildunterschrift
+    \label{img:uml_camera} %ID fürs Bild
+\end{figure}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{./img/uml/uml_common_classdiagramm.pdf}
+    \centering
+    \caption{Common} %Bildunterschrift
+    \label{img:uml_common} %ID fürs Bild
+\end{figure}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{./img/uml/uml_connector_classdiagramm.pdf}
+    \centering
+    \caption{Connector} %Bildunterschrift
+    \label{img:uml_connector} %ID fürs Bild
 \end{figure}
 
 Das Backend wurde in Python entwickelt. Die Pakete orientieren sich an den Arbeitsschritten aus dem Ablaufdiagramm (\autoref{img:ablauf}). Die einzelnen Python-Module greifen auf die oben beschriebene SQLite-Datenbank zu. Die einzelnen Module sind der Übersicht in \autoref{img:python} zu entnehmen.
 
-\begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=1\textwidth]{./img/python.pdf}
-    \centering
-    \caption{Implementierung der Python-Pakete} %Bildunterschrift
-    \label{img:python} %ID fürs Bild
-\end{figure}
-
 Über das Webstart-Modul werden dann die einzelnen Module über eine Website mit TypeScript angesprochen. Die einzelnen TypeScript-Klassen sind der \autoref{img:typescript} zu entnehmen. Hierbei wurde darauf Wert gelegt, die einzelnen Funktionen modular zu halten, sodass die Möglichkeit besteht, das System mit weiteren Modulen zu erweitern.
 
-\begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=1\textwidth]{./img/typescript.pdf}
-    \centering
-    \caption{Implementierung der TypeScript-Klassen} %Bildunterschrift
-    \label{img:typescript} %ID fürs Bild
-\end{figure}
 
-\section{Untersuchungen}
-
-\subsection{3D-Modell aus Fokusstacking}
-\begin{itemize}
-    \item Automatisierter Fokusstacking
-    \item keine Beachtung der festen Ausrichtung
-    \item Transformation über SIRF und Homographie
-\end{itemize}
-
-
-\subsection{Brennweitenänderung durch Fokussierung}
-\begin{itemize}
-    \item Charuco-Kalibriermuster
-    \item Kamera und Board unbewegt
-    \item 11 verschiedene Fokussierungen [0,5; 1; 2; 3; 4; 5; 6; 7; 8; 9; 10]
-    \item Fokussierung nacheinander und 4 Wiederhoungen
-    \item Erkennung des Musters
-    \item Analyse der Unterschiede/Vergrößerung
-\end{itemize}
-
-\subsection{Änderung der Verzeichnung}
-\begin{itemize}
-    \item Kamera fest positioniert (keine Änderungen durch Schwerkraft)
-    \item jeweils festen Fokus
-    \item ChAruco-Board wird bewegt
-\end{itemize}
 
 
 \section{Vorgehen}
@@ -134,17 +116,6 @@ wurde für die Berechnung der Bündelblockausgleichung verwendet. Der manuelle A
 \subsubsection{Flask}
 wurde genutzt um die Weboberfläche bereitzustellen und die Kommunikation zwischen dem Python und dem HTML/TypeScript-Modulen sicherzustellen. Die Weboberfläche selber muss nur einmalig kompiliert werden und wird dann von einen Flask-Webserver zur Verfügung gestellt. Per REST-Abfragen werden dann Daten zwischen TypeScript (bzw. nach dem Kompilieren eigentlich JavaScript) und Python ausgetauscht.
 
-\subsubsection{OpenSFM}
-wurde zwischenzeitlich verwendet um photogrammetrische Berechnung durchzuführen. Jedoch wurde dieses aufgrund mangelnder Anpassungsmöglichkeiten wieder verworfen. OpenSFM basiert aber auch unter anderem auf OpenCV. Der Code von OpenSFM wurde in der Prototyping-Phase zur Ideenfindung genutzt.
-
-Erstaunlicherweise wurde kein brauchbares Paket zur Durchführung einer Helmert-Transformation mittels identischer Punkte gefunden. Daher wurde hier eine Funktion geschrieben, die eine Abbildungsmatrix mit Hilfe der Methode der kleinsten Quadrate errechnet. Nachteilig ist bei dieser Lösung jedoch, dass diese Ausgleichung auch Scherungen und unterschiedliche Maßstäbe für die einzelnen Koordinatenkomponenten unterstützt. Eigentlich wäre jedoch eine Transformation mit einem festen Maßstab sinnvoller, da die errechnete Struktur durch die Bündelblockausgleichung bereits deutlich besser der Realität entspricht als die GNSS-Koordinaten, die zur Transformation genutzt wurden. So werden die Daten aktuell an dieser Stelle wieder verschlechtert.
-
-\subsection{TypeScript/JavaScript-Module}
-Wie bereits erläutert wurde die GUI in Form einer Webseite entwickelt. Entsprechend wurden hier JavaScript-Module verwendet. Da TypeScript durch seinen Kompiler wieder zu JavaScript umgeformt wird, kann hier auch auf die große Auswahl von JavaScript-Bibliotheken aus dem Node Package Manager zurückgriffen werden.
-
-\subsubsection{OpenLayers} ist eigentlich zur Anzeige von Online-Karten gedacht. In diesem Fall wurde es zur Darstellung der Passpunkte auf den Bildern genutzt. Es bietet einfache und weitläufig bekannte Funktionen zum Zoomen und Digitalisieren. Statt einer Karte wurde in dem entsprechenden Fenster das Bild und die Passpunkte als Marker auf diesem visualisiert. Auch die Editierfunktionen wurden hieraus genutzt.
-
-\subsubsection{Three.JS} ist eine Bibliothek zur Darstellung von 3D-Inhalten. Diese wurde hier genutzt um eine Vorschau der errechneten 3D-Koordinaten bereitzustellen.
 
 \biblio
 \end{document}
