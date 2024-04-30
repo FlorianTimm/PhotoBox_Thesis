@@ -17,11 +17,30 @@ Nachteil und Vorteil zugleich ist, dass die Kamera über einen Autofokus verfüg
 Weiterer Vorteil der Lösung mit einzelnen Raspberry Pis ist es, dass hierdurch bereits die einzelnen Kameraeinheiten Berechnungen wie das Identifizieren von Passpunkten übernehmen könnten und auch durch die Nutzung von Netzwerkverbindungen für die Steuerung das System skalierbar im Sinne der Anzahl der Kameras aber auch der Größenordnung der Abstände zwischen den Kameras.
 
 \section{Rahmen}
-Der Rahmen muss möglichst stabil sein, damit die Kameras sich nicht in ihrer Lage verändern können. Jedoch sollte das System auch weiterhin transportabel - also nicht zu schwer - und veränderbar bleiben, beispielsweise Kameras für Messreihen in ihrer Lage verändert werden. Der Aufbau aus genormten Bauteilen bietet sich an, um hier ggf. den Nachbau einfach ermöglichen zu können.
 
-Als mögliche Materialien kamen Holz, Stahl und Aluminum in Frage. Aufgrund der einfachen Bearbeitung und der genormten Profile, wurde sich für Aluminiumprofile entschieden. Diese gibt es in verschiedenen Ausführungen mit Nuten an den Seitenflächen, so dass eine einfache Montage, aber auch eine Demontage zu Transportzwecken, möglich wird. Außerdem sind diese sehr stabil bei leichtem Gewicht.
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[height=0.9\linewidth]{./img/aluwinkel.jpg}
+        \centering
+        \caption{Kamera-Winkel} %Bildunterschrift
+        \label{img:aluwinkel} %ID fürs Bild
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[height=0.9\linewidth]{./img/alurahmen.jpg}
+        \centering
+        \caption{Aluminum-Rahmen} %Bildunterschrift
+        \label{img:alurahmen} %ID fürs Bild
+    \end{subfigure}
+    \caption{Rahmen und Kameramontage-Winkel} %Bildunterschrift
+\end{figure}
 
-Durch eine Konstruktion mit Eckwürfeln sowie dem Einbau von dreieckigen Strukturen und Platten, die Scheibenwirkung haben, wurde die Stabilität der Verbindungen erhöht.
+Der Rahmen muss möglichst stabil sein, damit die Kameras sich nicht in ihrer Lage verändern können. Jedoch sollte das System auch weiterhin transportabel - also nicht zu schwer - und veränderbar bleiben, beispielsweise Kameras für Messreihen in ihrer Lage verändert werden. Der Aufbau aus genormten Bauteilen bietet sich an, um hier ggf. den Nachbau einfach ermöglichen zu können. Außerdem sollte der Rahmen auch gegebenenfalls auseinandernehmbar sein, damit er transportiert werden kann.
+
+Als mögliche Materialien kamen Holz, Stahl und Aluminum in Frage. Aufgrund der einfachen Bearbeitung und der genormten Profile, wurde sich für Aluminiumprofile entschieden. Diese gibt es in verschiedenen Ausführungen mit Nuten an den Seitenflächen, so dass eine einfache Montage, aber auch eine Demontage zu Transportzwecken, möglich wird. Außerdem sind diese sehr stabil bei leichtem Gewicht. Durch eine Konstruktion mit Eckwürfeln sowie dem Einbau von dreieckigen Strukturen und Platten, die Scheibenwirkung haben, wurde die Stabilität der Verbindungen erhöht. \autoref{img:alurahmen} zeigt den fertigen Rahmen vor Einbau der Platten und der Technik.
+
+Die Kameras wurden mit einem $90^\circ$-Winkel montiert, um diese weiterhin nach vertikal schwenken zu können. \autoref{img:aluwinkel} zeigt einen der Winkel, der an den Aluprofilen befestigt ist (noch ohne entsprechende Befestigungsbohrungen).
+
 
 \section{Beleuchtung}
 Um möglichst gute Bilder zu erzeugen, sollte das Objekt gut ausgeleuchtet sein. Eine dunkle Umgebung verlängert die Belichtungszeit, wodurch die Gefahr von unscharfen Aufnahmen steigt und dunklere Bereiche (ungleichmäßige Ausleuchtung) verursacht Rauschen in diesen Bildbereichen. Daher soll das System eine gleichmäßige Ausleuchtung ermöglichen. Problematisch ist hierbei, dass die Kameras ggf. auch die Lichtquellen mit im Bildbereich haben können, wodurch Linsenreflexionen oder Ausbrennen der Bildbereiche möglich sind.
