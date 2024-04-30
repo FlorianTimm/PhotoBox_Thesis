@@ -104,10 +104,24 @@ Die Koordinaten der ArUco-Marker sind aus einer Kalibrierung und aus vorherigen 
 \subsection{Vorwärtsschnitt}
 Die Koordinaten der Passpunkt-Ausreißer aus der Berechung der Kamerapositionen werden anschließend neu berechnet. Hierfür wird der Vorwärtsschnitt genutzt. Auch hier wird OpenCV zur Berechnung genutzt. Die Berechnung der Passpunkte erfolgt für jedes Bildpaar einzeln. Für alle Koordinaten wird dann pro Passpunkt der Z-Score berechnet. Passpunkte, die einen Z-Score von über 2 haben, werden als Ausreißer markiert und nicht weiter betrachtet.
 
+Mit dem Vorwärts\-schnitt können auch die Neupunkte, die mittels SIFT oder ähnlichen Bild\-erkennungs\-algorithmen erkannt wurden, berechnet werden. Dadurch kann schon eine dünne Punktwolke erzeugt werden, die dann in der Bündel\-block\-ausgleichung weiter optimiert werden kann.
+
 
 \section{Bündelblockausgleichung}
 \label{s:buendelblock}
 Mittels Bündelblockausgleichung können die grob mit den vorher genannten Verfahren bestimmten Positionen und Drehungen in einer Ausgleichung optimiert werden. Hierzu gehen alle Parameter der Bilder und die Positionen der Passpunkte in die gemeinsame Ausgleichung ein. Grundlage der Ausgleichung ist die in \autoref{ss:abbildungsgleichung} beschriebene Abbildungsgleichung. Als Ergebnis erhält man die ausgeglichenen Parameter und Genauigkeitsangaben für diese. \citep[S. 343ff]{luhmann}
+
+
+\section{Multi-view Stereo}
+\citep[S. 505]{luhmann}
+\citep[S. 51]{opendronemap}
+\todo{füllen}
+
+\section{Mesh-Generierung}
+\todo{füllen}
+
+\section{Texturierung}
+\todo{füllen}
 
 \biblio
 \end{document}
