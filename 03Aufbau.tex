@@ -27,10 +27,10 @@ Weiterer Vorteil der Lösung mit einzelnen Raspberry Pis ist es, dass hierdurch 
         \label{img:aluwinkel} %ID fürs Bild
     \end{subfigure}
     \begin{subfigure}{0.45\textwidth}
-        \includegraphics[height=0.9\linewidth]{./img/alurahmen.jpg}
+        \includegraphics[height=0.8\linewidth]{./img/alurahmen.jpg}
         \centering
         \caption{Aluminum-Rahmen} %Bildunterschrift
-        \label{img:alurahmen} %ID fürs Bild
+        \label{img:alurahmen} %ID fürs Bder an den Aluprofilen befestigt ist (ild
     \end{subfigure}
     \caption{Rahmen und Kameramontage-Winkel} %Bildunterschrift
 \end{figure}
@@ -39,18 +39,48 @@ Der Rahmen muss möglichst stabil sein, damit die Kameras sich nicht in ihrer La
 
 Als mögliche Materialien kamen Holz, Stahl und Aluminum in Frage. Aufgrund der einfachen Bearbeitung und der genormten Profile, wurde sich für Aluminiumprofile entschieden. Diese gibt es in verschiedenen Ausführungen mit Nuten an den Seitenflächen, so dass eine einfache Montage, aber auch eine Demontage zu Transportzwecken, möglich wird. Außerdem sind diese sehr stabil bei leichtem Gewicht. Durch eine Konstruktion mit Eckwürfeln sowie dem Einbau von dreieckigen Strukturen und Platten, die Scheibenwirkung haben, wurde die Stabilität der Verbindungen erhöht. \autoref{img:alurahmen} zeigt den fertigen Rahmen vor Einbau der Platten und der Technik.
 
-Die Kameras wurden mit einem $90^\circ$-Winkel montiert, um diese weiterhin nach vertikal schwenken zu können. \autoref{img:aluwinkel} zeigt einen der Winkel, der an den Aluprofilen befestigt ist (noch ohne entsprechende Befestigungsbohrungen).
+Die Kameras wurden mit einem $90^\circ$-Winkel montiert, um diese weiterhin noch vertikal schwenken zu können. \autoref{img:aluwinkel} zeigt einen der Winkel, der an den Aluprofilen befestigt ist (noch ohne entsprechende Befestigungsbohrungen).
 
 
 \section{Beleuchtung}
-Um möglichst gute Bilder zu erzeugen, sollte das Objekt gut ausgeleuchtet sein. Eine dunkle Umgebung verlängert die Belichtungszeit, wodurch die Gefahr von unscharfen Aufnahmen steigt und dunklere Bereiche (ungleichmäßige Ausleuchtung) verursacht Rauschen in diesen Bildbereichen. Daher soll das System eine gleichmäßige Ausleuchtung ermöglichen. Problematisch ist hierbei, dass die Kameras ggf. auch die Lichtquellen mit im Bildbereich haben können, wodurch Linsenreflexionen oder Ausbrennen der Bildbereiche möglich sind.
 
-Es wurde sich zur Beleuchtung für einzeln steuerbare LED-Lichtstreifen entschieden. Diese können einfach an den Aluprofilen montiert werden und ermöglichen es, einzelne Bereiche und so ggf. blendende Bereiche abzuschalten.
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[height=1.2\linewidth]{./img/beleuchtung.jpg}
+        \centering
+        \caption{Schattenarme Beleuchtung durch LED-Streifen} %Bildunterschrift
+        \label{img:led_streifen} %ID fürs Bild
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[height=1.2\linewidth]{./img/beleuchtung_farbig.jpg}
+        \centering
+        \caption{Farbige Beleuchtung zur Statusmeldung} %Bildunterschrift
+        \label{img:led_farbig} %ID fürs Bder an den Aluprofilen befestigt ist (ild
+    \end{subfigure}
+    \caption{Beleuchtung} %Bildunterschrift
+\end{figure}
+
+Um möglichst gute Bilder zu erzeugen, sollte das Objekt gut ausgeleuchtet sein. Eine dunkle Umgebung verlängert die Belichtungszeit, wodurch die Gefahr von unscharfen Aufnahmen steigt und dunklere Bereiche (ungleichmäßige Ausleuchtung) verursacht Rauschen in diesen Bildbereichen. Daher soll das System eine gleichmäßige Ausleuchtung ermöglichen. Problematisch ist hierbei, dass die Kameras ggf. auch die Lichtquellen mit im Bildbereich haben können, wodurch Linsenreflexionen oder Ausbrennen der Bildbereiche möglich sind. Außerdem störend sind fremde Lichtquellen, die Schatten werfen oder die Belichtung der Kameras beeinflussen können.
+
+Es wurde sich zur Beleuchtung für einzeln steuerbare LED-Lichtstreifen entschieden (siehe \autoref{img:led_streifen}). Diese können einfach an den Aluprofilen montiert werden und ermöglichen es, einzelne Bereiche und so ggf. blendende Bereiche abzuschalten. Außerdem können hiermit auch verschiedene Lichtfarben eingestellt werden, um Statusmeldungen zu geben (siehe \autoref{img:led_farbig}) oder ggf. die Farbgebung des Objektes zu beeinflussen. Die Steuerung erfolgt über einen Raspberry Pi 4, der auch die Steuerung der Kameras übernimmt.
+
+Für diffuseres Licht von außen kann ein halbtransparenter Stoff über den Rahmen gespannt werden. Dieser sorgt für eine gleichmäßigere Ausleuchtung und verhindert auch Reflexionen an Glasscheiben und ähnlichem.
 
 \section{Stromversorgung}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{./img/stromverteilung.jpg}
+    \centering
+    \caption{Elektroverteilung zu den einzelnen Raspberry Pi Zero} %Bildunterschrift
+    \label{img:stromverteilung} %ID fürs Bild
+\end{figure}
+
 Die Raspberry Pis werden mit 5~Volt betrieben. Der Raspberry Pi Zero mit Kamera hatte dabei in Messungen einen maximalen Stromverbrauch von 270~mA aufgezeigt, der Raspberry Pi 4 kann bis zu 1,5~A unter Last verbrauchen. Hieraus ergibt sich ein Gesamtstromverbrauch von maximal rund 8~Ampere. Für den Raspbery Pi 4 wurde ein eigenes Netzteil eingeplant und für die Zero W ein gemeinsames 35 Watt-Netzteil. Versuche zeigten jedoch, dass der Stromverbrauch kurzfristig höher ausfallen konnte, so dass die Zero W, die am meisten von Spannungsabfällen betroffen sind zum Absturz gebracht wurden, wenn alle Kameras gleichzeitig auslösten. Nach dem die Last auf sicherheitshalber auf zwei weitere Netzteile verteilt wurde, lief das System zuverlässig.
 
-Als Kabelmaterial wurde Klingeldraht mit $0,75~\text{mm}^2$ verwendet. Der relativ hohe Kabelquerschnitt soll für einen geringen Spannungsabfall sorgen. Durch die Verwendung von mehreren Netzteilen ist dieser jedoch nun nicht mehr notwendig. Hier würde sich nun ein geringerer Querschnitt anbieten, auch um eine einfachere Verbindung zu den Raspberry Pi Zero W zu ermöglichen. Diese wurden auf Seiten der Zero W verlötet und in den Verteilerdosen mit Federkraftklemmen verbunden.
+Als Kabelmaterial wurde Klingeldraht mit $0,75~\text{mm}^2$ verwendet. Der relativ hohe Kabelquerschnitt soll für einen geringen Spannungsabfall sorgen. Durch die Verwendung von mehreren Netzteilen ist dieser jedoch nun nicht mehr notwendig. Hier würde sich nun ein geringerer Querschnitt anbieten, auch um eine einfachere Verbindung zu den Raspberry Pi Zero W zu ermöglichen. Diese wurden auf Seiten der Zero W verlötet und in den Verteilerdosen mit Federkraftklemmen verbunden (siehe \autoref{img:stromverteilung}).
 
 Die Stromversorgung der Beleuchtung erfolgt über ein 12-V-Netzteil mit $3,5~\text{A}$ Ausgangsleistung. Auch hier wurde Klingeldraht zur Verteilung zwischen den einzelnen Holmen genutzt.
 
