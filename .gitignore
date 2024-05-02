@@ -3,7 +3,7 @@
 *.log
 *.lot
 *.out
-*.pdf
+/*.pdf
 *.synctex.gz
 *.toc
 *.bbl
