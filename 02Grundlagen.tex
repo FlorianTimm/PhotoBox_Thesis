@@ -69,11 +69,12 @@ Zur Erkennung von Merkmalen setzt das Verfahren auf die Detektion von Kanten. Di
 
 \section{Verknüpfung von Bildern}
 \label{s:photogramm}
-Durch die drei beschriebenen Verfahren und die hieraus entstandenen Verknüpfungs\-punkte können die Bilder miteinander verknüpft werden. Da die Kamerapositionen am Rahmen veränderlich sind und die Fixierung auch keine ausreichend genaue Fixierung garantiert, können die bekannten Positionen aus vorherigen Messungen nur als Näherungswerte genutzt werden. Die genaue Bestimmung erfolgt der Position und Ausrichtung - die äußere Orientierung - erfolgt dann Über ein Photogrammmetrische Verfahren. Dieses wird im Folgenden vorgestellt.
+Durch die beschriebenen Verfahren und die hieraus entstandenen Verknüpfungs\-punkte können die Bilder miteinander verknüpft werden. Da die Kamerapositionen am Rahmen veränderlich sind und die Fixierung auch keine ausreichend genaue Fixierung garantiert, können die bekannten Positionen aus vorherigen Messungen nur als Näherungswerte genutzt werden. Die genaue Bestimmung erfolgt der Position und Ausrichtung - die äußere Orientierung - erfolgt dann Über ein Photogrammmetrische Verfahren. Dieses wird im Folgenden vorgestellt.
 
 
 \subsubsection{Abbildungsgleichung}
 \label{ss:abbildungsgleichung}
+\todo{Abbildung allgemein erklären}
 Die Abbildung eines Punktes auf einem Bild wird durch die Abbildungsgleichung beschrieben. In der Matrizenrechnung ergibt sich dieser aus der Multiplikation mit der Projektionsmatrix $P$. Diese ergibt sich aus der Kameramatrix $K$, der Rotation $R$ und dem Projektionszentrum $X_0$. (siehe \autoref{abbildungsgleichung}, nach \citealp[S. 244]{hartley} und \citealp[S. 290]{luhmann})
 
 \begin{align}
@@ -95,6 +96,7 @@ Die Abbildung eines Punktes auf einem Bild wird durch die Abbildungsgleichung be
 \end{align}
 
 Um die Beziehung zwischen zwei Bildern aufzustellen, kann man die Abbildungsgleichung nutzen. Da es hier nur um die Beziehung zwischen zwei Bildern geht, kann die Rotation und Translation des ersten Bildes auf 0 gesetzt werden ($R$ ist dann eine 3x3-Einheitsmatrix und $X_0$ ein Nullvektor). $X_0$ des zweiten Bildes wird zur Translation zwischen den beiden Bildern. \citep[S. 330]{luhmann}
+\todo{Überarbeiten und Verzeichnung hinzufügen}
 
 
 \subsection{Rückwärtsschnitt}
