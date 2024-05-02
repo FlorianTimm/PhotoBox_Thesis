@@ -113,15 +113,16 @@ Mittels Bündelblockausgleichung können die grob mit den vorher genannten Verfa
 
 
 \section{Multi-view Stereo}
-\citep[S. 505]{luhmann}
-\citep[S. 51]{opendronemap}
-\todo{füllen}
+Die dünne Punktwolke aus dem Vorwärtsschnitt kann durch Multi-view Stereo-Verfahren zu einem 3D-Modell erweitert werden. Hierbei werden jeweils Bildpaare gebildet und die Disparitäten, also die Verschiebung des Objektes in der Abbildung, bestimmt. Diese sind abhängig von der Entfernung des Objektes, bei einem unendlich weit entfernten Objekt tritt keine Disparität auf \citep[S. 313]{luhmann}. Die Disparitäten können dann in Tiefeninformationen umgerechnet werden. Diese können dann wiederum gemittelt und zu einen Tiefenbild zusammengefasst werden. \citep[S. 505]{luhmann}
+%\citep[S. 51]{opendronemap}
 
 \section{Mesh-Generierung}
-\todo{füllen}
+Bis zu diesem Schritt besteht das Modell nur aus einzelnen Punkten, die keine Oberfläche ergeben. Um ein 3D-Modell zu erhalten, muss eine Oberfläche generiert werden. Hierfür wird ein Mesh-Generierungsverfahren genutzt. Hierbei wird die Punktwolke in Dreiecke unterteilt. Hierfür gibt es verschiedene Verfahren, die sich in der Art der Unterteilung unterscheiden. OpenDroneMap nutzt beispielsweise die Screened Poisson Surface Reconstruction. \citep[S. 52f]{opendronemap}
+
+Die Screened Poisson Surface Reconstruction ist ein Verfahren, das auf der Poisson-Gleichung basiert. Diese wird genutzt, um die Oberfläche zu glätten und zu interpolieren. Ein Teil des Ansatzes ist es, dass die Ausrichtung der Punkte berückstichtigt wird. Die Punkte werden hierbei in eine Gitterstruktur überführt und die Oberfläche durch die Lösung der Poisson-Gleichung bestimmt. \citep{spsr}
 
 \section{Texturierung}
-\todo{füllen}
+Abschließend wird das Modell texturiert. Hierfür werden die Bilder, die zur Erstellung des Modells genutzt wurden, auf das Modell projiziert. Außerdem werden Helligkeits- und Farbunterschiede ausgeglichenen. \citep[S. 54f]{opendronemap}
 
 \biblio
 \end{document}
