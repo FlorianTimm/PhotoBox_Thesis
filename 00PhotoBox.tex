@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt,bibliography=totoc, listof=totoc,titlepage]{scrreprt}
+\documentclass[a4paper,12pt,bibliography=totoc, listof=totoc, titlepage]{scrreprt}
 \usepackage[ngerman]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[left=3cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
@@ -82,7 +82,33 @@
 %\bibliography{Thesis.bib}
 \usepackage[round]{natbib}
 \bibliographystyle{hcu}
-\def\biblio{\bibliography{00PhotoBox}}
+\def\biblio{\bibliography{00PhotoBox} \printglossaries}
+
+
+\usepackage[acronym, toc]{glossaries}
+
+\makeglossaries
+
+\newglossaryentry{Bildweite}
+{
+    name=Bildweite,
+    description={Die Bildweite ist der Abstand zwischen der Bildebene und dem Hauptpunkt der Linse}
+}
+
+\newglossaryentry{Brennweite}
+{
+    name=Brennweite,
+    description={Die Brennweite ist der Abstand zwischen dem Hauptpunkt der Linse und dem Brennpunkt}
+}
+
+\newglossaryentry{Kammerkonstante}
+{
+    name=Kamerakonstante,
+    description={}
+}
+
+\newacronym{SfM}{SfM}{Structure-from-Motion}
+
 
 \usepackage{subfiles}
 
@@ -179,6 +205,12 @@ This paper explores the solution of using multiple low-cost cameras mounted on a
 \subfile{06Versuche}
 
 \subfile{07Fazit}
+
+\clearpage
+
+\printglossary[type=\acronymtype]
+
+\printglossaries
 
 \clearpage
 %Literatur
