@@ -5,7 +5,7 @@
 
 \chapter{Photogrammmetrische Grundlagen}
 \label{c:photogrammmetrie}
-Das zu entwickelnde System soll 3D-Modelle von Objekten erstellen. Hierfür wird Photogrammmetrie in Form einer \acrlong{SfM}-Pipeline genutzt.
+Das zu entwickelnde System soll 3D-Modelle von Objekten erstellen. Hierfür wird Photogrammmetrie in Form einer \gls{SfM}-Pipeline genutzt.
 Der allgemeine Ablauf ist in \autoref{img:ablauf} dargestellt. Zunächst werden die Bilder aufgenommen (siehe \autoref{s:bilder}). Hierbei ist es wichtig, dass die Bildinhalte sich überlappen.
 Die Bilder werden dann verknüpft, indem identische Punkte in den Bildern identifiziert werden  (siehe \autoref{s:verknuepfung}). Hierfür können beispielsweise ArUco-Marker oder die SIFT-Methode genutzt werden.
 Aus den identifizierten Punkten werden dann die Positionen und Ausrichtung der Kameras und Verknüpfungspunkte in einem lokalen Koordinatensystem ohne bekannten Maßstab berechnet werden. Die berechneten Daten werden anschließend in einer Bündelblockausgleichung gemeinsam optimiert (siehe \autoref{s:buendelblock}). Durch die Nutzung von bekannten Größen beispielsweise durch Maßstäbe kann dieses System transformiert werden.

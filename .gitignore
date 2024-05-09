@@ -13,3 +13,10 @@
 *.fls
 *.out.ps
 texput.log
+*.acn
+*.glo
+*.ist
+*.acr
+*.alg
+*.glg
+*.gls

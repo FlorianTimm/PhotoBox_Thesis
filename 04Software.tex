@@ -3,7 +3,7 @@
 \begin{document}
 
 \chapter{Software-Entwicklung}
-Für die Steuerung der Kameras und die anschließende Berechnung des 3D-Modelles muss ein Betriebssystem für das Kamerasystem und eine entsprechende Schnittstelle zu einer \acrshort{SfM}-Software geschaffen werden. Diese Entwicklung erfolgte hauptsächlich in Python in Form von Prototyping. Das Kapitel beschreibt die Anforderungen an die Software in \autoref{sec:Anforderungsanalyse}. Anschließend werden hieraus die Anwendungsfälle (\autoref{sec:Anwendungsfallmodellierung}) erarbeitet und abschließend die Implementation (\autoref{sec:Implementierung}) beschrieben.
+Für die Steuerung der Kameras und die anschließende Berechnung des 3D-Modelles muss ein Betriebssystem für das Kamerasystem und eine entsprechende Schnittstelle zu einer \gls{SfM}-Software geschaffen werden. Diese Entwicklung erfolgte hauptsächlich in Python in Form von Prototyping. Das Kapitel beschreibt die Anforderungen an die Software in \autoref{sec:Anforderungsanalyse}. Anschließend werden hieraus die Anwendungsfälle (\autoref{sec:Anwendungsfallmodellierung}) erarbeitet und abschließend die Implementation (\autoref{sec:Implementierung}) beschrieben.
 
 \section{Anforderungsanalyse}
 \label{sec:Anforderungsanalyse}
@@ -21,7 +21,7 @@ Für die Steuerung der Kameras und die anschließende Berechnung des 3D-Modelles
 \begin{itemize}
     \item Die Daten sollen intern gespeichert werden.
     \item Eine Speicherung auf tragbaren Speichermedien wie USB-Sticks soll möglich sein.
-    \item Eine direkte Übertragung an \acrshort{SfM}-Software soll möglich sein.
+    \item Eine direkte Übertragung an \gls{SfM}-Software soll möglich sein.
 \end{itemize}
 
 \subsection{Nicht-funktionale Anforderungen}
@@ -35,7 +35,7 @@ Für die Steuerung der Kameras und die anschließende Berechnung des 3D-Modelles
 
 Entsprechend der benötigten Schritte aus \autoref{c:photogrammmetrie} und \autoref{img:ablauf} wurde die Anwendungsfälle, die die Benutzeroberfläche ermöglichen soll, im Anwendungsfall-Dia\-gramm in \autoref{img:anwendungsfall} zusammengetragen.
 
-\begin{figure}[!htbp]
+\begin{figure}
     \centering
     \includegraphics[width=1\textwidth]{./img/uml/uml_usecases.pdf}
     \centering
@@ -45,7 +45,7 @@ Entsprechend der benötigten Schritte aus \autoref{c:photogrammmetrie} und \auto
 
 Aus den benötigten Daten wurde das Domänen-Klassendiagramm aus \autoref{img:dokladia} erzeugt. Dieses zeigt vor allem die Abhängigkeiten der einzelnen Datensätze untereinander.
 
-\begin{figure}[!htbp]
+\begin{figure}
     \centering
     \includegraphics[width=1\textwidth]{./img/uml/uml_domain.pdf}
     \centering
@@ -55,25 +55,32 @@ Aus den benötigten Daten wurde das Domänen-Klassendiagramm aus \autoref{img:do
 
 \section{Implementierung}
 \label{sec:Implementierung}
-Dieses ist dann auch Grundlage für die Implementierung der SQLite-Datenbank. Der Datenbankaufbau ist \autoref{img:datenbank} zu entnehmen. Die Datenbank dient der Zwischenspeicherung der Passpunkte und der durchgeführten Berechnungen.
 
-\begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=1\textwidth]{./img/uml/uml_master_classdiagramm.pdf}
-    \centering
-    \caption{Master} %Bildunterschrift
-    \label{img:master} %ID fürs Bild
-\end{figure}
 
-\begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=1\textwidth]{./img/uml/uml_camera_classdiagramm.pdf}
-    \centering
-    \caption{Camera} %Bildunterschrift
-    \label{img:uml_camera} %ID fürs Bild
-\end{figure}
+Die Programmierung des Systemes erfolgte iterativ. Einzelne Arbeitspakete wurden in einem Jupyter-Notebook ausprobiert und dann, wenn dieser Schritt erfolgreich war, in den Gesamtworkflow integriert. Größtenteils wurden der Python-Code objektorientiert und typisiert geschrieben.
 
-\begin{figure}[!htbp]
+
+
+\subsection{Module auf den Raspberry Pi's (Python)}
+
+\subsection{Allgemeine Module und Bibliotheken}
+Es wurde, wenn möglich, auf fertige Python-Bibliotheken zurückgegriffen. Hierdurch sollte der Programmieraufwand verringert und auf bereits getesteten Code gesetzt werden. Die wichtigsten Bibliotheken sind:
+
+\paragraph{OpenCV}
+ist eine Bibliothek für Bildbearbeitung und maschinelles Sehen. Sie ist weit verbreitet und bietet viele photogrammetrische Funktionen. Hiermit wurde beispielsweise die Detektion von Markern durchgeführt und die Näherungswerte der Kameras berechnet.
+
+\paragraph{NumPy}
+bietet neben vielen weiteren Funktionen die Möglichkeit der Matrizenrechnung. Diese wurde für viele Berechnungen benötigt, beispielsweise für die Berechnungen der Kamera-Projektionen.
+
+\paragraph{SciPy}
+wurde für die Berechnung der Bündelblockausgleichung verwendet. Der manuelle Ansatz mit den Formeln aus \cite{luhmann} unter Nutzung von NumPy war sehr ressourcenlastig. Unter Verwendung von SciPy und der Projektionsgleichung konnte die Berechnungsdauer stark dezimiert werden.
+
+\paragraph{Flask}
+wurde genutzt um die Weboberfläche und die Datendownloads bereitzustellen. Hiermit wurde ein Webserver aufgesetzt, der die Daten der Kameras anzeigt und die Steuerung ermöglicht.
+
+Außerdem wurden einige allgemeine Klassen erstellt, die in allen Modulen genutzt wurden. Diese sind in \autoref{img:uml_common} dargestellt. Diese steuern allgemeine Funktionen wie das Logging und das Auslesen der Konfiguration. Außerdem legen die Interfaces die Struktur der Datenübertragung zwischen den Raspberry Pi's fest.
+
+\begin{figure}
     \centering
     \includegraphics[width=1\textwidth]{./img/uml/uml_common_classdiagramm.pdf}
     \centering
@@ -81,41 +88,43 @@ Dieses ist dann auch Grundlage für die Implementierung der SQLite-Datenbank. De
     \label{img:uml_common} %ID fürs Bild
 \end{figure}
 
-\begin{figure}[!htbp]
+\subsubsection{Kamera-Steuerung}
+Die Raspberry Pi Zero W übernehmen die Steuerung der Kameras. Hierfür wurde ein Modul entwickelt, das die Kameras steuert, die Bilder aufnimmt und anschließend zur Verfügung stellt. Die Klassen sind in \autoref{img:uml_camera} dargestellt.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]{./img/uml/uml_camera_classdiagramm.pdf}
+    \centering
+    \caption{Camera} %Bildunterschrift
+    \label{img:uml_camera} %ID fürs Bild
+\end{figure}
+
+\subsubsection{Master-Steuerung}
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]{./img/uml/uml_master_classdiagramm.pdf}
+    \centering
+    \caption{Master} %Bildunterschrift
+    \label{img:master} %ID fürs Bild
+\end{figure}
+
+\subsubsection{Desktop-Programm (Java)}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]{./img/connector_screenshot.png}
+    \centering
+    \caption{Screenshot der Connector-Software unter Ubuntu 24.04} %Bildunterschrift
+    \label{img:screenshot_connector} %ID fürs Bild
+\end{figure}
+
+\begin{figure}
     \centering
     \includegraphics[width=1\textwidth]{./img/uml/uml_connector_classdiagramm.pdf}
     \centering
     \caption{Connector} %Bildunterschrift
     \label{img:uml_connector} %ID fürs Bild
 \end{figure}
-
-Das Backend wurde in Python entwickelt. Die Pakete orientieren sich an den Arbeitsschritten aus dem Ablaufdiagramm (\autoref{img:ablauf}). Die einzelnen Python-Module greifen auf die oben beschriebene SQLite-Datenbank zu. Die einzelnen Module sind der Übersicht in \autoref{img:python} zu entnehmen.
-
-Über das Webstart-Modul werden dann die einzelnen Module über eine Website mit TypeScript angesprochen. Die einzelnen TypeScript-Klassen sind der \autoref{img:typescript} zu entnehmen. Hierbei wurde darauf Wert gelegt, die einzelnen Funktionen modular zu halten, sodass die Möglichkeit besteht, das System mit weiteren Modulen zu erweitern.
-
-
-
-
-\section{Vorgehen}
-\label{ss:vorgehen}
-
-Die Programmierung des Systemes erfolgte iterativ. Einzelne Arbeitspakete wurden in einem Jupyter-Notebook ausprobiert und dann, wenn dieser Schritt erfolgreich war, in den Gesamtworkflow integriert. Größtenteils wurden der Python-Code objektorientiert und typisiert geschrieben, einzelne Module sind jedoch noch aus der Prototyp-Phase funktionsbasierend programmiert.
-
-\subsection{Python-Bibliotheken}
-Es wurde, wenn möglich, auf Python-Bibliotheken zurückgegriffen. Hierdurch sollte der Programmieraufwand verringert und auf bereits getesteten Code gesetzt werden. Wo dieses nicht möglich war, wurden Funktionen entsprechend Code-Beispielen aus GitHub oder \glqq Rezepten\grqq{} aus dem Werk von \citeauthor{hartley} programmiert.
-
-\subsubsection{OpenCV}
-ist eine Bibliothek für Bildbearbeitung und maschinelles Sehen. Sie ist weit verbreitet und bietet viele photogrammetrische Funktionen. Viele der unter \autoref{s:photogramm} beschriebenen Schritte wurden mit dieser Bibliothek durchgeführt. \citep{opencv} Es zeigten sich jedoch Probleme bei der Berechnung der Essentiellen Matrix, sodass diese mit Hilfe eines Codebeispieles von \cite{3drec} auf Grundlagen von \cite{hartley} berechnet wurde.
-
-\subsubsection{NumPy}
-bietet neben vielen weiteren Funktionen die Möglichkeit der Matrizenrechnung. Diese wurde für viele Berechnungen benötigt.
-
-\subsubsection{SciPy}
-wurde für die Berechnung der Bündelblockausgleichung verwendet. Der manuelle Ansatz mit den Formeln aus \cite{luhmann} unter Nutzung von NumPy war sehr ressourcenlastig. Unter Verwendung von SciPy und der Projektionsgleichung konnte die Berechnungsdauer stark dezimiert werden.
-
-\subsubsection{Flask}
-wurde genutzt um die Weboberfläche bereitzustellen und die Kommunikation zwischen dem Python und dem HTML/TypeScript-Modulen sicherzustellen. Die Weboberfläche selber muss nur einmalig kompiliert werden und wird dann von einen Flask-Webserver zur Verfügung gestellt. Per REST-Abfragen werden dann Daten zwischen TypeScript (bzw. nach dem Kompilieren eigentlich JavaScript) und Python ausgetauscht.
-
 
 \biblio
 \end{document}
