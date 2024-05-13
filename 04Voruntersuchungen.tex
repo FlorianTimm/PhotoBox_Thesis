@@ -58,9 +58,11 @@ Die innere Orientierung ist von der Fokussierung abhängig.
 Es soll eine Formel zur Bestimmung von Näherungswerten für die innere Orientierung in Abhängigkeit der Fokussierung ermittelt werden.
 
 \paragraph{Vorgehen}
-Es wurde jeweils mit dem fertig montierten System, also 24 Raspberry-Pi-Kameras, ein 3D-Modell bei gleich eingestellter Fokussierung mit Agisoft Metashape erzeugt. Hierbei wurden Aruco-Marker genutzt, dessen Position bekannt war (siehe \autoref{sec:kalibrierung}). Es wurde jeweils in Metashape alle Kameras als eine angenommen und die innere Orientierung bestimmt. Die innere Orientierung wurde mit der Fokussierung verglichen.
+Es wurden mit fünf verschiedenen Fokussierungen mit jeweils 24 Raspberry-Pi-Kameras Bilder aufgenommen und die Bilder in Agisoft Metashape mittels Aruco-Marker orientiert, dessen Position bekannt war (siehe \autoref{sec:kalibrierung}). Außerdem wurden etwa 100 Schneider-Marker im Bildbereich der Kameras verteilt und als Verknüpfungspunkte benutzt. Es wurde jeweils in Metashape alle Bilder mit der gleichen Fokussierung als eine Kamera angenommen und die innere Orientierung bestimmt. Anschließend wurden alle Kameras nochmal einzeln ausgeglichen. Die innere Orientierung wurde in Form von Brennweite, Bildhauptpunktverschiebung und Verzeichnung ermittelt. Die Ergebnisse wurden in einem Box-Whisker-Plot dargestellt und eine ausgleichende Gerade ermittelt.
 
 \paragraph{Ergebnis}
+
+Die Ergebnisse sind in \autoref{img:naeherungswerte} dargestellt. Wie auch schon in der vorherigen Untersuchung zeigt sich, dass die Brennweite linear zur Fokussierung ist. Bei der Bildhauptpunktverschiebung und der Verzeichnung ist die Abhängigkeit nicht eindeutig. \autoref{tab:naeherungswerte_corr} zeigt die Korrelationsmatrix der Näherungswerte. Es zeigt sich, dass die Fokussierung und die Brennweite stark korreliert sind. Die Bildhauptpunktverschiebung ist nur schwach korreliert. Die Verzeichnung ist nicht korreliert. Es zeigt sich, dass die innere Orientierung durch die Fokussierung beeinflusst wird. Die Brennweite ist dabei erwartungsgemäß am stärksten betroffen.
 
 \begin{figure}
     \centering
@@ -69,6 +71,8 @@ Es wurde jeweils mit dem fertig montierten System, also 24 Raspberry-Pi-Kameras,
     \caption{Box-Whisker-Plots und ausgleichende Gerade der inneren Orientierung in Abhängigkeit von der Fokussierung [dpt]} %Bildunterschrift
     \label{img:naeherungswerte} %ID fürs Bild
 \end{figure}
+
+\input{tabs/naeherungswerte_corr}
 
 \section{3D-Modell aus Fokusstacking}
 
