@@ -35,7 +35,7 @@ Die Ergebnisse sind in \autoref{img:fokus_faktor} dargestellt. Es zeigt sich, da
 
 
 
-\section{Änderung der Verzeichnung}
+\section{Änderung der Verzeichnung mittels Charuco-Board}
 
 \paragraph{These}
 Durch die Verschiebung der Linsen beim Fokusieren verändert sich auch die Verzeichnung der Kamera.
@@ -44,12 +44,31 @@ Durch die Verschiebung der Linsen beim Fokusieren verändert sich auch die Verze
 Die Veränderung der Verzeichnung soll ermittelt und eine Korrekturformel ermittelt werden.
 
 \paragraph{Vorgehen}
+Der Versuchsaufbau von der Bestimmung der relativen Änderung der Kamerakonstante blieb bestehen. Es wurden jedoch zusätzlich die Verzeichnungen der Bilder ermittelt. Die Verzeichnung wurde mit OpenCV ermittelt und mit der erwarteten Verzeichnung verglichen.
 
-\begin{itemize}
-    \item Kamera fest positioniert (keine Änderungen durch Schwerkraft)
-    \item jeweils festen Fokus
-    \item ChAruco-Board wird bewegt
-\end{itemize}
+\paragraph{Ergebnis}
+Die Ergebnisse waren nicht zufriedenstellend. Es zeigte sich, dass die Verzeichnung mit nur einer Aufnahme pro Fokussierung nicht zufriedenstellend modelliert werden konnte.
+
+\section{Bestimmung des Zusammenhang zwischen innerer Orientierung und Fokussierung}
+
+\paragraph{These}
+Die innere Orientierung ist von der Fokussierung abhängig.
+
+\paragraph{Ziel}
+Es soll eine Formel zur Bestimmung von Näherungswerten für die innere Orientierung in Abhängigkeit der Fokussierung ermittelt werden.
+
+\paragraph{Vorgehen}
+Es wurde jeweils mit dem fertig montierten System, also 24 Raspberry-Pi-Kameras, ein 3D-Modell bei gleich eingestellter Fokussierung mit Agisoft Metashape erzeugt. Hierbei wurden Aruco-Marker genutzt, dessen Position bekannt war (siehe \autoref{sec:kalibrierung}). Es wurde jeweils in Metashape alle Kameras als eine angenommen und die innere Orientierung bestimmt. Die innere Orientierung wurde mit der Fokussierung verglichen.
+
+\paragraph{Ergebnis}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]{./img/naeherungswerte_diagramm.pdf}
+    \centering
+    \caption{Box-Whisker-Plots und ausgleichende Gerade der inneren Orientierung in Abhängigkeit von der Fokussierung [dpt]} %Bildunterschrift
+    \label{img:naeherungswerte} %ID fürs Bild
+\end{figure}
 
 \section{3D-Modell aus Fokusstacking}
 
