@@ -62,11 +62,12 @@ Die Kameras wurden mit einem $90^\circ$-Winkel montiert, um diese weiterhin noch
     \caption{Beleuchtung} %Bildunterschrift
 \end{figure}
 
-Um möglichst gute Bilder zu erzeugen, sollte das Objekt gut ausgeleuchtet sein. Eine dunkle Umgebung verlängert die Belichtungszeit, wodurch die Gefahr von unscharfen Aufnahmen steigt und dunklere Bereiche (ungleichmäßige Ausleuchtung) verursacht Rauschen in diesen Bildbereichen. Daher soll das System eine gleichmäßige Ausleuchtung ermöglichen. Problematisch ist hierbei, dass die Kameras ggf. auch die Lichtquellen mit im Bildbereich haben können, wodurch Linsenreflexionen oder Ausbrennen der Bildbereiche möglich sind. Außerdem störend sind fremde Lichtquellen, die Schatten werfen oder die Belichtung der Kameras beeinflussen können.
+Um möglichst gute Bilder zu erzeugen, sollte das Objekt gut ausgeleuchtet sein. Eine dunkle Umgebung verlängert die Belichtungszeit, wodurch die Gefahr von unscharfen Aufnahmen steigt. Dunkele Bereiche (ungleichmäßige Ausleuchtung) verursachen verstärktes Rauschen in diesen Bildbereichen. Daher soll das System eine gleichmäßige Ausleuchtung ermöglichen. Problematisch ist hierbei, dass die Kameras ggf. auch die Lichtquellen mit im Bildbereich haben können, wodurch Linsenreflexionen oder Ausbrennen der Bildbereiche möglich sind. Außerdem störend sind fremde Lichtquellen, die Schatten werfen oder die Belichtung der Kameras beeinflussen können.
 
 Es wurde sich zur Beleuchtung für einzeln steuerbare LED-Lichtstreifen entschieden (siehe \autoref{img:led_streifen}). Diese können einfach an den Aluprofilen montiert werden und ermöglichen es, einzelne Bereiche und so ggf. blendende Bereiche abzuschalten. Außerdem können hiermit auch verschiedene Lichtfarben eingestellt werden, um Statusmeldungen zu geben (siehe \autoref{img:led_farbig}) oder ggf. die Farbgebung des Objektes zu beeinflussen. Die Steuerung erfolgt über einen Raspberry Pi 4, der auch die Steuerung der Kameras übernimmt.
 
-Für diffuseres Licht von außen kann ein halbtransparenter Stoff über den Rahmen gespannt werden. Dieser sorgt für eine gleichmäßigere Ausleuchtung und verhindert auch Reflexionen an Glasscheiben und ähnlichem.
+Für diffuseres Licht von außen kann ein halbtransparenter, weißer Stoff über den Rahmen gespannt werden. Dieser sorgt für eine gleichmäßigere Ausleuchtung durch Reflektion im inneren, verhindert auch Reflexionen an Glasscheiben und ähnlichem und vermindert Blendwirkungen durch externe Lichtquellen. Hierfür wurde aus weißem Baumwollstoff eine entsprechende Haube genäht, welche durch zwei mittels Reißverschluss verschließbaren Eingriffmöglichkeiten weiterhin das Einlegen von Objekten durch die Seite oder das Verstellen von Kameras ermöglicht.
+
 
 \section{Stromversorgung}
 
