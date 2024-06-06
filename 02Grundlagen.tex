@@ -24,19 +24,17 @@ Dieses Kapitel beschreibt die hierfür notwendigen Bedingungen und die Grundlage
 \section{Bilder}
 \label{s:bilder}
 
-Die Berechnung der Tiefeninformationen ist nur möglich, sofern der Punkt in mindestens einem weiteren Bild abgebildet ist. Die Genauigkeit der Berechnung ist vom Schnittwinkel dieser beiden Strahlen abhängig. Um möglichst gute Schnitte zur Ver\-fügung zu haben und die innere und äußere Orientierung möglichst gut berechnen zu können, müssen diese Bilder einige Bedingungen erfüllen.
+Die Berechnung der Tiefeninformationen ist nur möglich, sofern der Punkt in mindestens einem weiteren Bild abgebildet ist. Die Genauigkeit der Berechnung ist vom Schnittwinkel dieser beiden Strahlen abhängig. Um möglichst gute Schnitte zur Ver\-fügung zu haben und die innere und äußere Orientierung möglichst gut berechnen zu können, müssen diese Bilder einige Bedingungen erfüllen - auf diese wird in diesem Abschnitt eingegangen.
 
 \subsection{Überlappung und Bildinhalte}
-Da die Bilder durch identische Punkte verbunden werden, müssen die Bildinhalte sich überlappen. Die automatische Identifikation von identischen Punkten ist auf verschiedene Weisen möglich: Entweder durch die Nutzung von codierten Passpunkten wie ArUco-Markern oder konzentrischen Passpunkten nach \cite{schneider}. Alternativ können auch eine Merkmalsextraktion zur Indentifikation von gemeinsamen Punkten genutzt werden, beispielsweise durch die SIFT-Methode. Hierfür muss die oberfläche aber genügend Texturen aufweisen. \citep[S. 478]{luhmann}
-
-\subsection{Belichtung}
-und bei sich stark ändernden Helligkeitsverhältnissen auch hilfreich, jedoch wird hierdurch auch die Helligkeit der Verknüpfungspunkte verändert, was wiederum problematisch sein kann. Entsprechend ist es empfehlenswert bei gleichmäßiger Beleuchtung, die sich auch nicht ändern sollte, die Bilder zu erstellen - also beispielsweise bei bedeckten Himmel.
+Da die Bilder durch identische Punkte verbunden werden, müssen die Bildinhalte sich überlappen. Die automatische Identifikation von identischen Punkten ist auf verschiedene Weisen möglich: Entweder durch die Nutzung von codierten Passpunkten wie ArUco-Markern oder konzentrischen Passpunkten nach \cite{schneider}. Alternativ können auch eine Merkmalsextraktion zur Indentifikation von gemeinsamen Punkten genutzt werden, beispielsweise durch die SIFT-Methode. Hierfür muss die Oberfläche aber genügend Textur bzw. Struktur aufweisen. \citep[S. 478]{luhmann}
 
 \subsection{Position und Ausrichtung der Kamera}
 Bilder, die vom gleichen Standpunkt aufgenommen wurden, sind oft nur ungenau verknüpfbar. Daher empfiehlt es sich, Bilder aus verschiedensten Richtungen zu machen, also bei der manuellen Photographie um das Objekt herumzugehen - eine Mehrbildaufnahme im Rundum-Verband zu erzeugen. \citep[S. 170]{luhmann}
 Entsprechend müssen die Kameras an dem Trägern auch gleichmäßig um das Objekt verteilt positioniert werden und dabei auch an die Form des Objektes wie Einschnitte anpassbar sein.
 
-%\subsection{Schärfentiefe und Fokussierung}
+\subsection{Belichtung}
+und bei sich stark ändernden Helligkeitsverhältnissen auch hilfreich, jedoch wird hierdurch auch die Helligkeit der Verknüpfungspunkte verändert, was wiederum problematisch sein kann. Entsprechend ist es empfehlenswert bei gleichmäßiger Beleuchtung, die sich auch nicht ändern sollte, die Bilder zu erstellen - also beispielsweise bei bedeckten Himmel.
 
 \subsection{Innere Orientierung}
 \label{s:innereorientierung}
@@ -45,6 +43,11 @@ Aus der Position eines Punktes in einem Bild kann vereinfacht gedacht ähnlich e
 Die innere Orientierung kann während der Messung beispielsweise mittels Bündel\-block\-ausgleichung bestimmt werden. Bedingung hierfür ist jedoch, dass die innere Orientierung stabil ist und sich nicht während der Messung ändert \citep[S. 181f]{luhmann}.
 
 Jede Einstellung der Kameraoptik verändert die innere Orientierung und auch jede Kamera, auch einer Modellreihe, kann je nach Genauigkeitsanspruch als unterschiedlich angesehen werden. Änderungen können sich beispielsweise durch Umfokussierung oder die Nutzung eines optischen Zoom ergeben, aber auch durch einen mechanisch instabilen Aufbau der Kameras. Daher sollten die Bilder möglichst mit einer Kamera mit festen Einstellungen (Brennweite, Fokus, Blende, Objektiv) aufgenommen werden. Änderungen der Empfindlichkeit (ISO-Zahl) oder Belichtungszeit sind unproblematisch für die innere Orientierung \citep[S. 176]{luhmann}.
+
+
+\subsection{Fokussierung und Schärfentiefe}
+Um genaue Punktwolken zu ermöglichen, muss das Objekt scharf abgebildet werden. Die Kameras müssen dafür entsprechend fokussiert sein. Jedeoch wird durch die Fokussierung auch die Innere Orientierung verändert. Normalerweise wird daher auf eine Umfokussierung verzichtet und mittels der Blende (kleine Blendenöffnung) die Schärfentiefe erhöht, so dass ein großer Bereich scharf abgebildet wird. Die Schärfentiefe ist jedoch im Makrobereich relativ klein.
+
 
 \section{Verknüpfungspunkte}
 \label{s:verknuepfung}
@@ -56,10 +59,10 @@ Vorteilhaft ist jedoch die Verwendung von codierten Zielmarken. Hier können die
 \citep[S.535ff]{luhmann}
 
 \subsubsection{ArUco-Marker}
-Eine Variante der automatischen Verknüpfungspunkte sind die sogenannten ArUco-Marker. Diese werden häufig für die Orientierung bei Augmented-Reality-Anwend\-ungen genutzt. OpenCV unterstützt die Erkennung dieser Marker. Sie werden als codierte Messmarken verwendet und können automatisch im Subpixelbereich erkannt werden. Jede Ecke kann hier einzeln identifiziert werden, sodass ein erkannter Marker vier Verknüpfungspunkte liefern kann.
+Eine Variante der automatischen Verknüpfungspunkte sind die sogenannten ArUco-Marker. Diese werden häufig für die Orientierung bei Augmented-Reality-Anwend\-ungen genutzt. OpenCV unterstützt die Erkennung dieser Marker. Sie werden als codierte Messmarken verwendet und können automatisch im Subpixelbereich erkannt werden. Jede Ecke kann hier einzeln identifiziert werden, sodass ein erkannter Marker vier Verknüpfungspunkte liefern kann. Nachteilig ist, dass die Ecken nicht eindeutig identifiziert werden können, wenn die Aufnahme unscharf ist.
 
 \subsubsection{Zielmarken nach Schneider}
-\citep[S. 541]{luhmann}
+Beispielsweise von Agisoft Metashape werden Marker nach Schneider verwendet \citep{ccct}. Diese bestehen aus mehreren konzentrischen Kreisen. Die Mitte des Markers wird durch den Schnittpunkt der Kreise definiert.  Vorteilhaft ist jedoch, dass die Marker auch bei unscharfen Bildern erkannt werden können und ihr Zentrum auch manuell identifiziert werden kann.
 
 \subsection{SIFT}
 Die SIFT-Methode liefert Verknüpfungspunkte aus Mustern auf den photographierten Oberflächen. Es ist meist nicht notwendig explizit Marker an dem aufzunehmenden Objekt anzubringen, sofern seine Oberfläche nicht strukturlos ist (glatte weiße Wände etc.) oder in Bewegung ist.
