@@ -5,11 +5,11 @@
 
 
 \chapter{Ausblick und Fazit}
-Vor allem das Erzeugen der Näherungswerte in Vorbereitung der Bündelblockausgleich\-ung benötigte deutlich mehr Zeit und Theorieverständnis als gedacht. Daher wurde leider nicht alle ursprünglich geplanten Features umgesetzt. Aufgrund von Krankheit und anderen Uni-Projekten konnte dann zusätzlich auch nicht so viel Zeit in der zweiten Semesterhälfte in das Projekt gesteckt werden, wie eigentlich ursprünglich gedacht. Es sind bisher beispielsweise keine Nebenbedingungen möglich - ein Festlegen eines Maßstabes aufgrund einer bekannten Strecke ist so nicht möglich und auch nicht die Optimierung der Ausrichtung durch die Angabe gleich hoher Punkte. Auch wird aktuell nur die Position, nicht jedoch die bereits errechnete Drehung in den EXIF-Daten gespeichert. Hierfür müsste noch eine Umrechnung der Drehung aus dem System der ECEF-Koordinaten in die für EXIF-Daten übliche Ausrichtung an der Lotrichtung der Ortes des Bildes erfolgen. Ein weiteres offenes Problem ist die bereits erwähnte Transformation des lokalen Koordinatensystemes. Hier müsste noch die Ausgleichung so optimiert werden, dass nur ein Maßstab und keine Scherung verwendet wird.
 
-Neben den erwähnten fehlenden Funktionen wäre als weitere Erweiterungen eine Berechnung einer dichten Punktwolke denkbar. Entsprechende Bibliotheken wurden währ\-end der Entwicklung entdeckt und schienen relativ leicht einbaubar. So würde die Software zu einer Komplettlösung für \gls{SfM}-Punktwolken aus Bildern werden.
+Die Arbeit hat gezeigt, dass es möglich ist, ein photogrammetrisches Messsystem auf Basis von Raspberry-Pi-Kameras zu entwickeln. Die Kameras sind in der Lage, Bilder in hoher Qualität aufzunehmen und diese an eine zentrale Steuereinheit zu übertragen. Die Steuereinheit kann die Bilder speichern und an eine \gls{SfM}-Software übertragen.
 
-Im Gesamten sorgte das Projekt dafür, ein tiefergehendes Verständnis von Photogrammmetrie im Allgemeinen und \gls{SfM} im Speziellen zu erarbeiten sowie vor allem die Probleme und Schwierigkeiten kennenzulernen.
+
+
 
 \biblio
 \end{document}
