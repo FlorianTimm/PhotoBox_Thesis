@@ -4,7 +4,8 @@
 
 
 \chapter{Systemkalibrierung}
-Der Maßstab eines rein photogrammetrisch bestimmten 3D-Modelles ist nicht bekannt. Daher werden mindestens Referenzen in Form einer bekannten Länge benötigt um den Maßstab zu bestimmen. Neben dieser mindestens notwendigen Referenz sind weitere Kalibrierungen der Kamera möglich, um die Kameraparameter zu bestimmen. Da die Kameras jedoch alleine schon durch ihren Autofokus nicht stabil in ihrer inneren Orientierung sind, ist eine Kalibrierung der Kamera nur bedingt möglich und bietet nur einen Näherungswert.
+
+Für die Berechung von 3D-Modellen mit bekannten Maßstab sind einige Parameter zu bestimmen. Neben der Bestimmung der inneren Orientierung der Kameras ist auch eine Realisierung eines Maßstabes notwendig. Auf die notwendigen Schritte und die möglichen Fehlerquellen wird in diesem Kapitel eingegangen.
 
 \begin{itemize}
     \item Kameramodellierung
@@ -12,6 +13,30 @@ Der Maßstab eines rein photogrammetrisch bestimmten 3D-Modelles ist nicht bekan
     \item Kameraausrichtung
     \item Farbkalibrierung
 \end{itemize}
+
+\section{Maßstab und Passpunkte}
+\label{sec:passpunkte}
+Der Maßstab eines rein photogrammetrisch bestimmten 3D-Modelles ohne bekannte Längen ist nicht bekannt. Daher werden mindestens Referenzen in Form einer bekannten Länge benötigt um den Maßstab zu bestimmen. Alternativ können auch Passpunkte mit bekannten Koordinaten verwendet werden, um den Maßstab zu bestimmen. In diesem Fall wurde sich für eine Kombination aus beiden Verfahren entschieden. Die festen Passpunkte in Form von Aruco-Markern wurden am Rahmen fest montiert, diese sollen später als dauerhafte Realisierung des Maßstabes dienen. Außerdem wurden kalibrierte Maßstäbe im Objektraum verteilt, welche dann für die Bestimmung der Koordinaten der Passpunkte den Maßstab bilden. Zur Unterstützung der Bildverknüpfung wurden weitere Punkte in Form von Schneider-Markern im Bildbereich verteilt. Anschließend wurden Bilder vom gesamten System mit  einer externen Kamera mit festen Einstellungen aufgenommen. Diese Bilder wurden dann in Agisoft Metashape verarbeitet und Koordinaten der Passpunkte bestimmt. Über manuell in Agisoft bestimmte Punkte am Boden des Systems wurde das System so transformiert, dass der Boden die XY-Ebene darstellt.
+
+\section{Kamera-Kalibrierung}
+Die verwendeten Kameras weisen keine stabile innere Orientierung auf. Daher ist eine klassische Kalibrierung in Form von festen Parametern nicht möglich. Daher wurde die Annahme verfolgt, dass die innere Orientierung von der Fokusierung abhängig ist und eine Formel zur Bestimmung von Näherungswerten für die innere Orientierung in Abhängigkeit der Fokussierung ermittelt.
+
+\paragraph{Vorgehen}
+Es wurden mit fünf verschiedenen Fokussierungen mit jeweils 24 Raspberry-Pi-Kameras Bilder aufgenommen und die Bilder in Agisoft Metashape mittels Aruco-Markern orientiert, dessen Position aus \autoref{sec:passpunkte} bekannt ist. Außerdem wurden etwa 100 Schneider-Marker im Bildbereich der Kameras verteilt und als Verknüpfungspunkte benutzt. Es wurden jeweils in Metashape alle Bilder mit der gleichen Fokussierung als eine Kamera angenommen und die innere Orientierung bestimmt. Anschließend wurden alle Kameras nochmal einzeln ausgeglichen. Durch dieses zweistufige Vorgehen sollte bewirkt werden, dass die Näherungswerte schrittweise verbessert werden. Ein einstufiges Vorgehen ohne Näherungswerte führte zu sehr offensichtlich falschen Werten. Die innere Orientierung wurde in Form von Brennweite, Bildhauptpunktverschiebung und Verzeichnung ermittelt. Die Ergebnisse wurden in einem Box-Whisker-Plot dargestellt und eine ausgleichende Gerade ermittelt.
+
+\paragraph{Ergebnis}
+
+Die Ergebnisse sind in \autoref{img:naeherungswerte} dargestellt. Wie auch schon in der Voruntersuchung in \autoref{sec:fokus} zeigt sich, dass die Brennweite linear zur Fokussierung ist. Bei der Bildhauptpunktverschiebung und der Verzeichnung ist die Abhängigkeit nicht eindeutig. \autoref{tab:naeherungswerte_corr} zeigt die Korrelationsmatrix der Näherungswerte. Es zeigt sich, dass die Fokussierung und die Brennweite stark korreliert sind. Die Bildhauptpunktverschiebung ist nur schwach korreliert. Die Verzeichnung ist nicht korreliert. Es zeigt sich, dass die innere Orientierung durch die Fokussierung beeinflusst wird. Die Brennweite ist dabei erwartungsgemäß am stärksten betroffen.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]{./img/naeherungswerte_diagramm.pdf}
+    \caption{Box-Whisker-Plots und ausgleichende Gerade der inneren Orientierung in Abhängigkeit von der Fokussierung [dpt]} %Bildunterschrift
+    \label{img:naeherungswerte} %ID fürs Bild
+\end{figure}
+
+\input{tabs/naeherungswerte_corr}
+
 
 \biblio
 \end{document}
