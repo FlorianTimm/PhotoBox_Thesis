@@ -19,9 +19,12 @@ Für die Berechung von 3D-Modellen mit bekannten Maßstab sind einige Parameter 
 Der Maßstab eines rein photogrammetrisch bestimmten 3D-Modelles ohne bekannte Längen ist nicht bekannt. Daher werden mindestens Referenzen in Form einer bekannten Länge benötigt um den Maßstab zu bestimmen. Alternativ können auch Passpunkte mit bekannten Koordinaten verwendet werden, um den Maßstab zu bestimmen. In diesem Fall wurde sich für eine Kombination aus beiden Verfahren entschieden. Die festen Passpunkte in Form von Aruco-Markern wurden am Rahmen fest montiert, diese sollen später als dauerhafte Realisierung des Maßstabes dienen. Außerdem wurden kalibrierte Maßstäbe im Objektraum verteilt, welche dann für die Bestimmung der Koordinaten der Passpunkte den Maßstab bilden. Zur Unterstützung der Bildverknüpfung wurden weitere Punkte in Form von Schneider-Markern im Bildbereich verteilt. Anschließend wurden Bilder vom gesamten System mit  einer externen Kamera mit festen Einstellungen aufgenommen. Diese Bilder wurden dann in Agisoft Metashape verarbeitet und Koordinaten der Passpunkte bestimmt. Über manuell in Agisoft bestimmte Punkte am Boden des Systems wurde das System so transformiert, dass der Boden die XY-Ebene darstellt.
 
 \section{Kamera-Kalibrierung}
-Die verwendeten Kameras weisen keine stabile innere Orientierung auf. Daher ist eine klassische Kalibrierung in Form von festen Parametern nicht möglich. Daher wurde die Annahme verfolgt, dass die innere Orientierung von der Fokusierung abhängig ist und eine Formel zur Bestimmung von Näherungswerten für die innere Orientierung in Abhängigkeit der Fokussierung ermittelt.
+Die verwendeten Kameras weisen keine stabile innere Orientierung auf. Daher ist eine Kalibrierung in Form von festen Parametern nicht möglich. Daher wurde die Annahme verfolgt, dass die innere Orientierung linear von der Fokusierung abhängig ist und eine Formel zur Bestimmung von Näherungswerten für die innere Orientierung in Abhängigkeit der Fokussierung ermittelt.
+
+Die eigentliche Bestimmung der inneren Orientierung erfolgt im Betrieb in Form einer Simultankalibrierung (vgl: \autoref{s:innereorientierung}). Die Näherungswerte sollen dabei als Startwerte dienen.
 
 \paragraph{Vorgehen}
+
 Es wurden mit fünf verschiedenen Fokussierungen mit jeweils 24 Raspberry-Pi-Kameras Bilder aufgenommen und die Bilder in Agisoft Metashape mittels Aruco-Markern orientiert, dessen Position aus \autoref{sec:passpunkte} bekannt ist. Außerdem wurden etwa 100 Schneider-Marker im Bildbereich der Kameras verteilt und als Verknüpfungspunkte benutzt. Es wurden jeweils in Metashape alle Bilder mit der gleichen Fokussierung als eine Kamera angenommen und die innere Orientierung bestimmt. Anschließend wurden alle Kameras nochmal einzeln ausgeglichen. Durch dieses zweistufige Vorgehen sollte bewirkt werden, dass die Näherungswerte schrittweise verbessert werden. Ein einstufiges Vorgehen ohne Näherungswerte führte zu sehr offensichtlich falschen Werten. Die innere Orientierung wurde in Form von Brennweite, Bildhauptpunktverschiebung und Verzeichnung ermittelt. Die Ergebnisse wurden in einem Box-Whisker-Plot dargestellt und eine ausgleichende Gerade ermittelt.
 
 \paragraph{Ergebnis}
@@ -36,6 +39,10 @@ Die Ergebnisse sind in \autoref{img:naeherungswerte} dargestellt. Wie auch schon
 \end{figure}
 
 \input{tabs/naeherungswerte_corr}
+
+\section{Farbkalibrierung}
+
+Für die korrekte Texturierung des 3D-Modelles sollte die Farbe möglichst korrekt sein. Da das System aber nicht von Fremdlichtquellen abgeschirmt ist, soll dies nur verhindern, dass die Farbe schon ohne Fremdlicht falsch sind. Daher wurde mit dem System eine Farbkalibriertafel fotografiert und die Farbwerte ausgewertet. Hiermit lassen sich dann die Farben der Kameras korrigieren. \citep[S. 431f]{luhmann}
 
 
 \biblio
