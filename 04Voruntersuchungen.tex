@@ -5,7 +5,7 @@
 
 \chapter{Voruntersuchungen}
 \label{c:voruntersuchungen}
-Vor und während des Aufbaues des eigentlichen Messystemes wurden einige Voruntersuchungen durchgeführt. Diese dienten dazu, die Machbarkeit des Systemes zu prüfen und die notwendigen Schritte zu ermitteln und zu optimieren. Hauptsächlich ging es hierbei um die Ermittlung der Kamerakonstanten und der Verzeichnung der Kamera. Auch wurde die Möglichkeit der Erstellung eines 3D-Modells durch Fokusstacking wurde untersucht. Die einzelnen Untersuchungen werden im Folgenden kurz vorgestellt.
+Vor und während des Aufbaues des eigentlichen Messsystemes wurden einige Voruntersuchungen durchgeführt. Diese dienten dazu, die Machbarkeit des Systemes zu prüfen und die notwendigen Schritte zu ermitteln und zu optimieren. Hauptsächlich ging es hierbei um die Ermittlung der Kamerakonstanten und der Verzeichnung der Kamera. Auch wurde die Möglichkeit der Erstellung eines 3D-Modells durch Fokusstacking wurde untersucht. Die einzelnen Untersuchungen werden im Folgenden kurz vorgestellt.
 
 \section{Änderung der Kamerakonstante durch Fokussierung}
 \label{sec:fokus}
@@ -25,7 +25,7 @@ In \citet[S. 59]{kraus} wird eine Formel (siehe \autoref{eq:kraus_fokus}) für d
 Die Änderungen wurden in einem Versuch beobachtet. Hierzu wurde der Raspberry Pi Zero mit montierter Kamera fest vor einem Charuco-Kalibriermuster platziert. Dieser ermöglicht auch bei unscharfen Bildern noch eine gute automatische Erkennung der zu beobachtenden Punkte. Es wurden je 11 Bilder mit unterschiedlichen Fokussierungen von $2~\text{m}$ bis  $10~\text{cm}$ aufgenommen. Dieser Vorgang wurde insgesamt viermal wiederholt, um auch die Wiederholungsgenauigkeit zu ermitteln. Die Bilder wurden anschließend mit einem Python-Script unter Nutzung von OpenCV ausgewertet. Hierbei wurde die relative Veränderung der Kamerakonstante der Kamera ermittelt und mit dem erwarteten Wert verglichen. Die relativen Änderungen wurden auf eine Fokusdistanz von $20~\text{cm}$ (entspricht einer Kamerakonstante von $5~\text{dpt}$) normiert. Relative Angaben wurden genutzt, da noch keine Kamerakonstante zu dem Zeitpunkt vorlag oder angenommen werden sollte.
 
 \paragraph{Ergebnis}
-Die Ergebnisse sind in \autoref{img:fokus_faktor} dargestellt. Es zeigt sich, dass die Änderungen der Kamerakonstante durch die Fokusierung linear zu der Dioptrienzahl (Kehrwert der Gegenstandsweite) sind. Ein lineares Verhältnis ergibt sich auch mit der im Datenblatt angegebenen Brennweite von $4,74~\text{mm}$, jedoch eine etwas flachere Gerade (blau). Die ausgleichende Gerade (blau) ergab eine Brennweite von $6,97~\text{mm}$. Die Abweichung von $2,23~\text{mm}$ entspricht einer Abweichung von $47\%$, was als unrealistisch hoch eingeschätzt wird. Hier scheinen sich weitere Effekte bemerkbar zu machen, die noch nicht berücksichtigt wurden. Es wurde daher auch die Verzeichnung weiter untersucht.
+Die Ergebnisse sind in \autoref{img:fokus_faktor} dargestellt. Es zeigt sich, dass die Änderungen der Kamerakonstante durch die Fokussierung linear zu der Dioptrienzahl (Kehrwert der Gegenstandsweite) sind. Ein lineares Verhältnis ergibt sich auch mit der im Datenblatt angegebenen Brennweite von $4,74~\text{mm}$, jedoch eine etwas flachere Gerade (blau). Die ausgleichende Gerade (blau) ergab eine Brennweite von $6,97~\text{mm}$. Die Abweichung von $2,23~\text{mm}$ entspricht einer Abweichung von $47\%$, was als unrealistisch hoch eingeschätzt wird. Hier scheinen sich weitere Effekte bemerkbar zu machen, die noch nicht berücksichtigt wurden. Es wurde daher auch die Verzeichnung weiter untersucht.
 
 \begin{figure}
     \centering
@@ -39,7 +39,7 @@ Die Ergebnisse sind in \autoref{img:fokus_faktor} dargestellt. Es zeigt sich, da
 \section{Änderung der Verzeichnung mittels Charuco-Board}
 
 \paragraph{These}
-Durch die Verschiebung der Linsen beim Fokusieren verändert sich auch die Verzeichnung der Kamera.
+Durch die Verschiebung der Linsen beim Fokussieren verändert sich auch die Verzeichnung der Kamera.
 
 \paragraph{Ziel}
 Die Veränderung der Verzeichnung soll ermittelt und eine Korrekturformel ermittelt werden.

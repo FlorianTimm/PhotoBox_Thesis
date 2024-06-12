@@ -45,7 +45,7 @@ Jede Einstellung der Kameraoptik verändert die innere Orientierung und auch jed
 Die Bestimmung der inneren Orientierung, auch Kalibrierung genannt, kann während der Messung beispielsweise als Parameter in der Bündel\-block\-ausgleichung bestimmt werden. Je nach Stabilität der inneren Orientierung sind hier verschiedene Methoden möglich - beispielsweise die Kalibrierung jedes einzelnen Bildes bei instabilen Kameras, wie sie in diesem Projekt verwendet werden. \citep[S. 181f]{luhmann}
 
 \subsection{Fokussierung und Schärfentiefe}
-Um genaue Punktwolken zu ermöglichen, muss das Objekt scharf abgebildet werden. Die Kameras müssen dafür entsprechend fokussiert sein. Jedeoch wird durch die Fokussierung auch die Innere Orientierung verändert. Normalerweise wird daher auf eine Umfokussierung verzichtet und mittels der Blende (kleine Blendenöffnung) die Schärfentiefe erhöht, so dass ein großer Bereich scharf abgebildet wird. Die Schärfentiefe ist jedoch im Makrobereich relativ klein.
+Um genaue Punktwolken zu ermöglichen, muss das Objekt scharf abgebildet werden. Die Kameras müssen dafür entsprechend fokussiert sein. Jedoch wird durch die Fokussierung auch die Innere Orientierung verändert. Normalerweise wird daher auf eine Umfokussierung verzichtet und mittels der Blende (kleine Blendenöffnung) die Schärfentiefe erhöht, so dass ein großer Bereich scharf abgebildet wird. Die Schärfentiefe ist jedoch im Makrobereich relativ klein.
 
 
 \section{Verknüpfungspunkte}
@@ -102,11 +102,11 @@ Um die Beziehung zwischen zwei Bildern aufzustellen, kann man die Abbildungsglei
 
 
 \subsection{Rückwärtsschnitt}
-Die Koordinaten der ArUco-Marker sind aus einer Kalibrierung und aus vorherigen Messungen bekannt. Aus diesen und den Bildkoordinaten der Marker kann die Position und Ausrichtung der Kamera berechnet werden. Hierfür wird der sogenannte Rückwärtsschnitt genutzt. Die Berechung erfolgt auf Basis der Abbildungsgleichung, die die Position eines Punktes in einem Bild in Beziehung zur Kamera setzt. Für die Berechnung selbst gibt es verschiedene Methoden. Verwendet wurde hier der von OpenCV genutzte Ansatz von \citeauthor{Lepetit2008} in Kombination mit einem RANSAC-Ansatz. Durch die Nutzung des RANSAC-Ansatzes können veränderte Passpunkte identifiziert und als Ausreißer markiert werden.
+Die Koordinaten der ArUco-Marker sind aus einer Kalibrierung und aus vorherigen Messungen bekannt. Aus diesen und den Bildkoordinaten der Marker kann die Position und Ausrichtung der Kamera berechnet werden. Hierfür wird der sogenannte Rückwärtsschnitt genutzt. Die Berechnung erfolgt auf Basis der Abbildungsgleichung, die die Position eines Punktes in einem Bild in Beziehung zur Kamera setzt. Für die Berechnung selbst gibt es verschiedene Methoden. Verwendet wurde hier der von OpenCV genutzte Ansatz von \citeauthor{Lepetit2008} in Kombination mit einem RANSAC-Ansatz. Durch die Nutzung des RANSAC-Ansatzes können veränderte Passpunkte identifiziert und als Ausreißer markiert werden.
 
 
 \subsection{Vorwärtsschnitt}
-Die Koordinaten der Passpunkt-Ausreißer aus der Berechung der Kamerapositionen werden anschließend neu berechnet. Hierfür wird der Vorwärtsschnitt genutzt. Auch hier wird OpenCV zur Berechnung genutzt. Die Berechnung der Passpunkte erfolgt für jedes Bildpaar einzeln. Für alle Koordinaten wird dann pro Passpunkt der Z-Score berechnet. Passpunkte, die einen Z-Score von über 2 haben, werden als Ausreißer markiert und nicht weiter betrachtet.
+Die Koordinaten der Passpunkt-Ausreißer aus der Berechnung der Kamerapositionen werden anschließend neu berechnet. Hierfür wird der Vorwärtsschnitt genutzt. Auch hier wird OpenCV zur Berechnung genutzt. Die Berechnung der Passpunkte erfolgt für jedes Bildpaar einzeln. Für alle Koordinaten wird dann pro Passpunkt der Z-Score berechnet. Passpunkte, die einen Z-Score von über 2 haben, werden als Ausreißer markiert und nicht weiter betrachtet.
 
 Mit dem Vorwärts\-schnitt können auch die Neupunkte, die mittels SIFT oder ähnlichen Bild\-erkennungs\-algorithmen erkannt wurden, berechnet werden. Dadurch kann schon eine dünne Punktwolke erzeugt werden, die dann in der Bündel\-block\-ausgleichung weiter optimiert werden kann.
 
@@ -123,7 +123,7 @@ Die dünne Punktwolke aus dem Vorwärtsschnitt kann durch Multi-view Stereo-Verf
 \section{Mesh-Generierung}
 Bis zu diesem Schritt besteht das Modell nur aus einzelnen Punkten, die keine Oberfläche ergeben. Um ein 3D-Modell zu erhalten, muss eine Oberfläche generiert werden. Hierfür wird ein Mesh-Generierungsverfahren genutzt. Hierbei wird die Punktwolke in Dreiecke unterteilt. Hierfür gibt es verschiedene Verfahren, die sich in der Art der Unterteilung unterscheiden. OpenDroneMap nutzt beispielsweise die Screened Poisson Surface Reconstruction. \citep[S. 52f]{opendronemap}
 
-Die Screened Poisson Surface Reconstruction ist ein Verfahren, das auf der Poisson-Gleichung basiert. Diese wird genutzt, um die Oberfläche zu glätten und zu interpolieren. Ein Teil des Ansatzes ist es, dass die Ausrichtung der Punkte berückstichtigt wird. Die Punkte werden hierbei in eine Gitterstruktur überführt und die Oberfläche durch die Lösung der Poisson-Gleichung bestimmt. \citep{spsr}
+Die Screened Poisson Surface Reconstruction ist ein Verfahren, das auf der Poisson-Gleichung basiert. Diese wird genutzt, um die Oberfläche zu glätten und zu interpolieren. Ein Teil des Ansatzes ist es, dass die Ausrichtung der Punkte berücksichtigt wird. Die Punkte werden hierbei in eine Gitterstruktur überführt und die Oberfläche durch die Lösung der Poisson-Gleichung bestimmt. \citep{spsr}
 
 \section{Texturierung}
 Abschließend wird das Modell texturiert. Hierfür werden die Bilder, die zur Erstellung des Modells genutzt wurden, auf das Modell projiziert. Außerdem werden Helligkeits- und Farbunterschiede ausgeglichenen. \citep[S. 54f]{opendronemap}
