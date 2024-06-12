@@ -14,7 +14,7 @@ Als Kameras wurde das Raspberry Pi Camera Module 3 verwendet, welches jeweils vo
 
 Nachteil und Vorteil zugleich ist, dass die Kamera über einen Autofokus verfügt, der aber auch elektronisch gesteuert manuell fokussieren kann. Dieser verschlechtert die Stabilität der inneren Orientierung (vgl. \autoref{s:innereorientierung}) weiter und wurde daher auch besonders im \todo{Verweis zu Fokusexperimenten} analysiert. Da die Bilder aber Nahbereich zwischen $20$ und $70~\text{cm}$ benötigt werden, ist hier die Schärfentiefe niedrig. Der elektronische Fokus, eine wiederholgenaue und damit mathematisch modellierbare Fokussierung vorausgesetzt, ermöglicht hier, Fokusstacking zu nutzen um den Schärfebereich zu vergrößern.
 
-Weiterer Vorteil der Lösung mit einzelnen Raspberry Pis ist es, dass hierdurch bereits die einzelnen Kameraeinheiten Berechnungen wie das Identifizieren von Passpunkten übernehmen könnten und auch durch die Nutzung von Netzwerkverbindungen für die Steuerung das System skalierbar im Sinne der Anzahl der Kameras aber auch der Größenordnung der Abstände zwischen den Kameras.
+Weiterer Vorteil der Lösung mit einzelnen Raspberry Pi ist es, dass hierdurch bereits die einzelnen Kameraeinheiten Berechnungen wie das Identifizieren von Passpunkten übernehmen könnten und auch durch die Nutzung von Netzwerkverbindungen für die Steuerung das System skalierbar im Sinne der Anzahl der Kameras aber auch der Größenordnung der Abstände zwischen den Kameras.
 
 \section{Rahmen}
 
@@ -78,16 +78,16 @@ Für diffuseres Licht von außen kann ein halbtransparenter, weißer Stoff über
     \label{img:stromverteilung} %ID fürs Bild
 \end{figure}
 
-Die Raspberry Pis werden mit 5~Volt betrieben. Der Raspberry Pi Zero mit Kamera hatte dabei in Messungen einen maximalen Stromverbrauch von 270~mA aufgezeigt, der Raspberry Pi 4 kann bis zu 1,5~A unter Last verbrauchen. Hieraus ergibt sich ein Gesamtstromverbrauch von maximal rund 8~Ampere. Für den Raspbery Pi 4 wurde ein eigenes Netzteil eingeplant und für die Zero W ein gemeinsames 35 Watt-Netzteil. Versuche zeigten jedoch, dass der Stromverbrauch kurzfristig höher ausfallen konnte, so dass die Zero W, die am meisten von Spannungsabfällen betroffen sind zum Absturz gebracht wurden, wenn alle Kameras gleichzeitig auslösten. Nach dem die Last auf sicherheitshalber auf zwei weitere Netzteile verteilt wurde, lief das System zuverlässig.
+Die Raspberry Pi werden mit 5~Volt betrieben. Der Raspberry Pi Zero mit Kamera hatte dabei in Messungen einen maximalen Stromverbrauch von 270~mA aufgezeigt, der Raspberry Pi 4 kann bis zu 1,5~A unter Last verbrauchen. Hieraus ergibt sich ein Gesamtstromverbrauch von maximal rund 8~Ampere. Für den Raspberry Pi 4 wurde ein eigenes Netzteil eingeplant und für die Zero W ein gemeinsames 35 Watt-Netzteil. Versuche zeigten jedoch, dass der Stromverbrauch kurzfristig höher ausfallen konnte, sodass die Zero W, die am meisten von Spannungsabfällen betroffen sind, zum Absturz gebracht wurden, wenn alle Kameras gleichzeitig auslösten. Nachdem die Last auf sicherheitshalber auf zwei weitere Netzteile verteilt wurde, lief das System zuverlässig.
 
-Als Kabelmaterial wurde Klingeldraht mit $0,75~\text{mm}^2$ verwendet. Der relativ hohe Kabelquerschnitt soll für einen geringen Spannungsabfall sorgen. Durch die Verwendung von mehreren Netzteilen ist dieser jedoch nun nicht mehr notwendig. Hier würde sich nun ein geringerer Querschnitt anbieten, auch um eine einfachere Verbindung zu den Raspberry Pi Zero W zu ermöglichen. Diese wurden auf Seiten der Zero W verlötet und in den Verteilerdosen mit Federkraftklemmen verbunden (siehe \autoref{img:stromverteilung}).
+Als Kabelmaterial wurde Klingeldraht mit $0,75~\text{mm}^2$ verwendet. Der relativ hohe Kabelquerschnitt soll für einen geringen Spannungsabfall sorgen. Durch die Verwendung von mehreren Netzteilen ist dieser jedoch nun nicht mehr notwendig. Hier würde sich nun ein geringerer Querschnitt anbieten, auch um eine einfachere Verbindung zu den Raspberry Pi Zero W zu ermöglichen. Diese wurden aufseiten der Zero W verlötet und in den Verteilerdosen mit Federkraftklemmen verbunden (siehe \autoref{img:stromverteilung}).
 
 Die Stromversorgung der Beleuchtung erfolgt über ein 12-V-Netzteil mit $3,5~\text{A}$ Ausgangsleistung. Auch hier wurde Klingeldraht zur Verteilung zwischen den einzelnen Holmen genutzt.
 
 Beim WLAN-Router war ein entsprechendes USB-Netzteil mitgeliefert.
 
 \section{Kommunikation und Datenübertragung}
-Die Kommunikation zwischen den Raspberry Pis erfolgt über WLAN. Vorteil dieser Lösung ist, dass hier keine weiteren Leitungen außer der Stromversorgung zu den einzelnen Raspberry Pi Zero W benötigt wird und es auch möglich wäre, die gleiche Hard- und Software auch für ein größeres System ohne Änderungen zu nutzen. Nachteilig ist die Verbindungsgeschwindigkeit, gerade im Hinblick auf die Synchronisierung der Kameras. Diese Problematik soll aber durch entsprechende Programmierung der Software möglichst klein gehalten werden.
+Die Kommunikation zwischen den Raspberry Pi erfolgt über WLAN. Vorteil dieser Lösung ist, dass hier keine weiteren Leitungen außer der Stromversorgung zu den einzelnen Raspberry Pi Zero W benötigt wird und es auch möglich wäre, die gleiche Hard- und Software auch für ein größeres System ohne Änderungen zu nutzen. Nachteilig ist die Verbindungsgeschwindigkeit, gerade im Hinblick auf die Synchronisierung der Kameras. Diese Problematik soll aber durch entsprechende Programmierung der Software möglichst klein gehalten werden.
 
 Als weitere Datenleitungen wird eine Steuerleitung für die LED-Streifen benötigt. Über diese erfolgt die Steuerung der einzelnen LED-Gruppen. Auch hier wurde wieder Klingeldraht verwendet.
 

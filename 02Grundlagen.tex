@@ -5,7 +5,7 @@
 
 \chapter{Photogrammetrische Grundlagen}
 \label{c:photogrammetrie}
-Das zu entwickelnde System soll 3D-Modelle von Objekten erstellen. Hierfür wird Photogrammmetrie in Form einer \gls{SfM}-Pipeline genutzt.
+Das zu entwickelnde System soll 3D-Modelle von Objekten erstellen. Hierfür wird Photogrammetrie in Form einer \gls{SfM}-Pipeline genutzt.
 Der allgemeine Ablauf ist in \autoref{img:ablauf} dargestellt. Zunächst werden die Bilder aufgenommen (siehe \autoref{s:bilder}). Hierbei ist es wichtig, dass die Bildinhalte sich überlappen.
 Die Bilder werden dann verknüpft, indem identische Punkte in den Bildern identifiziert werden  (siehe \autoref{s:verknuepfung}). Hierfür können beispielsweise ArUco-Marker oder die SIFT-Methode genutzt werden.
 Aus den identifizierten Punkten werden dann die Positionen und Ausrichtung der Kameras und Verknüpfungspunkte in einem lokalen Koordinatensystem ohne bekannten Maßstab berechnet werden. Die berechneten Daten werden anschließend in einer Bündelblockausgleichung gemeinsam optimiert (siehe \autoref{s:buendelblock}). Durch die Nutzung von bekannten Größen beispielsweise durch Maßstäbe kann dieses System transformiert werden.
@@ -53,7 +53,7 @@ Um genaue Punktwolken zu ermöglichen, muss das Objekt scharf abgebildet werden.
 Um die einzelnen Bilder verknüpfen zu können, werden identische Punkte zwischen zwei oder mehr Bildern benötigt. Diese können klassisch per Hand erfasst werden, jedoch ist dieses schon bei kleineren Projekten sehr zeitaufwändig. Daher wurde zusätzlich die Möglichkeit genutzt, automatisch Verknüpfungspunkte zu erzeugen.
 
 \subsection{Codierte Zielmarker}
-Es gibt verschiedenste Formen von Markern, die automatisch erfasst werden können. Grob unterschieden werden kann in codierte und nicht codierte Zielmarker. Beispiele für nicht codierte sind beispielsweise einfache kreisförmige Klebepunkte oder Marker, die aus dem Linien bestehen und ihren Mittelpunkt durch dessen Schnitt definieren.
+Es gibt verschiedenste Formen von Markern, die automatisch erfasst werden können. Grob unterschieden werden kann in codierte und nicht codierte Zielmarker. Beispiele für nicht codierte sind beispielsweise einfache kreisförmige Klebepunkte oder Marker, die aus Linien bestehen und ihren Mittelpunkt durch dessen Schnitt definieren.
 Vorteilhaft ist jedoch die Verwendung von codierten Zielmarken. Hier können die Punkte ihren Nummern direkt zugeordnet werden.
 \citep[S.535ff]{luhmann}
 
@@ -64,14 +64,14 @@ Eine Variante der automatischen Verknüpfungspunkte sind die sogenannten ArUco-M
 Beispielsweise von Agisoft Metashape werden Marker nach Schneider verwendet \citep{ccct}. Diese bestehen aus mehreren konzentrischen Kreisen. Die Mitte des Markers wird durch den Schnittpunkt der Kreise definiert.  Vorteilhaft ist jedoch, dass die Marker auch bei unscharfen Bildern erkannt werden können und ihr Zentrum auch manuell identifiziert werden kann.
 
 \subsection{SIFT}
-Die SIFT-Methode liefert Verknüpfungspunkte aus Mustern auf den photographierten Oberflächen. Es ist meist nicht notwendig explizit Marker an dem aufzunehmenden Objekt anzubringen, sofern seine Oberfläche nicht strukturlos ist (glatte weiße Wände etc.) oder in Bewegung ist.
+Die SIFT-Methode liefert Verknüpfungspunkte aus Mustern auf den fotografierten Oberflächen. Es ist meist nicht notwendig explizit Marker an dem aufzunehmenden Objekt anzubringen, sofern seine Oberfläche nicht strukturlos ist (glatte weiße Wände etc.) oder in Bewegung ist.
 
-Zur Erkennung von Merkmalen setzt das Verfahren auf die Detektion von Kanten. Diese werden in verschiedenen Stufen einer Bildpyramide erkannt und ihre Extrema berechnet. Es werden diese Merkmale weiter ausgedünnt, beispielsweise über den Kontrast. Sofern ein möglicher Marker identifiziert wurde, wird eine Beschreibung erzeugt. Diese erfolgt  durch Analyse der Helligkeitsabweichungen zu den Nachbar-Pixeln und wird an der stärksten Abweichung ausgerichtet. Hierdurch wird die Beschreibung dann richtungsunabhängig. Mit diesen kann dann die Übereinstimmung von zwei Markern in zwei Photos bestimmt werden, auch wenn die Bilder zueinander gekippt oder gedreht sind.
+Zur Erkennung von Merkmalen setzt das Verfahren auf die Detektion von Kanten. Diese werden in verschiedenen Stufen einer Bildpyramide erkannt und ihre Extrema berechnet. Es werden diese Merkmale weiter ausgedünnt, beispielsweise über den Kontrast. Sofern ein möglicher Marker identifiziert wurde, wird eine Beschreibung erzeugt. Diese erfolgt  durch Analyse der Helligkeitsabweichungen zu den Nachbar-Pixeln und wird an der stärksten Abweichung ausgerichtet. Hierdurch wird die Beschreibung dann richtungsunabhängig. Mit diesen kann dann die Übereinstimmung von zwei Markern in zwei Fotos bestimmt werden, auch wenn die Bilder zueinander gekippt oder gedreht sind.
 \citep[S. 484f]{luhmann}
 
 \section{Verknüpfung von Bildern}
 \label{s:photogramm}
-Durch die beschriebenen Verfahren und die hieraus entstandenen Verknüpfungs\-punkte können die Bilder miteinander verknüpft werden. Da die Kamerapositionen am Rahmen veränderlich sind und die Fixierung auch keine ausreichend genaue Fixierung garantiert, können die bekannten Positionen aus vorherigen Messungen nur als Näherungswerte genutzt werden. Die genaue Bestimmung erfolgt der Position und Ausrichtung - die äußere Orientierung - erfolgt dann Über ein Photogrammmetrische Verfahren. Dieses wird im Folgenden vorgestellt.
+Durch die beschriebenen Verfahren und die hieraus entstandenen Verknüpfungs\-punkte können die Bilder miteinander verknüpft werden. Da die Kamerapositionen am Rahmen veränderlich sind und die Fixierung auch keine ausreichend genaue Fixierung garantiert, können die bekannten Positionen aus vorherigen Messungen nur als Näherungswerte genutzt werden. Die genaue Bestimmung erfolgt der Position und Ausrichtung - die äußere Orientierung - erfolgt dann Über ein Photogrammetrische Verfahren. Dieses wird im Folgenden vorgestellt.
 
 
 \subsection{Abbildungsgleichung}
