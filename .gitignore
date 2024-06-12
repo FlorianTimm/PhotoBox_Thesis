@@ -21,3 +21,4 @@ texput.log
 *.glg
 *.gls
 *.bibtex
+.fuse_hidden*
