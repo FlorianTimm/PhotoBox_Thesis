@@ -26,7 +26,7 @@ Die letzten Koordinaten der Passpunkte wird im System gespeichert - daher sollte
 Eine Kalibrierung mit Bordmitteln ist nicht möglich.
 
 \section{Durchführung}
-Das System wird gestartet, in dem die Stromversorgung hergestellt wird. Die Kameras starten selbstständig und die Beleuchtung wird eingeschaltet. Nach kurzer Zeit sollten kurz alle LEDs grün leuchten. Falls nicht, sind einige Kameras nicht erreichbar. Problemlösungen werden im Kapitel \autoref{sec:Problembehandlung} behandelt.
+Das System wird gestartet, in dem die Stromversorgung hergestellt wird. Die Kameras starten selbstständig und die Beleuchtung wird eingeschaltet. Nach kurzer Zeit sollten kurz alle LEDs grün leuchten. Falls nicht, sind einige Kameras nicht erreichbar. Problemlösungen werden im \autoref{sec:Fehlerbehebung} behandelt.
 
 Das Objekt wird mittig, ggf. auf einer Erhöhung im Rahmen positioniert.
 
@@ -39,14 +39,14 @@ Ab hier trennen sich die Wege je nach verwendeten System. Die Bildaufnahme erfol
     \label{img:connector} %ID fürs Bild
 \end{figure}
 
-\subsection{mit Netzwerkverbindung}
+\subsection{... mit Netzwerkverbindung}
 Der zu verwendende Rechner wird mit dem System per WLAN (bevorzugt) oder Netzwerkkabel verbunden. Die Verbindungssoftware wird gestartet und die IP-Adresse des Systemes angegeben werden. Standardmäßig lautet diese im WLAN 10.0.1.1, per Netzwerkkabel muss die IP von einem DHCP-Server festgelegt werden, beispielsweise in dem der angeschlossene Rechner als DHCP-Server konfiguriert wird. Unter Gnome ist dieses beispielsweise möglich, indem in den Netzwerkeinstellungen die Internetverbindung des PC freigegeben wird.
 
 Anschließend wird die zu nutzende Software ausgewählt und die Verbindung hergestellt.
 
 Nun können die Bilder aufgenommen werden (grüne Taste). Die Bilder werden auf den Rechner übertragen und dort in der ausgewählten Software weiterverarbeitet. Der Fortschritt ist in der rechten Hälfte der Verbindungssoftware zu erkennen.
 
-\section{Durchführung ohne direkte Weiterverarbeitung}
+\subsection{... ohne Netzwerkverbindung}
 Alternativ können die Bilder auch ohne angeschlossenen PC aufgenommen werden und später weiter verarbeitet werden. Die Bilder werden in allen Fällen auf dem Raspberry Pi 4, der die gesamte Steuerung übernimmt, gespeichert. Die Bilder können dann von der Website des Raspberry Pi heruntergeladen werden. Auch ist es möglich, einen USB-Stick in den USB-Port des Raspberry Pi 4 vor der Bildaufnahme zu stecken. Die Bilder werden dann auch auf den USB-Stick kopiert.
 
 Die Verbindungssoftware unterstützt auch das Laden der Bilder aus einem lokalen Ordner, beispielsweise aus der ZIP der Website oder dem Ordner auf dem USB-Stick.
@@ -55,9 +55,9 @@ Die Verbindungssoftware unterstützt auch das Laden der Bilder aus einem lokalen
 Software-Updates können zu Inkompatibilitäten führen, daher sollten diese erstmal auf einem zusätzlichen Raspberry Pi ausprobiert werden, bevor diese auf dem System ausgerollt werden.
 
 \section{Fehlerbehebung}
-\label{sec:Problembehandlung}
+\label{sec:Fehlerbehebung}
 \subsection{Kameras sind nicht erreichbar}
-Die Kameras sind nicht erreichbar, wenn die LEDs nicht grün leuchten. Dies kann verschiedene Ursachen haben. Als erstes sollte das System nochmal heruntergefahren werden durch einen langen Druck auf die rote Taste. Anschließend wird die Stromversorgung für einige Sekunden vollständig getrennt und wieder hergestellt. Das System sollte nun neu starten und die Kameras erreichbar sein.
+Die Kameras sind nicht erreichbar, wenn die LEDs nicht grün leuchten. Dies kann verschiedene Ursachen haben. Als Erstes sollte das System nochmal heruntergefahren werden durch einen langen Druck auf die rote Taste. Anschließend wird die Stromversorgung für einige Sekunden vollständig getrennt und wieder hergestellt. Das System sollte nun neu starten und die Kameras erreichbar sein.
 
 Falls das noch nicht der Fall ist, hilft ein Blick in das Menü des WLAN-Routers. Hier sollten in der Übersicht aller Netzwerkgeräte die 24 Kameras, der steuernde Raspberry Pi 4 und das Gerät, über das der Zugriff erfolgt, aufgezählt sein. Falls das nicht der Fall ist, muss der fehlerhafte Raspberry Pi Zero an einem Display und einer Tastatur angeschlossen werden, um den Fehler zu finden.
 
