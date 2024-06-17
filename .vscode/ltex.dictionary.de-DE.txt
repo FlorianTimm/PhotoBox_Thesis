@@ -31,3 +31,4 @@ Farbkalibriertafel
 ArUco-Markern
 Genauigkeitsuntersuchungen
 kamerasteuernden
+Genauigkeitsüberprüfung

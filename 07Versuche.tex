@@ -2,14 +2,38 @@
 \graphicspath{{\subfix{./img/}}}
 \begin{document}
 
-\chapter{Genauigkeitsuntersuchungen}
+\chapter{Untersuchungen zur Genauigkeit und Systemaufbau}
+Nach Abschluss der Konstruktion und des Aufbaus des Prototyps, wurden verschiedene Untersuchungen durchgeführt, um die Genauigkeit des Systems zu überprüfen und die Anzahl der Kameras zu evaluieren. Hierzu wurden unter anderem Vergleichsmessungen mit verschiedenen Systemen durchgeführt.
 
-\begin{itemize}
-    \item Kameraanzahl
-    \item Drehteller
-    \item Vergleichsmessung
-    \item
-\end{itemize}
+\section{Genauigkeitsüberprüfung des 3D-Modelles}
+Um die Genauigkeit der 3D-Modell-Erzeugung zu überprüfen, wurden mehrere Prüfkörper mit dem Prototypen und mit einem kommerziellen Streifenprojektionssystem vermessen. Die Ergebnisse wurden miteinander verglichen.
+
+\subsection{Erwartete Genauigkeit}
+
+Bildmaßstab:
+\begin{align}
+    m       & = \frac{h}{c}                                  \\
+    m_{min} & = \frac{100~\text{mm}}{4,7~\text{mm}} = 21,28  \\
+    m_{max} & = \frac{500~\text{mm}}{4,7~\text{mm}} = 106,38
+\end{align}
+
+Genauigkeit bei 2px Bildmessgenauigkeit:
+\begin{align}
+    dx'      & = 2~\text{px} = 0,0014~\frac{\text{mm}}{\text{px}} \cdot 2~\text{px} = 0,0028~\text{mm} \\
+    dX       & = m \cdot dx'                                                                           \\
+    dX_{min} & = 21,28 \cdot 0,0028~\text{mm} = 0,06~\text{mm}                                         \\
+    dX_{max} & = 106,38 \cdot 0,0028~\text{mm} = 0,30~\text{mm}
+\end{align}
+
+
+\subsection{Genauigkeit des Streifenprojektionssystems}
+Als
+
+
+\section{Nutzung eines Drehtellers}
+
+
+\section{Evaluation der Kameraanzahl}
 
 \biblio
 \end{document}
