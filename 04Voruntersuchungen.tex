@@ -7,6 +7,27 @@
 \label{c:voruntersuchungen}
 Vor und während des Aufbaues des eigentlichen Messsystemes wurden einige Voruntersuchungen durchgeführt. Diese dienten dazu, die Machbarkeit des Systemes zu prüfen und die notwendigen Schritte zu ermitteln und zu optimieren. Hauptsächlich ging es hierbei um die Ermittlung der Kamerakonstanten und der Verzeichnung der Kamera. Auch wurde die Möglichkeit der Erstellung eines 3D-Modells durch Fokusstacking wurde untersucht. Die einzelnen Untersuchungen werden im Folgenden kurz vorgestellt.
 
+\section{Überprüfung der Kameraauflösung}
+
+\paragraph{These}
+Die Angabe der Auflösung in Pixeln täuscht bei günstigen Kameras über die tatsächliche Auflösung hinweg.
+
+\paragraph{Ziel}
+Die tatsächliche Auflösung der Kamera soll ermittelt werden. Hierbei spielt neben der reinen Anzahl der Pixel auch die Qualität des Objektives der Kameras eine Rolle.
+
+\paragraph{Vorgehen}
+Es wurden Bilder von einem Siemensstern unter verschiedenen Belichtungssituationen und Entfernungen aufgenommen. Anschließend wurde die Größe des Unschärfekreises ermittelt und die Linienauflösung und -größe hieraus nach \cite[S. 161]{luhmann} berechnet. Zum Vergleich wurden die Bilder auch mit einer hochwertigeren Kamera aufgenommen (Spiegelreflexkamera Canon EOS 77D mit EF-S 18-55mm 1:4-5.6 IS STM).
+
+\begin{align*}
+    \text{[Auflösungsvermögen]} & = \frac{\text{[Anzahl Segmente]}}{\pi \cdot \text{[Durchmesser Unschärfekreis]}} \\
+    \text{[Liniengröße]}        & = \frac{1}{\text{[Auflösungsvermögen]}}
+\end{align*}
+
+\paragraph{Ergebnis}
+
+Der Unschärfekreis war durchschnittlich 28 Pixel groß. Dies entspricht einer Linienauflösung von 292 Linien pro Millimeter, die Linienbreite beträgt 0,0034~mm beziehungsweise 2,44~Pixel. Die Linienauflösung ist mit etwa 80~\% der Sensorauflösung sehr hoch. Die Linienbreite in Pixeln kann im Maximalfall (beste Auflösung) 2 Pixel betragen, entsprechend je eines weißen und einen schwarzen Pixels pro Linie. Die Linienbreite in Pixeln entsprach damit auch der zum Vergleich genutzten Spiegelreflexkamera.
+
+
 \section{Änderung der Kamerakonstante durch Fokussierung}
 \label{sec:fokus}
 

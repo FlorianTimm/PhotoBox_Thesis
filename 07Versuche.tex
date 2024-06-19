@@ -9,21 +9,26 @@ Nach Abschluss der Konstruktion und des Aufbaus des Prototyps, wurden verschiede
 Um die Genauigkeit der 3D-Modell-Erzeugung zu überprüfen, wurden mehrere Prüfkörper mit dem Prototypen und mit einem kommerziellen Streifenprojektionssystem vermessen. Die Ergebnisse wurden miteinander verglichen.
 
 \subsection{Erwartete Genauigkeit}
+Die erwartete Genauigkeit kann auf verschiedenen Wegen berechnet werden. Grundlage ist meistens der Bildmaßstab. Dieser unterscheidet sich je nach Entfernung. Die Entfernung zum Objekt beträgt im Normalfall zwischen 10 und 50~cm. Der Bildmaßstab $m$ berechnet sich nach \cite[S. 171]{luhmann} wie folgt:
 
-Bildmaßstab:
 \begin{align}
     m       & = \frac{h}{c}                                  \\
     m_{min} & = \frac{100~\text{mm}}{4,7~\text{mm}} = 21,28  \\
     m_{max} & = \frac{500~\text{mm}}{4,7~\text{mm}} = 106,38
 \end{align}
 
-Genauigkeit bei 2px Bildmessgenauigkeit:
+Aufgrund des Bayersensors, welcher durch die Farbfilterung die reale Auflösung des Bildes halbiert und den übereinstimmenden Erfahrungen aus den Probemessungen wurde die Bildmessgenauigkeit mit 2~px abgeschätzt. Hieraus lässt sich dann zusammen mit den Bildmaßstab die erreichbare Genauigkeit berechnen \citep[S. 173]{luhmann}:
+
 \begin{align}
     dx'      & = 2~\text{px} = 0,0014~\frac{\text{mm}}{\text{px}} \cdot 2~\text{px} = 0,0028~\text{mm} \\
     dX       & = m \cdot dx'                                                                           \\
     dX_{min} & = 21,28 \cdot 0,0028~\text{mm} = 0,06~\text{mm}                                         \\
     dX_{max} & = 106,38 \cdot 0,0028~\text{mm} = 0,30~\text{mm}
 \end{align}
+
+Begrenzt wird dieser theoretische Wert des Kamerasensors jedoch durch die Linienauflösung der Optik. Mit einem Siemensstern wurde mit dem Raspberry Pi Camera Module 3 ein Unschärfekreis von 28 Pixeln Durchmesser gemessen. Dieses entspricht zwar einer hohen Linienauflösung von 292 Linien pro Millimeter, aber.
+
+
 
 
 \subsection{Genauigkeit des Streifenprojektionssystems}

@@ -32,3 +32,4 @@ ArUco-Markern
 Genauigkeitsuntersuchungen
 kamerasteuernden
 Genauigkeitsüberprüfung
+Unschärfekreis
