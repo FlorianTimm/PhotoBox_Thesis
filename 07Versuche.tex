@@ -17,18 +17,32 @@ Die erwartete Genauigkeit kann auf verschiedenen Wegen berechnet werden. Grundla
     m_{max} & = \frac{500~\text{mm}}{4,7~\text{mm}} = 106,38
 \end{align}
 
-Aufgrund des Bayersensors, welcher durch die Farbfilterung die reale Auflösung des Bildes halbiert und den übereinstimmenden Erfahrungen aus den Probemessungen wurde die Bildmessgenauigkeit mit 2~px abgeschätzt. Hieraus lässt sich dann zusammen mit den Bildmaßstab die erreichbare Genauigkeit berechnen \citep[S. 173]{luhmann}:
+Für die Bildmessgenauigkeit werden verschiedene Werte in der Literatur erwähnt, sie liegen je nach Messmethode zwischen 0,05 und 3~px, je nach Messmethode. Für Messung von CCCTs wird z.B. von \cite{soot2015} eine Genauigkeit von 0,1~px angegeben.
+Eigene, manuelle Messungen ergaben eine Genauigkeit von etwa 1,5~px. Vereinfacht wurde mit 1~px Genauigkeit gerechnet.
 
 \begin{align}
-    dx'      & = 2~\text{px} = 0,0014~\frac{\text{mm}}{\text{px}} \cdot 2~\text{px} = 0,0028~\text{mm} \\
-    dX       & = m \cdot dx'                                                                           \\
-    dX_{min} & = 21,28 \cdot 0,0028~\text{mm} = 0,06~\text{mm}                                         \\
-    dX_{max} & = 106,38 \cdot 0,0028~\text{mm} = 0,30~\text{mm}
+    dx'      & = 1~\text{px} = 0,0014~\frac{\text{mm}}{\text{px}} \cdot 12~\text{px} = 0,0014~\text{mm} \\
+    dX       & = m \cdot dx'                                                                            \\
+    dX_{min} & = 21,28 \cdot 0,0014~\text{mm} = 0,03~\text{mm}                                          \\
+    dX_{max} & = 106,38 \cdot 0,0014~\text{mm} = 0,15~\text{mm}
 \end{align}
 
-Begrenzt wird dieser theoretische Wert des Kamerasensors jedoch durch die Linienauflösung der Optik. Mit einem Siemensstern wurde mit dem Raspberry Pi Camera Module 3 ein Unschärfekreis von 28 Pixeln Durchmesser gemessen. Dieses entspricht zwar einer hohen Linienauflösung von 292 Linien pro Millimeter, aber.
+An diesem Wert muss dann noch der sogenannte Design-Faktor angebracht werden, dieser liegt bei Rundumverbänden zwischen 0,4 und 0,8, bei Stereoaufnahmen bei 1,5-3,0 \citep[S. 174]{luhmann}. Vereinfacht für eine grobe Abschätzung wird hier daher der Faktor weggelassen. Die erwartete Genauigkeit liegt damit deutlich unter einem Millimeter in der Lage.
 
+\begin{align}
+    s_{px; min}' & = dX_{min}
+    s_{px; max}' & = dX_{max}
+\end{align}
 
+Die Tiefeninformation ist von dem Verhältnis des Abstandes der Kameras zur Entfernung abhängig.
+
+\begin{align}
+    s_Z       & = m \cdot \frac{h}{b} \cdots s_{px}'                                                   \\
+    s_{Z;min} & = 21,28 \cdot \frac{10~\text{cm}}{30~\text{cm}}\cdot 0,03~\text{mm}  = 0,02~\text{mm}  \\
+    s_{Z;max} & = 106,38 \cdot \frac{50~\text{cm}}{30~\text{cm}} \cdot 0,15~\text{mm} = 0,25~\text{mm}
+\end{align}
+
+\todo{Überprüfen!}
 
 
 \subsection{Genauigkeit des Streifenprojektionssystems}

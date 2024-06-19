@@ -61,7 +61,7 @@ Vorteilhaft ist jedoch die Verwendung von codierten Zielmarken. Hier können die
 Eine Variante der automatischen Verknüpfungspunkte sind die sogenannten ArUco-Marker. Diese werden häufig für die Orientierung bei Augmented-Reality-Anwend\-ungen genutzt. OpenCV unterstützt die Erkennung dieser Marker. Sie werden als codierte Messmarken verwendet und können automatisch im Subpixelbereich erkannt werden. Jede Ecke kann hier einzeln identifiziert werden, sodass ein erkannter Marker vier Verknüpfungspunkte liefern kann. Nachteilig ist, dass die Ecken nicht eindeutig identifiziert werden können, wenn die Aufnahme unscharf ist.
 
 \subsubsection{Zielmarken nach Schneider}
-Beispielsweise von Agisoft Metashape werden Marker nach Schneider verwendet \citep{ccct}. Diese bestehen aus mehreren konzentrischen Kreisen. Die Mitte des Markers wird durch den Schnittpunkt der Kreise definiert.  Vorteilhaft ist jedoch, dass die Marker auch bei unscharfen Bildern erkannt werden können und ihr Zentrum auch manuell identifiziert werden kann.
+Beispielsweise von Agisoft Metashape werden Marker nach Schneider verwendet \citep{ccct}. Diese bestehen aus mehreren konzentrischen Kreisen und werden entsprechend auch als CCCT -- concentric circular coded target -- bezeichnet. Die Mitte des Markers wird durch den Schnittpunkt der Kreise definiert.  Vorteilhaft ist jedoch, dass die Marker auch bei unscharfen Bildern erkannt werden können und ihr Zentrum auch manuell identifiziert werden kann.
 
 \subsection{SIFT}
 Die SIFT-Methode liefert Verknüpfungspunkte aus Mustern auf den fotografierten Oberflächen. Es ist meist nicht notwendig explizit Marker an dem aufzunehmenden Objekt anzubringen, sofern seine Oberfläche nicht strukturlos ist (glatte weiße Wände etc.) oder in Bewegung ist.
