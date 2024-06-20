@@ -112,7 +112,7 @@ Die Steuerung per Taster ermöglicht das Suchen von Kameras, das Aufnehmen von B
 
 
 \subsubsection{Kamera-Steuerung}
-Die Raspberry Pi Zero W übernehmen die Steuerung der Kameras. Hierfür wurde ein Modul entwickelt, das die Kameras steuert, die Bilder aufnimmt und anschließend zur Verfügung stellt. Die Klassen sind in \autoref{img:uml_camera} dargestellt. Neben einer einfachen Benutzeroberfläche in Form einer über Flask bereitgestellten Website, erfolgt die Kommunikation bzw. Steuerung über eine REST-Schnittstelle zur Datenübertragung und eine Socket-Verbindung, die auf Broadcast-Nachrichten vom steuernden Raspberry Pi 4 wartet. Außerdem übernimmt der Raspberry Pi Zero W die Identifizierung von ArUco-Markern in den aufgenommenen Bildern.
+Die Raspberry Pi Zero W übernehmen die Steuerung der Kameras. Hierfür wurde ein Modul entwickelt das die Kameras steuert, die Bilder aufnimmt und anschließend zur Verfügung stellt. Die Klassen sind in \autoref{img:uml_camera} dargestellt. Neben einer einfachen Benutzeroberfläche in Form einer über Flask bereitgestellten Website, erfolgt die Kommunikation bzw. Steuerung über eine REST-Schnittstelle zur Datenübertragung und eine Socket-Verbindung, die auf Broadcast-Nachrichten vom steuernden Raspberry Pi 4 wartet. Außerdem übernimmt der Raspberry Pi Zero W die Identifizierung von ArUco-Markern in den aufgenommenen Bildern.
 
 \begin{figure}
     \centering
@@ -123,7 +123,7 @@ Die Raspberry Pi Zero W übernehmen die Steuerung der Kameras. Hierfür wurde ei
 
 
 \subsubsection{Desktop-Programm (Java)}
-Die Desktop-Software dient zur Steuerung des Systems und zur automatischen Übertragung der Daten an die \gls{SfM}-Software. Die Klassen sind in \autoref{img:uml_connector} dargestellt. Die Software wurde in Java geschrieben, um eine einfache Installation auf verschiedenen Betriebssystemen zu ermöglichen. Die Kommunikation erfolgt über eine Socket-Verbindung zum Raspberry Pi 4. Neben der Übertragung der Bilder an die \gls{SfM}-Software ermöglicht die Software das Starten von Aufnahmen. Ein Screenshot der Benutzeroberfläche ist in \autoref{img:screenshot_connector} dargestellt. Die Software unterstützt als \gls{SfM}-Software aktuell Agisoft Metashape und OpenDroneMap, jedoch ist die Schnittstelle so gestaltet, dass auch andere Software ergänzt werden könnte.
+Die Desktop-Software dient zur Steuerung des Systems und zur automatischen Übertragung der Daten an die \gls{SfM}-Software. Die Klassen sind in \autoref{img:uml_connector} dargestellt. Die Software wurde in Java geschrieben, um eine einfache Installation auf verschiedenen Betriebssystemen zu ermöglichen. Die Kommunikation erfolgt über eine Socket-Verbindung zum Raspberry Pi 4. Neben der Übertragung der Bilder an die \gls{SfM}-Software, ermöglicht die Software das Starten von Aufnahmen. Ein Screenshot der Benutzeroberfläche ist in \autoref{img:screenshot_connector} dargestellt. Die Software unterstützt als \gls{SfM}-Software aktuell Agisoft Metashape und OpenDroneMap, jedoch ist die Schnittstelle so gestaltet, dass auch andere Software ergänzt werden könnte.
 
 
 \begin{figure}
