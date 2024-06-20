@@ -34,7 +34,7 @@ An diesem Wert muss dann noch der sogenannte Design-Faktor angebracht werden, di
     s_{px; max}' & = dX_{max}
 \end{align}
 
-Die Tiefeninformation ist von dem Verhältnis des Abstandes der Kameras zur Entfernung abhängig.
+Die Genauigkeit der Tiefeninformationen ist von dem Verhältnis des Abstandes der Kameras zur Entfernung abhängig. Zwischen zwei Kamerareihen sind etwa 25~cm Abstand. Die Genauigkeit der Tiefeninformationen kann daher wie folgt berechnet werden \citep[S. 174]{luhmann}:
 
 \begin{align}
     s_Z       & = m \cdot \frac{h}{b} \cdots s_{px}'                                                   \\
@@ -42,11 +42,22 @@ Die Tiefeninformation ist von dem Verhältnis des Abstandes der Kameras zur Entf
     s_{Z;max} & = 106,38 \cdot \frac{50~\text{cm}}{30~\text{cm}} \cdot 0,15~\text{mm} = 0,25~\text{mm}
 \end{align}
 
-\todo{Überprüfen!}
+Die erwartete Genauigkeit und auch die Auflösung der Kameras liegt also im Bereich eines Fünftel Millimeters.
 
 
-\subsection{Genauigkeit des Streifenprojektionssystems}
-Als
+\subsection{Vergleichsmessung mit Streifenprojektionssystem}
+Als Vergleichsmessung wurden die Objekte mit einem Zeiss GOM ATOS 5 aufgemessen. Hierbei handelt es sich um ein Streifenprojektionssystem, welches hauptsächlich in der Industrie zur Vermessung von Bauteilen eingesetzt wird. Streifenprojektionssysteme arbeiten auch photogrammetrisch, haben aber den Vorteil, das sie durch das Projektionssystem auch texturarme Objekte erfassen können. Wie der Name bereits andeutet, wird ein Streifenmuster auf das Objekt projiziert, welches dann von mindestens einer Kamera aufgenommen wird. Projektor und Kamera sind auf einer festen Basis montiert. \citep[S. 581f]{luhmann}
+
+Bei dem verwendeten System werden zwei Kameras eingesetzt, die sich ein massives Gehäuse mit dem mittig angeordneten Projektor teilen. Bei dem verwendeten Messvolumen und Objektentfernung beträgt die Genauigkeit etwa \todo{Wert}. Aufgrund der deutlich höheren erwarteten Genauigkeit des Streifenprojektionssystems, kann davon ausgegangen werden, dass die Messungen deutlich genauer sind als die des Prototypen und als wahre Werte angenommen werden können.
+
+\subsection{Ergebnisse}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/moai_fehler.jpg}
+    \caption{Differenzbild des Moai (rot: Fehler größer 1 mm)}
+    \label{fig:differenz_moia}
+\end{figure}
 
 
 \section{Nutzung eines Drehtellers}
