@@ -6,9 +6,11 @@
 Nach Abschluss der Konstruktion und des Aufbaus des Prototyps, wurden verschiedene Untersuchungen durchgeführt, um die Genauigkeit des Systems zu überprüfen und die Anzahl der Kameras zu evaluieren. Hierzu wurden unter anderem Vergleichsmessungen mit verschiedenen Systemen durchgeführt.
 
 \section{Genauigkeitsüberprüfung des 3D-Modelles}
+\label{s:genauigkeitsueberpruefung}
 Um die Genauigkeit der 3D-Modell-Erzeugung zu überprüfen, wurden mehrere Prüfkörper mit dem Prototypen und mit einem kommerziellen Streifenprojektionssystem vermessen. Die Ergebnisse wurden miteinander verglichen.
 
 \subsection{Erwartete Genauigkeit}
+\label{ss:erwartete_genauigkeit}
 Die erwartete Genauigkeit kann auf verschiedenen Wegen berechnet werden. Grundlage ist meistens der Bildmaßstab. Dieser unterscheidet sich je nach Entfernung. Die Entfernung zum Objekt beträgt im Normalfall zwischen 10 und 50~cm. Der Bildmaßstab $m$ berechnet sich nach \cite[S. 171]{luhmann} wie folgt:
 
 \begin{align}
@@ -51,6 +53,9 @@ Als Vergleichsmessung wurden die Objekte mit einem Zeiss GOM ATOS 5 aufgemessen.
 Bei dem verwendeten System werden zwei Kameras eingesetzt, die sich ein massives Gehäuse mit dem mittig angeordneten Projektor teilen. Bei dem verwendeten Messvolumen und Objektentfernung beträgt die Genauigkeit etwa \todo{Wert}. Aufgrund der deutlich höheren erwarteten Genauigkeit des Streifenprojektionssystems, kann davon ausgegangen werden, dass die Messungen deutlich genauer sind als die des Prototypen und als wahre Werte angenommen werden können.
 
 \subsection{Ergebnisse}
+Die modellierte Oberfläche aus dem Streifenprojektionssystem und aus derm Prototypen wurden in Meshlab aufeinandergelegt und die Differenz berechnet. Die Differenzbild ist in \autoref{fig:differenz_moia} dargestellt. Es ist zu erkennen, dass einige Bereiche deutlich von der erwarteten Genauigkeit abweichen. Die größten Abweichungen sind im Bereich des Kopfes und des Bauches zu erkennen. Die Abweichungen im Bereich des restlichen Körpers sind deutlich geringer und liegen im Bereich von 0,1~mm. Die Abweichungen sind auf die schlechtere Erfassung der nach unten gerichteten Flächen zurückzuführen. Hier wurde die Oberfläche stark interpoliert.
+
+Die Abweichungen sind zwar größer, als mittels der Abschätzung in \autoref{ss:erwartete_genauigkeit} berechneten Werte, liegt aber in der Größenordnung dieser und auch der Genauigkeit eines 3D-Modelles, welches photogrammetrisch mit einer Spiegelreflexkamera Nikon D90 aufgenommen wurde. Die Ergebnisse sind in \autoref{tab:vergleich_erg} zusammengefasst.
 
 \begin{figure}
     \centering
@@ -59,11 +64,31 @@ Bei dem verwendeten System werden zwei Kameras eingesetzt, die sich ein massives
     \label{fig:differenz_moia}
 \end{figure}
 
-
-\section{Nutzung eines Drehtellers}
+\begin{table}
+    \caption{Ergebnisse der Genauigkeitsüberprüfung}
+    \label{tab:vergleich_erg}
+    \begin{tabular}{l|r|r|r}
+        \toprule
+                  & Durchschnittliche & Standard-  & Maximaler \\
+                  & Abweichung        & abweichung & Fehler    \\
+        \midrule
+        Gesamt    & 0,37~mm           & 1,09~mm    & 11,6~mm   \\
+        gefiltert & 0,20~mm           & 0,72~mm    & 1,9~mm    \\
+        \midrule
+        Nikon D90 & 0,27~mm           & 0,19~mm    & 1,2~mm    \\
+        \bottomrule
+    \end{tabular}
+\end{table}
 
 
 \section{Evaluation der Kameraanzahl}
+Zur Abschätzung, wie viele Kameras für eine gute Genauigkeit notwendig sind, wurden verschiedene Konfigurationen getestet. Hierzu wurde die Aufnahme des Moai aus \autoref{s:genauigkeitsueberpruefung} genutzt und hier in Agisoft Metashape verschiedene Kameras deaktiviert und das 3D-Modell neu berechnet. Die Ergebnisse wurden wie \autoref{s:genauigkeitsueberpruefung} mit dem Streifenprojektionssystem verglichen.
+\todo{Ergebnisse}
+
+
+\section{Nutzung eines Drehtellers}
+Statt mehr Kameras kann auch ein Drehteller dafür sorgen, dass die Abdeckung verbessert wird.
+\todo{fortführen}
 
 \biblio
 \end{document}
