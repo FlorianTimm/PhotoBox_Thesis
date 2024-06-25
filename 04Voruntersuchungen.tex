@@ -27,15 +27,17 @@ Es wurden Bilder von einem Siemensstern unter verschiedenen Belichtungssituation
 
 Der Unschärfekreis war durchschnittlich 28 Pixel groß. Dies entspricht einer Linienauflösung von 292 Linien pro Millimeter, die Linienbreite beträgt 0,0034~mm beziehungsweise 2,44~Pixel. Die Linienauflösung ist mit etwa 80~\% der Sensorauflösung sehr hoch. Die Linienbreite in Pixeln kann im Maximalfall (beste Auflösung) 2 Pixel betragen, entsprechend je eines weißen und einen schwarzen Pixels pro Linie. Die Linienbreite in Pixeln entsprach damit auch der zum Vergleich genutzten Spiegelreflexkamera.
 
+\todo{Siemenssternbild einfügen}
+
 
 \section{Änderung der Kamerakonstante durch Fokussierung}
 \label{sec:fokus}
 
 \paragraph{These}
-Die Kamerakonstante einer Kamera ändert sich durch die Fokussierung. Bei gleich eingestellter Objektdistanz ist die Kamerakonstante näherungsweise gleich sein.
+Die Kamerakonstante einer Kamera ändert sich durch die Fokussierung. Bei gleich eingestellter Objektdistanz ist die Kamerakonstante näherungsweise gleich.
 
 \paragraph{Ziel}
-In \citet[S. 59]{kraus} wird eine Formel (siehe \autoref{eq:kraus_fokus}) für die \Gls{Bildweite} b in Abhängigkeit des Gegenstandsweite g gegeben. Näherungsweise entspricht die Bildweite entspricht der Kamerakonstante \citep[S. 59]{kraus}. Die Nutzung der Formel als Näherungswert soll überprüft werden und eine optimierte Formel für die Raspberry Pi Kamera ermittelt werden.
+In \citet[S. 59]{kraus} wird eine Formel (siehe \autoref{eq:kraus_fokus}) für die \Gls{Bildweite} $b$ in Abhängigkeit des Gegenstandsweite $g$ gegeben. Näherungsweise entspricht die Bildweite der Kamerakonstante \citep[S. 59]{kraus}. Die Nutzung der Formel als Näherungswert soll überprüft werden und eine optimierte Formel für die Raspberry-Pi-Kamera ermittelt werden.
 
 \begin{align}
     \frac{1}{f} = \frac{1}{g} + \frac{1}{b}
@@ -43,7 +45,7 @@ In \citet[S. 59]{kraus} wird eine Formel (siehe \autoref{eq:kraus_fokus}) für d
 \end{align}
 
 \paragraph{Vorgehen}
-Die Änderungen wurden in einem Versuch beobachtet. Hierzu wurde der Raspberry Pi Zero mit montierter Kamera fest vor einem Charuco-Kalibriermuster platziert. Dieser ermöglicht auch bei unscharfen Bildern noch eine gute automatische Erkennung der zu beobachtenden Punkte. Es wurden je 11 Bilder mit unterschiedlichen Fokussierungen von $2~\text{m}$ bis  $10~\text{cm}$ aufgenommen. Dieser Vorgang wurde insgesamt viermal wiederholt, um auch die Wiederholungsgenauigkeit zu ermitteln. Die Bilder wurden anschließend mit einem Python-Script unter Nutzung von OpenCV ausgewertet. Hierbei wurde die relative Veränderung der Kamerakonstante der Kamera ermittelt und mit dem erwarteten Wert verglichen. Die relativen Änderungen wurden auf eine Fokusdistanz von $20~\text{cm}$ (entspricht einer Kamerakonstante von $5~\text{dpt}$) normiert. Relative Angaben wurden genutzt, da noch keine Kamerakonstante zu dem Zeitpunkt vorlag oder angenommen werden sollte.
+Die Änderungen wurden in einem Versuch beobachtet. Hierzu wurde der Raspberry Pi Zero mit montierter Kamera fest vor einem ChArUco-Kalibriermuster platziert. Das Kalibriermuster besteht aus einer Kombination aus ArUco-Markern und einem Schachbrettmuster. \todo{Bild einfühgen und verweisen} Durch das Schachbrettmuster ermöglicht es auch bei unscharfen Bildern noch eine gute automatische Erkennung der zu beobachtenden Punkte. Es wurden je 11 Bilder mit unterschiedlichen Fokussierungen von $2~\text{m}$ bis  $10~\text{cm}$ aufgenommen. Dieser Vorgang wurde insgesamt viermal wiederholt, um auch die Wiederholungsgenauigkeit zu ermitteln. Die Bilder wurden anschließend mit einem Python-Script unter Nutzung von OpenCV ausgewertet. Hierbei wurde die relative Veränderung der Kamerakonstante der Kamera ermittelt und mit dem erwarteten Wert verglichen. Die relativen Änderungen wurden auf eine Fokusdistanz von $20~\text{cm}$ (entspricht einer Kamerakonstante von $5~\text{dpt}$) normiert. Relative Angaben wurden genutzt, da noch keine Kamerakonstante zu dem Zeitpunkt vorlag oder angenommen werden sollte.
 
 \paragraph{Ergebnis}
 Die Ergebnisse sind in \autoref{img:fokus_faktor} dargestellt. Es zeigt sich, dass die Änderungen der Kamerakonstante durch die Fokussierung linear zu der Dioptrienzahl (Kehrwert der Gegenstandsweite) sind. Ein lineares Verhältnis ergibt sich auch mit der im Datenblatt angegebenen Brennweite von $4,74~\text{mm}$, jedoch eine etwas flachere Gerade (blau). Die ausgleichende Gerade (blau) ergab eine Brennweite von $6,97~\text{mm}$. Die Abweichung von $2,23~\text{mm}$ entspricht einer Abweichung von $47\%$, was als unrealistisch hoch eingeschätzt wird. Hier scheinen sich weitere Effekte bemerkbar zu machen, die noch nicht berücksichtigt wurden. Es wurde daher auch die Verzeichnung weiter untersucht.
@@ -57,7 +59,7 @@ Die Ergebnisse sind in \autoref{img:fokus_faktor} dargestellt. Es zeigt sich, da
 
 
 
-\section{Änderung der Verzeichnung mittels Charuco-Board}
+\section{Änderung der Verzeichnung durch Fokussierung}
 
 \paragraph{These}
 Durch die Verschiebung der Linsen beim Fokussieren verändert sich auch die Verzeichnung der Kamera.
@@ -74,12 +76,13 @@ Die Ergebnisse waren nicht zufriedenstellend. Es zeigte sich, dass die Verzeichn
 
 \section{3D-Modell aus Fokusstacking}
 \label{sec:fokusstacking}
+\todo{Berechnung Schärfentiefe / Notwendige Fokusschritte für Abdeckung 0,1-1m}
 
 \paragraph{These}
-Durch Fokusstacking kann ein besseres 3D-Modell erstellt werden.
+Die Schärfentiefe der Kameras ist gering. Durch Fokusstacking kann ein besseres 3D-Modell erstellt werden.
 
 \paragraph{Ziel}
-Es soll geprüft werden, ob durch Fokusstacking die Qualität des 3D-Modell verbessert werden kann. Hierzu wird ein 3D-Modell aus einem Fokusstacking erstellt und mit einem normalen 3D-Modell verglichen.
+Es wird vermutet, dass die geringe Schärfentiefe die Qualität der 3D-Modelle begrenzt. Daher soll geprüft werden, ob durch Fokusstacking die Qualität des 3D-Modell verbessert werden kann. Hierzu wird ein 3D-Modell aus einem Fokusstacking erstellt und mit einem normalen 3D-Modell verglichen.
 
 \paragraph{Vorgehen}
 \begin{itemize}

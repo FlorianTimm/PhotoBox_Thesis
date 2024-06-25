@@ -33,3 +33,4 @@ Genauigkeitsuntersuchungen
 kamerasteuernden
 Genauigkeitsüberprüfung
 Unschärfekreis
+Stereopaar

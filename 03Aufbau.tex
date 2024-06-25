@@ -12,9 +12,9 @@ Aus diesen Anforderungen ergeben sich die einzelnen Abschnitte dieses Kapitels.
 \section{Kameras}
 Als Kameras wurde das Raspberry Pi Camera Module 3 verwendet, welches jeweils von einem Raspberry Pi Zero W gesteuert wird. Im Vergleich zu anderen günstigen Kameras wie Webcams oder der ESP32 CAM haben die Kameras eine hohe geometrische Auflösung von 12 Megapixeln und dennoch mit $1,4~\mu m$ relativ große Pixel \citep{raspi_cam_datasheet}, was im subjektiven Eindruck eine sehr gute Bildqualität ergibt.
 
-Nachteil und Vorteil zugleich ist, dass die Kamera über einen Autofokus verfügt, der aber auch elektronisch gesteuert manuell fokussieren kann. Dieser verschlechtert die Stabilität der inneren Orientierung (vgl. \autoref{s:innereorientierung}) weiter und wurde daher auch besonders im \todo{Verweis zu Fokusexperimenten} analysiert. Da die Bilder aber Nahbereich zwischen $20$ und $70~\text{cm}$ benötigt werden, ist hier die Schärfentiefe niedrig. Der elektronische Fokus, eine wiederholgenaue und damit mathematisch modellierbare Fokussierung vorausgesetzt, ermöglicht hier, Fokusstacking zu nutzen um den Schärfebereich zu vergrößern.
+Nachteil und Vorteil zugleich ist, dass die Kamera über einen Autofokus verfügt, der aber auch elektronisch gesteuert manuell fokussieren kann. Dieser verschlechtert die Stabilität der inneren Orientierung (vgl. \autoref{s:innereorientierung}) weiter und wurde daher auch besonders im \autoref{c:voruntersuchungen} analysiert. Da die Bilder im Makrobereich zwischen $10$ und $80~\text{cm}$ aufgenommen werden und die Kameras keine Veränderung der Blende ermöglichen, ist die Schärfentiefe vergleichsweise niedrig. Hierauf wird in den Untersuchungen in \autoref{sec:fokusstacking} speziell eingegangen.
 
-Weiterer Vorteil der Lösung mit einzelnen Raspberry Pi ist es, dass hierdurch bereits die einzelnen Kameraeinheiten Berechnungen wie das Identifizieren von Passpunkten übernehmen könnten. Außerdem ist durch die Nutzung von kabellosen Netzwerkverbindungen zur Steuerung das System skalierbar im Sinne der Anzahl der Kameras aber auch der Abstände zwischen den Kameras.
+Weiterer Vorteil der Lösung mit einzelnen Raspberry Pi ist es, dass hierdurch bereits die einzelnen Kameraeinheiten Berechnungen wie das Identifizieren von Passpunkten übernehmen können. Durch die Parallelisierung dieses Schrittes ist weniger Berechnungszeit zwischen den Aufnahmen zu erwarten. Außerdem ist durch die Nutzung von kabellosen Netzwerkverbindungen zur Steuerung das System skalierbar im Sinne der Anzahl der Kameras aber auch der Abstände zwischen den Kameras.
 
 \section{Rahmen}
 
@@ -39,7 +39,7 @@ Der Rahmen muss möglichst stabil sein, damit die Kameras sich nicht in ihrer La
 
 Als mögliche Materialien kamen Holz, Stahl und Aluminium in Frage. Aufgrund der einfachen Bearbeitung und der genormten Profile, wurde sich für Aluminiumprofile entschieden. Diese gibt es in verschiedenen Ausführungen mit Nuten an den Seitenflächen, so dass eine einfache Montage, aber auch eine Demontage zu Transportzwecken, möglich wird. Außerdem sind diese sehr stabil bei leichtem Gewicht. Durch eine Konstruktion mit Eckwürfeln sowie dem Einbau von dreieckigen Strukturen und Platten, die Scheibenwirkung haben, wurde die Stabilität der Verbindungen erhöht. \autoref{img:alurahmen} zeigt den fertigen Rahmen vor Einbau der Platten und der Technik.
 
-Die Kameras wurden mit einem $90^\circ$-Winkel montiert, um diese weiterhin noch vertikal schwenken zu können. \autoref{img:aluwinkel} zeigt einen der Winkel, der an den Aluprofilen befestigt ist (noch ohne entsprechende Befestigungsbohrungen).
+Die Kameras wurden mit einem $90^\circ$-Winkel am Rahmen montiert, um diese weiterhin noch vertikal schwenken zu können. \autoref{img:aluwinkel} zeigt einen der Winkel, der an den Aluprofilen befestigt ist (noch ohne entsprechende Befestigungsbohrungen).
 
 
 \section{Beleuchtung}
@@ -62,7 +62,7 @@ Die Kameras wurden mit einem $90^\circ$-Winkel montiert, um diese weiterhin noch
     \caption{Beleuchtung} %Bildunterschrift
 \end{figure}
 
-Um möglichst gute Bilder zu erzeugen, sollte das Objekt gut ausgeleuchtet sein. Eine dunkle Umgebung verlängert die Belichtungszeit, wodurch die Gefahr von unscharfen Aufnahmen steigt. Dunkele Bereiche (ungleichmäßige Ausleuchtung) verursachen verstärktes Rauschen in diesen Bildbereichen. Daher soll das System eine gleichmäßige Ausleuchtung ermöglichen. Problematisch ist hierbei, dass die Kameras ggf. auch die Lichtquellen mit im Bildbereich haben können, wodurch Linsenreflexionen oder Ausbrennen der Bildbereiche möglich sind. Außerdem störend sind fremde Lichtquellen, die Schatten werfen oder die Belichtung der Kameras beeinflussen können.
+Um möglichst gute Bilder zu erzeugen, sollte das Objekt ausreichend und gleichmäßig ausgeleuchtet sein. Eine dunkle Umgebung verlängert die Belichtungszeit, wodurch die Gefahr von unscharfen Aufnahmen steigt. Schlecht ausgeleuchtete Bereiche (ungleichmäßige Ausleuchtung) verursachen verstärktes Rauschen in diesen Bildbereichen. Daher soll das System eine gleichmäßige Ausleuchtung ermöglichen. Problematisch ist hierbei, dass die Kameras ggf. auch die Lichtquellen mit im Bildbereich haben können, wodurch Linsenreflexionen oder Ausbrennen der Bildbereiche möglich sind. Außerdem störend sind fremde Lichtquellen, die Schatten werfen oder die Belichtung der Kameras beeinflussen können.
 
 Es wurde sich zur Beleuchtung für einzeln steuerbare LED-Lichtstreifen entschieden (siehe \autoref{img:led_streifen}). Diese können einfach an den Aluprofilen montiert werden und ermöglichen es, einzelne Bereiche und so ggf. blendende Bereiche abzuschalten. Außerdem können hiermit auch verschiedene Lichtfarben eingestellt werden, um Statusmeldungen zu geben (siehe \autoref{img:led_farbig}) oder ggf. die Farbgebung des Objektes zu beeinflussen. Die Steuerung erfolgt über einen Raspberry Pi 4, der auch die Steuerung der Kameras übernimmt.
 
@@ -87,7 +87,7 @@ Die Stromversorgung der Beleuchtung erfolgt über ein 12-V-Netzteil mit $3,5~\te
 Beim WLAN-Router war ein entsprechendes USB-Netzteil mitgeliefert.
 
 \section{Kommunikation und Datenübertragung}
-Die Kommunikation zwischen den Raspberry Pi erfolgt über WLAN. Vorteil dieser Lösung ist, dass hier keine weiteren Leitungen außer der Stromversorgung zu den einzelnen Raspberry Pi Zero W benötigt wird und es auch möglich wäre, die gleiche Hard- und Software auch für ein größeres System ohne Änderungen zu nutzen. Nachteilig ist die Verbindungsgeschwindigkeit, gerade im Hinblick auf die Synchronisierung der Kameras. Diese Problematik soll aber durch entsprechende Programmierung der Software möglichst klein gehalten werden.
+Die Kommunikation zwischen den Raspberry Pi erfolgt über WLAN. Vorteil dieser Lösung ist, dass hier keine weiteren Leitungen außer der Stromversorgung zu den einzelnen Raspberry Pi Zero W benötigt wird und es auch möglich wäre, die gleiche Hard- und Software für ein größeres System ohne Änderungen zu nutzen. Nachteilig ist die Verbindungsgeschwindigkeit, gerade im Hinblick auf die Synchronisierung der Kameras. Diese Problematik soll aber durch entsprechende Programmierung der Software möglichst klein gehalten werden.
 
 Als weitere Datenleitungen wird eine Steuerleitung für die LED-Streifen benötigt. Über diese erfolgt die Steuerung der einzelnen LED-Gruppen. Auch hier wurde wieder Klingeldraht verwendet.
 

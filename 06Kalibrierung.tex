@@ -5,27 +5,29 @@
 
 \chapter{Systemkalibrierung}
 
-Für die Berechnung von 3D-Modellen mit bekannten Maßstab sind einige Parameter zu bestimmen. Neben der Bestimmung der inneren Orientierung der Kameras ist auch eine Realisierung eines Maßstabes notwendig. Auf die notwendigen Schritte und die möglichen Fehlerquellen wird in diesem Kapitel eingegangen.
+Für die Berechnung von 3D-Modellen mit korrekter Skalierung sind einige Parameter zu bestimmen. Neben der Bestimmung der inneren Orientierung der Kameras ist auch eine Realisierung eines Maßstabes notwendig. Auf die notwendigen Schritte und die möglichen Fehlerquellen wird in diesem Kapitel eingegangen.
 
-\begin{itemize}
-    \item Kameramodellierung
-    \item Kamerakalibrierung
-    \item Kameraausrichtung
-    \item Farbkalibrierung
-\end{itemize}
+\begin{comment}
+\item Kameramodellierung
+\item Kamerakalibrierung
+\item Kameraausrichtung
+\item Farbkalibrierung
+\end{comment}
 
 \section{Maßstab und Passpunkte}
 \label{sec:passpunkte}
-Der Maßstab eines rein photogrammetrisch bestimmten 3D-Modelles ohne bekannte Längen ist nicht bekannt. Daher werden mindestens Referenzen in Form einer bekannten Länge benötigt, um den Maßstab zu bestimmen. Alternativ können auch Passpunkte mit bekannten Koordinaten verwendet werden, um den Maßstab zu bestimmen. In diesem Fall wurde sich für eine Kombination aus beiden Verfahren entschieden. Die festen Passpunkte in Form von ArUco-Markern wurden am Rahmen fest montiert, diese sollen später als dauerhafte Realisierung des Maßstabes dienen. Außerdem wurden kalibrierte Maßstäbe im Objektraum verteilt, welche dann für die Bestimmung der Koordinaten der Passpunkte den Maßstab bilden. Zur Unterstützung der Bildverknüpfung wurden weitere Punkte in Form von Schneider-Markern im Bildbereich verteilt. Anschließend wurden Bilder vom gesamten System mit  einer externen Kamera mit festen Einstellungen aufgenommen. Diese Bilder wurden dann in Agisoft Metashape verarbeitet und Koordinaten der Passpunkte bestimmt. Über manuell in Agisoft bestimmte Punkte am Boden des Systems wurde das System so transformiert, dass der Boden die XY-Ebene darstellt.
+Die Skalierung eines rein photogrammetrisch bestimmten 3D-Modelles ist nicht bekannt. Daher werden mindestens Referenzen in Form einer bekannten Länge benötigt, um den Maßstab zu bestimmen. Alternativ können auch Passpunkte mit bekannten Koordinaten verwendet werden, um die Skalierung zu bestimmen.
+
+In diesem Fall wurde sich für eine Kombination aus beiden Verfahren entschieden. Die festen Passpunkte in Form von ArUco-Markern wurden am Rahmen fest montiert, diese sollen später als dauerhafte Realisierung des Maßstabes dienen. Außerdem wurden kalibrierte Maßstäbe im Objektraum verteilt, welche dann für die Bestimmung der Koordinaten der Passpunkte den Maßstab bilden. Zur Unterstützung der Bildverknüpfung wurden weitere Punkte in Form von Schneider-Markern im Bildbereich verteilt. Anschließend wurden Bilder vom gesamten System mit  einer externen Kamera mit festen Einstellungen aufgenommen. Diese Bilder wurden dann in Agisoft Metashape verarbeitet und Koordinaten der Passpunkte bestimmt. Über manuell in Agisoft bestimmte Punkte am Boden des Systems wurde das System so transformiert, dass der Boden die XY-Ebene darstellt.
 
 \section{Kamerakalibrierung}
-Die verwendeten Kameras weisen keine stabile innere Orientierung auf. Daher ist eine Kalibrierung in Form von festen Parametern nicht möglich. Daher wurde die Annahme verfolgt, dass die innere Orientierung linear von der Fokussierung abhängig ist und eine Formel zur Bestimmung von Näherungswerten für die innere Orientierung in Abhängigkeit der Fokussierung ermittelt.
+Die verwendeten Kameras weisen keine stabile innere Orientierung auf. Daher ist eine Kalibrierung in Form von festen Parametern nicht möglich. Es wurde die Annahme verfolgt, dass die innere Orientierung linear von der Fokussierung abhängig ist und eine Formel zur Bestimmung von Näherungswerten für die innere Orientierung in Abhängigkeit der Fokussierung ermittelt.
 
 Die eigentliche Bestimmung der inneren Orientierung erfolgt im Betrieb in Form einer Simultankalibrierung (vgl: \autoref{s:innereorientierung}). Die Näherungswerte sollen dabei als Startwerte dienen.
 
 \paragraph{Vorgehen}
 
-Es wurden mit fünf verschiedenen Fokussierungen mit jeweils 24 Raspberry-Pi-Kameras Bilder aufgenommen und die Bilder in Agisoft Metashape mittels ArUco-Markern orientiert, dessen Position aus \autoref{sec:passpunkte} bekannt ist. Außerdem wurden etwa 100 Schneider-Marker im Bildbereich der Kameras verteilt und als Verknüpfungspunkte benutzt. Es wurden jeweils in Metashape alle Bilder mit der gleichen Fokussierung als eine Kamera angenommen und die innere Orientierung bestimmt. Anschließend wurden alle Kameras nochmal einzeln ausgeglichen. Durch dieses zweistufige Vorgehen sollte bewirkt werden, dass die Näherungswerte schrittweise verbessert werden. Ein einstufiges Vorgehen ohne Näherungswerte führte zu sehr offensichtlich falschen Werten. Die innere Orientierung wurde in Form von Brennweite, Bildhauptpunktverschiebung und Verzeichnung ermittelt und die Ergebnisse wurden in einem Box-Whisker-Plot dargestellt und eine ausgleichende Gerade ermittelt.
+Es wurden mit fünf verschiedenen Fokussierungen mit jeweils 24 Raspberry-Pi-Kameras Bilder aufgenommen und die Bilder in Agisoft Metashape mittels ArUco-Markern orientiert, dessen Position aus \autoref{sec:passpunkte} bekannt ist. Außerdem wurden etwa 100 Schneider-Marker im Bildbereich der Kameras verteilt und als Verknüpfungspunkte benutzt. Es wurden jeweils in Metashape alle Bilder mit der gleichen Fokussierung als eine Kamera angenommen und die innere Orientierung bestimmt. Anschließend wurden alle Kameras nochmal einzeln ausgeglichen. Durch dieses zweistufige Vorgehen sollte bewirkt werden, dass die Näherungswerte schrittweise verbessert werden. Ein einstufiges Vorgehen ohne Näherungswerte führte zu falschen Werten. Die innere Orientierung wurde in Form von Brennweite, Bildhauptpunktverschiebung und Verzeichnung ermittelt und die Ergebnisse wurden in einem Box-Whisker-Plot dargestellt und eine ausgleichende Gerade ermittelt.
 
 \paragraph{Ergebnis}
 

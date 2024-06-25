@@ -1,6 +1,6 @@
 {
     "files.exclude": {
-        "*.aux": true,
+        "**/*.aux": true,
         "*.lof": true,
         "*.log": true,
         "*.lot": true,
@@ -12,7 +12,14 @@
         "*.dvi": true,
         "*.fdb_latexmk": true,
         "*.fls": true,
-        "*.out.ps": true
+        "*.out.ps": true,
+        "*.acr": true,
+        "*.acn": true,
+        "*.alg": true,
+        "*.glg": true,
+        "*.glo": true,
+        "*.gls": true,
+        "*.ist": true,
     },
     "latex-workshop.latex.recipe.default": "lastUsed",
     "latex-workshop.view.pdf.viewer": "tab",
