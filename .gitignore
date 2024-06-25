@@ -22,4 +22,4 @@ texput.log
 *.gls
 *.bibtex
 .fuse_hidden*
-.synctex(busy)
+*.synctex(busy)
