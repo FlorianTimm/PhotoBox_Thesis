@@ -34,3 +34,4 @@ kamerasteuernden
 Genauigkeitsüberprüfung
 Unschärfekreis
 Stereopaar
+SIRF
