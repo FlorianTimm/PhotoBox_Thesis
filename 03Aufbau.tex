@@ -10,11 +10,34 @@ Um Ungenauigkeiten durch Bewegungen zu verhindern, müssen die Kameras möglichs
 Aus diesen Anforderungen ergeben sich die einzelnen Abschnitte dieses Kapitels.
 
 \section{Kameras}
-Als Kameras wurde das Raspberry Pi Camera Module 3 verwendet, welches jeweils von einem Raspberry Pi Zero W gesteuert wird. Im Vergleich zu anderen günstigen Kameras wie Webcams oder der ESP32 CAM haben die Kameras eine hohe geometrische Auflösung von 12 Megapixeln und dennoch mit $1,4~\mu m$ relativ große Pixel \citep{raspi_cam_datasheet}, was im subjektiven Eindruck eine sehr gute Bildqualität ergibt.
+Als Kameras wurde das Raspberry Pi Camera Module 3 verwendet, welches jeweils von einem Raspberry Pi Zero W gesteuert wird. Im Vergleich zu anderen günstigen Kameras wie Webcams oder der ESP32 CAM haben die Kameras eine hohe geometrische Auflösung von 12 Megapixeln und dennoch mit $1,4~\mu m$ relativ große Pixel \citep{raspicamdatasheet}, was im subjektiven Eindruck eine sehr gute Bildqualität ergibt.
+
+Andere Kameramodule für den Raspberry Pi wurden in \autoref{tab:vergleich_kameras} verglichen. Das Camera Module v1 entfiel als Möglichkeit, da die Kamera einen Mindestabstand von einem Meter aufwies. Hiermit müsste der Aufnahmebereich für die Objekte auf über zwei Meter vergrößert werden. Das HQ- und GS-Kameras haben kein Objektiv mitgeliefert, sodass hier die Kosten für ein Objektiv hinzukommen würden. Das Camera Module v2 hat eine geringere Auflösung und auch eine geringere Bildqualität bei gleichem Preis wie das Modul v3. Außerdem ist die Fokussierung nur manuell möglich, dass die Automatisierung desselben verhindert. Das Camera Module v3 Wide hat zwar ein größeres Sichtfeld, jedoch damit auch eine geringere Auflösung auf dem Objekt. Vorteil ist der geringe Mindestabstand. Das Camera Module v3 bot somit den besten Kompromiss.
+
+\begin{table}
+    \centering
+    \label{tab:vergleich_kameras}
+    \caption{Vergleich der möglichen Kameramodule für den Raspberry Pi \citep{raspicamdatasheet}}
+    \resizebox{\textwidth}{!}{%
+        \begin{tabular}{l|l|l|l|ll|l|l|l|}
+            \cline{2-9}
+                                                                & \textbf{Preis}               & \textbf{\begin{tabular}[c]{@{}l@{}}Sensor-\\ auflösung\end{tabular}} & \textbf{\begin{tabular}[c]{@{}l@{}}Pixel\\ {[}µm{]}\end{tabular}} & \multicolumn{2}{l|}{\textbf{Fokus}}                                         & \textbf{f {[}mm{]}}                                         & \textbf{Sichtfeld}       & \textbf{Blende}                                         \\ \hline
+            \multicolumn{1}{|l|}{\textbf{Camera Module v1}}     & \$25                         & 2592 × 1944                                                          & 1,40                                                              & \multicolumn{1}{l|}{\cellcolor[HTML]{FFCCC9}fix}                            & \cellcolor[HTML]{FFCCC9}{\color[HTML]{000000} 1 m - $\inf$} & 3,60                     & 54° x 41°                & F2.9                         \\ \hline
+            \multicolumn{1}{|l|}{\textbf{Camera Module v2}}     & \$25                         & 3280 × 2464                                                          & 1,12                                                              & \multicolumn{1}{l|}{\cellcolor[HTML]{FFCCC9}manuell}                        & 10 cm - $\inf$                                              & 3,04                     & 62° x 49°                & F2.0                         \\ \hline
+            \multicolumn{1}{|l|}{\textbf{Camera Module 3}}      & \cellcolor[HTML]{9AFF99}\$25 & \cellcolor[HTML]{9AFF99}4608 x 2592                                  & 1,40                                                              & \multicolumn{1}{l|}{\cellcolor[HTML]{9AFF99}motorisiert}                    & 10 cm - $\inf$                                              & 4,74                     & 66° x 41°                & \cellcolor[HTML]{9AFF99}F1.8 \\ \hline
+            \multicolumn{1}{|l|}{\textbf{Camera Module 3 Wide}} & \$35                         & \cellcolor[HTML]{9AFF99}4608 x 2592                                  & 1,40                                                              & \multicolumn{1}{l|}{\cellcolor[HTML]{9AFF99}motorisiert}                    & \cellcolor[HTML]{9AFF99}5 cm - $\inf$                       & 2,75                     & 102° x 67°               & F2.2                         \\ \hline
+            \multicolumn{1}{|l|}{\textbf{HQ Camera}}            & \cellcolor[HTML]{FFCCC9}\$50 & 4056 x 3040                                                          & 1,55                                                              & \multicolumn{1}{l|}{\cellcolor[HTML]{FFCCC9}{\color[HTML]{000000} manuell}} & \cellcolor[HTML]{C0C0C0}                                    & \cellcolor[HTML]{C0C0C0} & \cellcolor[HTML]{C0C0C0} & \cellcolor[HTML]{C0C0C0}     \\ \hline
+            \multicolumn{1}{|l|}{\textbf{GS Camera}}            & \cellcolor[HTML]{FFCCC9}\$50 & 1456 x 1088                                                          & \cellcolor[HTML]{9AFF99}3,45                                      & \multicolumn{1}{l|}{\cellcolor[HTML]{FFCCC9}{\color[HTML]{000000} manuell}} & \cellcolor[HTML]{C0C0C0}                                    & \cellcolor[HTML]{C0C0C0} & \cellcolor[HTML]{C0C0C0} & \cellcolor[HTML]{C0C0C0}     \\ \hline
+        \end{tabular}
+    }
+\end{table}
+\todo{Kameras vergleichen?}
 
 Nachteil und Vorteil zugleich ist, dass die Kamera über einen Autofokus verfügt, der aber auch elektronisch gesteuert manuell fokussieren kann. Dieser verschlechtert die Stabilität der inneren Orientierung (vgl. \autoref{s:innereorientierung}) weiter und wurde daher auch besonders im \autoref{c:voruntersuchungen} analysiert. Da die Bilder im Makrobereich zwischen $10$ und $80~\text{cm}$ aufgenommen werden und die Kameras keine Veränderung der Blende ermöglichen, ist die Schärfentiefe vergleichsweise niedrig. Hierauf wird in den Untersuchungen in \autoref{sec:fokusstacking} speziell eingegangen.
 
 Weiterer Vorteil der Lösung mit einzelnen Raspberry Pi ist es, dass hierdurch bereits die einzelnen Kameraeinheiten Berechnungen wie das Identifizieren von Passpunkten übernehmen können. Durch die Parallelisierung dieses Schrittes ist weniger Berechnungszeit zwischen den Aufnahmen zu erwarten. Außerdem ist durch die Nutzung von kabellosen Netzwerkverbindungen zur Steuerung das System skalierbar im Sinne der Anzahl der Kameras aber auch der Abstände zwischen den Kameras.
+
+
 
 \section{Rahmen}
 

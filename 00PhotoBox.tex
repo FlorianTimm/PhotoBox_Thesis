@@ -91,6 +91,11 @@
         \printglossaries%
     }{}
 }
+% Mehrere gleichzeitig zitieren
+\providecommand{\citeTwo}[4]{\citep[{\citealp[#1]{#2};}][#3]{#4}}
+\providecommand{\citeThree}[6]{\citep[{\citealp[#1]{#2}; \citealp[#3]{#4};}][#5]{#6}}
+\providecommand{\citeFour}[8]{\citep[{\citealp[#1]{#2}; \citealp[#3]{#4}; \citealp[#5]{#6};}][#7]{#8}}
+
 
 
 \usepackage[acronym, toc]{glossaries}
@@ -171,11 +176,6 @@ In dieser Arbeit soll der Lösungsansatz untersucht werden, mehrere kostengünst
 Photogrammetry offers the possibility of creating 3D models with relatively simple technology. However, capturing the images is very time consuming and therefore not practical for many objects, such as museum digitisation. Systems using multiple fixed cameras usually rely on high quality cameras, which significantly increases hardware costs.
 
 This paper explores the solution of using multiple low-cost cameras mounted on a frame. Cameras for the Raspberry Pi are used to build a photogrammetric measurement system for small objects. This involves programming an interface to synchronise the cameras and developing a way to calibrate the cameras. The end result should ideally enable even a photogrammetric layman to produce 3D models of acceptable resolution and quality quickly and without a long training period.
-
-% Mehrere gleichzeitig zitieren
-\providecommand{\citeTwo}[4]{\citep[{\citealp[#1]{#2};}][#3]{#4}}
-\providecommand{\citeThree}[6]{\citep[{\citealp[#1]{#2}; \citealp[#3]{#4};}][#5]{#6}}
-\providecommand{\citeFour}[8]{\citep[{\citealp[#1]{#2}; \citealp[#3]{#4}; \citealp[#5]{#6};}][#7]{#8}}
 
 \newpage
 
