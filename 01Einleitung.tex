@@ -2,20 +2,23 @@
 \graphicspath{{\subfix{./img/}}}
 \begin{document}
 
-
 \chapter{Einleitung}
 
-\todo{Text?}
+Im Rahmen dieser Arbeit soll ein Photogrammetrie-System auf Basis von Raspberry-Pi-Kameras entwickelt werden. Das System soll es ermöglichen, kleine Objekte mit geringem personellen Aufwand zu erfassen und daraus 3D-Modelle zu erstellen.
 
-\section{Konzept}
+Die folgenden Abschnitte geben einen Überblick über die Motivation und das Konzept der Arbeit und stellen den Stand der Thematik dar.
+
+\section{Motivation}
 
 In Museen besteht vielfach der Wunsch, ihre Exponate zu digitalisieren. Entsprechende Handreichungen des Deutschen Museumsbundes legen auch die Digitalisierung als 3D-Modelle nahe, verweisen aber auf den großen Aufwand und Format-Probleme \citep[S. 43]{handreichung_digital}.
 Auch in vielen weiteren Bereichen besteht der Bedarf dreidimensionale Modelle einfach und kostengünstig zu erfassen, beispielsweise in der Archäologie, der Spiele- und Filmindustrie oder der Industrie. \todo{Quellen}
 
-Im Rahmen dieser Arbeit soll ein Kamerasystem basierend auf Raspberry-Pi-Kame\-ras entwickelt werden und untersucht werden, inwiefern es diesen Anforderungen gerecht wird. Es soll mittels Photogrammetrie mit geringen personellen Aufwand kleine Objekte bis etwa 40~cm Durchmesser erfassen. Die Bedienung soll dabei auch von Laien mit kurzer Einarbeitungszeit möglich sein und das System die meisten Schritte selbstständig durchführen. Auch der Nachbau des Systemes soll einfach möglich sein. Um Lizenzkosten zu sparen, soll die Möglichkeit Open-Source-Software zu nutzen geprüft werden.
+Das System soll dabei auch von Laien mit kurzer Einarbeitungszeit bedienbar sein. Die erforderlichen Schritte sollen dafür möglichst automatisiert werden. Auch der Nachbau des Systems soll einfach möglich sein. Um Lizenzkosten zu sparen, soll die Möglichkeit Open-Source-Software zu nutzen geprüft werden. Als Größenordnung soll das System kleine Objekte bis etwa 40~cm Durchmesser erfassen können.
 
-Als Prototyp soll ein System mit 24 Kameras gebaut werden. Neben der eigentlichen Entwicklung und Untersuchung dieses Systemes soll abschließend die Anzahl der Kameras und die Nutzung eines Drehtellers evaluiert werden, um hiermit gegebenenfalls die Hardwarekosten weiter zu senken oder die Auflösung und Genauigkeit zu steigern.
+\section{Konzept}
+Nach einer Recherche zu den Anforderungen an ein solches System soll ein Prototyp entwickelt werden. Dieser soll aus mehreren Kameras bestehen, die auf einem Rahmen montiert sind. Die Kameras sollen dabei so angeordnet sein, dass sie das Objekt aus verschiedenen Blickwinkeln erfassen können und sollen dabei über eine Schnittstelle synchronisiert werden. Die Datenübertragung soll danach automatisiert erfolgen und die Bilder sollen automatisch zu einem 3D-Modell verarbeitet werden.
 
+Neben der eigentlichen Entwicklung und Untersuchung dieses Systemes soll abschließend die Anzahl der Kameras und die Nutzung eines Drehtellers evaluiert werden, um hiermit gegebenenfalls die Hardwarekosten weiter zu senken oder die Auflösung und Genauigkeit zu steigern.
 
 \section{Stand der Thematik}
 Der Ansatz, Kameras auf einem festen Rahmen zu montieren, Bilder aufzunehmen und anschließend automatisiert 3D-Modelle auf Basis von Photogrammetrie zu erzeugen, ist bereits weit verbreitet und erprobt. Hauptsächlich unterscheiden sich diese in der Wahl der Kameras und der Zielgruppe der Bediener. Häufig werden hochwertige Kameras verwendet, die jedoch entsprechend hohe Kosten in der Anschaffung verursachen.
