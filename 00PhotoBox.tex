@@ -85,7 +85,12 @@
 %\bibliography{Thesis.bib}
 \usepackage[round]{natbib}
 \bibliographystyle{hcu}
-\def\biblio{\bibliography{00PhotoBox} \printglossaries}
+\def\biblio{
+    \ifSubfilesClassLoaded{%
+        \bibliography{./00PhotoBox}
+        \printglossaries%
+    }{}
+}
 
 
 \usepackage[acronym, toc]{glossaries}

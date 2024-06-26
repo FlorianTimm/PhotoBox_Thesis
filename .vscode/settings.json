@@ -26,10 +26,11 @@
     "latex-workshop.view.pdf.viewer": "tab",
     "latex-workshop.latex.recipes": [
         {
-            "name": "pdflatex, makeglossaries, pdflatex (2x)",
+            "name": "pdflatex, makeglossaries, bibtex, pdflatex (2x)",
             "tools": [
                 "pdflatex",
                 "makeglossaries",
+                "bibtex",
                 "pdflatex",
                 "pdflatex"
             ]
@@ -49,6 +50,13 @@
         {
             "name": "makeglossaries",
             "command": "makeglossaries",
+            "args": [
+                "%DOCFILE%"
+            ]
+        },
+        {
+            "name": "bibtex",
+            "command": "bibtex",
             "args": [
                 "%DOCFILE%"
             ]
