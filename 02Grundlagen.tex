@@ -49,10 +49,15 @@ Die Bestimmung der inneren Orientierung, auch Kalibrierung genannt, kann währen
 \subsection{Fokussierung und Schärfentiefe}
 Um genaue Punktwolken zu ermöglichen, muss das Objekt scharf abgebildet werden. Die Kameras müssen dafür entsprechend fokussiert sein. Jedoch wird durch die Fokussierung auch die Innere Orientierung verändert. Normalerweise wird daher auf eine Umfokussierung verzichtet und mittels der Blende (kleine Blendenöffnung) die Schärfentiefe erhöht, sodass ein großer Bereich scharf abgebildet wird. Die Schärfentiefe ist jedoch im Makrobereich relativ klein. Genauer wird auf die Schärfentiefe in \autoref{sec:fokusstacking} eingegangen.
 
+\section{Skalierung/Maßstab}
+\label{sec:masstab}
+Die Skalierung eines rein photogrammetrisch bestimmten 3D-Modelles ist nicht bekannt, da die Berechnungen nur auf Richtungen basieren. Daher werden mindestens Referenzen in Form einer bekannten Länge benötigt, um die Skalierung zu bestimmen. Alternativ können auch Passpunkte (siehe \autoref{s:verknuepfung}) mit bekannten Koordinaten verwendet werden oder im Falle von Mehrkamerasystemen eine bekannte äußeren Orientierungen der Kameras. \citep[S. 546]{luhmann}
 
-\section{Verknüpfungspunkte}
+
+\section{Verknüpfungs- und Passpunkte}
 \label{s:verknuepfung}
 Um die einzelnen Bilder verknüpfen zu können, werden identische Punkte zwischen zwei oder mehr Bildern benötigt. Diese können klassisch per Hand erfasst werden, jedoch ist dieses schon bei kleineren Projekten sehr zeitaufwändig. Daher wird meist die Möglichkeit genutzt, automatisch Verknüpfungspunkte zu erzeugen. Hierfür gibt es verschiedene Methoden, die im Folgenden vorgestellt werden.
+
 
 \subsection{Zielmarker}
 Es gibt verschiedenste Formen von Markern, die automatisch erfasst werden können. Grob unterschieden werden kann in codierte und nicht codierte Zielmarker. Beispiele für nicht codierte sind beispielsweise einfache kreisförmige Klebepunkte oder Marker, die aus Linien bestehen und ihren Mittelpunkt durch dessen Schnitt definieren.
