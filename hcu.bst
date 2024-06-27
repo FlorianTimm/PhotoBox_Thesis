@@ -80,6 +80,7 @@ ENTRY
     title
     type
     url
+    doi
     lastchecked
     volume
     year
@@ -393,6 +394,20 @@ FUNCTION {format.url}
     { "\urlprefix\url{" swap$ * "}" * }
   if$
 }
+
+FUNCTION {format.doi}
+{
+  doi
+  duplicate$ empty$
+  { pop$ "" }
+  { doi empty$
+    { skip$ }
+    { "\href{http://dx.doi.org/" doi * "}{doi:" * swap$ * "}" * }
+  if$
+}
+if$
+}
+
 
 FUNCTION {format.lastchecked}
 { lastchecked empty$
@@ -1016,6 +1031,7 @@ FUNCTION {article}
   format.publisher.address output
   format.issn output
   format.url output
+  format.doi output
   format.lastchecked output
   format.note output
   fin.entry
@@ -1050,6 +1066,7 @@ FUNCTION {book}
   if$
   format.isbn output
   format.url output
+  format.doi output
   format.lastchecked output
   format.note output
   fin.entry
@@ -1066,6 +1083,7 @@ FUNCTION {booklet}
   address "address" bibinfo.check output
   format.isbn output
   format.url output
+  format.doi output
   format.lastchecked output
   format.note output
   fin.entry
@@ -1108,6 +1126,7 @@ FUNCTION {inbook}
   if$
   format.url output
   format.lastchecked output
+  format.doi output
   format.note output
   fin.entry
 }
@@ -1135,6 +1154,7 @@ FUNCTION {incollection}
   if$
   format.url output
   format.lastchecked output
+  format.doi output
   format.note output
   fin.entry
 }
@@ -1166,6 +1186,7 @@ FUNCTION {inproceedings}
   if$
   format.url output
   format.lastchecked output
+  format.doi output
   format.note output
   fin.entry
 }
@@ -1183,6 +1204,7 @@ FUNCTION {manual}
   format.edition output
   format.url output
   format.lastchecked output
+  format.doi output
   format.note output
   fin.entry
 }
@@ -1201,6 +1223,7 @@ FUNCTION {mastersthesis}
   address "address" bibinfo.check output
   format.url output
   format.lastchecked output
+  format.doi output
   format.note output
   fin.entry
 }
@@ -1217,6 +1240,7 @@ FUNCTION {misc}
   format.publisher.address output
   format.url output
   format.lastchecked output
+  format.doi output
   format.note output
   fin.entry
 }
@@ -1234,6 +1258,7 @@ FUNCTION {phdthesis}
   address "address" bibinfo.check output
   format.url output
   format.lastchecked output
+  format.doi output
   format.note output
   fin.entry
 }
@@ -1257,6 +1282,7 @@ FUNCTION {proceedings}
   format.issn output
   format.url output
   format.lastchecked output
+  format.doi output
   format.note output
   fin.entry
 }
@@ -1275,6 +1301,7 @@ FUNCTION {techreport}
   address "address" bibinfo.check output
   format.url output
   format.lastchecked output
+  format.doi output
   format.note output
   fin.entry
 }
@@ -1288,6 +1315,7 @@ FUNCTION {unpublished}
   format.title "title" output.check
   format.url output
   format.lastchecked output
+  format.doi output
   format.note "note" output.check
   fin.entry
 }
