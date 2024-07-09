@@ -53,9 +53,9 @@ Als Vergleichsmessung wurden die Objekte mit einem Zeiss GOM ATOS 5 aufgemessen.
 Bei dem verwendeten System werden zwei Kameras eingesetzt, die sich ein massives Gehäuse mit dem mittig angeordneten Projektor teilen. Bei dem verwendeten Messvolumen und Objektentfernung beträgt die Genauigkeit etwa \todo{Wert}. Aufgrund der deutlich höheren erwarteten Genauigkeit des Streifenprojektionssystems, kann davon ausgegangen werden, dass die Messungen deutlich genauer sind als die des Prototypen und als wahre Werte angenommen werden können.
 
 \subsection{Ergebnisse}
-Die modellierte Oberfläche aus dem Streifenprojektionssystem und die Punktewolke aus dem Prototypen wurden in CloudCompare aufeinandergelegt und die Differenz berechnet. Die Visualisierung der Differenzen ist in \autoref{fig:differenz_moia} dargestellt. Es ist zu erkennen, dass einige Bereiche deutlich von der erwarteten Genauigkeit abweichen. Die größten Abweichungen sind im Bereich des Kopfes und des Bauches zu erkennen. Die Abweichungen im Bereich des restlichen Körpers sind deutlich geringer und liegen im Bereich von 0,7~mm. Die Abweichungen sind auf die schlechtere Erfassung der nach unten gerichteten Flächen \todo{andere Beschreibung oder Fehler vermeiden} zurückzuführen. Hier wurde die Oberfläche stark interpoliert.
+Die modellierte Oberfläche aus dem Streifenprojektionssystem und die Punktwolke aus dem Prototypen wurden in CloudCompare aufeinandergelegt und die Differenz berechnet. Die Visualisierung der Differenzen ist in \autoref{fig:differenz_moia} dargestellt. Es ist zu erkennen, dass einige Bereiche gar nicht erfasst bzw. deren Genauigkeit deutlich von der erwarteten abweichen. Die größten Fehlstellen sind im Bereich des Kinnes und unterhalb des Bauches zu erkennen. Die Abweichungen im Bereich des restlichen Körpers sind deutlich geringer und liegen im Bereich von 0,21~mm. Die Abweichungen sind auf die schlechtere Erfassung der nach unten gerichteten Flächen \todo{andere Beschreibung oder Fehler vermeiden} zurückzuführen. Diese Bildbereiche sind nur in wenigen Bildern sichtbar und können daher nicht so gut rekonstruiert werden.
 
-Die Abweichungen sind zwar größer, als mittels der Abschätzung in \autoref{ss:erwartete_genauigkeit} berechneten Werte, liegt aber in der Größenordnung dieser und auch der Genauigkeit eines 3D-Modelles des Körpers, welches photogrammetrisch mit einer Spiegelreflexkamera Nikon D90 aufgenommen wurde. Die Ergebnisse sind in \autoref{tab:vergleich_erg} zusammengefasst.
+Die Abweichungen liegen in der Größenordnung der in \autoref{ss:erwartete_genauigkeit} berechneten Werte und sind nur minimal schlechter, als die Genauigkeit eines 3D-Modelles des Körpers, welches photogrammetrisch mit einer Spiegelreflexkamera Nikon D90 manuell aufgenommen wurde. Durch Kombinationen von anderne Perspektiven ist hier jedoch die Abdeckung, welche hier nicht objektiv betrachtet wurde, besser. Die Ergebnisse sind in \autoref{tab:vergleich_erg} zusammengefasst.
 
 \begin{figure}
     \centering
@@ -90,8 +90,22 @@ Zur Abschätzung, wie viele Kameras für eine gute Genauigkeit notwendig sind, w
 
 
 \section{Nutzung eines Drehtellers}
-Statt mehr Kameras kann auch ein Drehteller dafür sorgen, dass die Abdeckung verbessert wird.
-\todo{fortführen}
+Statt die reele Zahl der Kameras zu verändern, kann auch ein Drehteller genutzt werden, so dass jede Kamera mehr als ein Bild zur Erfassung des Objektes liefert.
+
+\subsection{Durchführung}
+Hierzu wurde ein einfacher manueller Drehteller genutzt (IKEA SNUDDA). Dieser wurde mit Passpunkten beklebt und weißt ansonsten eine texturreiche Naturholzoberfläche auf (siehe \autoref{fig:drehteller_moai}). Die Daten würde in Metashape weiterverarbeitet und die einzelnen Aufnahmeschritte über die Passpunkte und die Punktwolke zusammengerechnet. Die Ergebnisse wurden mit denen des Streifenprojektionssystems und den Aufnahmen ohne Drehteller verglichen.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/drehteller_moai.jpg}
+    \caption{Drehteller mit Moai-Figur im Prototypen (aufgenommen von einem der verbauten Raspberry Camera Module v3)}
+    \label{fig:drehteller_moai}
+\end{figure}
+
+\subsection{Ergebnisse}
+
+
+\todo{Auswerten}
 
 \biblio
 \end{document}
