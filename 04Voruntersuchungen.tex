@@ -30,7 +30,7 @@ Der Unschärfekreis war durchschnittlich 28 Pixel groß. Dies entspricht einer L
 \todo{Siemenssternbild beschriften}
 \begin{figure}
     \centering
-    \includegraphics[width=1\textwidth]{./img/siemens.jpg}
+    \includegraphics[width=0.5\textwidth]{./img/siemens.jpg}
     \caption{Siemensstern} %Bildunterschrift
     \label{img:siemens} %ID fürs Bild
 \end{figure}
@@ -51,7 +51,14 @@ In \citet[S. 59]{kraus} wird eine Formel (siehe \autoref{eq:kraus_fokus}) für d
 \end{align}
 
 \paragraph{Vorgehen}
-Die Änderungen wurden in einem Versuch beobachtet. Hierzu wurde der Raspberry Pi Zero mit montierter Kamera fest vor einem ChArUco-Kalibriermuster platziert. Das Kalibriermuster besteht aus einer Kombination aus ArUco-Markern und einem Schachbrettmuster. \todo{Bild einfühgen und verweisen} Durch das Schachbrettmuster ermöglicht es auch bei unscharfen Bildern noch eine gute automatische Erkennung der zu beobachtenden Punkte. Es wurden je 11 Bilder mit unterschiedlichen Fokussierungen von $2~\text{m}$ bis  $10~\text{cm}$ aufgenommen. Dieser Vorgang wurde insgesamt viermal wiederholt, um auch die Wiederholungsgenauigkeit zu ermitteln. Die Bilder wurden anschließend mit einem Python-Script unter Nutzung von OpenCV ausgewertet. Hierbei wurde die relative Veränderung der Kamerakonstante der Kamera ermittelt und mit dem erwarteten Wert verglichen. Die relativen Änderungen wurden auf eine Fokusdistanz von $20~\text{cm}$ (entspricht einer Kamerakonstante von $5~\text{dpt}$) normiert. Relative Angaben wurden genutzt, da noch keine Kamerakonstante zu dem Zeitpunkt vorlag oder angenommen werden sollte.
+Die Änderungen der Parameter wurden in einem Versuch beobachtet. Hierzu wurde der Raspberry Pi Zero mit montierter Kamera fest vor einem ChArUco-Kalibriermuster platziert. Das Kalibriermuster besteht aus einer Kombination aus ArUco-Markern und einem Schachbrettmuster (siehe \autoref{img:charuco}). Durch das Schachbrettmuster ermöglicht es auch bei unscharfen Bildern noch eine gute automatische Erkennung der zu beobachtenden Punkte. Es wurden je 11 Bilder mit unterschiedlichen Fokussierungen von $2~\text{m}$ bis  $10~\text{cm}$ aufgenommen. Dieser Vorgang wurde insgesamt viermal wiederholt, um auch die Wiederholungsgenauigkeit zu ermitteln. Die Bilder wurden anschließend mit einem Python-Script unter Nutzung von OpenCV ausgewertet. Hierbei wurde die relative Veränderung der Kamerakonstante der Kamera ermittelt und mit dem erwarteten Wert verglichen. Die relativen Änderungen wurden auf eine Fokusdistanz von $20~\text{cm}$ (entspricht einer Kamerakonstante von $5~\text{dpt}$) normiert. Relative Angaben wurden genutzt, da noch keine Kamerakonstante zu dem Zeitpunkt vorlag oder angenommen werden sollte.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]{./img/charuco.png}
+    \caption{ChArUco-Board mit Fokus auf 5 dpt} %Bildunterschrift
+    \label{img:charuco} %ID fürs Bild
+\end{figure}
 
 \paragraph{Ergebnis}
 Die Ergebnisse sind in \autoref{img:fokus_faktor} dargestellt. Es zeigt sich, dass die Änderungen der Kamerakonstante durch die Fokussierung linear zu der Dioptrienzahl (Kehrwert der Gegenstandsweite) sind. Ein lineares Verhältnis ergibt sich auch mit der im Datenblatt angegebenen Brennweite von $4,74~\text{mm}$, jedoch eine etwas flachere Gerade (blau). Die ausgleichende Gerade (blau) ergab eine Brennweite von $6,97~\text{mm}$. Die Abweichung von $2,23~\text{mm}$ entspricht einer Abweichung von $47\%$, was als unrealistisch hoch eingeschätzt wird. Hier scheinen sich weitere Effekte bemerkbar zu machen, die noch nicht berücksichtigt wurden. Es wurde daher auch die Verzeichnung weiter untersucht.
