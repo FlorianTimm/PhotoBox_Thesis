@@ -60,7 +60,7 @@ Die Abweichungen liegen in der Größenordnung der in \autoref{ss:erwartete_gena
 \begin{figure}
     \centering
     \includegraphics[width=0.8\textwidth]{img/moai_fehler.jpg}
-    \caption{Differenzbild des Moai (rot: Fehler größer 1 mm)}
+    \caption{Differenzbild des Moai (rot: Fehler größer 0,5 mm)}
     \label{fig:differenz_moia}
 \end{figure}
 
@@ -104,8 +104,29 @@ Hierzu wurde ein einfacher manueller Drehteller genutzt (IKEA SNUDDA). Dieser wu
 
 \subsection{Ergebnisse}
 
-
+\begin{table}
+    \centering
+    \caption{Ergebnisse der unter Anpassung des Maßstabes durchgeführten Genauigkeitsüberprüfung}
+    \label{tab:vergleich_drehteller}
+    \begin{tabular}{l|r|r|r|r}
+        \toprule
+                        & Durchschnittliche & Mittlerer & Maximaler & Punktanzahl \\
+                        & Fehler            & Fehler    & Fehler    &             \\
+        \midrule
+        ohne Drehteller & - 0,03~mm         & 0,22~mm   & 2,0~mm    & 3,3 Mio     \\
+        mit Drehteller  & - 0,03~mm         & 0,15~mm   & 1,6~mm    & 3,4 Mio     \\
+        Nikon D90       & 0,03~mm           & 0,17~mm   & 1,2~mm    & 0,05 Mio    \\
+        \bottomrule
+    \end{tabular}
+\end{table}
 \todo{Auswerten}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/moai_fehler_drehteller.jpg}
+    \caption{Differenzbild des Moai (rot: Fehler größer 0,5 mm)}
+    \label{fig:drehteller_moai_fehler}
+\end{figure}
 
 \biblio
 \end{document}
