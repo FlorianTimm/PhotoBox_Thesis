@@ -88,6 +88,10 @@ wurde für die Berechnung der Bündelblockausgleichung verwendet. Der manuelle A
 \paragraph{Flask}
 wurde genutzt um die Weboberfläche und die Datendownloads bereitzustellen. Hiermit wurde ein Webserver aufgesetzt, der die Daten der Kameras anzeigt und die Steuerung ermöglicht.
 
+\paragraph{rpi-ws281x}
+\label{p:ws281x}
+ermöglicht die Steuerung der RGB-LEDs. Hierzu wird das in \cite{ws2811} beschriebene Steuerprotokoll von der Bibliothek implementiert. Die Steuerung kann dann mittels einfacher Farbcodes erfolgen.
+
 \subsubsection{Allgemeine Module}
 Es wurden einige Klassen erstellt, die in allen Modulen genutzt wurden. Diese sind in \autoref{img:uml_common} dargestellt. Diese steuern allgemeine Funktionen wie das Logging und das Auslesen der Konfiguration. Außerdem legen die Interfaces die Struktur der Datenübertragung zwischen den Raspberry Pi fest. \todo{Plural Raspberry Pi verdeutlichen}
 
