@@ -39,3 +39,6 @@ OpenDroneMap
 Nahbereichsphotogrammetrie
 Kalibriermatrix
 Kalibrier-
+schattenfrei
+Camera
+Wide

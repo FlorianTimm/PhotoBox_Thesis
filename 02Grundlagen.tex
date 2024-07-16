@@ -29,13 +29,20 @@ Grundlage der Photogrammetrie ist die Abbildungsgleichung. Diese beschreibt die 
 \label{s:innereorientierung}
 Damit diese Berechnung möglich wird, müssen die Parameter der Kamera bekannt sein, die sogenannte innere Orientierung. Sie beschreibt die Abbildungseigenschaften der Kamera mathematisch. Wichtigste Parameter sind hierbei die Lage des Bildhauptpunktes und die Kamerakonstante. Außerdem zählen hierzu auch die Parameter, die die Verzeichnung beschreiben. \citep[S. 179f]{luhmann}
 
-Normalerweise wird die Kamera hierbei vereinfacht als Lochkamera unter Verwendung der Zentralperspektive betrachtet. Als Projektionszentrum wird hierbei der Punkt beschrieben, durch den alle Bildstrahlen geradlinig laufen. Sein Lot auf dem Sensor wird als Bildpunkt bezeichnet und beispielsweise durch seine Lage in Pixeln oder Mikrometern beschrieben. Durch eine schiefe optische Achse kann dieser vom Mittelpunkt des Sensors abweichen. Die Kamerakonstante beschreibt idealisiert den Abstand des Projektionszentrums zum Sensor. \citep[S. 177]{luhmann}
+Normalerweise wird die Kamera hierbei vereinfacht als Lochkamera unter Verwendung der Zentralperspektive betrachtet (siehe \autoref{img:optische_achse}). Als Projektionszentrum wird hierbei der Punkt beschrieben, durch den alle Bildstrahlen geradlinig laufen. Sein Lot auf dem Sensor wird als Bildhauptpunkt $H$ bezeichnet und beispielsweise durch seine Lage in Pixeln oder Mikrometern beschrieben. Durch eine schiefe optische Achse kann dieser vom Mittelpunkt des Sensors abweichen. Die Kamerakonstante $c$ beschreibt idealisiert den Abstand des Projektionszentrums zum Sensor. \citep[S. 177]{luhmann}
 
 Als Verzeichnung wird die Abweichung der Abbildung von der idealen Lochkamera bezeichnet. Diese kann durch die Nutzung von Linsen oder durch die Bauweise der Kamera entstehen. Die Verzeichnung wird in radialer und tangentialer Verzeichnung unterschieden. Die radiale Verzeichnung beschreibt die Verzerrung der Bildpunkte in radialer Richtung, die tangentialen Verzeichnungen die Verzerrung in tangentialer Richtung. Am wichtigsten ist hierbei die radialsymmetrische Verzeichnung, da diese die größte Auswirkung hat. \citep[S. 178]{luhmann}
 
 Jede Einstellung der Kameraoptik verändert die innere Orientierung und auch jede Kamera, auch einer Modellreihe, kann je nach Genauigkeitsanspruch als unterschiedlich angesehen werden. Änderungen können sich beispielsweise durch Umfokussierung oder die Nutzung eines optischen Zoom ergeben, aber auch durch einen mechanisch instabilen Aufbau der Kameras. Daher sollten die Bilder normalerweise möglichst mit nur einer Kamera mit festen Einstellungen (Brennweite, Fokus, Blende, Objektiv) aufgenommen werden. Änderungen der Empfindlichkeit (ISO-Zahl) oder Belichtungszeit sind unproblematisch für die innere Orientierung, da hierbei die Abbildungseigenschaften der Kamera nicht verändert werden. \citep[S. 176]{luhmann}
 
 Die Bestimmung der inneren Orientierung, auch Kalibrierung genannt, kann wäh\-rend der Messung beispielsweise als Parameter in der Bündel\-block\-ausgleichung erfolgen. Je nach Stabilität der inneren Orientierung sind hier verschiedene Methoden möglich - beispielsweise die Kalibrierung jedes einzelnen Bildes bei instabilen Kameras, wie sie in diesem Projekt verwendet werden. \citep[S. 181f]{luhmann}
+
+\begin{figure}
+    \centering
+    \includesvg[width=0.8\textwidth]{./img/optischeAchse}
+    \caption{Abbildung des Lochkamera-Modelles mit Spiegelung am Projektionszentrum (rot), nach \citealt[S. 154]{hartley}, Beschriftung nach \citealt{luhmann}} %Bildunterschrift
+    \label{img:optische_achse}
+\end{figure}
 
 
 \subsection{Äußere Orientierung}
@@ -44,19 +51,27 @@ Die äußere Orientierung beschreibt die Lage der Kamera im Raum und ihre Ausric
 
 \subsection{Abbildungsgleichung}
 \label{ss:abbildungsgleichung}
-Die Abbildung eines Punktes auf einem Bild wird durch die Abbildungsgleichung beschrieben. Hierfür gibt es verschiedene Schreibweisen. In der Matrizenrechnung besteht diese aus der Multiplikation der homogenen Punktkoordinaten $X$ mit der Projektionsmatrix $P$. $P$ ergibt sich aus der Kalibrier- oder Kameramatrix $K$, der Rotation $R$ und dem Projektionszentrum $X_0$. Die Kalibriermatrix wiederum besteht aus der Kamerakonstante und der Lage des Bildhauptpunktes (siehe \autoref{abbildungsgleichung}, nach \citealp[S. 244]{hartley} und \citealp[S. 290]{luhmann})
+Die Abbildung eines Punktes auf einem Bild wird durch die Abbildungsgleichung beschrieben. Hierfür gibt es verschiedene Schreibweisen. In der Matrizenrechnung besteht diese aus der Multiplikation der homogenen Punktkoordinaten $X$ mit der Projektionsmatrix $P$ (\autoref{eq:abbildungsgleichung}). $P$ ergibt sich aus der Kalibrier- oder Kameramatrix $K$, der Rotation $R$ und dem Projektionszentrum $X_0$ (\autoref{eq:pkr}). Die Kalibriermatrix wiederum besteht aus der Kamerakonstante und der Lage des Bildhauptpunktes (\autoref{eq:k}).
+(nach \citealp[S. 244]{hartley} und \citealp[S. 290]{luhmann})
+
+Die äußere Orientierung ist durch die Matrix $[R|X_0]$ beschrieben (\autoref{eq:r}). Diese besteht aus der Rotationsmatrix $R$ und dem Projektionszentrum $X_0$. Die Rotationsmatrix beschreibt die Ausrichtung der Kamera im Raum, das Projektionszentrum beschreibt die Position der Kamera bzw. des Projektionszentrums im Raum. Im Falle der Rotationsmatrix wird die Drehung durch 8 unabhängige Parameter beschrieben.
+
+\todo{Verringerung der Parameter durch Quaternionen}
 
 \begin{align}
-    \label{abbildungsgleichung}
-    x' & = P \cdot X       \\
-    P  & = K \cdot [R|X_0] \\
-    K  & =
+    \label{eq:abbildungsgleichung}
+    x'      & = P \cdot X       \\
+    \label{eq:pkr}
+    P       & = K \cdot [R|X_0] \\
+    \label{eq:k}
+    K       & =
     \begin{bmatrix}
         c_x & 0   & x'_0 \\
         0   & c_y & y'_0 \\
-        0   & 0   & 1
-    \end{bmatrix}
-    \cdot
+        0   & 0   & 1    \\
+    \end{bmatrix}            \\
+    \label{eq:r}
+    [R|X_0] & =
     \begin{bmatrix}
         r_11 & r_21 & r_31 & X_0 \\
         r_12 & r_22 & r_32 & Y_0 \\
@@ -65,6 +80,8 @@ Die Abbildung eines Punktes auf einem Bild wird durch die Abbildungsgleichung be
 \end{align}
 
 % Um die Beziehung zwischen zwei Bildern aufzustellen, kann man diese Abbildungsgleichung nutzen. Da es hier nur um die Beziehung zwischen zwei Bildern geht, kann die Rotation und Translation des ersten Bildes auf 0 gesetzt werden ($R$ ist dann eine 3x3-Einheitsmatrix und $X_0$ ein Nullvektor). $X_0$ des zweiten Bildes wird zur Translation zwischen den beiden Bildern. \citep[S. 330]{luhmann}
+
+Grundlage dieser Formel ist wieder das Lochkamera-Modell (siehe \autoref{img:optische_achse}). Dabei wird rechnerisch das Bild an dem Projektionszentrum in den Objektraum gespiegelt (rot im Bild). Dadurch kann mit einem aufrechten Bild gerechnet werden.
 
 Als weitere Parameter spielen die Verzeichnungen eine Rolle. Diese kann in die Abbildungsgleichung integriert werden, in dem $x'$ durch $\Delta x'$ korrigiert wird. \citep[S. 277]{luhmann}
 
