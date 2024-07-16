@@ -20,10 +20,93 @@ Dieses Kapitel beschreibt die hierfür notwendigen Bedingungen und die Grundlage
 \end{figure}
 
 
+
+\section{Abbildung}
+
+Grundlage der Photogrammetrie ist die Abbildungsgleichung. Diese beschreibt die Abbildung eines Punktes im Raum auf dem Sensor bzw. dem Film. Umgekehrt kann mit ihrer Hilfe aus der Position eines Punktes in einem Bild, ähnlich einer Messung mit einem Theodolit, die Richtung des Punktes in Relation zu der Kamera bestimmt werden. Die Abbildungsgleichung ist abhängig von der inneren und äußeren Orientierung der Kamera. Die innere Orientierung beschreibt die Abbildungseigenschaften der Kamera, die äußere Orientierung die Position und Ausrichtung der Kamera. Im folgenden Wird erstmal auf die innere und äußere Orientierung eingegangen, bevor die Abbildungsgleichung vorgestellt wird.
+
+\subsection{Innere Orientierung}
+\label{s:innereorientierung}
+Damit diese Berechnung möglich wird, müssen die Parameter der Kamera bekannt sein, die sogenannte innere Orientierung. Sie beschreibt die Abbildungseigenschaften der Kamera mathematisch. Wichtigste Parameter sind hierbei die Lage des Bildhauptpunktes und die Kamerakonstante. Außerdem zählen hierzu auch die Parameter, die die Verzeichnung beschreiben. \citep[S. 179f]{luhmann}
+
+Normalerweise wird die Kamera hierbei vereinfacht als Lochkamera unter Verwendung der Zentralperspektive betrachtet (siehe \autoref{img:optische_achse}). Als Projektionszentrum wird hierbei der Punkt beschrieben, durch den alle Bildstrahlen geradlinig laufen. Sein Lot auf dem Sensor wird als Bildhauptpunkt $H$ bezeichnet und beispielsweise durch seine Lage in Pixeln oder Mikrometern beschrieben. Durch eine schiefe optische Achse kann dieser vom Mittelpunkt des Sensors abweichen. Die Kamerakonstante $c$ beschreibt idealisiert den Abstand des Projektionszentrums zum Sensor. \citep[S. 177]{luhmann}
+
+Als Verzeichnung wird die Abweichung der Abbildung von der idealen Lochkamera bezeichnet. Diese kann durch die Nutzung von Linsen oder durch die Bauweise der Kamera entstehen. Die Verzeichnung wird in radialer und tangentialer Verzeichnung unterschieden. Die radiale Verzeichnung beschreibt die Verzerrung der Bildpunkte in radialer Richtung, die tangentialen Verzeichnungen die Verzerrung in tangentialer Richtung. Am wichtigsten ist hierbei die radialsymmetrische Verzeichnung, da diese die größte Auswirkung hat. \citep[S. 178]{luhmann}
+
+Jede Einstellung der Kameraoptik verändert die innere Orientierung und auch jede Kamera, auch einer Modellreihe, kann je nach Genauigkeitsanspruch als unterschiedlich angesehen werden. Änderungen können sich beispielsweise durch Umfokussierung oder die Nutzung eines optischen Zoom ergeben, aber auch durch einen mechanisch instabilen Aufbau der Kameras. Daher sollten die Bilder normalerweise möglichst mit nur einer Kamera mit festen Einstellungen (Brennweite, Fokus, Blende, Objektiv) aufgenommen werden. Änderungen der Empfindlichkeit (ISO-Zahl) oder Belichtungszeit sind unproblematisch für die innere Orientierung, da hierbei die Abbildungseigenschaften der Kamera nicht verändert werden. \citep[S. 176]{luhmann}
+
+Die Bestimmung der inneren Orientierung, auch Kalibrierung genannt, kann wäh\-rend der Messung beispielsweise als Parameter in der Bündel\-block\-ausgleichung erfolgen. Je nach Stabilität der inneren Orientierung sind hier verschiedene Methoden möglich - beispielsweise die Kalibrierung jedes einzelnen Bildes bei instabilen Kameras, wie sie in diesem Projekt verwendet werden. \citep[S. 181f]{luhmann}
+
+\begin{figure}
+    \centering
+    \includesvg[width=0.8\textwidth]{./img/optischeAchse}
+    \caption{Abbildung des Lochkamera-Modells mit Spiegelung am Projektionszentrum (rot), nach \citealt[S. 154]{hartley}, Beschriftung nach \citealt{luhmann}} %Bildunterschrift
+    \label{img:optische_achse}
+\end{figure}
+
+
+\subsection{Äußere Orientierung}
+\label{s:aeussereorientierung}
+Die äußere Orientierung beschreibt die Lage der Kamera im Raum und ihre Ausrichtung. Sie wird durch die Position des Projektionszentrums und die Richtung der optischen Achse beschrieben. Die Position des Projektionszentrums wird durch die Koordinaten des Projektionszentrums in einem Koordinatensystem -- in der Nahbereichsphotogrammetrie oft einem lokalen -- beschrieben. Die Richtung der optischen Achse wird mit der Rotation der Kamera beschrieben, beispielsweise durch eine Rotationsmatrix, eulersche Winkel oder Quaternionen. Durch die Nutzung von Passpunkten oder bekannten Koordinaten der Kamera kann die äußere Orientierung bestimmt werden. \citep[S. 273ff]{luhmann}
+
+\subsection{Abbildungsgleichung}
+\label{ss:abbildungsgleichung}
+Die Abbildung eines Punktes auf einem Bild wird durch die Abbildungsgleichung beschrieben. Hierfür gibt es verschiedene Schreibweisen. In der Matrizenrechnung besteht diese aus der Multiplikation der homogenen Punktkoordinaten $X$ mit der Projektionsmatrix $P$ (\autoref{eq:abbildungsgleichung}). $P$ ergibt sich aus der Kalibrier- oder Kameramatrix $K$, der Rotation $R$ und dem Projektionszentrum $X_0$ (\autoref{eq:pkr}). Die Kalibriermatrix wiederum besteht aus der Kamerakonstante und der Lage des Bildhauptpunktes (\autoref{eq:k}).
+(nach \citealp[S. 244]{hartley} und \citealp[S. 290]{luhmann})
+
+Die äußere Orientierung ist durch die Matrix $[R|X_0]$ beschrieben (\autoref{eq:r}). Diese besteht aus der Rotationsmatrix $R$ und dem Projektionszentrum $X_0$. Die Rotationsmatrix beschreibt die Ausrichtung der Kamera im Raum, das Projektionszentrum beschreibt die Position der Kamera bzw. des Projektionszentrums im Raum. Im Falle der Rotationsmatrix wird die Drehung durch 8 unabhängige Parameter beschrieben.
+
+\todo{Verringerung der Parameter durch Quaternionen}
+
+\begin{align}
+    \label{eq:abbildungsgleichung}
+    x'      & = P \cdot X       \\
+    \label{eq:pkr}
+    P       & = K \cdot [R|X_0] \\
+    \label{eq:k}
+    K       & =
+    \begin{bmatrix}
+        c_x & 0   & x'_0 \\
+        0   & c_y & y'_0 \\
+        0   & 0   & 1    \\
+    \end{bmatrix}            \\
+    \label{eq:r}
+    [R|X_0] & =
+    \begin{bmatrix}
+        r_11 & r_21 & r_31 & X_0 \\
+        r_12 & r_22 & r_32 & Y_0 \\
+        r_13 & r_23 & r_33 & Z_0 \\
+    \end{bmatrix}
+\end{align}
+
+% Um die Beziehung zwischen zwei Bildern aufzustellen, kann man diese Abbildungsgleichung nutzen. Da es hier nur um die Beziehung zwischen zwei Bildern geht, kann die Rotation und Translation des ersten Bildes auf 0 gesetzt werden ($R$ ist dann eine 3x3-Einheitsmatrix und $X_0$ ein Nullvektor). $X_0$ des zweiten Bildes wird zur Translation zwischen den beiden Bildern. \citep[S. 330]{luhmann}
+
+Grundlage dieser Formel ist wieder das Lochkamera-Modell (siehe \autoref{img:optische_achse}). Dabei wird rechnerisch das Bild an dem Projektionszentrum in den Objektraum gespiegelt (rot im Bild). Dadurch kann mit einem aufrechten Bild gerechnet werden.
+
+Als weitere Parameter spielen die Verzeichnungen eine Rolle. Diese kann in die Abbildungsgleichung integriert werden, in dem $x'$ durch $\Delta x'$ korrigiert wird. \citep[S. 277]{luhmann}
+
+\begin{align}
+    \label{abbildungsgleichung_verzerrung}
+    x'        & = P \cdot X + \Delta x'                 \\
+    \Delta x' & = \Delta x_{rad} + \Delta x_{tan} + ...
+\end{align}
+
+Die Verzeichnungen werden meist mit den Parametern $k1$ bis $k4$ für die radiale Verzeichnung und $p1$ und $p2$ für die tangentialen Verzeichnungen bezeichnet. Die Faktoren stellen dabei die Parameter einer Taylor-Reihe dar. Sie basieren auf dem Kameramodell von Brown und den von ihm in \cite[S. 859]{brown1971} vorgestellten Formeln (siehe \autoref{eq:brown_rad} und \ref{eq:brown_tan}).
+
+\begin{align}
+    \label{eq:brown_rad}
+    \Delta x_{rad} = k1 \cdot r^2 + k2 \cdot r^4 + k3 \cdot r^6 + k4 \cdot r^8 \\
+    \label{eq:brown_tan}
+    \Delta x_{tan} = 2 \cdot p1 \cdot x \cdot y + p2 \cdot (r^2 + 2 \cdot x^2)
+\end{align}
+
+Diese Parameter werden beispielsweise auch in Metashape, OpenDroneMap und OpenCV genutzt.
+
+
 \section{Bilder}
 \label{s:bilder}
 
-Die Berechnung der Tiefeninformationen ist nur möglich, sofern der Punkt in mindestens einem weiteren Bild abgebildet ist. Die Genauigkeit der Berechnung ist vom Schnittwinkel dieser beiden Strahlen abhängig. Um möglichst gute Grundlagen zur Ver\-fügung zu haben und die innere und äußere Orientierung möglichst gut berechnen zu können, müssen diese Bilder einige Bedingungen erfüllen - auf diese wird in diesem Abschnitt eingegangen.
+Die Berechnung der Position eines Objektes im Bild ist nur möglich, sofern der Punkt in mindestens einem weiteren Bild abgebildet ist. Die Genauigkeit der Berechnung ist vom Schnittwinkel dieser beiden Strahlen abhängig. Um möglichst gute Grundlagen zur Ver\-fügung zu haben und die innere und äußere Orientierung möglichst gut berechnen zu können, müssen diese Bilder einige Bedingungen erfüllen - auf diese wird in diesem Abschnitt eingegangen.
 
 \subsection{Überlappung und Bildinhalte}
 Da die Bilder durch identische Punkte verbunden werden, müssen die Bildinhalte sich überlappen und gemeinsame Punkte in den Bildern identifiziert werden. Die automatische Detektion von identischen Punkten ist auf verschiedene Weisen möglich: Entweder durch die Nutzung von uncodierten und codierten Passpunkten aber über eine Merkmalsextraktion. Für das letztere muss die Oberfläche aber genügend Textur bzw. Struktur aufweisen. Detailliert wird in \autoref{s:verknuepfung} hierauf eingegangen. \citep[S. 478]{luhmann}
@@ -38,19 +121,12 @@ Entsprechend müssen die Kameras an den Trägern auch gleichmäßig um das Objek
 Um identische Punkte in den Bildern identifizieren zu können, müssen die Bilder eine gleichmäßige Beleuchtung aufweisen. Hierfür sollte es vermieden werden, dass Schatten auf das Objekt fallen. Eine gleichmäßige Beleuchtung kann durch die Nutzung von mehreren Lichtquellen erreicht werden. Auch sollte keine Blendwirkung entstehen, die durch direkte Sonneneinstrahlung oder Reflexionen entstehen kann. Die Belichtung der einzelnen Bilder sollte möglichst identisch sein, damit später auch eine zusammenhängende Texturierung möglich ist.
 Da die Objekte und die Kameras sich während der Aufnahme nicht bewegen, kann die Belichtungszeit verlängert werden, um Rauschen durch eine zu hohe Sensorempfindlichkeit zu vermeiden und so die Bildqualität zu erhöhen.
 
-\subsection{Innere Orientierung}
-\label{s:innereorientierung}
-Aus der Position eines Punktes in einem Bild kann, ähnlich einer Messung mit einem Theodolit, die Richtung des Punktes in Relation zu der Kamera bestimmt werden. Damit diese Berechnung möglich wird, müssen die Parameter der Kamera bekannt sein, die sogenannte innere Orientierung. Sie beschreibt die Abbildung der Kamera mathematisch. Wichtigste Parameter sind hierbei die Lage des Bildhauptpunktes und die Kamerakonstante. Außerdem zählen hierzu auch die Parameter, die die Verzeichnung beschreiben. \citep[S. 179f]{luhmann}
-
-Jede Einstellung der Kameraoptik verändert die innere Orientierung und auch jede Kamera, auch einer Modellreihe, kann je nach Genauigkeitsanspruch als unterschiedlich angesehen werden. Änderungen können sich beispielsweise durch Umfokussierung oder die Nutzung eines optischen Zoom ergeben, aber auch durch einen mechanisch instabilen Aufbau der Kameras. Daher sollten die Bilder normalerweise möglichst mit nur einer Kamera mit festen Einstellungen (Brennweite, Fokus, Blende, Objektiv) aufgenommen werden. Änderungen der Empfindlichkeit (ISO-Zahl) oder Belichtungszeit sind unproblematisch für die innere Orientierung, da hierbei die Abbildungseigenschaften der Kamera nicht verändert werden. \citep[S. 176]{luhmann}
-
-Die Bestimmung der inneren Orientierung, auch Kalibrierung genannt, kann wäh\-rend der Messung beispielsweise als Parameter in der Bündel\-block\-ausgleichung erfolgen. Je nach Stabilität der inneren Orientierung sind hier verschiedene Methoden möglich - beispielsweise die Kalibrierung jedes einzelnen Bildes bei instabilen Kameras, wie sie in diesem Projekt verwendet werden. \citep[S. 181f]{luhmann}
 
 \subsection{Fokussierung und Schärfentiefe}
-Um genaue Punktwolken zu ermöglichen, muss das Objekt scharf abgebildet werden. Die Kameras müssen dafür entsprechend fokussiert sein. Jedoch wird durch die Fokussierung auch die Innere Orientierung verändert. Normalerweise wird daher auf eine Umfokussierung verzichtet und mittels der Blende (kleine Blendenöffnung) die Schärfentiefe erhöht, sodass ein großer Bereich scharf abgebildet wird. Die Schärfentiefe ist jedoch im Makrobereich relativ klein. Genauer wird auf die Schärfentiefe in \autoref{sec:fokusstacking} eingegangen.
+Um genaue Punktwolken zu ermöglichen, muss das Objekt scharf abgebildet werden. Die Kameras müssen dafür entsprechend fokussiert sein. Jedoch wird durch die Fokussierung auch die innere Orientierung verändert. Normalerweise wird daher auf eine Umfokussierung verzichtet und mittels der Blende (kleine Blendenöffnung) die Schärfentiefe erhöht, sodass ein großer Bereich scharf abgebildet wird. Die Schärfentiefe ist jedoch im Makrobereich relativ klein. Genauer wird auf die Schärfentiefe in \autoref{sec:fokusstacking} eingegangen.
 
 \section{Skalierung/Maßstab}
-\label{sec:masstab}
+\label{sec:massstab}
 Die Skalierung eines rein photogrammetrisch bestimmten 3D-Modelles ist nicht bekannt, da die Berechnungen nur auf Richtungen basieren. Daher werden mindestens Referenzen in Form einer bekannten Länge benötigt, um die Skalierung zu bestimmen. Alternativ können auch Passpunkte (siehe \autoref{s:verknuepfung}) mit bekannten Koordinaten verwendet werden oder im Falle von Mehrkamerasystemen eine bekannte äußeren Orientierungen der Kameras. \citep[S. 546]{luhmann}
 
 
@@ -74,42 +150,13 @@ Eine andere Variante der automatischen Verknüpfungspunkte sind die sogenannten 
 \subsection{Merkmalsextraktion}
 Ohne das Anbringen von Markern können auch Merkmale in den Bildern erkannt werden. Hierfür gibt es verschiedene Methoden, eine dieser ist die SIFT-Methode, welche hier beispielhaft kurz dargestellt wird. Sie liefert Verknüpfungspunkte aus Mustern auf den photographierten Oberflächen. Es ist meist nicht notwendig explizit Marker an dem aufzunehmenden Objekt anzubringen, sofern seine Oberfläche nicht strukturlos ist (glatte weiße Wände etc.) oder in Bewegung ist.
 
-Zur Erkennung von Merkmalen setzt das Verfahren auf die Detektion von Kanten. Diese werden in verschiedenen Stufen einer Bildpyramide erkannt und ihre Extrema berechnet. Es werden diese Merkmale weiter ausgedünnt, beispielsweise über den Kontrast. Sofern ein möglicher Marker identifiziert wurde, wird eine Beschreibung erzeugt. Diese erfolgt  durch Analyse der Helligkeitsabweichungen zu den Nachbar-Pixeln und wird an der stärksten Abweichung ausgerichtet. Hierdurch wird die Beschreibung dann richtungsunabhängig. Mit diesen kann dann die Übereinstimmung von zwei Markern in zwei Photos bestimmt werden, auch wenn die Bilder zueinander gekippt oder gedreht sind.
+Zur Erkennung von Merkmalen setzt das Verfahren auf die Detektion von Kanten. Diese werden in verschiedenen Stufen einer Bildpyramide erkannt und ihre Extrema berechnet. Es werden diese Merkmale weiter ausgedünnt, beispielsweise über den Kontrast. Sofern ein möglicher Marker identifiziert wurde, wird eine Beschreibung erzeugt. Diese erfolgt  durch Analyse der Helligkeitsabweichungen zu den Nachbar-Pixeln und wird an der stärksten Abweichung ausgerichtet. Hierdurch wird die Beschreibung dann richtungsunabhängig. Mit diesen kann dann die Übereinstimmung von zwei Markern in zwei Bildern bestimmt werden, auch wenn diese zueinander gekippt oder gedreht sind.
 \citep[S. 484f]{luhmann}
 
 \section{Verknüpfung von Bildern}
 \label{s:photogramm}
 Durch die beschriebenen Verfahren und die hieraus entstandenen Verknüpfungs\-punkte können die Bilder miteinander verknüpft werden. Da die Kamerapositionen am Rahmen veränderlich sind und die Montage auch keine ausreichend genaue Fixierung garantiert, können die bekannten Positionen aus vorherigen Messungen nur als Näherungswerte genutzt werden. Die genaue Bestimmung der Position und Ausrichtung - die äußere Orientierung - erfolgt dann über ein photogrammetrisches Verfahren. Dieses wird im Folgenden vorgestellt.
 
-
-\subsection{Abbildung}
-\todo{Abbildung allgemein erklären}
-\label{ss:abbildungsgleichung}
-
-\paragraph{Abbildungsgleichung}
-
-Die Abbildung eines Punktes auf einem Bild wird durch die Abbildungsgleichung beschrieben. In der Matrizenrechnung ergibt sich dieser aus der Multiplikation mit der Projektionsmatrix $P$. Diese ergibt sich aus der Kameramatrix $K$, der Rotation $R$ und dem Projektionszentrum $X_0$. (siehe \autoref{abbildungsgleichung}, nach \citealp[S. 244]{hartley} und \citealp[S. 290]{luhmann})
-
-\begin{align}
-    \label{abbildungsgleichung}
-    x' & = P \cdot X       \\
-    P  & = K \cdot [R|X_0] \\
-    P  & =
-    \begin{bmatrix}
-        c_x & 0   & x'_0 \\
-        0   & c_y & y'_0 \\
-        0   & 0   & 1
-    \end{bmatrix}
-    \cdot
-    \begin{bmatrix}
-        r_11 & r_21 & r_31 & X_0 \\
-        r_12 & r_22 & r_32 & Y_0 \\
-        r_13 & r_23 & r_33 & Z_0 \\
-    \end{bmatrix}
-\end{align}
-
-Um die Beziehung zwischen zwei Bildern aufzustellen, kann man diese Abbildungsgleichung nutzen. Da es hier nur um die Beziehung zwischen zwei Bildern geht, kann die Rotation und Translation des ersten Bildes auf 0 gesetzt werden ($R$ ist dann eine 3x3-Einheitsmatrix und $X_0$ ein Nullvektor). $X_0$ des zweiten Bildes wird zur Translation zwischen den beiden Bildern. \citep[S. 330]{luhmann}
-\todo{Überarbeiten und Verzeichnung hinzufügen}
 
 
 \subsection{Rückwärtsschnitt}
@@ -131,7 +178,7 @@ Mittels Bündelblockausgleichung können die grob mit den vorher genannten Verfa
 
 \section{Multi-view Stereo}
 \todo{überprüfen, falsch?}
-Die dünne Punktwolke aus dem Vorwärtsschnitt kann durch Multi-view Stereo-Verfahren zu einem 3D-Modell erweitert werden. Hierbei werden jeweils Bildpaare gebildet und die Disparitäten, also die Verschiebung des Objektes in der Abbildung, bestimmt. Diese sind abhängig von der Entfernung des Objektes, bei einem unendlich weit entfernten Objekt tritt keine Disparität auf \citep[S. 313]{luhmann}. Die Disparitäten können dann in Tiefeninformationen umgerechnet werden. Diese können dann wiederum gemittelt und zu einen Tiefenbild zusammengefasst werden. \citep[S. 505]{luhmann}
+Die dünne Punktwolke aus dem Vorwärtsschnitt kann durch Multi-view Stereo-Verfahren zu einem 3D-Modell erweitert werden. Hierbei werden jeweils Bildpaare gebildet und die Disparitäten, also die Verschiebung des Objektes in der Abbildung, bestimmt. Diese sind abhängig von der Entfernung des Objektes, bei einem unendlich weit entfernten Objekt tritt keine Disparität auf \citep[S. 313]{luhmann}. Die Disparitäten können dann in Tiefeninformationen umgerechnet werden. Diese können dann wiederum gemittelt und zu einem Tiefenbild zusammengefasst werden. \citep[S. 505]{luhmann}
 %\citep[S. 51]{opendronemap}
 
 \section{Mesh-Generierung}

@@ -5,3 +5,4 @@
 {"rule":"TEST_F_ANSTATT_PH","sentence":"^\\QDas Endergebnis soll es im Idealfall auch einem photogrammetrischen Laien ermöglichen, schnell und ohne lange Einarbeitungszeit 3D-Modelle in akzeptabler Auflösung und Qualität zu erzeugen.\\E$"}
 {"rule":"TEST_F_ANSTATT_PH","sentence":"^\\QAufbau eines photogrammetrischen Messsystems unter Verwendung von Raspberry-Pi-Kameras als Low-Cost-Sensoren Florian Timm August 2024\\E$"}
 {"rule":"TEST_F_ANSTATT_PH","sentence":"^\\QErklärung Ich versichere, dass ich die vorliegende Thesis mit dem Titel Aufbau eines photogrammetrischen Messsystems unter Verwendung von Raspberry-Pi-Kameras als Low-Cost-Sensoren selbstständig und ohne unzulässige fremde Hilfe erbracht habe.\\E$"}
+{"rule":"F_ANSTATT_PH","sentence":"^\\QDaher empfiehlt es sich, Bilder aus verschiedensten Richtungen zu machen, also bei der manuellen Photographie um das Objekt herumzugehen - eine Mehrbildaufnahme im Rundum-Verband zu erzeugen.\\E$"}

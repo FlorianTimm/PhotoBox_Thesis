@@ -15,7 +15,7 @@ Für die Berechnung von 3D-Modellen mit korrekter Skalierung sind einige Paramet
 
 \section{Maßstab und Passpunkte}
 \label{sec:passpunkt_bestimmung}
-Zur Bestimmung der Skalierung (vgl. \autoref{sec:masstab}) wurde sich für eine Kombination aus Maßstäben und Passpunktkoordinaten entschieden. Die Möglichkeit der festen und bekannten äußeren Orientierung der Kameras entfiel, da diese projektabhängig bewegt werden sollten.
+Zur Bestimmung der Skalierung (vgl. \autoref{sec:massstab}) wurde sich für eine Kombination aus Maßstäben und Passpunktkoordinaten entschieden. Die Möglichkeit der festen und bekannten äußeren Orientierung der Kameras entfiel, da diese projektabhängig bewegt werden sollten.
 
 Die Passpunkte in Form von ArUco-Markern wurden fest am Rahmen montiert. Diese sollen später als dauerhafte Realisierung des Maßstabes dienen. Außerdem wurden kalibrierte Maßstäbe im Objektraum verteilt, welche für die erstmalige Bestimmung der Koordinaten der Passpunkte den Maßstab bilden. Zur Unterstützung der Bildverknüpfung wurden weitere Punkte in Form von Schneider-Markern im Bildbereich verteilt. Anschließend wurden Bilder vom gesamten System mit  einer externen Kamera mit festen Einstellungen aufgenommen. Diese Bilder wurden dann in Agisoft Metashape verarbeitet und Koordinaten der Passpunkte bestimmt. Über manuell in Agisoft bestimmte Punkte am Boden des Systems wurde das System so transformiert, dass der Boden die XY-Ebene darstellt.
 
@@ -44,7 +44,7 @@ Die Ergebnisse sind in \autoref{img:naeherungswerte} dargestellt. Wie auch schon
 \begin{comment}
 \section{Farbkalibrierung}
 
-Für die korrekte Texturierung des 3D-Modelles sollte die Farbe möglichst korrekt sein. Da das System aber nicht von Fremdlichtquellen abgeschirmt ist, soll dies nur verhindern, dass die Farbe schon ohne Fremdlicht falsch sind. Daher wurde mit dem System eine Farbkalibriertafel photographiert und die Farbwerte ausgewertet. Hiermit lassen sich dann die Farben der Kameras korrigieren. \citep[S. 431f]{luhmann}
+Für die korrekte Texturierung des 3D-Modelles sollte die Farbe möglichst korrekt sein. Da das System aber nicht von Fremdlichtquellen abgeschirmt ist, soll dies nur verhindern, dass die Farbe schon ohne Fremdlicht falsch sind. Daher wurde mit dem System eine Farbkalibriertafel fotografiert und die Farbwerte ausgewertet. Hiermit lassen sich dann die Farben der Kameras korrigieren. \citep[S. 431f]{luhmann}
 \end{comment}
 
 \biblio
