@@ -90,15 +90,23 @@ Als weitere Parameter spielen die Verzeichnungen eine Rolle. Diese kann in die A
     x'        & = P \cdot X + \Delta x'                 \\
     \Delta x' & = \Delta x_{rad} + \Delta x_{tan} + ...
 \end{align}
-\todo{Parameter aus OpenCV/Agisoft beschreiben}
 
-\todo{Brown?}
+Die Verzeichnungen werden meist mit den Parametern $k1$ bis $k4$ für die radiale Verzeichnung und $p1$ und $p2$ für die tangentialen Verzeichnungen bezeichnet. Die Faktoren stellen dabei die Parameter einer Taylor-Reihe dar. Sie basieren auf dem Kameramodell von Brown und den von ihm in \cite[S. 859]{brown1971} vorgestellten Formeln (siehe \autoref{eq:brown_rad} und \ref{eq:brown_tan}).
+
+\begin{align}
+    \label{eq:brown_rad}
+    \Delta x_{rad} = k1 \cdot r^2 + k2 \cdot r^4 + k3 \cdot r^6 + k4 \cdot r^8 \\
+    \label{eq:brown_tan}
+    \Delta x_{tan} = 2 \cdot p1 \cdot x \cdot y + p2 \cdot (r^2 + 2 \cdot x^2)
+\end{align}
+
+Diese Parameter werden beispielsweise auch in Metashape, OpenDroneMap und OpenCV genutzt.
 
 
 \section{Bilder}
 \label{s:bilder}
 
-Die Berechnung der Tiefeninformationen ist nur möglich, sofern der Punkt in mindestens einem weiteren Bild abgebildet ist. Die Genauigkeit der Berechnung ist vom Schnittwinkel dieser beiden Strahlen abhängig. Um möglichst gute Grundlagen zur Ver\-fügung zu haben und die innere und äußere Orientierung möglichst gut berechnen zu können, müssen diese Bilder einige Bedingungen erfüllen - auf diese wird in diesem Abschnitt eingegangen.
+Die Berechnung der Position eines Objektes im Bild ist nur möglich, sofern der Punkt in mindestens einem weiteren Bild abgebildet ist. Die Genauigkeit der Berechnung ist vom Schnittwinkel dieser beiden Strahlen abhängig. Um möglichst gute Grundlagen zur Ver\-fügung zu haben und die innere und äußere Orientierung möglichst gut berechnen zu können, müssen diese Bilder einige Bedingungen erfüllen - auf diese wird in diesem Abschnitt eingegangen.
 
 \subsection{Überlappung und Bildinhalte}
 Da die Bilder durch identische Punkte verbunden werden, müssen die Bildinhalte sich überlappen und gemeinsame Punkte in den Bildern identifiziert werden. Die automatische Detektion von identischen Punkten ist auf verschiedene Weisen möglich: Entweder durch die Nutzung von uncodierten und codierten Passpunkten aber über eine Merkmalsextraktion. Für das letztere muss die Oberfläche aber genügend Textur bzw. Struktur aufweisen. Detailliert wird in \autoref{s:verknuepfung} hierauf eingegangen. \citep[S. 478]{luhmann}
