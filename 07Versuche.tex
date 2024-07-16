@@ -53,7 +53,7 @@ Als Vergleichsmessung wurden die Objekte mit einem Zeiss GOM ATOS 5 aufgemessen.
 Bei dem verwendeten System werden zwei Kameras eingesetzt, die sich ein massives Gehäuse mit dem mittig angeordneten Projektor teilen. Bei dem verwendeten Messvolumen und Objektentfernung beträgt die Genauigkeit etwa \todo{Wert}. Aufgrund der deutlich höheren erwarteten Genauigkeit des Streifenprojektionssystems, kann davon ausgegangen werden, dass die Messungen deutlich genauer sind als die des Prototypen und als wahre Werte angenommen werden können.
 
 \subsection{Ergebnisse}
-Die modellierte Oberfläche aus dem Streifenprojektionssystem und die Punktwolke aus dem Prototyp wurden in CloudCompare aufeinandergelegt und die Differenz berechnet. Die Visualisierung der Differenzen ist in \autoref{img:differenz_moia} dargestellt. Es ist zu erkennen, dass einige Bereiche gar nicht erfasst bzw. deren Genauigkeit deutlich von der erwarteten abweichen. Die größten Fehlstellen sind im Bereich des Kinnes und unterhalb des Bauches zu erkennen. Abweichungen im Bereich des restlichen Körpers sind deutlich geringer und liegen im Bereich von 0,21~mm. Sie sind auf die schlechtere Erfassung der nach unten gerichteten Flächen zurückzuführen. Diese Bildbereiche sind nur in wenigen Bildern sichtbar und können daher nicht so gut rekonstruiert werden.
+Die modellierte Oberfläche aus dem Streifenprojektionssystem und die Punktwolke aus dem Prototyp wurden in CloudCompare aufeinandergelegt und die Differenz berechnet. Die Visualisierung der Differenzen ist in \autoref{img:differenz_moai} dargestellt. Es ist zu erkennen, dass einige Bereiche gar nicht erfasst bzw. deren Genauigkeit deutlich von der erwarteten abweichen. Die größten Fehlstellen sind im Bereich des Kinnes und unterhalb des Bauches zu erkennen. Abweichungen im Bereich des restlichen Körpers sind deutlich geringer und liegen im Bereich von 0,21~mm. Sie sind auf die schlechtere Erfassung der nach unten gerichteten Flächen zurückzuführen. Diese Bildbereiche sind nur in wenigen Bildern sichtbar und können daher nicht so gut rekonstruiert werden.
 
 Die Abweichungen liegen in der Größenordnung der in \autoref{ss:erwartete_genauigkeit} berechneten Werte und sind nur minimal schlechter, als die Genauigkeit eines 3D-Modelles des Körpers, welches photogrammetrisch mit einer Spiegelreflexkamera Nikon D90 manuell aufgenommen wurde. Durch Kombinationen von anderne Perspektiven ist hier jedoch die Abdeckung, welche hier nicht objektiv betrachtet wurde, besser. Die Ergebnisse sind in \autoref{tab:vergleich_erg} zusammengefasst.
 
@@ -61,7 +61,7 @@ Die Abweichungen liegen in der Größenordnung der in \autoref{ss:erwartete_gena
     \centering
     \includegraphics[width=0.8\textwidth]{img/moai_fehler.jpg}
     \caption{Differenzbild des Moai (rot: Fehler größer 0,5 mm)}
-    \label{img:differenz_moia}
+    \label{img:differenz_moai}
 \end{figure}
 
 \begin{table}
@@ -84,12 +84,8 @@ Die Abweichungen liegen in der Größenordnung der in \autoref{ss:erwartete_gena
 \end{table}
 
 
-\section{Evaluation der Kameraanzahl}
-Zur Abschätzung, wie viele Kameras für eine gute Genauigkeit notwendig sind, wurden verschiedene Konfigurationen getestet. Hierzu wurde die Aufnahme des Moai aus \autoref{s:genauigkeitsueberpruefung} genutzt und hier in Agisoft Metashape verschiedene Kameras deaktiviert und das 3D-Modell neu berechnet. Die Ergebnisse wurden wie \autoref{s:genauigkeitsueberpruefung} mit dem Streifenprojektionssystem verglichen.
-\todo{Ergebnisse}
-
-
 \section{Nutzung eines Drehtellers}
+\label{s:drehteller}
 Statt die reele Zahl der Kameras zu verändern, kann auch ein Drehteller genutzt werden, so dass jede Kamera mehr als ein Bild zur Erfassung des Objektes liefert.
 
 \subsection{Durchführung}
@@ -132,6 +128,15 @@ Die Ergebnisse sind in \autoref{tab:vergleich_drehteller} zusammengefasst.
     \caption{Differenzbild des Moai (rot: Fehler größer 0,5 mm)}
     \label{img:drehteller_moai_fehler}
 \end{figure}
+
+
+
+\section{Evaluation der Kameraanzahl}
+Die Kameras machen einen großen Teil des (Kosten-)Aufwandes zur Realisierung des Projekte aus. Es soll daher in diesem Schritt geprüft werden, ob die Anzahl der Kameras auch reduziert werden kann. Entsprechend \autoref{s:drehteller} wird auch der Einsatz des Drehtellers statt mehr Kameras geprüft.
+
+\subsection{Durchführung}
+Zur Abschätzung, wie viele Kameras für eine gute Genauigkeit notwendig sind, wurden verschiedene Konfigurationen getestet. Hierzu wurde die Aufnahme des Moai aus \autoref{s:genauigkeitsueberpruefung} genutzt und hier in Agisoft Metashape verschiedene Kameras deaktiviert und das 3D-Modell neu berechnet. Die Ergebnisse wurden wie \autoref{s:genauigkeitsueberpruefung} mit dem Streifenprojektionssystem verglichen.
+\todo{Ergebnisse}
 
 \biblio
 \end{document}
