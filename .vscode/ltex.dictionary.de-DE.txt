@@ -42,3 +42,13 @@ Kalibrier-
 schattenfrei
 Camera
 Wide
+Genauigkeitsanspruch
+Umfokussierung
+RANSAC-Ansatz
+Tiefenbild
+Reconstruction
+Screened
+ressourcenlastig
+projektabhängig
+dpt
+texturreiche

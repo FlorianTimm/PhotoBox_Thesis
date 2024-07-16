@@ -40,7 +40,7 @@ Die Bestimmung der inneren Orientierung, auch Kalibrierung genannt, kann wäh\-r
 \begin{figure}
     \centering
     \includesvg[width=0.8\textwidth]{./img/optischeAchse}
-    \caption{Abbildung des Lochkamera-Modelles mit Spiegelung am Projektionszentrum (rot), nach \citealt[S. 154]{hartley}, Beschriftung nach \citealt{luhmann}} %Bildunterschrift
+    \caption{Abbildung des Lochkamera-Modells mit Spiegelung am Projektionszentrum (rot), nach \citealt[S. 154]{hartley}, Beschriftung nach \citealt{luhmann}} %Bildunterschrift
     \label{img:optische_achse}
 \end{figure}
 
@@ -115,10 +115,10 @@ Da die Objekte und die Kameras sich während der Aufnahme nicht bewegen, kann di
 
 
 \subsection{Fokussierung und Schärfentiefe}
-Um genaue Punktwolken zu ermöglichen, muss das Objekt scharf abgebildet werden. Die Kameras müssen dafür entsprechend fokussiert sein. Jedoch wird durch die Fokussierung auch die Innere Orientierung verändert. Normalerweise wird daher auf eine Umfokussierung verzichtet und mittels der Blende (kleine Blendenöffnung) die Schärfentiefe erhöht, sodass ein großer Bereich scharf abgebildet wird. Die Schärfentiefe ist jedoch im Makrobereich relativ klein. Genauer wird auf die Schärfentiefe in \autoref{sec:fokusstacking} eingegangen.
+Um genaue Punktwolken zu ermöglichen, muss das Objekt scharf abgebildet werden. Die Kameras müssen dafür entsprechend fokussiert sein. Jedoch wird durch die Fokussierung auch die innere Orientierung verändert. Normalerweise wird daher auf eine Umfokussierung verzichtet und mittels der Blende (kleine Blendenöffnung) die Schärfentiefe erhöht, sodass ein großer Bereich scharf abgebildet wird. Die Schärfentiefe ist jedoch im Makrobereich relativ klein. Genauer wird auf die Schärfentiefe in \autoref{sec:fokusstacking} eingegangen.
 
 \section{Skalierung/Maßstab}
-\label{sec:masstab}
+\label{sec:massstab}
 Die Skalierung eines rein photogrammetrisch bestimmten 3D-Modelles ist nicht bekannt, da die Berechnungen nur auf Richtungen basieren. Daher werden mindestens Referenzen in Form einer bekannten Länge benötigt, um die Skalierung zu bestimmen. Alternativ können auch Passpunkte (siehe \autoref{s:verknuepfung}) mit bekannten Koordinaten verwendet werden oder im Falle von Mehrkamerasystemen eine bekannte äußeren Orientierungen der Kameras. \citep[S. 546]{luhmann}
 
 
@@ -142,7 +142,7 @@ Eine andere Variante der automatischen Verknüpfungspunkte sind die sogenannten 
 \subsection{Merkmalsextraktion}
 Ohne das Anbringen von Markern können auch Merkmale in den Bildern erkannt werden. Hierfür gibt es verschiedene Methoden, eine dieser ist die SIFT-Methode, welche hier beispielhaft kurz dargestellt wird. Sie liefert Verknüpfungspunkte aus Mustern auf den photographierten Oberflächen. Es ist meist nicht notwendig explizit Marker an dem aufzunehmenden Objekt anzubringen, sofern seine Oberfläche nicht strukturlos ist (glatte weiße Wände etc.) oder in Bewegung ist.
 
-Zur Erkennung von Merkmalen setzt das Verfahren auf die Detektion von Kanten. Diese werden in verschiedenen Stufen einer Bildpyramide erkannt und ihre Extrema berechnet. Es werden diese Merkmale weiter ausgedünnt, beispielsweise über den Kontrast. Sofern ein möglicher Marker identifiziert wurde, wird eine Beschreibung erzeugt. Diese erfolgt  durch Analyse der Helligkeitsabweichungen zu den Nachbar-Pixeln und wird an der stärksten Abweichung ausgerichtet. Hierdurch wird die Beschreibung dann richtungsunabhängig. Mit diesen kann dann die Übereinstimmung von zwei Markern in zwei Photos bestimmt werden, auch wenn die Bilder zueinander gekippt oder gedreht sind.
+Zur Erkennung von Merkmalen setzt das Verfahren auf die Detektion von Kanten. Diese werden in verschiedenen Stufen einer Bildpyramide erkannt und ihre Extrema berechnet. Es werden diese Merkmale weiter ausgedünnt, beispielsweise über den Kontrast. Sofern ein möglicher Marker identifiziert wurde, wird eine Beschreibung erzeugt. Diese erfolgt  durch Analyse der Helligkeitsabweichungen zu den Nachbar-Pixeln und wird an der stärksten Abweichung ausgerichtet. Hierdurch wird die Beschreibung dann richtungsunabhängig. Mit diesen kann dann die Übereinstimmung von zwei Markern in zwei Bildern bestimmt werden, auch wenn diese zueinander gekippt oder gedreht sind.
 \citep[S. 484f]{luhmann}
 
 \section{Verknüpfung von Bildern}
@@ -170,7 +170,7 @@ Mittels Bündelblockausgleichung können die grob mit den vorher genannten Verfa
 
 \section{Multi-view Stereo}
 \todo{überprüfen, falsch?}
-Die dünne Punktwolke aus dem Vorwärtsschnitt kann durch Multi-view Stereo-Verfahren zu einem 3D-Modell erweitert werden. Hierbei werden jeweils Bildpaare gebildet und die Disparitäten, also die Verschiebung des Objektes in der Abbildung, bestimmt. Diese sind abhängig von der Entfernung des Objektes, bei einem unendlich weit entfernten Objekt tritt keine Disparität auf \citep[S. 313]{luhmann}. Die Disparitäten können dann in Tiefeninformationen umgerechnet werden. Diese können dann wiederum gemittelt und zu einen Tiefenbild zusammengefasst werden. \citep[S. 505]{luhmann}
+Die dünne Punktwolke aus dem Vorwärtsschnitt kann durch Multi-view Stereo-Verfahren zu einem 3D-Modell erweitert werden. Hierbei werden jeweils Bildpaare gebildet und die Disparitäten, also die Verschiebung des Objektes in der Abbildung, bestimmt. Diese sind abhängig von der Entfernung des Objektes, bei einem unendlich weit entfernten Objekt tritt keine Disparität auf \citep[S. 313]{luhmann}. Die Disparitäten können dann in Tiefeninformationen umgerechnet werden. Diese können dann wiederum gemittelt und zu einem Tiefenbild zusammengefasst werden. \citep[S. 505]{luhmann}
 %\citep[S. 51]{opendronemap}
 
 \section{Mesh-Generierung}
