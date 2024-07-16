@@ -15,7 +15,7 @@ Für die Berechnung von 3D-Modellen mit korrekter Skalierung sind einige Paramet
 
 \section{Maßstab und Passpunkte}
 \label{sec:passpunkt_bestimmung}
-Zur Bestimmung der Skalierung (vgl. \autoref{sec:massstab}) wurde sich für eine Kombination aus Maßstäben und Passpunktkoordinaten entschieden. Die Möglichkeit der festen und bekannten äußeren Orientierung der Kameras entfiel, da diese projektabhängig bewegt werden sollten.
+Zur Bestimmung der Skalierung (vergleiche \autoref{sec:massstab}) wurde sich für eine Kombination aus Maß\-stäben und Passpunktkoordinaten entschieden. Die Möglichkeit der festen und bekannten äußeren Orientierung der Kameras entfiel, da diese projektabhängig bewegt werden sollten.
 
 Die Passpunkte in Form von ArUco-Markern wurden fest am Rahmen montiert. Diese sollen später als dauerhafte Realisierung des Maßstabes dienen. Außerdem wurden kalibrierte Maßstäbe im Objektraum verteilt, welche für die erstmalige Bestimmung der Koordinaten der Passpunkte den Maßstab bilden. Zur Unterstützung der Bildverknüpfung wurden weitere Punkte in Form von Schneider-Markern im Bildbereich verteilt. Anschließend wurden Bilder vom gesamten System mit  einer externen Kamera mit festen Einstellungen aufgenommen. Diese Bilder wurden dann in Agisoft Metashape verarbeitet und Koordinaten der Passpunkte bestimmt. Über manuell in Agisoft bestimmte Punkte am Boden des Systems wurde das System so transformiert, dass der Boden die XY-Ebene darstellt.
 
@@ -26,7 +26,7 @@ Die eigentliche Bestimmung der inneren Orientierung erfolgt im Betrieb in Form e
 
 \paragraph{Vorgehen}
 
-Es wurden mit fünf verschiedenen Fokussierungen mit jeweils 24 Raspberry-Pi-Kameras Bilder aufgenommen und die Bilder in Agisoft Metashape mittels ArUco-Markern orientiert, dessen Position aus \autoref{sec:passpunkt_bestimmung} bekannt ist. Außerdem wurden etwa 100 Schneider-Marker im Bildbereich der Kameras verteilt und als Verknüpfungspunkte benutzt. Es wurden jeweils in Metashape alle Bilder mit der gleichen Fokussierung als eine Kamera angenommen und die innere Orientierung bestimmt. Anschließend wurden alle Kameras nochmal einzeln ausgeglichen. Durch dieses zweistufige Vorgehen sollte bewirkt werden, dass die Näherungswerte schrittweise verbessert werden. Ein einstufiges Vorgehen ohne Näherungswerte führte zu falschen Werten. Die innere Orientierung wurde in Form von Brennweite, Bildhauptpunktverschiebung und Verzeichnung ermittelt und die Ergebnisse wurden in einem Box-Whisker-Plot dargestellt und eine ausgleichende Gerade ermittelt.
+Es wurden mit fünf verschiedenen Fokussierungen mit jeweils 24 Rasp\-berry-Pi-Kameras Bilder aufgenommen und die Bilder in Agisoft Metashape mittels ArUco-Markern orientiert, dessen Position aus \autoref{sec:passpunkt_bestimmung} bekannt ist. Außerdem wurden etwa 100 Schneider-Marker im Bildbereich der Kameras verteilt und als Verknüpfungspunkte benutzt. Es wurden jeweils in Metashape alle Bilder mit der gleichen Fokussierung als eine Kamera angenommen und die innere Orientierung bestimmt. Anschließend wurden alle Kameras nochmal einzeln ausgeglichen. Durch dieses zweistufige Vorgehen sollte bewirkt werden, dass die Näherungswerte schrittweise verbessert werden. Ein einstufiges Vorgehen ohne Näherungswerte führte zu falschen Werten. Die innere Orientierung wurde in Form von Brennweite, Bildhauptpunktverschiebung und Verzeichnung ermittelt und die Ergebnisse wurden in einem Box-Whisker-Plot dargestellt und eine ausgleichende Gerade ermittelt.
 
 \paragraph{Ergebnis}
 
