@@ -10,6 +10,7 @@ jobs:
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v3
         with:
+          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode --shell-escape
           root_file: 00PhotoBox.tex
       - name: Upload PDF file
         uses: actions/upload-artifact@v4
