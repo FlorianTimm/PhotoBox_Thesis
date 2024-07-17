@@ -87,6 +87,7 @@
 \bibliographystyle{hcu}
 \def\biblio{
     \ifSubfilesClassLoaded{%
+        \nocite{timm}
         \bibliography{./00PhotoBox}
         \printglossaries%
     }{}
@@ -220,7 +221,9 @@ This paper explores the solution of using multiple low-cost cameras mounted on a
 \renewcommand{\appendixtocname}{\appendixname}
 \begin{appendices}
     \subfile{A01Bedienung}
-    \subfile{A02Teile}
+    \subfile{A02Kurzbedienung}
+    \subfile{A03QuickGuide}
+    \subfile{A04Teile}
 \end{appendices}
 
 \clearpage

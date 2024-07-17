@@ -20,7 +20,26 @@ Nach einer Recherche zu den Anforderungen an ein solches System soll ein Prototy
 
 Neben der eigentlichen Entwicklung und Untersuchung dieses Systemes soll abschließend die Anzahl der Kameras und die Nutzung eines Drehtellers evaluiert werden, um hiermit gegebenenfalls die Hardwarekosten weiter zu senken oder die Auflösung und Genauigkeit zu steigern.
 
-\section{Stand der Thematik}
+\section{Anforderungen}
+\label{sec:anforderungen}
+Das System soll folgende Anforderungen erfüllen:
+
+\begin{itemize}
+    \item Erfassung von kleinen Objekten bis etwa 40~cm Durchmesser
+    \item Automatisierte Erfassung der Bilder
+    \item Automatisierte Übertragung der Bilder
+    \item Automatisierte Verarbeitung der Bilder zu einem 3D-Modell
+    \item Einfache Bedienbarkeit
+    \item Geringe Kosten
+    \item Einfacher Nachbau
+    \item Nutzung von Open-Source-Software
+    \item Transportmöglichkeit
+    \item Nutzung in anderen Ländern
+    \item Möglichkeit zur Erweiterung
+\end{itemize}
+\todo{Anforderungen prüfen/Textform bzw. Absätze}
+
+\section{Stand der Technik}
 Der Ansatz, Kameras auf einem festen Rahmen zu montieren, Bilder aufzunehmen und anschließend automatisiert 3D-Modelle auf Basis von Photogrammetrie zu erzeugen, ist bereits weit verbreitet und erprobt. Hauptsächlich unterscheiden sich diese in der Wahl der Kameras und der Zielgruppe der Bediener. Häufig werden hochwertige Kameras verwendet, die jedoch entsprechend hohe Kosten in der Anschaffung verursachen.
 
 Bereits Anfang der 1990er Jahre wurde ein modulares System von Leica entwickelt, das die Objekterfassung mittels mehrerer Digitalkameras ermöglichte, das sogenannte Leica POM.  Dieses System wurde für die Industrie entwickelt, beispielsweise für die Qualitätskontrolle von Bauteilen. Es ermöglichte die flexible Nutzung verschiedener Kamerasysteme, Drehteller und Lichtquellen. Ähnlich wie bei dem hier geplanten System wurden die Daten auch automatisch übertragen und verarbeitet. Auch konnten bereits einige Punkte automatisch durch Bildvergleich und Kantendetektion gemessen werden.

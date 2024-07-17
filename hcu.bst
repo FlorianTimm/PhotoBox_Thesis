@@ -261,7 +261,7 @@ FUNCTION {bbl.techrep}
 { "{Technischer Bericht}" }
 
 FUNCTION {bbl.mthesis}
-{ "Diplomarbeit" }
+{ "Masterthesis" }
 
 FUNCTION {bbl.phdthesis}
 { "Dissertation" }

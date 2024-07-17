@@ -52,3 +52,5 @@ ressourcenlastig
 projektabhängig
 dpt
 texturreiche
+Merkmalspunkte
+SfM-Werkzeugen
