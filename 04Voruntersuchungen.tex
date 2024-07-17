@@ -89,21 +89,50 @@ Die Ergebnisse waren nicht zufriedenstellend. Es zeigte sich, dass die Verzeichn
 
 \section{3D-Modell aus Fokusstacking}
 \label{sec:fokusstacking}
-\todo{Berechnung Schärfentiefe / Notwendige Fokusschritte für Abdeckung 0,1-1 m}
+
 
 \paragraph{These}
 Die Schärfentiefe der Kameras ist gering. Durch Fokusstacking kann ein besseres 3D-Modell erstellt werden.
 
 \paragraph{Ziel}
-Es wird vermutet, dass die geringe Schärfentiefe die Qualität der 3D-Modelle begrenzt. Daher soll geprüft werden, ob durch Fokusstacking die Qualität des 3D-Modell verbessert werden kann. Hierzu wird ein 3D-Modell aus einem Fokusstacking erstellt und mit einem normalen 3D-Modell verglichen.
+Es wird vermutet, dass die geringe Schärfentiefe (siehe \autoref{s:schaerfe}) die Qualität der 3D-Modelle begrenzt. Daher soll geprüft werden, ob durch Fokusstacking die Qualität des 3D-Modell verbessert werden kann. Hierzu wird ein 3D-Modell aus einem Fokusstacking erstellt und mit einem normalen 3D-Modell verglichen.
 
 \paragraph{Vorgehen}
+
+Mittels eines Pythonskriptes wurden die notwendigen Fokusschritte berechnet, damit der Bereich von 10 cm bis 1 m scharf abgebildet wird. Hierbei wurden die Werte so bestimmt, dass jeweils die hintere Schärfegrenze $a_h$ einer Aufname der vorderen $a_v$ des nächsten Bildes entspricht. Im Gegensatz zu den Berechnungen in \autoref{s:schaerfe} wurde hier ein Unschärfekreis von 6 Pixeln akzeptiert, da ansonsten die Anzahl der notwendigen Aufnahmen zu groß geworden wäre. Die berechneten Werte mit ihren Grenzen sind in \autoref{tab:fokusstack} aufgelistet und in \autoref{img:fokusstack_plot} dargestellt.
+
+
+\begin{table}
+    \centering
+    \caption{Notwendige Fokusschritte für den Bereich von 10 cm bis 1 m}
+    \label{tab:fokusstack}
+    \begin{tabular}{rr|r|r}
+        \multicolumn{2}{c|}{\textbf{Fokussierung}} & \multicolumn{1}{c|}{\textbf{Nahgrenze}} & \multicolumn{1}{c}{\textbf{Ferngrenze}}                    \\ \hline
+        \multicolumn{1}{r|}{\textbf{{[}m{]}}}      & \textbf{{[}dpt{]}}                      & \textbf{{[}m{]}}                        & \textbf{{[}m{]}} \\ \hline
+        \multicolumn{1}{r|}{0,11}                  & 9,31                                    & 0,10                                    & 0,12             \\
+        \multicolumn{1}{r|}{0,13}                  & 7,93                                    & 0,12                                    & 0,14             \\
+        \multicolumn{1}{r|}{0,15}                  & 6,53                                    & 0,14                                    & 0,17             \\
+        \multicolumn{1}{r|}{0,19}                  & 5,13                                    & 0,17                                    & 0,23             \\
+        \multicolumn{1}{r|}{0,27}                  & 3,72                                    & 0,23                                    & 0,33             \\
+        \multicolumn{1}{r|}{0,43}                  & 2,30                                    & 0,33                                    & 0,63             \\
+        \multicolumn{1}{r|}{1,15}                  & 0,87                                    & 0,63                                    & 6,66
+    \end{tabular}
+\end{table}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]{./img/fokusstack_plot.png}
+    \caption{Notwendige Fokusschritte, um den Bereich von 10 cm bis 1 m scharf abzubilden} %Bildunterschrift
+    \label{img:fokusstack_plot} %ID fürs Bild
+\end{figure}
+
 \begin{itemize}
     \item Automatisierter Fokusstacking
     \item keine Beachtung der festen Ausrichtung
     \item Transformation über SIRF und Homografie
 \end{itemize}
 \todo{Textform}
+
 
 \paragraph{Ergebnis}
 \todo{Füllen}
