@@ -36,11 +36,43 @@ Nachteil und Vorteil zugleich ist, dass die Kamera über einen Autofokus verfüg
 
 Weiterer Vorteil der Lösung mit einzelnen Raspberry Pi ist es, dass hierdurch bereits die einzelnen Kameraeinheiten Berechnungen wie das Identifizieren von Passpunkten übernehmen können. Durch die Parallelisierung dieses Schrittes ist weniger Berechnungszeit zwischen den Aufnahmen zu erwarten. Außerdem ist durch die Nutzung von kabellosen Netzwerkverbindungen zur Steuerung das System skalierbar im Sinne der Anzahl der Kameras aber auch der Abstände zwischen den Kameras.
 
-\todo{virtuelles Blendermodell}
-
-
+Die Anzahl der Kameras für den Prototyp wurde zusammen mit der Art des Rahmentypen (\autoref{s:rahmen}) festgelegt. Hierzu wurde der Rahmen mit seinen Kameras in der 3D-Software Blender modelliert und einzelne Bilder der möglichen Kamera-Positionen gerendert. Diese wurden dann in Agisoft Metashape genutzt, um wieder ein 3D-Modell zu berechnen bzw. zu prüfen, ob dieses möglich ist. Außerdem war es hierdurch einfach möglich, die Überdeckung der Kameras zu prüfen. Das virtuelle Modell des Systemes würde anschließend auch genutzt, um Visualisierungen für die Anleitung (\autoref{ch:Bedienungsanleitung}) zu erstellen. Eine Verwendung in der Websoftware zur visuellen Überprüfung der berechneten Kamera-Positionen wurde geprüft, aber nicht mehr umgesetzt (siehe \autoref{s:ausblick}).
 
 \section{Rahmen}
+\label{s:rahmen}
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.32\textwidth}
+        \includegraphics[width=1\linewidth]{./img/modell1.png}
+        \centering
+        \caption{Unter Nutzung eines Drehtellers} %Bildunterschrift
+        \label{img:entwurf1} %ID fürs Bild
+    \end{subfigure}
+    \begin{subfigure}{0.32\textwidth}
+        \includegraphics[width=1\linewidth]{./img/modell2.png}
+        \centering
+        \caption{24er Rahmen mit Boden-Versteifung} %Bildunterschrift
+        \label{img:entwurf2} %ID fürs Bder an den Aluprofilen befestigt ist (ild
+    \end{subfigure}
+    \begin{subfigure}{0.32\textwidth}
+        \includegraphics[width=1\linewidth]{./img/modell3.png}
+        \centering
+        \caption{Endgültiger Entwurf mit seitlichen Versteifungen} %Bildunterschrift
+        \label{img:entwurf3} %ID fürs Bder an den Aluprofilen befestigt ist (ild
+    \end{subfigure}
+    \label{img:entwuerfe}
+    \caption{Verschiedene Entwurfsideen, modelliert mit Blender} %Bildunterschrift
+\end{figure}
+
+
+Der Rahmen muss möglichst stabil sein, damit die Kameras sich nicht in ihrer Lage verändern können. Jedoch sollte das System auch weiterhin transportabel - also nicht zu schwer - und veränderbar bleiben, beispielsweise Kameras für Messreihen in ihrer Lage verändert werden. Der Aufbau aus genormten Bauteilen bietet sich an, um hier ggf. den Nachbau einfach ermöglichen zu können. Außerdem sollte der Rahmen auch gegebenenfalls demontierbar sein, damit er transportiert werden kann.
+
+Als mögliche Materialien kamen Holz, Stahl und Aluminium infrage. Aufgrund der einfachen Bearbeitung und der genormten Profile wurde sich für Aluminiumprofile entschieden. Diese gibt es in verschiedenen Ausführungen mit Nuten an den Seitenflächen, sodass eine einfache Montage, aber auch eine Demontage zu Transportzwecken, möglich wird. Außerdem sind diese sehr stabil bei leichtem Gewicht.
+
+
+Es wurden verschiedene Varianten geprüft, die in \autoref{img:entwuerfe} dargestellt sind. Der erste Entwurf (\autoref{img:entwurf1}) sah weniger Kameras und die zwingende Nutzung eines Drehtellers vor, dies wurde jedoch verworfen, weil dieser nicht der Anforderung einer schnellen Erfassung entsprochen hätte und auch nur zum Teil laiensicher wäre. Der zweite Entwurf (\autoref{img:entwurf2}) sah bereits die Nutzung von 8 Kamera-Hauptrichtungen vor, was für gute Schnittwinkel sorgt. Für die Aussteifung wurde hier ein Boden vorgesehen. Dies ist jedoch nachteilig, da das System dann beispielsweise nicht mehr über große, nicht bewegliche Objekte herüber gestülpt werden könnte. Gerade bei empfindlichen Objekten wäre dieses aber vorteilhaft. In der dritten Variante (\autoref{img:entwurf3}) wurde dann die Versteifung in den Seitenwänden umgesetzt. Durch eine Konstruktion mit Eckwürfeln sowie dem Einbau von dreieckigen Strukturen und Platten, die Scheibenwirkung haben, wurde die Stabilität der Verbindungen erhöht. \autoref{img:alurahmen} zeigt den fertigen Rahmen vor Einbau der Platten und der Technik.
+
 
 \begin{figure}
     \centering
@@ -58,10 +90,6 @@ Weiterer Vorteil der Lösung mit einzelnen Raspberry Pi ist es, dass hierdurch b
     \end{subfigure}
     \caption{Rahmen und Kameramontage-Winkel} %Bildunterschrift
 \end{figure}
-
-Der Rahmen muss möglichst stabil sein, damit die Kameras sich nicht in ihrer Lage verändern können. Jedoch sollte das System auch weiterhin transportabel - also nicht zu schwer - und veränderbar bleiben, beispielsweise Kameras für Messreihen in ihrer Lage verändert werden. Der Aufbau aus genormten Bauteilen bietet sich an, um hier ggf. den Nachbau einfach ermöglichen zu können. Außerdem sollte der Rahmen auch gegebenenfalls demontierbar sein, damit er transportiert werden kann.
-
-Als mögliche Materialien kamen Holz, Stahl und Aluminium infrage. Aufgrund der einfachen Bearbeitung und der genormten Profile wurde sich für Aluminiumprofile entschieden. Diese gibt es in verschiedenen Ausführungen mit Nuten an den Seitenflächen, sodass eine einfache Montage, aber auch eine Demontage zu Transportzwecken, möglich wird. Außerdem sind diese sehr stabil bei leichtem Gewicht. Durch eine Konstruktion mit Eckwürfeln sowie dem Einbau von dreieckigen Strukturen und Platten, die Scheibenwirkung haben, wurde die Stabilität der Verbindungen erhöht. \autoref{img:alurahmen} zeigt den fertigen Rahmen vor Einbau der Platten und der Technik.
 
 Die Kameras wurden mit einem $90^\circ$-Winkel am Rahmen montiert, um diese weiterhin noch vertikal schwenken zu können. \autoref{img:aluwinkel} zeigt einen der Winkel, der an den Aluprofilen befestigt ist (noch ohne entsprechende Befestigungsbohrungen).
 
