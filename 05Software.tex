@@ -70,7 +70,6 @@ Die Kommunikation innerhalb des Systemes ist in dem Ablaufdiagramm aus \autoref{
 
 
 \subsection{Module auf den Raspberry Pi (Python)}
-\todo{Plural von Raspberry Pi verdeutlichen}
 Die Software auf den Raspberry Pi wurde in Python geschrieben. Hierbei wurde darauf geachtet, dass die Module möglichst unabhängig voneinander sind und nur über definierte Schnittstellen kommunizieren.
 
 \subsubsection{Bibliotheken}
@@ -93,7 +92,7 @@ wurde genutzt um die Weboberfläche und die Datendownloads bereitzustellen. Hier
 ermöglicht die Steuerung der RGB-LEDs. Hierzu wird das in \cite{ws2811} beschriebene Steuerprotokoll von der Bibliothek implementiert. Die Steuerung kann dann mittels einfacher Farbcodes erfolgen.
 
 \subsubsection{Allgemeine Module}
-Es wurden einige Klassen erstellt, die in allen Modulen genutzt wurden. Diese sind in \autoref{img:uml_common} dargestellt. Diese steuern allgemeine Funktionen wie das Logging und das Auslesen der Konfiguration. Außerdem legen die Interfaces die Struktur der Datenübertragung zwischen den Raspberry Pi fest. \todo{Plural Raspberry Pi verdeutlichen}
+Es wurden einige Klassen erstellt, die in allen Modulen genutzt wurden. Diese sind in \autoref{img:uml_common} dargestellt. Diese steuern allgemeine Funktionen wie das Logging und das Auslesen der Konfiguration. Außerdem legen die Interfaces die Struktur der Datenübertragung zwischen den Raspberry Pi fest. Die Klasse \texttt{Config} liest die Konfiguration aus einer Datei aus und stellt diese zur Verfügung. Die Klasse \texttt{Logger} ermöglicht das Loggen von Informationen und Fehlern. Die Klasse \texttt{Interface} stellt die Schnittstelle zur Kommunikation mit anderen Modulen bereit. Die Klasse \texttt{CamSettings} und \texttt{ArucoMarkerPos} sind Datenklassen, die die Einstellungen der Kameras und die Position der ArUco-Marker speichern. Diese Daten werden zwischen den Komponenten ausgetauscht -- hierdurch wird sichergestellt, dass das erwartete Datenmodell auf beiden Seiten gleich ist.
 
 \begin{figure}
   \centering
@@ -105,11 +104,13 @@ Es wurden einige Klassen erstellt, die in allen Modulen genutzt wurden. Diese si
 
 \subsubsection{Master-Steuerung}
 
-Auf einem Raspberry Pi 4 läuft die Gesamtsteuerung des Systemes. Dieses stellt Schnittstellen zur Steuerung auf drei verschiedenen Wegen bereit: per Taster, per Weboberfläche und per Socket-Verbindung. Außerdem stellt es die Daten per REST-Schnittstelle zur Verfügung. Die Klassen sind in \autoref{img:master} dargestellt.
+Auf einem Raspberry Pi 4 läuft die Gesamt\-steuerung des Systemes. Dieses stellt Schnitt\-stellen zur Steuerung auf drei verschiedenen Wegen bereit: per Taster, per Weboberfläche und per Socket-Verbindung. Außerdem stellt es die Daten per REST-Schnittstelle zur Verfügung. Die Klassen sind in \autoref{img:master} dargestellt.
 
-Die Steuerung per Taster ermöglicht einfache Aufgaben wie das Suchen von Kameras, das Aufnehmen von Bilder und die Aktivierung des Standbys bzw. das Herunterfahren des Systems auch ohne PC durchzuführen. Die Weboberfläche ermöglicht die komplette Steuerung, das Konfigurieren sowie das Anzeigen und Herunterladen der Bilder. Die Socket-Verbindung ermöglicht die Kommunikation mit der Desktop-Software und die Steuerung hierüber.
+Das Skript \texttt{Master} wird automatisch bei Systemstart über \texttt{systemctl} als Daemon gestartet. Hier ist die Webschnittstelle implementiert. Sie ermöglicht die komplette Steuerung, das Konfigurieren sowie das Anzeigen und Herunterladen der Bilder. Das Skript instanziert außerdem die Klasse \texttt{Control}, welche die hauptsächliche Steuerung übernimmt und den Kern des Systemes darstellt.
 
-Der Raspberry Pi sammelt die Daten der einzelnen Kameras und stellt diese zur Weiterverarbeitung zur Verfügung. Die Datenübertragung an die Desktop-Software erfolgt über die REST-Schnittstelle. Alternativ kann auch ein USB-Stick an dem Raspberry Pi angesteckt werden oder die Daten über die Weboberfläche manuell heruntergeladen werden.
+Die Steuerung per Taster ermöglicht die Klasse \texttt{ButtonControl}. Sie ermöglicht einfache Aufgaben wie das Suchen von Kameras, das Aufnehmen von Bilder und die Aktivierung des Standbys bzw. das Herunterfahren des Systems auch ohne PC durchzuführen. Die Klasse \texttt{DesktopControlThread} startet, wie der Name bereits vermuten lässt, als eigenständiger Thread und stellt eine Socket-Verbindung zur Kommunikation mit der Desktop-Software und die Steuerung hierüber bereit. Ein weitereren Thread stellt \texttt{CameraControlThread} zur verfügung. Dieser überwacht das Netzwerk auf Nachrichten der Kameras und initiert die entsprechenden Schritte. Die eigentlichen Verarbeitungsschritte werden in der Klasse \texttt{Control} durchgeführt. Auch für diese Aufgaben werden zum Teil eigene Threads gestartet, damit die Verarbeitung parallel erfolgen kann. Beispielsweise wird der Download der Bilder und die Berechnung von Kamerapositionen in eigenen Threads durchgeführt.
+
+Die \texttt{Control}-Klasse sammelt die Daten der einzelnen Kameras und stellt diese zur Weiterverarbeitung zur Verfügung. Die Datenübertragung an die Desktop-Software erfolgt über die REST-Schnittstelle, die wieder vom \texttt{Master}-Skript bereitgestellt wird. Alternativ kann auch ein USB-Stick an dem Raspberry Pi angesteckt werden oder die Daten über die Weboberfläche manuell heruntergeladen werden. Dazu wird bei der Verarbeitung der Daten geprüft, ob ein USB-Stick angeschlossen ist. Falls dieses der Fall ist, wird dieser gemountet, die Daten kopiert und der Stick wieder ausgehängt, damit dieser (fast) jederzeit getrennt werden kann. Das Datenformat auf dem USB-Stick und in den Archiv-Dateien aus der Weboberfläche entspricht dem, dass die Desktop-Software anlegt. So kann diese die Daten dann auch einladen und weiterverarbeiten.
 
 \begin{figure}
   \centering
@@ -122,6 +123,8 @@ Der Raspberry Pi sammelt die Daten der einzelnen Kameras und stellt diese zur We
 \subsubsection{Kamera-Steuerung}
 Die Raspberry Pi Zero W übernehmen die Steuerung der Kameras. Hierfür wurde ein Modul entwickelt, das die Kameras steuert, die Bilder aufnimmt und anschließend dem steuernden Raspberry zur Verfügung stellt. Die Klassen sind in \autoref{img:uml_camera} dargestellt. Neben einer einfachen Benutzeroberfläche in Form einer über Flask bereitgestellten Website, erfolgt die Kommunikation bzw. Steuerung über eine REST-Schnittstelle zur Datenübertragung und eine Socket-Verbindung, die auf Broadcast-Nachrichten vom steuernden Raspberry Pi 4 wartet. Außerdem übernimmt der Raspberry Pi Zero W die Identifizierung von ArUco-Markern in den aufgenommenen Bildern.
 
+\todo{mehr Details}
+
 \begin{figure}
   \centering
   \includegraphics[width=1\textwidth]{./img/uml/uml_camera_classdiagramm.pdf}
@@ -133,6 +136,7 @@ Die Raspberry Pi Zero W übernehmen die Steuerung der Kameras. Hierfür wurde ei
 \subsection{Desktop-Programm (Java)}
 Die Desktop-Software dient zur Steuerung des Systems und zur automatischen Über\-tragung der Daten an die \gls{SfM}-Software. Die Klassen sind in \autoref{img:uml_connector} dargestellt. Sie wurden in Java geschrieben, um eine einfache Installation auf verschiedenen Betriebssystemen zu ermöglichen. Die Kommunikation erfolgt über eine Socket-Verbindung zum Raspberry Pi 4. Neben der Übertragung der Bilder an die \gls{SfM}-Software ermöglicht die Software das Starten von Aufnahmen. Ein Screenshot der Benutzeroberfläche ist in \autoref{img:screenshot_connector} dargestellt. Die Software unterstützt als \gls{SfM}-Software aktuell Agisoft Metashape und OpenDroneMap, jedoch ist die Schnittstelle so gestaltet, dass auch andere Software ergänzt werden könnte.
 
+\todo{mehr Details}
 
 \begin{figure}
   \centering

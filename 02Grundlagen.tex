@@ -196,10 +196,11 @@ Die Koordinaten der Passpunkt-Ausreißer aus der Berechnung der Kamerapositionen
 \label{s:buendelblock}
 Mittels Bündelblockausgleichung können die grob mit den vorher genannten Verfahren bestimmten Positionen und Drehungen in einer Ausgleichung optimiert werden. Hierzu gehen alle Parameter der Bilder und die Positionen der Passpunkte in die gemeinsame Ausgleichung ein. Grundlage der Ausgleichung ist die in \autoref{ss:abbildungsgleichung} beschriebene Abbildungsgleichung. Als Ergebnis erhält man die ausgeglichenen Parameter und Genauigkeitsangaben für diese. \citep[S. 343ff]{luhmann}
 
+Neben der Optimierung der Parameter hat die Bündelblockausgleichung auch den Vorteil, dass instabile Kameras, wie sie in diesen Projekt verwendet werden, simultan kalibriert werden können. Hierbei werden die inneren und äußeren Orientierungen der Kameras gemeinsam optimiert. Die in vorherigen Untersuchungen festgestellten, jedoch nicht genauen Parameter der Kamera werden hierbei als Näherungswerte genutzt und die endgültigen Parameter erst durch die Ausgleichung bestimmt. Es ist daher unkritisch, wenn sich die Parameter der Kamera im geringen Rahmen zwischen den Aufnahmen verändern. \citep[S. 357f]{luhmann}
+
 
 \section{Multi-view Stereo}
-\todo{überprüfen, falsch?}
-Die dünne Punktwolke aus dem Vorwärtsschnitt kann durch Multi-view Stereo-Verfahren zu einem 3D-Modell erweitert werden. Hierbei werden jeweils Bildpaare gebildet und die Disparitäten, also die Verschiebung des Objektes in der Abbildung, bestimmt. Diese sind abhängig von der Entfernung des Objektes, bei einem unendlich weit entfernten Objekt tritt keine Disparität auf \citep[S. 313]{luhmann}. Die Disparitäten können dann in Tiefeninformationen umgerechnet werden. Diese können dann wiederum gemittelt und zu einem Tiefenbild zusammengefasst werden. \citep[S. 505]{luhmann}
+Die dünne Punktwolke aus dem Vorwärtsschnitt und der anschließenden Bündelblockausgleichung kann durch Multi-view Stereo-Verfahren zu einem 3D-Modell erweitert werden. Hierbei werden jeweils Bildpaare gebildet und die Disparitäten, also die Verschiebung des Objektes in der Abbildung, bestimmt. Diese sind abhängig von der Entfernung des Objektes, bei einem unendlich weit entfernten Objekt tritt keine Disparität auf \citep[S. 313]{luhmann}. Die Disparitäten können dann in Tiefeninformationen umgerechnet werden. Diese können dann wiederum gemittelt und zu einem Tiefenbild zusammengefasst werden. \citep[S. 505]{luhmann}
 %\citep[S. 51]{opendronemap}
 
 \section{Mesh-Generierung}

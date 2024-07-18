@@ -99,7 +99,7 @@ Es wird vermutet, dass die geringe Schärfentiefe (siehe \autoref{s:schaerfe}) d
 
 \paragraph{Vorgehen}
 
-Mittels eines Pythonskriptes wurden die notwendigen Fokusschritte berechnet, damit der Bereich von 10 cm bis 1 m scharf abgebildet wird. Hierbei wurden die Werte so bestimmt, dass jeweils die hintere Schärfegrenze $a_h$ einer Aufname der vorderen $a_v$ des nächsten Bildes entspricht. Im Gegensatz zu den Berechnungen in \autoref{s:schaerfe} wurde hier ein Unschärfekreis von 6 Pixeln akzeptiert, da ansonsten die Anzahl der notwendigen Aufnahmen zu groß geworden wäre. Die berechneten Werte mit ihren Grenzen sind in \autoref{tab:fokusstack} aufgelistet und in \autoref{img:fokusstack_plot} dargestellt.
+Mittels eines Pythonskriptes wurden die notwendigen Fokusschritte berechnet, damit der Bereich von 10 cm bis 1 m scharf abgebildet wird. Hierbei wurden die Werte so bestimmt, dass jeweils die hintere Schärfegrenze $a_h$ einer Aufname der vorderen $a_v$ des nächsten Bildes entspricht. Im Gegensatz zu den Berechnungen in \autoref{s:schaerfe} wurde hier ein Unschärfekreis von 6 Pixeln akzeptiert, da ansonsten die Anzahl der notwendigen Aufnahmen zu groß geworden wäre. Die berechneten Werte mit ihren Grenzen sind in \autoref{tab:fokusstack} aufgelistet und in \autoref{img:fokusstack_plot} dargestellt -- die blauen Striche stellen hierbei die Abdeckung einer Aufnahme dar.
 
 
 \begin{table}
@@ -126,16 +126,10 @@ Mittels eines Pythonskriptes wurden die notwendigen Fokusschritte berechnet, dam
     \label{img:fokusstack_plot} %ID fürs Bild
 \end{figure}
 
-\begin{itemize}
-    \item Automatisierter Fokusstacking
-    \item keine Beachtung der festen Ausrichtung
-    \item Transformation über SIRF und Homografie
-\end{itemize}
-\todo{Textform}
-
+Anschließend wurden die Bilder mit einem Python-Skript unter Verwendung von OpenCV automatisiert zu je einem Bild pro Kamera bestehend aus allen scharf dargestellten Bereichen zusammengerechnet. Dazu wurde jeweils die notwendige Transformation mittels SIRF und Homografie berechnet. Die fertigen Bilder wurden dann in Agisoft Metashape zur Berechnung eines 3D-Modells genutzt. Die Daten wurden dann, wie bereits in den vorherigen Testvorgängen beschrieben, im Vergleich zu den Daten des Streifenprojektionssystems ausgewertet.
 
 \paragraph{Ergebnis}
-\todo{Füllen}
+\todo{Fokusstack neu durchführen und Ergebnisse auswerten}
 
 \biblio
 \end{document}
