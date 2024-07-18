@@ -81,7 +81,7 @@ Die äußere Orientierung ist durch die Matrix $[R|X_0]$ beschrieben (\autoref{e
 
 % Um die Beziehung zwischen zwei Bildern aufzustellen, kann man diese Abbildungsgleichung nutzen. Da es hier nur um die Beziehung zwischen zwei Bildern geht, kann die Rotation und Translation des ersten Bildes auf 0 gesetzt werden ($R$ ist dann eine 3x3-Einheitsmatrix und $X_0$ ein Nullvektor). $X_0$ des zweiten Bildes wird zur Translation zwischen den beiden Bildern. \citep[S. 330]{luhmann}
 
-Grundlage dieser Formel ist wieder das Lochkamera-Modell (siehe \autoref{img:optische_achse}). Dabei wird rechnerisch das Bild an dem Projektionszentrum in den Objektraum gespiegelt (rot im Bild). Dadurch kann mit einem aufrechten Bild gerechnet werden.
+Grundlage dieser Formel ist das Lochkamera-Modell (siehe \autoref{img:optische_achse}). Dabei wird rechnerisch das Bild an dem Projektionszentrum in den Objektraum gespiegelt (rot im Bild). Dadurch kann mit einem aufrechten Bild gerechnet werden.
 
 Als weitere Parameter spielen die Verzeichnungen eine Rolle. Diese kann in die Abbildungsgleichung integriert werden, in dem $x'$ durch $\Delta x'$ korrigiert wird. \citep[S. 277]{luhmann}
 
@@ -124,7 +124,7 @@ Da die Objekte und die Kameras sich während der Aufnahme nicht bewegen, kann di
 
 \subsection{Fokussierung und Schärfentiefe}
 \label{s:schaerfe}
-Um genaue Punktwolken zu ermöglichen, muss das Objekt scharf abgebildet werden. Die Kameras müssen dafür entsprechend fokussiert sein. Jedoch wird durch die Fokussierung auch die innere Orientierung verändert. Normalerweise wird daher auf eine Umfokussierung verzichtet und mittels der Blende (kleine Blendenöffnung) die Schärfentiefe erhöht, sodass ein großer Bereich scharf abgebildet wird. Dieses ist aber bei vielen einfachen Kameras wie dem verwendeten Raspberry Pi Camera Module v3 nicht möglich.
+Um genaue Punktwolken zu ermöglichen, muss das Objekt scharf abgebildet werden. Die Kameras müssen dafür entsprechend fokussiert sein. Jedoch wird durch die Fokussierung auch die innere Orientierung verändert. Normalerweise wird daher auf eine Umfokussierung verzichtet und mittels der Blende (kleine Blendenöffnung) die Schärfentiefe erhöht, sodass ein großer Bereich scharf abgebildet wird. Dieses ist aber bei vielen einfachen Kameras wie dem verwendeten Raspberry Pi Camera Module 3 nicht möglich.
 
 Der Schärfebereich ergibt sich aus der Größe des tolerierbaren Unschärfekreis auf dem Sensor. Bei digitalen Kameras wird dieser durch die Pixelgröße bestimmt. Nach \citet[S. 148f]{luhmann} berechnet sich die Schärfentiefe nach folgender Formel, wobei $t$ die Länge des Schärfebereich, $a_v$ die vordere Grenze der Schärfentiefe, $a_h$ die hintere, $a$ die fokussierte Dingweite, $k$ die Blendenzahl, $f$ die Brennweite darstellt:
 
