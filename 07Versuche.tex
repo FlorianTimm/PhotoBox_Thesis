@@ -7,7 +7,7 @@ Nach Abschluss der Konstruktion und des Aufbaus des Prototyps, wurden verschiede
 
 \section{Genauigkeitsüberprüfung des 3D-Modelles}
 \label{s:genauigkeitsueberpruefung}
-Um die Genauigkeit der 3D-Modell-Erzeugung zu überprüfen, wurden mehrere Prüf\-körper mit dem Prototypen und mit einem kommerziellen Streifenprojektionssystem vermessen. Die Ergebnisse wurden miteinander verglichen.
+Um die Genauigkeit der 3D-Modell-Erzeugung zu überprüfen, wurden mehrere Prüf\-körper mit dem Prototyp und mit einem kommerziellen Streifenprojektionssystem vermessen. Die Ergebnisse wurden miteinander verglichen.
 
 \subsection{Erwartete Genauigkeit}
 \label{ss:erwartete_genauigkeit}
@@ -50,12 +50,12 @@ Die erwartete Genauigkeit und auch die Auflösung der Kameras liegt also im Bere
 \subsection{Vergleichsmessung mit Streifenprojektionssystem}
 Als Vergleichsmessung wurden die Objekte mit einem Zeiss GOM ATOS 5 aufgemessen. Hierbei handelt es sich um ein Streifenprojektionssystem, welches hauptsächlich in der Industrie zur Vermessung von Bauteilen eingesetzt wird. Streifenprojektionssysteme arbeiten auch photogrammetrisch, haben aber den Vorteil, das sie durch das Projektionssystem auch texturarme Objekte erfassen können. Wie der Name bereits andeutet, wird ein Streifenmuster auf das Objekt projiziert, welches dann von mindestens einer Kamera aufgenommen wird. Projektor und Kamera sind auf einer festen Basis montiert. \citep[S. 581f]{luhmann}
 
-Bei dem verwendeten System werden zwei Kameras eingesetzt, die sich ein massives Gehäuse mit dem mittig angeordneten Projektor teilen. Bei dem verwendeten Messvolumen und Objektentfernung beträgt die Genauigkeit etwa \todo{Wert}. Aufgrund der deutlich höheren erwarteten Genauigkeit des Streifenprojektionssystems, kann davon ausgegangen werden, dass die Messungen deutlich genauer sind als die des Prototypen und als wahre Werte angenommen werden können.
+Bei dem verwendeten System werden zwei Kameras eingesetzt, die sich ein massives Gehäuse mit dem mittig angeordneten Projektor teilen. Bei dem verwendeten Messvolumen und Objektentfernung beträgt die Genauigkeit etwa \todo{Wert}. Aufgrund der deutlich höheren erwarteten Genauigkeit des Streifenprojektionssystems, kann davon ausgegangen werden, dass die Messungen deutlich genauer sind als die des Prototyp und als wahre Werte angenommen werden können.
 
 \subsection{Ergebnisse}
 Die modellierte Oberfläche aus dem Streifenprojektionssystem und die Punktwolke aus dem Prototyp wurden in CloudCompare aufeinandergelegt und die Differenz berechnet. Die Visualisierung der Differenzen ist in \autoref{img:differenz_moai} dargestellt. Es ist zu erkennen, dass einige Bereiche gar nicht erfasst bzw. deren Genauigkeit deutlich von der erwarteten abweichen. Die größten Fehlstellen sind im Bereich des Kinnes und unterhalb des Bauches zu erkennen. Abweichungen im Bereich des restlichen Körpers sind deutlich geringer und liegen im Bereich von 0,21~mm. Sie sind auf die schlechtere Erfassung der nach unten gerichteten Flächen zurückzuführen. Diese Bildbereiche sind nur in wenigen Bildern sichtbar und können daher nicht so gut rekonstruiert werden.
 
-Die Abweichungen liegen in der Größenordnung der in \autoref{ss:erwartete_genauigkeit} berechneten Werte und sind nur minimal schlechter, als die Genauigkeit eines 3D-Modelles des Körpers, welches photogrammetrisch mit einer Spiegelreflexkamera Nikon D90 manuell aufgenommen wurde. Durch Kombinationen von anderne Perspektiven ist hier jedoch die Abdeckung, welche hier nicht objektiv betrachtet wurde, besser. Die Ergebnisse sind in \autoref{tab:vergleich_erg} zusammengefasst.
+Die Abweichungen liegen in der Größenordnung der in \autoref{ss:erwartete_genauigkeit} berechneten Werte und sind nur minimal schlechter, als die Genauigkeit eines 3D-Modelles des Körpers, welches photogrammetrisch mit einer Spiegelreflexkamera Nikon D90 manuell aufgenommen wurde. Durch Kombinationen von anderen Perspektiven ist hier jedoch die Abdeckung, welche hier nicht objektiv betrachtet wurde, besser. Die Ergebnisse sind in \autoref{tab:vergleich_erg} zusammengefasst.
 
 \begin{figure}
     \centering
@@ -132,7 +132,7 @@ Die Ergebnisse sind in \autoref{tab:vergleich_drehteller} zusammengefasst.
 
 
 \section{Evaluation der Kameraanzahl}
-Die Kameras machen einen großen Teil des (Kosten-)Aufwandes zur Realisierung des Projekte aus. Es soll daher in diesem Schritt geprüft werden, ob die Anzahl der Kameras auch reduziert werden kann. Entsprechend \autoref{s:drehteller} wird auch der Einsatz des Drehtellers statt mehr Kameras geprüft.
+Die Kameras machen einen großen Teil des (Kosten-)Aufwandes zur Realisierung des Projektes aus. Es soll daher in diesem Schritt geprüft werden, ob die Anzahl der Kameras auch reduziert werden kann. Entsprechend \autoref{s:drehteller} wird auch der Einsatz des Drehtellers statt mehr Kameras geprüft.
 
 \subsection{Durchführung}
 Zur Abschätzung, wie viele Kameras für eine gute Genauigkeit notwendig sind, wurden verschiedene Konfigurationen getestet. Hierzu wurde die Aufnahme des Moai aus \autoref{s:genauigkeitsueberpruefung} genutzt und hier in Agisoft Metashape verschiedene Kameras deaktiviert und das 3D-Modell neu berechnet. Die Ergebnisse wurden wie \autoref{s:genauigkeitsueberpruefung} mit dem Streifenprojektionssystem verglichen.

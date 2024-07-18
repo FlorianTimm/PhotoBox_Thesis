@@ -49,14 +49,14 @@ Die Bestimmung der inneren Orientierung, auch Kalibrierung genannt, kann wäh\-r
 \label{s:aeussereorientierung}
 Die äußere Orientierung beschreibt die Lage der Kamera im Raum und ihre Ausrichtung. Sie wird durch die Position des Projektionszentrums und die Richtung der optischen Achse beschrieben. Die Position des Projektionszentrums wird durch die Koordinaten des Projektionszentrums in einem Koordinatensystem -- in der Nahbereichsphotogrammetrie oft einem lokalen -- beschrieben. Die Richtung der optischen Achse wird mit der Rotation der Kamera beschrieben, beispielsweise durch eine Rotationsmatrix, eulersche Winkel oder Quaternionen. Durch die Nutzung von Passpunkten oder bekannten Koordinaten der Kamera kann die äußere Orientierung bestimmt werden. \citep[S. 273ff]{luhmann}
 
+Die Darstellung der Rotation der Kamera als Quaternionen hat den Vorteil, dass diese dann mit nur vier Parametern statt neun (bzw. acht unabhängigen) bei der Matrix in eine Bündelblockausgleichung eingeht. Die Nutzung von eulerschen Winkeln hat den Nachteil, dass hier ein sogenannter Gimbal-Lock auftreten kann, bei dem zwei Achsen zusammenfallen und die Rotation nicht mehr eindeutig bestimmt werden kann. \citep[S. 63]{luhmann}
+
 \subsection{Abbildungsgleichung}
 \label{ss:abbildungsgleichung}
 Die Abbildung eines Punktes auf einem Bild wird durch die Abbildungsgleichung beschrieben. Hierfür gibt es verschiedene Schreibweisen. In der Matrizenrechnung besteht diese aus der Multiplikation der homogenen Punktkoordinaten $X$ mit der Projektionsmatrix $P$ (\autoref{eq:abbildungsgleichung}). $P$ ergibt sich aus der Kalibrier- oder Kameramatrix $K$, der Rotation $R$ und dem Projektionszentrum $X_0$ (\autoref{eq:pkr}). Die Kalibriermatrix wiederum besteht aus der Kamerakonstante und der Lage des Bildhauptpunktes (\autoref{eq:k}).
 (nach \citealp[S. 244]{hartley} und \citealp[S. 290]{luhmann})
 
-Die äußere Orientierung ist durch die Matrix $[R|X_0]$ beschrieben (\autoref{eq:r}). Diese besteht aus der Rotationsmatrix $R$ und dem Projektionszentrum $X_0$. Die Rotationsmatrix beschreibt die Ausrichtung der Kamera im Raum, das Projektionszentrum beschreibt die Position der Kamera bzw. des Projektionszentrums im Raum. Im Falle der Rotationsmatrix wird die Drehung durch 8 unabhängige Parameter beschrieben.
-
-\todo{Verringerung der Parameter durch Quaternionen}
+Die äußere Orientierung ist durch die Matrix $[R|X_0]$ beschrieben (\autoref{eq:r}). Diese besteht aus der Rotationsmatrix $R$ und dem Projektionszentrum $X_0$. Die Rotationsmatrix beschreibt die Ausrichtung der Kamera im Raum, das Projektionszentrum beschreibt die Position der Kamera bzw. des Projektionszentrums im Raum.
 
 \begin{align}
     \label{eq:abbildungsgleichung}
