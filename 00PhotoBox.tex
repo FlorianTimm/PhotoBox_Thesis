@@ -44,6 +44,17 @@
   \hyphenchar\font=`\-% allowing hyphenation
 }
 
+\usepackage{array,tabularx,calc}
+
+\newlength{\conditionwd}
+\newenvironment{conditions}[1][mit]
+  {%
+   #1\tabularx{\textwidth-\widthof{#1}}[t]{
+     >{$}l<{$} @{${}:{}$} X@{}
+   }%
+  }
+  {\endtabularx\\[\belowdisplayskip]}
+
 \newcommand{\code}[1]{\texttt{\justify{#1}}}
 %\usepackage{tocloft}
 
@@ -169,14 +180,14 @@ HafenCity Universität Hamburg\\
 E-Mail: kay.zobel@hcu-hamburg.de\\
 \newpage
 \noindent\textbf{\large Kurzzusammenfassung}\\
-Die Photogrammetrie bietet die Möglichkeit mit relativ einfacher Technik 3D-Modelle zu erstellen. Die Aufnahme der Bilder ist jedoch sehr zeitaufwendig und daher für die Erfassung vieler Objekte, z.B. bei der Digitalisierung von Museumsobjekten, nicht praktikabel. Systeme mit mehreren fest installierten Kameras setzen in der Regel auf hochwertige Kameras, die jedoch die Hardwarekosten stark in die Höhe treiben.
+Die Photogrammetrie ermöglicht die Erstellung von 3D-Modellen unter Zuhilfenahme relativ einfacher Technik. Allerdings ist der Zeitaufwand für die Aufnahme der Bilder oft hoch, sodass sich diese Methode nicht für die Erfassung einer großen Anzahl von Objekten eignet, beispielsweise bei der Digitalisierung von Museumsbeständen. Systeme, die auf mehreren fest installierten Kameras basieren, verwenden in der Regel hochwertige Kameras. Dies führt jedoch zu einem signifikanten Anstieg der Hardwarekosten.
 
-In dieser Arbeit soll der Lösungsansatz untersucht werden, mehrere kostengünstige Kameras, die fest auf einem Rahmen montiert sind, zu verwenden. Mit Kameras für den Raspberry Pi soll ein photogrammetrisches Messsystem für kleine Objekte aufgebaut werden. Dazu soll eine Schnittstelle zur Synchronisation der Kameras programmiert und eine Möglichkeit zur Kalibrierung der Kameras entwickelt werden. Das Endergebnis soll es im Idealfall auch einem photogrammetrischen Laien ermöglichen, schnell und ohne lange Einarbeitungszeit 3D-Modelle in akzeptabler Auflösung und Qualität zu erzeugen.
+Im Rahmen dieser Arbeit erfolgt eine Untersuchung des Lösungsansatzes, mehrere kostengünstige Kameras, die fest auf einem Rahmen montiert sind, zu verwenden. Der Kern dieser Untersuchung bildet der Aufbau eines photogrammetrischen Messsystems für kleine Objekte, welches aus Raspberry-Pi-Kameras besteht. Im Rahmen dessen ist die Programmierung einer Schnittstelle zur Synchronisation der Kameras sowie die Entwicklung einer Möglichkeit zur Kalibrierung der Kameras vorgesehen. In einem nächsten Schritt wird die Genauigkeit der Erfassung überprüft. Das Endergebnis soll es im Idealfall auch einem photogrammetrischen Laien ermöglichen, schnell und ohne lange Einarbeitungszeit 3D-Modelle in akzeptabler Auflösung und Qualität zu erzeugen.
 \vspace{2cm}\\
 \noindent\textbf{\large Abstract}\\
-Photogrammetry offers the possibility of creating 3D models with relatively simple technology. However, capturing the images is very time consuming and therefore not practical for many objects, such as museum digitisation. Systems using multiple fixed cameras usually rely on high quality cameras, which significantly increases hardware costs.
+Photogrammetry enables the creation of 3D models using relatively simple technology. However, the time required to capture the images is often high, meaning that this method is not suitable for capturing a large number of objects, for example when digitising museum collections. Systems based on several permanently installed cameras generally use high-quality cameras. However, this results in a significant increase in hardware costs.
 
-This paper explores the solution of using multiple low-cost cameras mounted on a frame. Cameras for the Raspberry Pi are used to build a photogrammetric measurement system for small objects. This involves programming an interface to synchronise the cameras and developing a way to calibrate the cameras. The end result should ideally enable even a photogrammetric layman to produce 3D models of acceptable resolution and quality quickly and without a long training period.
+This thesis investigates the solution of using several low-cost cameras mounted on a fixed frame. The core of this investigation is the construction of a photogrammetric measurement system for small objects, which consists of Raspberry Pi cameras. The programming of an interface to synchronise the cameras and the development of a way to calibrate the cameras are planned as part of this. The next step will be to check the accuracy of the recording. Ideally, the end result should also enable a photogrammetric layman to generate 3D models in acceptable resolution and quality quickly and without a long familiarisation period.
 
 \newpage
 

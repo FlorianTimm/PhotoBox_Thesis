@@ -49,6 +49,11 @@ In \citet[S. 59]{kraus} wird eine Formel (siehe \autoref{eq:kraus_fokus}) für d
     \frac{1}{f} = \frac{1}{g} + \frac{1}{b}
     \label{eq:kraus_fokus}
 \end{align}
+\begin{conditions}
+    f & Brennweite der Kamera \\
+    g & Gegenstandsweite \\
+    b & Bildweite
+\end{conditions}
 
 \paragraph{Vorgehen}
 Die Änderungen der Parameter wurden in einem Versuch beobachtet. Hierzu wurde der Raspberry Pi Zero mit montierter Kamera fest vor einem ChArUco-Kalibriermuster platziert. Das Kalibriermuster besteht aus einer Kombination aus ArUco-Markern und einem Schachbrettmuster (siehe \autoref{img:charuco}). Durch das Schachbrettmuster ermöglicht es auch bei unscharfen Bildern noch eine gute automatische Erkennung der zu beobachtenden Punkte. Es wurden je 11 Bilder mit unterschiedlichen Fokussierungen von $2~\text{m}$ bis  $10~\text{cm}$ aufgenommen. Dieser Vorgang wurde insgesamt viermal wiederholt, um auch die Wiederholungsgenauigkeit zu ermitteln. Die Bilder wurden anschließend mit einem Python-Script unter Nutzung von OpenCV ausgewertet. Hierbei wurde die relative Veränderung der Kamerakonstante der Kamera ermittelt und mit dem erwarteten Wert verglichen. Die relativen Änderungen wurden auf eine Fokusdistanz von $20~\text{cm}$ (entspricht einer Kamerakonstante von $5~\text{dpt}$) normiert. Relative Angaben wurden genutzt, da noch keine Kamerakonstante zu dem Zeitpunkt vorlag oder angenommen werden sollte.
