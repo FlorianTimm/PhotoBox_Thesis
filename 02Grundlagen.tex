@@ -194,7 +194,7 @@ Eine Form der codierten Zielmarken sind die Marker nach Schneider. Diese bestehe
 
 
 \subsubsection{ArUco-Marker}
-Eine andere Variante der codierten Verknüpfungspunkte sind die sogenannten ArUco-Marker. Diese werden häufig für die Orientierung bei Augmented-Reality-An\-wend\-ungen genutzt. Sie werden als codierte Messmarken verwendet und können automatisch im Subpixelbereich erkannt werden. Jede Ecke kann hier einzeln identifiziert werden, sodass ein erkannter Marker vier Verknüpfungspunkte liefern kann. Nachteilig ist, dass die Ecken nicht eindeutig identifiziert werden können, wenn die Aufnahme unscharf ist. Durch ihre Verwendung in der Augmented-Reality-Anwendungen sind auch viele kostenfreie Bibliotheken für ihre Erkennung verfügbar. Beispielsweise kann OpenCV ArUco-Marker identifizieren. %\citep[S. 536]{luhmann}
+Eine andere Variante der codierten Verknüpfungspunkte sind die sogenannten ArUco-Marker. Diese werden häufig für die Orientierung bei Augmented-Reality-An\-wend\-ungen genutzt. Sie werden als codierte Messmarken verwendet und können automatisch im Subpixelbereich erkannt werden. Jede Ecke kann hier einzeln identifiziert werden, sodass ein erkannter Marker vier Verknüpfungspunkte liefern kann. Nachteilig ist, dass die Ecken nicht eindeutig identifiziert werden können, wenn die Aufnahme unscharf ist. Durch ihre Verwendung in Augmented-Reality-Anwendungen sind auch viele kostenfreie Bibliotheken für ihre Erkennung verfügbar. Beispielsweise kann OpenCV ArUco-Marker identifizieren. %\citep[S. 536]{luhmann}
 \todo{Quelle}
 
 \subsection{Merkmalsextraktion}
@@ -205,8 +205,7 @@ Zur Erkennung von Merkmalen setzt das Verfahren auf die Detektion von Kanten. Di
 
 \section{Verknüpfung von Bildern}
 \label{s:photogramm}
-Durch die beschriebenen Verfahren und die hieraus entstandenen Verknüpfungs\-punkte können die Bilder miteinander verknüpft werden. Da die Kamerapositionen am Rahmen veränderlich sind und die Montage auch keine ausreichend genaue Fixierung garantiert, können die bekannten Positionen aus vorherigen Messungen nur als Näherungswerte genutzt werden. Die genaue Bestimmung der Position und Ausrichtung - die äußere Orientierung - erfolgt dann über ein photogrammetrisches Verfahren. Dieses wird im Folgenden vorgestellt.
-
+Durch die beschriebenen Verfahren und die hieraus entstandenen Verknüpfungs\-punkte können die Bilder miteinander verknüpft werden. Da die Kamerapositionen am Rahmen veränderlich sind und die Montage auch keine ausreichend genaue Fixierung garantiert, können die bekannten Positionen aus vorherigen Messungen maximal als Näherungswerte genutzt werden. Die genaue Bestimmung der Position und Ausrichtung - die äußere Orientierung - muss daher mindestens für die verschobenen oder gedrehten Kameras neu berechnet werden. Gleiches gilt für neue Verknüpfungspunkte, für die noch keine Koordinate bekannt ist. Die beiden Verfahren, die so zur Verknüpfung der Bilder beitragen, werden im Folgenden vorgestellt.
 
 
 \subsection{Rückwärtsschnitt}

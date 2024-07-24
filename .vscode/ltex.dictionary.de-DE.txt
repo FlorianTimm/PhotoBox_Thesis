@@ -54,3 +54,4 @@ dpt
 texturreiche
 Merkmalspunkte
 SfM-Werkzeugen
+Gimbal-Lock
