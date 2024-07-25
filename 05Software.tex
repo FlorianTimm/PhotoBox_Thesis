@@ -4,16 +4,17 @@
 
 \chapter{Software-Entwicklung}
 \label{c:software}
-Für die Steuerung der Kameras und die anschließende Berechnung des 3D-Modelles muss eine Steuerungssoftware für das Kamerasystem und eine entsprechende Schnittstelle zu einer \gls{SfM}-Software geschaffen werden. Diese Entwicklung erfolgte hauptsächlich in Python in Form von Prototyping. Das Kapitel beschreibt die Anforderungen an die Software in \autoref{sec:Anforderungsanalyse} und die zu implementierenden Anwendungsfälle (\autoref{sec:Anwendungsfallmodellierung}). Abschließend wird die Implementation (\autoref{sec:Implementierung}) erarbeitet.
+Für die Steuerung der Kameras und die anschließende Berechnung des 3D-Modelles muss eine Steuerungssoftware für das Kamerasystem und eine entsprechende Schnittstelle zu einer \gls{SfM}-Software geschaffen werden. Diese Entwicklung erfolgte hauptsächlich in Python in Form von Prototyping. Das Kapitel beschreibt die Anforderungen an die Software (\autoref{sec:Anforderungsanalyse}) und die zu implementierenden Anwendungsfälle (\autoref{sec:Anwendungsfallmodellierung}). Abschließend wird die Implementation (\autoref{sec:Implementierung}) erarbeitet.
 \todo{Erst Anwendungsfälle, dann Anforderungen?}
 
 \section{Anforderungsanalyse}
 \label{sec:Anforderungsanalyse}
 
 \subsection{Funktionale Anforderungen}
+\todo{Nummern weiterverwenden}
 \begin{enumerate}[label=F\arabic*]
   \item Die Kameras sollen zeitgleich auslösbar sein. Es soll möglichst ver\-zögerungs\-frei ausgelöst werden.
-  \item Die Steuerung soll auch unabhängig von anderen Geräten möglich sein, beispielsweise per Tastensteuerung.
+  \item Die Steuerung soll unabhängig von anderen Geräten möglich sein, beispielsweise per Tastensteuerung.
   \item Der Status des Systemes soll für den Nutzer erkennbar sein - auch ohne Anschluss eines Computers.
   \item Es sollen Passpunkte automatisch gefunden und für die Bestimmung der äußeren Orientierung genutzt werden.
   \item Die Bilder sollen scharf und fokussiert sein. Die Belichtung soll automatisch erfolgen, jedoch die Helligkeit der Bilder identisch sein.
@@ -29,13 +30,13 @@ Für die Steuerung der Kameras und die anschließende Berechnung des 3D-Modelles
 \subsection{Nicht-funktionale Anforderungen}
 \begin{enumerate}[label=N\arabic*]
   \item Die Erfassung soll ohne weitere Hardware möglich sein. Das System soll unabhängig von Netzwerkanschlüssen etc. sein.
-  \item Alle Kommunikation soll über WLAN erfolgen.
+  \item Jegliche Kommunikation soll über WLAN erfolgen.
 \end{enumerate}
 
 \section{Anwendungsfallmodellierung}
 \label{sec:Anwendungsfallmodellierung}
 
-Entsprechend der benötigten Schritte aus \autoref{c:photogrammetrie} und \autoref{img:ablauf} wurde die Anwendungsfälle, die die Benutzeroberfläche ermöglichen soll, im Anwendungsfall-Dia\-gramm in \autoref{img:anwendungsfall} zusammengetragen. Entsprechend der Anforderung, dass das System einfach in der Bedienung gehalten sein soll, ist die Anzahl der verschiedenen Anwendungsfälle gering.
+Entsprechend der benötigten Schritte aus \autoref{c:photogrammetrie} und \autoref{img:ablauf} wurden die Anwendungsfälle, die die Benutzeroberfläche ermöglichen soll, im Anwendungsfall-Dia\-gramm in \autoref{img:anwendungsfall} zusammengetragen. Entsprechend der Anforderung eines einfach gehaltenen Bedienung des Systemes, ist die Anzahl der verschiedenen Anwendungsfälle gering.
 
 \begin{figure}
   \centering
@@ -57,9 +58,9 @@ Aus den benötigten Daten wurde das Domänen-Klassendiagramm aus \autoref{img:do
 \label{sec:Implementierung}
 
 
-Die Programmierung des Systemes erfolgte iterativ. Einzelne Arbeitspakete wurden in einem Jupyter-Notebook ausprobiert und dann, wenn dieser Schritt erfolgreich war, in den Gesamtworkflow integriert - teilweise sind diese im \autoref{c:voruntersuchungen} beschrieben. Größtenteils wurden der Python-Code objektorientiert und typisiert geschrieben. Die Teile, die auf einem Desktoprechner laufen sollen, wurden in Java geschrieben, da hier später die Einrichtung auf verschiedenen Rechnern und Plattformen einfacher ist.
+Die Programmierung des Systemes erfolgte iterativ. Einzelne Arbeitspakete wurden in einem Jupyter-Notebook ausprobiert und dann, wenn dieser Schritt erfolgreich war, in den Gesamtworkflow integriert - teilweise sind diese im \autoref{c:voruntersuchungen} beschrieben. Größtenteils wurde der Python-Code objektorientiert und typisiert geschrieben. Die Teile, die auf einem Desktoprechner ausgeführt werden sollen, wurden in Java geschrieben, da hier später die Einrichtung auf verschiedenen Rechnern und Plattformen einfacher ist.
 
-Die Kommunikation innerhalb des Systemes ist in dem Ablaufdiagramm aus \autoref{img:uml_sequence_capture} dargestellt. Auf die Details der einzelnen Module wird in den folgenden Abschnitten eingegangen.
+Die Kommunikation innerhalb des Systemes ist in dem Ablaufdiagramm in \autoref{img:uml_sequence_capture} dargestellt. Auf die Details der einzelnen Module wird in den folgenden Abschnitten eingegangen.
 
 
 \begin{figure}
@@ -83,7 +84,7 @@ ist eine Bibliothek für Bildbearbeitung und maschinelles Sehen. Sie ist weit ve
 bietet neben vielen weiteren Funktionen die Möglichkeit der Matrizenrechnung. Diese wurde für viele Berechnungen benötigt, beispielsweise für die Berechnungen der Kamera-Projektionen.
 
 \paragraph{SciPy}
-wurde für die Berechnung der Bündelblockausgleichung verwendet. Der manuelle Ansatz mit den Formeln aus \cite{luhmann} unter Nutzung von NumPy war sehr ressourcenlastig. Unter Verwendung von SciPy und der Projektionsgleichung konnte die Berechnungsdauer stark dezimiert werden.
+wurde für die Berechnung der Bündelblockausgleichung verwendet. Der manuelle Ansatz mit Formeln aus \cite{luhmann} unter Nutzung von NumPy war sehr ressourcenlastig. Unter Verwendung von SciPy und der Projektionsgleichung konnte die Berechnungsdauer stark dezimiert werden.
 
 \paragraph{Flask}
 wurde genutzt um die Weboberfläche und die Datendownloads bereitzustellen. Hiermit wurde ein Webserver aufgesetzt, der die Daten der Kameras anzeigt und die Steuerung ermöglicht.
@@ -93,7 +94,7 @@ wurde genutzt um die Weboberfläche und die Datendownloads bereitzustellen. Hier
 ermöglicht die Steuerung der RGB-LEDs. Hierzu wird das in \cite{ws2811} beschriebene Steuerprotokoll von der Bibliothek implementiert. Die Steuerung kann dann mittels einfacher Farbcodes erfolgen.
 
 \subsubsection{Allgemeine Module}
-Es wurden einige Klassen erstellt, die in allen Modulen genutzt wurden. Diese sind in \autoref{img:uml_common} dargestellt. Diese steuern allgemeine Funktionen wie das Logging und das Auslesen der Konfiguration. Außerdem legen die Interfaces die Struktur der Datenübertragung zwischen den Raspberry Pi fest. Die Klasse \texttt{Config} liest die Konfiguration aus einer Datei aus und stellt diese zur Verfügung. Die Klasse \texttt{Logger} ermöglicht das Loggen von Informationen und Fehlern. Die Klasse \texttt{Interface} stellt die Schnittstelle zur Kommunikation mit anderen Modulen bereit. Die Klasse \texttt{CamSettings} und \texttt{ArucoMarkerPos} sind Datenklassen, die die Einstellungen der Kameras und die Position der ArUco-Marker speichern. Diese Daten werden zwischen den Komponenten ausgetauscht -- hierdurch wird sichergestellt, dass das erwartete Datenmodell auf beiden Seiten gleich ist.
+Es wurden einige Klassen erstellt, die in allen Modulen genutzt wurden. Diese sind in \autoref{img:uml_common} dargestellt. Diese steuern allgemeine Funktionen wie das Logging und das Auslesen der Konfiguration. Außerdem legen die Interfaces die Struktur der Datenübertragung zwischen den Raspberry Pi fest. Die Klasse \texttt{Config} liest die Konfiguration aus einer Datei aus und stellt diese zur Verfügung. Die Klasse \texttt{Logger} ermöglicht das Loggen von Informationen und Fehlern. \texttt{Interface} stellt die Schnittstelle zur Kommunikation mit anderen Modulen bereit. Die Klassen \texttt{CamSettings} und \texttt{ArucoMarkerPos} sind Datenklassen, die die Einstellungen der Kameras und die Position der ArUco-Marker speichern. Diese Daten werden zwischen den Komponenten ausgetauscht -- hierdurch wird sichergestellt, dass das erwartete Datenmodell auf beiden Seiten gleich ist.
 
 \begin{figure}
   \centering
@@ -109,9 +110,9 @@ Auf einem Raspberry Pi 4 läuft die Gesamt\-steuerung des Systemes. Dieses stell
 
 Das Skript \texttt{Master} wird automatisch bei Systemstart über \texttt{systemctl} als Daemon gestartet. Hier ist die Webschnittstelle implementiert. Sie ermöglicht die komplette Steuerung, das Konfigurieren sowie das Anzeigen und Herunterladen der Bilder. Das Skript instanziert außerdem die Klasse \texttt{Control}, welche die hauptsächliche Steuerung übernimmt und den Kern des Systemes darstellt.
 
-Die Steuerung per Taster ermöglicht die Klasse \texttt{ButtonControl}. Sie ermöglicht einfache Aufgaben wie das Suchen von Kameras, das Aufnehmen von Bilder und die Aktivierung des Standbys bzw. das Herunterfahren des Systems auch ohne PC durchzuführen. Die Klasse \texttt{DesktopControlThread} startet, wie der Name bereits vermuten lässt, als eigenständiger Thread und stellt eine Socket-Verbindung zur Kommunikation mit der Desktop-Software und die Steuerung hierüber bereit. Ein weitereren Thread stellt \texttt{CameraControlThread} zur verfügung. Dieser überwacht das Netzwerk auf Nachrichten der Kameras und initiert die entsprechenden Schritte. Die eigentlichen Verarbeitungsschritte werden in der Klasse \texttt{Control} durchgeführt. Auch für diese Aufgaben werden zum Teil eigene Threads gestartet, damit die Verarbeitung parallel erfolgen kann. Beispielsweise wird der Download der Bilder und die Berechnung von Kamerapositionen in eigenen Threads durchgeführt.
+Die Steuerung per Taster implementiert die Klasse \texttt{ButtonControl}. Sie ermöglicht einfache Aufgaben wie das Suchen von Kameras, das Aufnehmen von Bilder und die Aktivierung des Standbys bzw. das Herunterfahren des Systems auch ohne PC durchzuführen. Die Klasse \texttt{DesktopControlThread} startet, wie der Name bereits vermuten lässt, als eigenständiger Thread und stellt eine Socket-Verbindung zur Kommunikation mit der Desktop-Software und die Steuerung hierüber bereit. Ein weitereren Thread stellt \texttt{CameraControlThread} zur Verfügung. Dieser überwacht das Netzwerk auf Nachrichten der Kameras und initiert die entsprechenden Schritte. Die eigentlichen Verarbeitungsschritte werden in der Klasse \texttt{Control} durchgeführt. Auch für diese Aufgaben werden zum Teil eigene Threads gestartet, damit die Verarbeitung parallel erfolgen kann. Beispielsweise wird der Download der Bilder und die Berechnung von Kamerapositionen in eigenen Threads durchgeführt.
 
-Die \texttt{Control}-Klasse sammelt die Daten der einzelnen Kameras und stellt diese zur Weiterverarbeitung zur Verfügung. Die Datenübertragung an die Desktop-Software erfolgt über die REST-Schnittstelle, die wieder vom \texttt{Master}-Skript bereitgestellt wird. Alternativ kann auch ein USB-Stick an dem Raspberry Pi angesteckt werden oder die Daten über die Weboberfläche manuell heruntergeladen werden. Dazu wird bei der Verarbeitung der Daten geprüft, ob ein USB-Stick angeschlossen ist. Falls dieses der Fall ist, wird dieser gemountet, die Daten kopiert und der Stick wieder ausgehängt, damit dieser (fast) jederzeit getrennt werden kann. Das Datenformat auf dem USB-Stick und in den Archiv-Dateien aus der Weboberfläche entspricht dem, dass die Desktop-Software anlegt. So kann diese die Daten dann auch einladen und weiterverarbeiten.
+Die \texttt{Control}-Klasse sammelt die Daten der einzelnen Kameras und stellt diese zur Weiterverarbeitung zur Verfügung. Die Datenübertragung an die Desktop-Software erfolgt über die REST-Schnittstelle, die wieder vom \texttt{Master}-Skript bereitgestellt wird. Alternativ kann auch ein USB-Stick an dem Raspberry Pi angesteckt werden oder die Daten über die Weboberfläche manuell heruntergeladen werden. Dazu wird bei der Verarbeitung der Daten geprüft, ob ein USB-Stick angeschlossen ist. Falls dieses der Fall ist, wird dieser gemountet, die Daten kopiert und der Stick wieder ausgehängt, damit dieser (fast) jederzeit getrennt werden kann. Das Datenformat auf dem USB-Stick und in den Archiv-Dateien aus der Weboberfläche entspricht dem, welches die Desktop-Software anlegt. So kann diese die Daten dann auch einladen und weiterverarbeiten.
 
 \begin{figure}
   \centering
@@ -122,7 +123,7 @@ Die \texttt{Control}-Klasse sammelt die Daten der einzelnen Kameras und stellt d
 
 
 \subsubsection{Kamera-Steuerung}
-Die Raspberry Pi Zero W übernehmen die Steuerung der Kameras. Hierfür wurde ein Modul entwickelt, das die Kameras steuert, die Bilder aufnimmt und anschließend dem steuernden Raspberry zur Verfügung stellt. Die Klassen sind in \autoref{img:uml_camera} dargestellt. Neben einer einfachen Benutzeroberfläche in Form einer über Flask bereitgestellten Website, erfolgt die Kommunikation bzw. Steuerung über eine REST-Schnittstelle zur Datenübertragung und eine Socket-Verbindung, die auf Broadcast-Nachrichten vom steuernden Raspberry Pi 4 wartet. Außerdem übernimmt der Raspberry Pi Zero W die Identifizierung von ArUco-Markern in den aufgenommenen Bildern.
+Die Raspberry Pi Zero W übernehmen die Steuerung der Kameras. Hierfür wurde ein Modul entwickelt, dass die Kameras steuert, die Bilder aufnimmt und anschließend dem steuernden Raspberry zur Verfügung stellt. Die Klassen sind in \autoref{img:uml_camera} dargestellt. Neben einer einfachen Benutzeroberfläche in Form einer über Flask bereitgestellten Website, erfolgt die Kommunikation bzw. Steuerung über eine REST-Schnittstelle zur Datenübertragung und eine Socket-Verbindung, die auf Broadcast-Nachrichten vom steuernden Raspberry Pi 4 wartet. Außerdem übernimmt der Raspberry Pi Zero W die Identifizierung von ArUco-Markern in den aufgenommenen Bildern.
 
 \todo{mehr Details}
 
