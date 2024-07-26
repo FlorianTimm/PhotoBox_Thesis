@@ -1,6 +1,7 @@
 \documentclass[./00PhotoBox.tex]{subfiles}
 \graphicspath{{\subfix{./img/}}}
 \begin{document}
+\renewcommand{\itemautorefname}{Anforderung}
 
 \chapter{Software-Entwicklung}
 \label{c:software}
@@ -10,27 +11,31 @@ Für die Steuerung der Kameras und die anschließende Berechnung des 3D-Modelles
 \section{Anforderungsanalyse}
 \label{sec:Anforderungsanalyse}
 
+Die notwendigen Anforderungen an das System wurden aus \autoref{c:einleitung} und \ref{c:photogrammetrie} abgeleitet und in diesen Abschnitt in Form eines Lastenheftes aufgezeichnet. Sie wurden in funktionale und nicht-funktionale Anforderungen unterteilt. Die funktionalen Anforderungen beschreiben, was das System leisten soll, die nicht-funktionalen Anforderungen beschreiben, wie das System arbeiten soll. \todo{Quelle Fernuni Hagen?}
+
+
 \subsection{Funktionale Anforderungen}
 \todo{Nummern weiterverwenden}
 \begin{enumerate}[label=F\arabic*]
-  \item Die Kameras sollen zeitgleich auslösbar sein. Es soll möglichst ver\-zögerungs\-frei ausgelöst werden.
-  \item Die Steuerung soll unabhängig von anderen Geräten möglich sein, beispielsweise per Tastensteuerung.
-  \item Der Status des Systemes soll für den Nutzer erkennbar sein - auch ohne Anschluss eines Computers.
-  \item Es sollen Passpunkte automatisch gefunden und für die Bestimmung der äußeren Orientierung genutzt werden.
-  \item Die Bilder sollen scharf und fokussiert sein. Die Belichtung soll automatisch erfolgen, jedoch die Helligkeit der Bilder identisch sein.
+  \item \label{e:zeitgleich} Die Kameras sollen zeitgleich auslösbar sein. Es soll möglichst ver\-zögerungs\-frei ausgelöst werden.
+  \item \label{e:button} Die Steuerung soll unabhängig von anderen Geräten möglich sein, beispielsweise per Tastensteuerung.
+  \item \label{e:status} Der Status des Systemes soll für den Nutzer erkennbar sein - auch ohne Anschluss eines Computers.
+  \item \label{e:passpunkte} Es sollen Passpunkte automatisch gefunden und für die Bestimmung der äußeren Orientierung genutzt werden.
+  \item \label{e:scharf} Die Bilder sollen scharf und fokussiert sein.
+  \item \label{e:licht} Die Belichtung soll automatisch erfolgen, jedoch die Helligkeit der Bilder identisch sein.
 \end{enumerate}
 
 \subsection{Schnittstellen}
 \begin{enumerate}[label=S\arabic*]
-  \item Die Daten sollen intern gespeichert werden.
-  \item Eine Speicherung auf tragbaren Speichermedien wie USB-Sticks soll möglich sein.
-  \item Eine direkte Übertragung an \gls{SfM}-Software soll möglich sein.
+  \item \label{e:intspeicher} Die Daten sollen intern gespeichert werden.
+  \item \label{e:usbspeicher} Eine Speicherung auf tragbaren Speichermedien wie USB-Sticks soll möglich sein.
+  \item \label{e:sfmsoftware} Eine direkte Übertragung an \gls{SfM}-Software soll möglich sein.
 \end{enumerate}
 
 \subsection{Nicht-funktionale Anforderungen}
 \begin{enumerate}[label=N\arabic*]
-  \item Die Erfassung soll ohne weitere Hardware möglich sein. Das System soll unabhängig von Netzwerkanschlüssen etc. sein.
-  \item Jegliche Kommunikation soll über WLAN erfolgen.
+  \item \label{e:standalone} Die Erfassung soll ohne weitere Hardware möglich sein. Das System soll unabhängig von Netzwerkanschlüssen etc. sein.
+  \item \label{e:wlan} Jegliche Kommunikation soll über WLAN erfolgen.
 \end{enumerate}
 
 \section{Anwendungsfallmodellierung}
@@ -110,9 +115,12 @@ Auf einem Raspberry Pi 4 läuft die Gesamt\-steuerung des Systemes. Dieses stell
 
 Das Skript \texttt{Master} wird automatisch bei Systemstart über \texttt{systemctl} als Daemon gestartet. Hier ist die Webschnittstelle implementiert. Sie ermöglicht die komplette Steuerung, das Konfigurieren sowie das Anzeigen und Herunterladen der Bilder. Das Skript instanziert außerdem die Klasse \texttt{Control}, welche die hauptsächliche Steuerung übernimmt und den Kern des Systemes darstellt.
 
-Die Steuerung per Taster implementiert die Klasse \texttt{ButtonControl}. Sie ermöglicht einfache Aufgaben wie das Suchen von Kameras, das Aufnehmen von Bilder und die Aktivierung des Standbys bzw. das Herunterfahren des Systems auch ohne PC durchzuführen. Die Klasse \texttt{DesktopControlThread} startet, wie der Name bereits vermuten lässt, als eigenständiger Thread und stellt eine Socket-Verbindung zur Kommunikation mit der Desktop-Software und die Steuerung hierüber bereit. Ein weitereren Thread stellt \texttt{CameraControlThread} zur Verfügung. Dieser überwacht das Netzwerk auf Nachrichten der Kameras und initiert die entsprechenden Schritte. Die eigentlichen Verarbeitungsschritte werden in der Klasse \texttt{Control} durchgeführt. Auch für diese Aufgaben werden zum Teil eigene Threads gestartet, damit die Verarbeitung parallel erfolgen kann. Beispielsweise wird der Download der Bilder und die Berechnung von Kamerapositionen in eigenen Threads durchgeführt.
+Die Steuerung per Taster implementiert die Klasse \texttt{ButtonControl}. Sie ermöglicht einfache Aufgaben wie das Suchen von Kameras, das Aufnehmen von Bilder und die Aktivierung des Standbys bzw. das Herunterfahren des Systems auch ohne PC durchzuführen (\autoref{e:button}). Die Klasse \texttt{DesktopControlThread} startet, wie der Name bereits vermuten lässt, als eigenständiger Thread und stellt eine Socket-Verbindung zur Kommunikation mit der Desktop-Software und die Steuerung hierüber bereit. Ein weiteren Thread stellt \texttt{CameraControlThread} zur Verfügung. Dieser überwacht das Netzwerk auf Nachrichten der Kameras und initiert die entsprechenden Schritte. Die eigentlichen Verarbeitungsschritte werden in der Klasse \texttt{Control} durchgeführt. Auch für diese Aufgaben werden zum Teil eigene Threads gestartet, damit die Verarbeitung parallel erfolgen kann. Beispielsweise wird der Download der Bilder und die Berechnung von Kamerapositionen in eigenen Threads durchgeführt.
 
-Die \texttt{Control}-Klasse sammelt die Daten der einzelnen Kameras und stellt diese zur Weiterverarbeitung zur Verfügung. Die Datenübertragung an die Desktop-Software erfolgt über die REST-Schnittstelle, die wieder vom \texttt{Master}-Skript bereitgestellt wird. Alternativ kann auch ein USB-Stick an dem Raspberry Pi angesteckt werden oder die Daten über die Weboberfläche manuell heruntergeladen werden. Dazu wird bei der Verarbeitung der Daten geprüft, ob ein USB-Stick angeschlossen ist. Falls dieses der Fall ist, wird dieser gemountet, die Daten kopiert und der Stick wieder ausgehängt, damit dieser (fast) jederzeit getrennt werden kann. Das Datenformat auf dem USB-Stick und in den Archiv-Dateien aus der Weboberfläche entspricht dem, welches die Desktop-Software anlegt. So kann diese die Daten dann auch einladen und weiterverarbeiten.
+Die \texttt{Control}-Klasse steuert die Aufnahme, sammelt die Daten der einzelnen Kameras und stellt diese zur Weiterverarbeitung zur Verfügung. Sie sendet eingehende Aufträge als Broadcast-Nachrichten in das Netzwerk an die Raspberry Pi Zero W mit den Kameras, die dann beispielsweise Bilder aufnehmen. Hierdurch wird die nahezu zeitgleiche Auslösung gewährleistet (\autoref{e:zeitgleich}), die bei einer einzelnen Ansteuerung als Schleife nicht möglich wäre. Zur Vereinheitlichung der Belichtung kann eine Funktion aktiviert werden, dass erst einmal die Belichtung von jeder Kamera berechnet wird und diese dann von der \texttt{Control}-Klasse gemittelt wird. Dadurch werden dann alle Bilder mit der gleichen Einstellung aufgenommen, so dass keine Helligkeitsunterschiede zwischen den Aufnahmen bestehen (\autoref{e:licht}).
+Nach der Aufnahme der Bilder und der Erkennung der ArUco-Marker werden die Daten von den Raspberry Pi Zero W an den Raspberry Pi 4 übertragen. Aus den ArUco-markern wird die äußere Orientierung der Kameras als Näherungswerte bestimmt (\autoref{e:passpunkte}). Die Daten werden anschließend in einem Archiv gespeichert (\autoref{e:intspeicher}).
+
+Die Datenübertragung an die Desktop-Software erfolgt über die REST-Schnittstelle, die wieder vom \texttt{Master}-Skript bereitgestellt wird. Alternativ kann auch ein USB-Stick an dem Raspberry Pi angesteckt werden (\autoref{e:usbspeicher}) oder die Daten über die Weboberfläche manuell heruntergeladen werden. Dazu wird bei der Verarbeitung der Daten geprüft, ob ein USB-Stick angeschlossen ist. Falls dieses der Fall ist, wird dieser gemountet, die Daten kopiert und der Stick wieder ausgehängt, damit dieser (fast) jederzeit getrennt werden kann. Das Datenformat auf dem USB-Stick und in den Archiv-Dateien aus der Weboberfläche entspricht dem, welches die Desktop-Software anlegt. So kann diese die Daten dann auch einladen und weiterverarbeiten.
 
 \begin{figure}
   \centering
@@ -123,7 +131,7 @@ Die \texttt{Control}-Klasse sammelt die Daten der einzelnen Kameras und stellt d
 
 
 \subsubsection{Kamera-Steuerung}
-Die Raspberry Pi Zero W übernehmen die Steuerung der Kameras. Hierfür wurde ein Modul entwickelt, dass die Kameras steuert, die Bilder aufnimmt und anschließend dem steuernden Raspberry zur Verfügung stellt. Die Klassen sind in \autoref{img:uml_camera} dargestellt. Neben einer einfachen Benutzeroberfläche in Form einer über Flask bereitgestellten Website, erfolgt die Kommunikation bzw. Steuerung über eine REST-Schnittstelle zur Datenübertragung und eine Socket-Verbindung, die auf Broadcast-Nachrichten vom steuernden Raspberry Pi 4 wartet. Außerdem übernimmt der Raspberry Pi Zero W die Identifizierung von ArUco-Markern in den aufgenommenen Bildern.
+Die Raspberry Pi Zero W übernehmen die Steuerung der Kameras. Hierfür wurde ein Modul entwickelt, dass die Kameras steuert, die Bilder aufnimmt und anschließend dem steuernden Raspberry zur Verfügung stellt. Die Klassen sind in \autoref{img:uml_camera} dargestellt. Neben einer einfachen Benutzeroberfläche in Form einer über Flask bereitgestellten Website, erfolgt die Kommunikation bzw. Steuerung über eine REST-Schnittstelle zur Datenübertragung und eine Socket-Verbindung, die auf Broadcast-Nachrichten vom steuernden Raspberry Pi 4 wartet. Außerdem übernimmt der Raspberry Pi Zero W die Identifizierung von ArUco-Markern in den aufgenommenen Bildern (\autoref{e:passpunkte}).
 
 \todo{mehr Details}
 
@@ -136,7 +144,7 @@ Die Raspberry Pi Zero W übernehmen die Steuerung der Kameras. Hierfür wurde ei
 
 
 \subsection{Desktop-Programm (Java)}
-Die Desktop-Software dient zur Steuerung des Systems und zur automatischen Über\-tragung der Daten an die \gls{SfM}-Software. Die Klassen sind in \autoref{img:uml_connector} dargestellt. Sie wurden in Java geschrieben, um eine einfache Installation auf verschiedenen Betriebssystemen zu ermöglichen. Die Kommunikation erfolgt über eine Socket-Verbindung zum Raspberry Pi 4. Neben der Übertragung der Bilder an die \gls{SfM}-Software ermöglicht die Software das Starten von Aufnahmen. Ein Screenshot der Benutzeroberfläche ist in \autoref{img:screenshot_connector} dargestellt. Die Software unterstützt als \gls{SfM}-Software aktuell Agisoft Metashape und OpenDroneMap, jedoch ist die Schnittstelle so gestaltet, dass auch andere Software ergänzt werden könnte.
+Die Desktop-Software dient zur Steuerung des Systems und zur automatischen Über\-tragung der Daten an die \gls{SfM}-Software (\autoref{e:sfmsoftware}). Die Klassen sind in \autoref{img:uml_connector} dargestellt. Sie wurden in Java geschrieben, um eine einfache Installation auf verschiedenen Betriebssystemen zu ermöglichen. Die Kommunikation erfolgt über eine Socket-Verbindung zum Raspberry Pi 4. Neben der Übertragung der Bilder an die \gls{SfM}-Software ermöglicht die Software das Starten von Aufnahmen. Ein Screenshot der Benutzeroberfläche ist in \autoref{img:screenshot_connector} dargestellt. Die Software unterstützt als \gls{SfM}-Software aktuell Agisoft Metashape und OpenDroneMap, jedoch ist die Schnittstelle so gestaltet, dass auch andere Software ergänzt werden könnte.
 
 \todo{mehr Details}
 
