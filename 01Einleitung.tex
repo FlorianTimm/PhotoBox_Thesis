@@ -12,7 +12,8 @@ Die folgenden Abschnitte geben einen Überblick über die Motivation und das Kon
 \section{Motivation}
 
 In Museen besteht vielfach der Wunsch, den Bestand an Exponaten zu digitalisieren. Entsprechende Handreichungen des Deutschen Museumsbundes legen auch die Digitalisierung als 3D-Modelle nahe, verweisen aber auf den großen Aufwand und Format-Probleme \citep[S. 43]{handreichung_digital}.
-Auch in vielen weiteren Bereichen besteht der Bedarf dreidimensionale Modelle einfach und kostengünstig zu erfassen, beispielsweise in der Archäologie, der Spiele- und Filmindustrie für die 3D-Modellierung oder auch der Industrie zur Entwicklung und Qualitätskontrolle. \todo{Quellen}
+Auch in vielen weiteren Bereichen besteht der Bedarf dreidimensionale Modelle einfach und kostengünstig zu erfassen, beispielsweise in der Archäologie, der Spiele- und Filmindustrie für die 3D-Modellierung oder auch der Industrie zur Entwicklung und Qualitätskontrolle \citep[S. 37f]{luhmann}.
+
 
 Das System soll dabei auch von Laien mit kurzer Einarbeitungszeit bedienbar sein. Dazu ist eine weitgehende Automatisierung der Schritte erforderlich. Auch ein eigener Nachbau des Systems soll einfach möglich sein. Um Lizenzkosten zu sparen, ist die Möglich\-keit Open-Source-Software zu nutzen zu prüfen. Das System soll kleine Objekte in einer Größenordnung bis etwa 40~cm Durchmesser erfassen können.
 
@@ -50,10 +51,12 @@ An der HafenCity Universität wurde 2015 ein Innenraum-Erfassungssystem entwicke
 
 Ansätze für kleinere Objekte, bei denen die Schärfentiefe der Raspberry-Pi-Kameras ein Problem darstellt, sind bisher nicht bekannt. Jedoch gibt es ähnliche Probleme auch bei höherwertigen Kameras und noch kleineren Objekten, bei denen ein Abblenden des Objektives nicht mehr für ausreichend Schärfentiefe sorgt. Auch tritt das Problem bei der Verwendung von Mikroskopen auf. \cite{focusstack_sfm} zeigt hier eine Lösung durch die Nutzung von Fokusstacking, bei der mehrere Bilder mit unterschiedlichen Fokussierungen aufgenommen und anschließend zusammengefügt werden. Dieser Ansatz wurde auch in dieser Arbeit geprüft.
 
+Der Einsatz von \gls{SfM} -- die automatische Erstellung von 3D-Modellen aus Bildern (siehe \autoref{c:photogrammetrie}) -- wurde für die Erfassung von Kulturgütern bereits \cite{kersten2012} an der HafenCity untersucht \citep{kersten2012}. Damals schon zum Teil mit Laserscannern vergleichbare Ergebnisse erzielt. Zum Teil waren die Ergebnisse aber noch unbrauchbar, aber eine stetige Verbesserung der SOftware schon absehbar. Auch die Nutzung von Open-Source-Software wurde bereits untersucht.
+
+Genauigkeitsuntersuchungen von \cite{IvanNikolov} an der Universität Aalborg zeigten schon bessere Ergebnisse, jedoch waren auch hier je nach Software bei manchen Objekten keine Erzeugung möglich, beispielsweise bei glänzenden oder texturlosen Oberflächen.
+
+
 \todo{Tube Inspect AICON}
-
-\todo{Ivan Nikolov Uni Aarlborg}
-
 
 \biblio
 \end{document}

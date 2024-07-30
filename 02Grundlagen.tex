@@ -208,15 +208,37 @@ Zur Erkennung von Merkmalen setzt das Verfahren auf die Detektion von Kanten. Di
 Durch die beschriebenen Verfahren und die hieraus entstandenen Verknüpfungs\-punkte können die Bilder miteinander verknüpft werden. Da die Kamerapositionen am Rahmen veränderlich sind und die Montage auch keine ausreichend genaue Fixierung garantiert, können die bekannten Positionen aus vorherigen Messungen maximal als Näherungswerte genutzt werden. Die genaue Bestimmung der Position und Ausrichtung - die äußere Orientierung - muss daher mindestens für die verschobenen oder gedrehten Kameras neu berechnet werden. Gleiches gilt für neue Verknüpfungspunkte, für die noch keine Koordinate bekannt ist. Die beiden Verfahren, die so zur Verknüpfung der Bilder beitragen, werden im Folgenden vorgestellt.
 
 
-\subsection{Rückwärtsschnitt}
-Sofern Koordinaten von Passpunkten bekannt sind, können die Positionen und Ausrichtungen der Kameras berechnet werden. Hierfür wird der sogenannte Rückwärtsschnitt genutzt. Die Berechnung erfolgt auf Basis der Abbildungsgleichung, die die Position eines Punktes in einem Bild in Beziehung zur Kamera setzt. Für die Berechnung selbst gibt es verschiedene Methoden. Verwendet wurde hier der von OpenCV genutzte Ansatz von \citeauthor{Lepetit2008} in Kombination mit einem RANSAC-Ansatz. Durch die Nutzung des RANSAC-Ansatzes können veränderte Passpunkte identifiziert und als Ausreißer markiert werden.
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \includesvg[height=0.9\linewidth]{./img/rueckwaertsschnitt}
+        \centering
+        \caption{Rückwärtsschnitt, nach \citealt[S. 284]{luhmann}} %Bildunterschrift
+        \label{img:rueckwaertsschnitt} %ID fürs Bild
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \includesvg[height=0.9\linewidth]{./img/rueckwaertsschnitt}
+        \centering
+        \caption{Vorwärtsschnitt, nach \citealt[S. 339]{luhmann}} %Bildunterschrift
+        \label{img:vorwaertsschnitt} %ID fürs Bder an den Aluprofilen befestigt ist (ild
+    \end{subfigure}
+    \caption{Geometrische Grundlagen des Rückwärtsschnitt und Vorwärtsschnitt} %Bildunterschrift
+\end{figure}
 
-\todo{Bild + Erklärung}
+
+\subsection{Rückwärtsschnitt}
+Sofern Koordinaten von Passpunkten bekannt sind, können die Positionen und Ausrichtungen der Kameras berechnet werden. Hierfür wird der sogenannte Rückwärtsschnitt genutzt. Die Berechnung erfolgt auf Basis der Abbildungsgleichung, die die Position eines Punktes in einem Bild in Beziehung zur Kamera setzt. Für die Berechnung selbst gibt es verschiedene Methoden. Verwendet wurde hier der von OpenCV genutzte Ansatz von \cite{Lepetit2008} in Kombination mit einem RANSAC-Ansatz.
+
+Durch die Nutzung des RANSAC-Ansatzes können veränderte Passpunkte identifiziert und als Ausreißer markiert werden. Hierzu werden mehrere Stichproben der Punkte gewählt, die Berechnung durchgeführt und die Lösung gewählt, zu denen die meisten Punkte passen. \citep[S. 134]{luhmann}
+
+\todo{Verweis und Erklärung}
 
 \subsection{Vorwärtsschnitt}
 Um wiederum aus einem Stereopaar mit bekannter innerer und äußerer Orientierung Punktkoordinaten zu berechnen, wird der Vorwärtsschnitt genutzt. Hierfür sind die Bildkoordinaten des zu berechnenden Punktes in beiden Bildern notwendig.
 
 Mit dem Vorwärts\-schnitt können neben markierten Verknüpfungspunkten auch die Neupunkte, die mittels SIFT oder ähnlichen Bild\-erkennungs\-algorithmen erkannt wurden, berechnet werden. Dadurch kann eine dünne Punktwolke erzeugt werden.
+
+
 
 \begin{comment}
 Die Koordinaten der Passpunkt-Ausreißer aus der Berechnung der Kamerapositionen werden anschließend neu berechnet. Hierfür wird der Vorwärtsschnitt genutzt. Auch hier wird OpenCV zur Berechnung genutzt. Die Berechnung der Passpunkte erfolgt für jedes Bildpaar einzeln. Für alle Koordinaten wird dann pro Passpunkt der Z-Score berechnet. Passpunkte, die einen Z-Score von über 2 haben, werden als Ausreißer markiert und nicht weiter betrachtet.
