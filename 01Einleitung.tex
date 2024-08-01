@@ -5,7 +5,7 @@
 \chapter{Einleitung}
 \label{c:einleitung}
 
-Im Rahmen dieser Arbeit soll ein Photogrammetrie-System auf Basis von Raspberry-Pi-Kameras entwickelt werden. Das System soll es ermöglichen, kleine Objekte mit geringem personellen Aufwand zu erfassen und daraus 3D-Modelle zu erstellen.
+Im Rahmen dieser Arbeit soll ein Photogrammetrie-System auf Basis von Raspberry-Pi-Kameras entwickelt werden. Das System soll es ermöglichen, kleine Objekte mit geringem finanziellen und personellen Aufwand zu erfassen und daraus 3D-Modelle zu erstellen.
 
 Die folgenden Abschnitte geben einen Überblick über die Motivation und das Konzept der Arbeit und stellen den bisherigen Stand der Technik dar.
 
@@ -14,13 +14,12 @@ Die folgenden Abschnitte geben einen Überblick über die Motivation und das Kon
 In Museen besteht vielfach der Wunsch, den Bestand an Exponaten zu digitalisieren. Entsprechende Handreichungen des Deutschen Museumsbundes legen auch die Digitalisierung als 3D-Modelle nahe, verweisen aber auf den großen Aufwand und Format-Probleme \citep[S. 43]{handreichung_digital}.
 Auch in vielen weiteren Bereichen besteht der Bedarf dreidimensionale Modelle einfach und kostengünstig zu erfassen, beispielsweise in der Archäologie, der Spiele- und Filmindustrie für die 3D-Modellierung oder auch der Industrie zur Entwicklung und Qualitätskontrolle \citep[S. 37f]{luhmann}.
 
-
-Das System soll dabei auch von Laien mit kurzer Einarbeitungszeit bedienbar sein. Dazu ist eine weitgehende Automatisierung der Schritte erforderlich. Auch ein eigener Nachbau des Systems soll einfach möglich sein. Um Lizenzkosten zu sparen, ist die Möglich\-keit Open-Source-Software zu nutzen zu prüfen. Das System soll kleine Objekte in einer Größenordnung bis etwa 40~cm Durchmesser erfassen können.
+Das zu entwickelnde System soll dabei auch von Laien mit kurzer Einarbeitungszeit bedienbar sein. Dazu ist eine weitgehende Automatisierung der Schritte erforderlich. Auch ein eigener Nachbau des Systems soll einfach möglich sein. Um Lizenzkosten zu sparen, ist die Möglich\-keit der Nutzung von Open-Source-Software zu prüfen. Das System soll kleine Objekte in einer Größenordnung bis etwa 40~cm Durchmesser erfassen können.
 
 \section{Konzept}
 Nach einer Analyse der Anforderungen an ein solches System ist die Entwicklung eines Prototyps vorgesehen, welcher aus mehreren Kameras besteht, die auf einem Rahmen montiert sind. Die Anordnung der Kameras erfolgt dabei so, dass eine Erfassung des Objekts aus verschiedenen Blickwinkeln gewährleistet ist. Die Kameras sind dabei synchron auszulösen und die Daten anschließend automatisch zu übertragen, sodass direkt eine Verarbeitung der Aufnahmen zu einem 3D-Modell erfolgen kann.
 
-Zur abschließenden Evaluierung des Systems ist neben der eigentlichen Entwicklung und Untersuchung eine Analyse der Anzahl der Kameras sowie der Nutzung eines Drehtellers vorgesehen. Ziel ist die Identifikation von Potenzialen zur Senkung der Hardwarekosten oder Alternativ zur Steigerung der Auflösung und Genauigkeit.
+Zur abschließenden Evaluierung des Systems ist neben der eigentlichen Entwicklung und Untersuchung eine Analyse der Anzahl der Kameras sowie der Nutzung eines Drehtellers vorgesehen. Ziel ist die Identifikation von Potenzialen zur Senkung der Hardwarekosten oder alternativ zur Steigerung der Auflösung und Genauigkeit.
 
 Zusammengefasst sollen folgende Anforderungen erfüllt werden:
 
@@ -36,6 +35,7 @@ Zusammengefasst sollen folgende Anforderungen erfüllt werden:
     \item Transportmöglichkeit/Nutzung in anderen Ländern
     \item Möglichkeit zur Erweiterung
 \end{enumerate}
+\todo{Später hierauf verweisen?}
 
 \section{Stand der Technik}
 Der Ansatz, Kameras auf einem festen Rahmen zu montieren, Bilder aufzunehmen und anschließend automatisiert 3D-Modelle auf Basis von Photogrammetrie zu erzeugen, ist bereits weit verbreitet und erprobt. Hauptsächlich unterscheiden sich diese im Vergleich zu dem hier untersuchten Ansatz in der Wahl der Kameras und der Zielgruppe der Bediener. Häufig werden hochwertige Kameras verwendet, die jedoch entsprechend hohe Kosten in der Anschaffung verursachen.
@@ -43,15 +43,15 @@ Der Ansatz, Kameras auf einem festen Rahmen zu montieren, Bilder aufzunehmen und
 Bereits Anfang der 1990er Jahre wurde ein modulares System von Leica entwickelt, das die Objekterfassung mittels mehrerer Digitalkameras ermöglichte, das sogenannte Leica POM. Dieses System wurde für industrielle Anwendungen entwickelt, beispielsweise für die Qualitätskontrolle von Bauteilen. Es ermöglichte die flexible Nutzung verschiedener Kamerasysteme, Drehteller und Lichtquellen. Ähnlich wie bei dem hier geplanten System wurden die Daten auch automatisch übertragen und verarbeitet. Auch konnten bereits einige Punkte automatisch durch Bildvergleich und Kantendetektion gemessen werden.
 \citep{leica_pom_concept}
 
-Raspberry-Pi-Kameras wurden bereits in der Photogrammetrie eingesetzt, beispielsweise beim Pi3DScanner. Das Projekt Pi3DScanner verfolgt das Ziel, ein kostengünstiges Photogrammetrie-System auf Basis mehrerer Raspberry Pi zu entwickeln. Der Ansatz ist ähnlich, jedoch kommerziell und aufgrund der Nutzung einer größeren Anzahl von Kameras höherpreisiger als das hier geplante Vorhaben. Zudem liegt der Fokus, wie bei den meisten Projekten dieser Art, auf der Erfassung von größeren Objekten oder Personen.
+Raspberry-Pi-Kameras wurden bereits in der Photogrammetrie eingesetzt, beispielsweise bei dem Projekt Pi3DScanner. Dieses verfolgt das Ziel, ein kostengünstiges Photo\-grammetrie-System auf Basis mehrerer Raspberry Pi zu entwickeln. Der Ansatz ist ähnlich, jedoch kommerziell und aufgrund der Nutzung einer größeren Anzahl von Kameras höherpreisiger als das hier geplante Vorhaben. Zudem liegt der Fokus, wie bei den meisten Projekten dieser Art, auf der Erfassung von größeren Objekten oder Personen.
 \citep{pi3dscanner}
 
 An der HafenCity Universität wurde 2015 ein Innenraum-Erfassungssystem entwickelt, das auf Basis einer Raspberry-Pi-Kamera und einem Laserentfernungsmessgerät arbeitet. Hierbei wurde auch die Genauigkeit der Kameras untersucht und die Möglichkeit der Kalibrierung geprüft. Bei dem verwendeten, älteren Camera Module v2 handelt es sich jedoch um eine Kamera mit Fixfokus, wodurch die Kalibrierung vereinfacht ist (siehe \autoref{s:kameras}). Hier wurde dennoch ein instabiler Bildhauptpunkt festgestellt, dass Genauigkeitspotenzial nach Simultankalibrierung aber mit einer Spiegelreflexkamera vergleichbar bezeichnet.
 \citep{3d_raspi_laserscanner}
 
-Ansätze für kleinere Objekte, bei denen die Schärfentiefe der Raspberry-Pi-Kameras ein Problem darstellt, sind bisher nicht bekannt. Jedoch gibt es ähnliche Probleme auch bei höherwertigen Kameras und noch kleineren Objekten, bei denen ein Abblenden des Objektives nicht mehr für ausreichend Schärfentiefe sorgt. Auch tritt das Problem bei der Verwendung von Mikroskopen auf. \cite{focusstack_sfm} zeigt hier eine Lösung durch die Nutzung von Fokusstacking, bei der mehrere Bilder mit unterschiedlichen Fokussierungen aufgenommen und anschließend zusammengefügt werden. Dieser Ansatz wurde auch in dieser Arbeit geprüft.
+Ansätze für die Erfassung von kleineren Objekten in Kombination von Raspberry-Pi-Kamera-Modulen sind bisher nicht bekannt. Problematisch ist hierbei die geringe Tiefenschärfe im Makrobereich (vgl. \autoref{s:schaerfe}). Diese Problem tritt aber auch bei höherwertigen Kameras und noch kleineren Objekten auf, bei denen ein Abblenden des Objektives nicht mehr für ausreichend Schärfentiefe sorgt. Auch im Bereich der Mikroskopie ist dieses Problem weit verbreitet. \cite{focusstack_sfm} zeigt hier eine Lösung durch die Nutzung von Fokusstacking, bei der mehrere Bilder mit unterschiedlichen Fokussierungen aufgenommen und anschließend zusammengefügt werden. Dieser Ansatz wurde auch in dieser Arbeit geprüft.
 
-Der Einsatz von \gls{SfM} -- die automatische Erstellung von 3D-Modellen aus Bildern (siehe \autoref{c:photogrammetrie}) -- wurde für die Erfassung von Kulturgütern bereits \citeyear{kersten2012} an der HafenCity untersucht \citep{kersten2012}. Hierbei wurden damals zum Teil mit Laserscannern vergleichbare Ergebnisse erzielt, wobei Objekte verschiedener Größenordnungen wie Gebäuden oder kleinen Objekten überprüft wurden. Zum anderen Teil waren die Ergebnisse auch noch unbrauchbar, aber eine stetige Verbesserung der SOftware schon absehbar. Auch die Nutzung von Open-Source-Software wurde bereits untersucht.
+Der Einsatz von Structure-from-Motion (SfM) -- die automatische Erstellung von 3D-Modellen aus Bildern (siehe \autoref{c:photogrammetrie}) -- wurde für die Erfassung von Kulturgütern bereits \citeyear{kersten2012} an der HafenCity untersucht \citep{kersten2012}. Hierbei wurden damals zum Teil mit Laserscannern vergleichbare Ergebnisse erzielt, wobei Objekte verschiedener Größenordnungen wie Gebäuden oder kleinen Objekten überprüft wurden. Manche Testobjekte führten jedoch auch zu unbrauchbaren Ergebnissen, aber eine stetige Verbesserung der Software war schon damals absehbar. Auch die Nutzung von Open-Source-Software wurde bereits untersucht.
 
 Genauigkeitsuntersuchungen von \cite{IvanNikolov} an der Universität Aalborg zeigten schon bessere Ergebnisse, jedoch waren auch hier je nach Software bei einigen Objekten keine Erzeugung des 3D-Modelles möglich, beispielsweise bei glänzenden oder texturlosen Oberflächen.
 

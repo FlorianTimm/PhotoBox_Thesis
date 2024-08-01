@@ -3,9 +3,10 @@
 \begin{document}
 
 
-\chapter{Aufbau des Messsystemes}
+\chapter{Aufbau des Messsystems}
+\todo{Überlappung mit Kapitel 2}
 Die Kameras sollten eine hohe geometrische Auflösung und möglichst stabile innere Orientierung aufweisen. Außerdem sollen sie während einer Messkampagne nicht in ihrer Lage zueinander verändert werden, damit die äußere Orientierung größtenteils gleich bleibt. Daher ist ein stabiler Rahmen notwendig, an welchem die Kameras verdrehsicher angebracht werden können. Kleinere Restfehler in den Orientierungen können mit der Bündelblockausgleichung ausgeglichen werden.
-Um Ungenauigkeiten durch Bewegungen zu verhindern, müssen die Kameras möglichst zeitgleich auslösen. Daher ist eine gemeinsame Steuerung und Kommunikation zwischen den Kameras notwendig. Außerdem sollen alle Bilder auf das Steuerungssystem übertragen werden, hierfür wir eine Form der Datenübertragung benötigt. Damit die Bilder möglichst schattenfrei ausgeleuchtet werden, muss eine Beleuchtung mit eingeplant werden. Außerdem muss die Stromversorgung der einzelnen Kameras sichergestellt sein.
+Um Ungenauigkeiten durch Bewegungen zu verhindern, müssen die Kameras möglichst zeitgleich auslösen. Daher ist eine gemeinsame Steuerung und Kommunikation zwischen den Kameras notwendig. Außerdem sollen alle Bilder auf das Steuerungssystem übertragen werden, hierfür wird eine Form der Datenübertragung benötigt. Damit die Bilder möglichst schattenfrei ausgeleuchtet werden, muss eine Beleuchtung mit eingeplant werden. Außerdem muss die Stromversorgung der einzelnen Kameras sichergestellt sein.
 
 Diese Anforderungen werden in den folgenden Abschnitten genauer erläutert.
 
@@ -13,7 +14,7 @@ Diese Anforderungen werden in den folgenden Abschnitten genauer erläutert.
 \label{s:kameras}
 Als Kameras wurde das Raspberry Pi Camera Module 3 verwendet, welches jeweils von einem Raspberry Pi Zero W gesteuert wird. Im Vergleich zu anderen günstigen Kameras wie Webcams oder der ESP32 CAM haben die Kameras eine hohe geometrische Auflösung von 12 Megapixeln und dennoch mit $1,4~\mu m$ relativ große Pixel \citep{raspicamdatasheet}, was im subjektiven Eindruck eine sehr gute Bildqualität ergibt.
 
-Andere Kameramodule für den Raspberry Pi wurden in \autoref{tab:vergleich_kameras} verglichen. Das Camera Module v1 entfiel als Möglichkeit, da die Kamera einen Mindestabstand von einem Meter aufweißt. Hiermit müsste der Aufnahmebereich für die Objekte auf über zwei Meter vergrößert werden. Die HQ- und GS-Kameras haben kein Objektiv mitgeliefert, sodass hier die Kosten für ein Objektiv hinzukommen würden. Das Camera Module v2 hat eine geringere Auflösung und auch eine geringere Bildqualität bei gleichem Preis wie das Modul 3. Außerdem ist die Fokussierung nur manuell möglich, dass die Automatisierung desselben verhindert. Das Camera Module 3 Wide hat zwar ein größeres Sichtfeld, jedoch damit auch eine geringere Auflösung auf dem Objekt. Vorteil ist der geringe Mindestabstand. Da das Camera Module 3 besser verfügbar und etwas günstiger war, bildete es einen guten Kompromiss und es wurde sich für dieses Modell entschieden.
+Andere Kameramodule für den Raspberry Pi wurden in \autoref{tab:vergleich_kameras} verglichen. Das Camera Module v1 entfiel als Möglichkeit, da die Kamera einen Mindestabstand von einem Meter benötigt. Hiermit müsste der Aufnahmebereich für die Objekte auf über zwei Meter vergrößert werden. Die HQ- und GS-Kameras haben kein Objektiv mitgeliefert, sodass hier die Kosten für ein Objektiv hinzukommen würden. Das Camera Module v2 hat eine geringere Auflösung und auch eine geringere Bildqualität bei gleichem Preis wie das Modul 3. Außerdem ist die Fokussierung nur manuell möglich, dass die Automatisierung desselben verhindert. Das Camera Module 3 Wide hat zwar ein größeres Sichtfeld, jedoch damit auch eine geringere Auflösung auf dem Objekt. Vorteil ist der geringe Mindestabstand. Da das Camera Module 3 besser verfügbar und etwas günstiger war wurde sich für dieses Modell entschieden, was einen guten Kompromiss aus Auflösung, Bildqualität und Preis darstellt.
 
 \begin{table}
     \centering
@@ -33,31 +34,31 @@ Andere Kameramodule für den Raspberry Pi wurden in \autoref{tab:vergleich_kamer
     }
 \end{table}
 
-Nachteil und Vorteil zugleich ist, dass die Kamera über einen Autofokus verfügt, der aber auch elektronisch gesteuert manuell fokussieren kann. Dieser verschlechtert die Stabilität der inneren Orientierung (vgl. \autoref{s:innereorientierung}) und wurde daher im \autoref{c:voruntersuchungen} analysiert. Da die Bilder im Makrobereich zwischen $0,1$ und $1~\text{m}$ aufgenommen werden und die Kameras keine Veränderung der Blende ermöglichen, ist die Schärfentiefe vergleichsweise niedrig. Hierauf wird in den Untersuchungen in \autoref{sec:fokusstacking} genauer eingegangen.
+Nachteil und Vorteil zugleich ist, dass die Kamera über einen Autofokus verfügt, der aber auch elektronisch gesteuert manuell fokussieren kann. Dieser verschlechtert die Stabilität der inneren Orientierung und wurde daher im \autoref{c:voruntersuchungen} analysiert. Da die Bilder im Makrobereich zwischen $0,1$ und $1~\text{m}$ aufgenommen werden und die Kameras keine Veränderung der Blende ermöglichen, ist die Schärfentiefe vergleichsweise niedrig. Hierauf wird in den Untersuchungen in \autoref{sec:fokusstacking} genauer eingegangen.
 
 Ein weiterer Vorteil der Lösung mit einzelnen Raspberry Pi besteht darin, dass hierdurch bereits die einzelnen Kameraeinheiten Berechnungen wie das Identifizieren von Passpunkten übernehmen können. Durch die Parallelisierung dieses Schrittes ist eine Reduktion der Berechnungszeit zwischen den Aufnahmen zu erwarten. Zudem ermöglicht die Nutzung von kabellosen Netzwerkverbindungen zur Steuerung eine Skalierung des Systems sowohl hinsichtlich der Anzahl der Kameras als auch der Abstände zwischen den Kameras.
 
-Die Anzahl der Kameras für den Prototypen wurde zusammen mit der Art des Rahmen (\autoref{s:rahmen}) definiert. Hierzu wurde der Rahmen mit seinen Kameras in der 3D-Visualisierungssoftware Blender modelliert und einzelne Bilder der möglichen Kamera-Positionen gerendert. Im Anschluss wurden die Bilder in Agisoft Metashape zur Berechnung eines 3D-Modells verwendet. Dabei wurde evaluiert, ob die Berechnung möglich ist und wie gut die Abdeckung des Testobjektes ist. Das virtuelle Modell des Systems wurde darüber hinaus genutzt, um Visualisierungen für die Bedienungsanleitung zu erstellen (siehe \autoref{ch:Bedienungsanleitung}). Eine Verwendung in der Websoftware zur visuellen Überprüfung der berechneten Kamera-Positionen wurde geprüft, aber nicht umgesetzt (vgl. \autoref{s:ausblick}).
+Die Anzahl der Kameras für den Prototyp wurde zusammen mit der Art des Rahmens (\autoref{s:rahmen}) definiert. Hierzu wurde der Rahmen mit seinen Kameras in der 3D-Visualisierungssoftware Blender modelliert und einzelne Bilder der möglichen Kamera-Positionen gerendert. Im Anschluss wurden die Bilder in Agisoft Metashape zur Berechnung eines 3D-Modells verwendet. Dabei wurde evaluiert, ob die Berechnung möglich ist und wie gut die Abdeckung des Testobjektes ist. Das virtuelle Modell des Systems wurde darüber hinaus genutzt, um Visualisierungen für die Bedienungsanleitung zu erstellen (siehe \autoref{ch:Bedienungsanleitung}). Eine Verwendung in der Websoftware zur visuellen Überprüfung der berechneten Kamera-Positionen wurde geprüft, aber nicht umgesetzt (vgl. \autoref{s:ausblick}).
 
 \section{Rahmen}
 \label{s:rahmen}
 
 \begin{figure}
     \centering
-    \begin{subfigure}{0.32\textwidth}
-        \includegraphics[width=1\linewidth]{./img/modell1.png}
+    \begin{subfigure}{0.30\textwidth}
+        \includegraphics[height=1\linewidth]{./img/modell1.png}
         \centering
         \caption{Unter Nutzung eines Drehtellers}
         \label{img:entwurf1}
     \end{subfigure}
-    \begin{subfigure}{0.32\textwidth}
-        \includegraphics[width=1\linewidth]{./img/modell2.png}
+    \begin{subfigure}{0.30\textwidth}
+        \includegraphics[height=1\linewidth]{./img/modell2.png}
         \centering
-        \caption{24er Rahmen mit Boden-Versteifung}
+        \caption{Rahmen mit Boden-Versteifung}
         \label{img:entwurf2}
     \end{subfigure}
-    \begin{subfigure}{0.32\textwidth}
-        \includegraphics[width=1\linewidth]{./img/modell3.png}
+    \begin{subfigure}{0.30\textwidth}
+        \includegraphics[height=1\linewidth]{./img/modell3.png}
         \centering
         \caption{Endgültiger Entwurf mit seitlichen Versteifungen}
         \label{img:entwurf3}
@@ -67,12 +68,12 @@ Die Anzahl der Kameras für den Prototypen wurde zusammen mit der Art des Rahmen
 \end{figure}
 
 
-Der Rahmen muss möglichst stabil sein, damit die Kameras sich nicht in ihrer Lage verändern können. Jedoch sollte das System auch weiterhin transportabel - also nicht zu schwer - und veränderbar bleiben, beispielsweise Kameras für Messreihen in ihrer Lage verändert werden. Der Aufbau aus genormten Bauteilen bietet sich an, um hier ggf. den Nachbau einfach ermöglichen zu können. Außerdem sollte der Rahmen auch gegebenenfalls demontierbar sein, damit er transportiert werden kann.
+Der Rahmen muss möglichst stabil sein, damit die Kameras sich nicht in ihrer Lage verändern können. Jedoch sollte das System auch weiterhin transportabel - also nicht zu schwer - und veränderbar bleiben, beispielsweise Kameras für Messreihen in ihrer Lage verändert werden. Der Aufbau aus genormten Bauteilen bietet sich an, um hier ggf. den Nachbau einfach ermöglichen zu können. Außerdem sollte der Rahmen auch demontierbar sein, damit er transportiert werden kann.
 
 Als mögliche Materialien kamen Holz, Stahl und Aluminium infrage. Aufgrund der einfachen Bearbeitung und der Standardisierung wurde sich für Aluminiumprofile entschieden. Diese gibt es in verschiedenen Ausführungen mit Nuten an den Seitenflächen, sodass eine einfache Montage, aber auch eine Demontage zu Transportzwecken, möglich wird. Außerdem sind diese sehr stabil bei leichtem Gewicht.
 
 
-Es wurden verschiedene Varianten geprüft, die in \autoref{img:entwuerfe} dargestellt sind. Der erste Entwurf (\autoref{img:entwurf1}) sah weniger Kameras und die zwingende Nutzung eines Drehtellers vor, dies wurde jedoch verworfen, weil dieser nicht der Anforderung einer schnellen Erfassung entsprochen hätte und auch der Anforderung der kurzen Einarbeitungszeit widersprechen würde. Der zweite Entwurf (\autoref{img:entwurf2}) sah bereits die Nutzung von 8 Kamera-Hauptrichtungen vor, was für gute Schnittwinkel sorgt. Für die Aussteifung wurde hier ein Boden vorgesehen. Dies ist jedoch nachteilig, da das System dann beispielsweise nicht mehr über große, nicht bewegliche Objekte herüber gestülpt werden könnte. Gerade bei empfindlichen Objekten wäre dies aber vorteilhaft. In der dritten Variante (\autoref{img:entwurf3}) wurde dann die Versteifung in den Seitenwänden umgesetzt. Durch eine Konstruktion mit Eckwürfeln sowie der Bildung von dreieckigen Strukturen und Nutzung von Platten, die Scheibenwirkung haben, wurde die Stabilität der Verbindungen erhöht. \autoref{img:alurahmen} zeigt den fertigen Rahmen vor Einbau der Platten und der Technik.
+Es wurden verschiedene Varianten geprüft, die in \autoref{img:entwuerfe} dargestellt sind. Der erste Entwurf (\autoref{img:entwurf1}) sah weniger Kameras und die zwingende Nutzung eines Drehtellers vor, dies wurde jedoch verworfen, weil dieser nicht der Anforderung einer schnellen Erfassung entsprochen hätte und auch der Anforderung der kurzen Einarbeitungszeit widersprechen würde. Der zweite Entwurf (\autoref{img:entwurf2}) sah bereits die Nutzung von 8 Kamera-Hauptrichtungen vor, was für gute Schnittwinkel sorgt. Für die Aussteifung wurde hier ein Boden vorgesehen. Dies ist jedoch nachteilig, da das System dann beispielsweise nicht mehr über große, nicht bewegliche Objekte herüber gestülpt werden könnte. Gerade bei empfindlichen Objekten wäre dies aber vorteilhaft. In der dritten Variante (\autoref{img:entwurf3}) wurde dann die Versteifung in den Seitenwänden umgesetzt. Durch eine Konstruktion mit Eckwürfeln sowie der Bildung von dreieckigen Strukturen und den Einbau von eckaussteifenden Platten mit Scheibenwirkung, wurde die Stabilität der Verbindungen erhöht. \autoref{img:alurahmen} zeigt den fertigen Rahmen vor Einbau der Platten und der Technik.
 
 
 \begin{figure}
@@ -96,7 +97,7 @@ Die Kameras wurden mit einem $90^\circ$-Winkel am Rahmen montiert, um diese weit
 
 
 \section{Beleuchtung}
-
+\todo{Überlappung mit Belichtung prüfen}
 
 \begin{figure}
     \centering
@@ -122,6 +123,12 @@ Es wurde sich für einzeln steuerbare LED-Lichtstreifen als Lichtquelle entschie
 Für diffuseres Licht von außen kann ein halbtransparenter, weißer Stoff über den Rahmen gespannt werden. Hierfür wurde aus weißem Baumwollstoff eine entsprechende Haube genäht, welche durch zwei mittels Reißverschluss verschließbaren Eingriffmöglichkeiten weiterhin das Einlegen von Objekten durch die Seite oder das Verstellen von Kameras ermöglicht. Dieser sorgt für eine gleichmäßigere Ausleuchtung durch Reflexion im Inneren, verhindert Reflexionen an Glasscheiben etc. und vermindert Blendwirkungen durch externe Lichtquellen.
 
 
+\section{Kommunikation und Datenübertragung}
+Die Kommunikation zwischen den Raspberry Pi erfolgt über WLAN. Hierfür ist ein Mini-WLAN-Router mit im System verbaut worden. Vorteil dieser Lösung ist, dass hier keine weiteren Leitungen außer der Stromversorgung zu den einzelnen Raspberry Pi Zero W benötigt wird und es auch möglich wäre, die gleiche Hard- und Software für ein größeres System ohne Änderungen zu nutzen. Nachteilig ist die Verbindungsgeschwindigkeit, gerade im Hinblick auf die Synchronisierung der Kameras. Diese Problematik soll aber durch entsprechende Programmierung der Software möglichst klein gehalten werden. \todo{Prüfung und Verweis auf diese Stelle in der Auswertung}
+
+Als weitere Datenleitungen wird eine Steuerleitung für die LED-Streifen benötigt. Über diese erfolgt die Steuerung der einzelnen LED-Gruppen. Auch hier wurde wieder Klingeldraht verwendet. Sie ist in \autoref{img:schema_energie} in Orange dargestellt.
+
+
 \section{Stromversorgung}
 
 \begin{figure}
@@ -131,7 +138,7 @@ Für diffuseres Licht von außen kann ein halbtransparenter, weißer Stoff über
     \label{img:stromverteilung} %ID fürs Bild
 \end{figure}
 
-Alle Raspberry Pi werden mit 5~Volt betrieben. Der Raspberry Pi Zero mit Kamera hatte dabei in Messungen einen maximalen Stromverbrauch von 270~mA aufgezeigt, der Raspberry Pi 4 kann bis zu 1,5~A unter Last verbrauchen. Hieraus ergibt sich ein Gesamtstromverbrauch von maximal rund 8~Ampere. Für den Raspberry Pi 4 wurde ein eigenes Netzteil eingeplant und für die 24 Raspberry Pi Zero W ein gemeinsames 35 Watt-Netzteil. Versuche zeigten jedoch, dass der Stromverbrauch kurzfristig höher ausfallen konnte, sodass die Raspberry Pi Zero W, die am meisten von Spannungsabfällen betroffen sind, zum Absturz gebracht wurden, wenn alle Kameras gleichzeitig auslösten. Nachdem die Last sicherheitshalber auf zwei weitere Netzteile verteilt wurde, lief das System zuverlässig.
+Alle Raspberry Pi werden mit 5~Volt betrieben. Der Raspberry Pi Zero mit Kamera hatte dabei in Messungen einen maximalen Stromverbrauch von 270~mA aufgezeigt, der Raspberry Pi 4 kann bis zu 1,5~A unter Last verbrauchen. Hieraus ergibt sich ein Gesamtstromverbrauch von maximal rund 8~Ampere. Für den Raspberry Pi 4 wurde ein eigenes Netzteil eingeplant und für die 24 Raspberry Pi Zero W ein gemeinsames 35 Watt-Netzteil. Versuche zeigten jedoch, dass der Stromverbrauch kurzfristig höher ausfallen kann, sodass die Raspberry Pi Zero W, die am meisten von Spannungsabfällen betroffen sind, zum Absturz gebracht wurden, wenn alle Kameras gleichzeitig auslösten. Nachdem die Last sicherheitshalber auf zwei weitere Netzteile verteilt wurde, lief das System zuverlässig.
 
 Als Kabelmaterial wurde Klingeldraht mit $0,75~\text{mm}^2$ verwendet. Der relativ hohe Kabelquerschnitt soll für einen geringen Spannungsabfall sorgen. Durch die Verwendung von mehreren Netzteilen ist dieser jedoch nun nicht mehr notwendig. Hier würde sich nun ein geringerer Querschnitt anbieten, auch um eine einfachere Verbindung zu den Raspberry Pi Zero W zu ermöglichen. Diese wurden aufseiten der Zero W verlötet und in den Verteilerdosen mit Federkraftklemmen verbunden (siehe \autoref{img:stromverteilung}).
 
@@ -147,11 +154,6 @@ Alle Netzteile werden von einer zentralen Steckdosenleiste mit 230V-Netzspannung
     \caption{Schematische Darstellung der Energieversorgung (blau: 5 V; rot: 12 V; magenta: 230 V; orange: Daten)} %Bildunterschrift
     \label{img:schema_energie} %ID fürs Bild
 \end{figure}
-
-\section{Kommunikation und Datenübertragung}
-Die Kommunikation zwischen den Raspberry Pi erfolgt über WLAN. Vorteil dieser Lösung ist, dass hier keine weiteren Leitungen außer der Stromversorgung zu den einzelnen Raspberry Pi Zero W benötigt wird und es auch möglich wäre, die gleiche Hard- und Software für ein größeres System ohne Änderungen zu nutzen. Nachteilig ist die Verbindungsgeschwindigkeit, gerade im Hinblick auf die Synchronisierung der Kameras. Diese Problematik soll aber durch entsprechende Programmierung der Software möglichst klein gehalten werden. \todo{Prüfung und Verweis auf diese Stelle in der Auswertung}
-
-Als weitere Datenleitungen wird eine Steuerleitung für die LED-Streifen benötigt. Über diese erfolgt die Steuerung der einzelnen LED-Gruppen. Auch hier wurde wieder Klingeldraht verwendet. Sie ist in \autoref{img:schema_energie} in Orange dargestellt.
 
 
 \biblio

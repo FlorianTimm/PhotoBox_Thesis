@@ -5,7 +5,7 @@
 
 \chapter{Voruntersuchungen}
 \label{c:voruntersuchungen}
-Vor und während des Aufbaues des eigentlichen Messsystemes wurden einige Voruntersuchungen durchgeführt. Diese dienten dazu, die Machbarkeit des Systemes zu prüfen und die notwendigen Schritte zu ermitteln und zu optimieren. Hauptsächlich ging es hierbei um die Ermittlung der Kamerakonstanten und der Verzeichnung der Kamera. Auch die Möglichkeit der Erstellung eines 3D-Modells durch Fokusstacking wurde untersucht. Die einzelnen Untersuchungen werden im Folgenden kurz vorgestellt.
+Vor und während des Aufbaues des eigentlichen Messsystems wurden einige Voruntersuchungen durchgeführt. Diese dienten dazu, die Machbarkeit des Systems zu prüfen und die notwendigen Schritte zu ermitteln und zu optimieren. Hauptsächlich ging es hierbei um die Ermittlung der Kamerakonstanten und der Verzeichnung der Kamera. Auch die Möglichkeit der Erstellung eines 3D-Modells durch Fokusstacking wurde untersucht. Die einzelnen Untersuchungen werden im Folgenden kurz vorgestellt.
 
 \section{Überprüfung der Kameraauflösung}
 
@@ -16,7 +16,7 @@ Die Angabe der Auflösung in Pixeln täuscht bei günstigen Kameras über die ta
 Die tatsächliche Auflösung der Kamera soll ermittelt werden. Hierbei spielt neben der reinen Anzahl der Pixel auch die Qualität des Objektives der Kameras eine Rolle.
 
 \paragraph{Vorgehen}
-Es wurden Bilder von einem Siemensstern unter verschiedenen Belichtungssituationen und Entfernungen aufgenommen. Anschließend wurde die Größe des Unschärfekreises ermittelt und die Linienauflösung und -größe hieraus nach \cite[S. 161]{luhmann} berechnet. Zum Vergleich wurden die Bilder auch mit einer hochwertigeren Kamera aufgenommen (Spiegelreflexkamera Canon EOS 77D mit EF-S 18-55mm 1:4-5.6 IS STM). Eine der Aufnahmen ist in \autoref{img:siemens} dargestellt.
+Es wurden Bilder von einem Siemensstern unter verschiedenen Belichtungssituationen und Entfernungen aufgenommen (Beispielaufnahme siehe \autoref{img:siemens}). Anschließend wurde die Größe des Unschärfekreises ermittelt und die Linienauflösung und -größe hieraus nach \cite[S. 161]{luhmann} berechnet. Zum Vergleich wurden die Bilder auch mit einer hochwertigeren Kamera aufgenommen (Spiegelreflexkamera Canon EOS 77D mit EF-S 18-55 mm 1:4-5.6 IS STM).
 
 \begin{align*}
     \text{[Auflösungsvermögen]} & = \frac{\text{[Anzahl Segmente]}}{\pi \cdot \text{[Durchmesser Unschärfekreis]}} \\
@@ -43,7 +43,7 @@ Der Unschärfekreis war durchschnittlich 28 Pixel groß. Dies entspricht einer L
 Die Kamerakonstante einer Kamera ändert sich durch die Fokussierung. Bei gleich eingestellter Objektdistanz ist die Kamerakonstante näherungsweise gleich.
 
 \paragraph{Ziel}
-In \citet[S. 59]{kraus} wird eine Formel (siehe \autoref{eq:kraus_fokus}) für die \Gls{Bildweite} $b$ in Abhängigkeit des Gegenstandsweite $g$ gegeben. Näherungsweise entspricht die Bildweite der Kamerakonstante \citep[S. 59]{kraus}. Die Nutzung der Formel als Näherungswert soll überprüft werden und eine optimierte Formel für die Raspberry-Pi-Kamera ermittelt werden.
+\citet[S. 59]{kraus} gibt eine Formel (siehe \autoref{eq:kraus_fokus}) für die Bildweite $b$ in Abhängigkeit der Gegenstandsweite $g$ an. Näherungsweise entspricht die Bildweite der Kamerakonstante \citep[S. 59]{kraus}. Die Nutzung der Formel als Näherungswert soll überprüft werden und eine optimierte Formel für die Raspberry-Pi-Kamera ermittelt werden.
 
 \begin{align}
     \frac{1}{f} = \frac{1}{g} + \frac{1}{b}
@@ -56,7 +56,7 @@ In \citet[S. 59]{kraus} wird eine Formel (siehe \autoref{eq:kraus_fokus}) für d
 \end{conditions}
 
 \paragraph{Vorgehen}
-Die Änderungen der Parameter wurden in einem Versuch beobachtet. Hierzu wurde der Raspberry Pi Zero mit montierter Kamera fest vor einem ChArUco-Kalibriermuster platziert. Das Kalibriermuster besteht aus einer Kombination von ArUco-Markern und einem Schachbrettmuster (siehe \autoref{img:charuco}). Durch das Schachbrettmuster ermöglicht es auch bei unscharfen Bildern eine gute automatische Erkennung der zu beobachtenden Punkte. Es wurden je 11 Bilder mit unterschiedlichen Fokussierungen von $2~\text{m}$ bis  $10~\text{cm}$ aufgenommen. Dieser Vorgang wurde insgesamt viermal wiederholt, um auch die Wiederholungsgenauigkeit zu ermitteln. Die Bilder wurden anschließend mit einem Python-Script unter Nutzung von OpenCV ausgewertet. Hierbei wurde die relative Veränderung der Kamerakonstante ermittelt und mit dem erwarteten Wert verglichen. Die relativen Änderungen wurden auf eine Fokusdistanz von $20~\text{cm}$ (entspricht einer Kamerakonstante von $5~\text{dpt}$) normiert. Es urden relative Angaben genutzt, da noch keine genaue Kenntnis über die tatsächliche Brennweite der Kamera bestand. Die Ergebnisse wurden in einem Box-Whisker-Plot dargestellt.
+Die Änderungen der Parameter wurden in einem Versuch beobachtet. Hierzu wurde der Raspberry Pi Zero mit montierter Kamera fest vor einem ChArUco-Kalibriermuster platziert. Das Kalibriermuster besteht aus einer Kombination von ArUco-Markern und einem Schachbrettmuster (siehe \autoref{img:charuco}). Durch das Schachbrettmuster ermöglicht es auch bei unscharfen Bildern eine gute automatische Erkennung der zu beobachtenden Punkte. Es wurden je 11 Bilder mit unterschiedlichen Fokussierungen von $2~\text{m}$ bis  $10~\text{cm}$ aufgenommen. Dieser Vorgang wurde insgesamt viermal wiederholt, um auch die Wiederholungsgenauigkeit zu ermitteln. Die Bilder wurden anschließend mit einem Python-Script unter Nutzung von OpenCV ausgewertet. Hierbei wurde die relative Veränderung der Kamerakonstante ermittelt und mit dem erwarteten Wert verglichen. Die relativen Änderungen wurden auf eine Fokusdistanz von $20~\text{cm}$ (entspricht einer Kamerakonstante von $5~\text{dpt}$) normiert. Es wurden relative Angaben genutzt, da noch keine genaue Kenntnis über die tatsächliche Brennweite der Kamera bestand. Die Ergebnisse wurden in einem Box-Whisker-Plot dargestellt.
 
 \begin{figure}
     \centering
@@ -83,7 +83,7 @@ Die Ergebnisse sind in \autoref{img:fokus_faktor} dargestellt. Es zeigt sich, da
 Durch die Verschiebung der Linsen bei der Fokussierung verändert sich auch die Verzeichnung der Kamera.
 
 \paragraph{Ziel}
-Die Veränderung der Verzeichnung und eine Korrekturformel soll ermittelt werden.
+Die Veränderung der Verzeichnung und eine entsprechende Korrekturformel soll ermittelt werden.
 
 \paragraph{Vorgehen}
 Der Versuchsaufbau aus \autoref{sec:fokus} zur Bestimmung der relativen Änderung der Kamerakonstante blieb bestehen. Es wurden jedoch zusätzlich die Verzeichnungen der Bilder ermittelt. Die Verzeichnung wurde mit OpenCV ermittelt und mit der erwarteten Verzeichnung verglichen.
@@ -133,6 +133,7 @@ Anschließend wurden die Bilder mit einem Python-Skript unter Verwendung von Ope
 
 \paragraph{Ergebnis}
 \todo{Fokusstack neu durchführen und Ergebnisse auswerten}
+\todo{Bild einfügen}
 
 \biblio
 \end{document}

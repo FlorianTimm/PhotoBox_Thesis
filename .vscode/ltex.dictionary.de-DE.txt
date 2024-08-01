@@ -14,8 +14,6 @@ Low-Cost-Sensoren
 Kersten
 Gaiserstraße
 Fokusstacking
-Messsystemes
-Systemes
 Fokusdistanz
 Dioptrienzahl
 Gegenstandsweite

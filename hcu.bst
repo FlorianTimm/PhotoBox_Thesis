@@ -402,7 +402,7 @@ FUNCTION {format.doi}
   { pop$ "" }
   { doi empty$
     { skip$ }
-    { "\textit{\href{http://dx.doi.org/" doi * "}{doi: " * swap$ * "}}" * }
+    { "\textit{\href{http://dx.doi.org/" doi * "}{doi:" * swap$ * "}}" * }
   if$
 }
 if$

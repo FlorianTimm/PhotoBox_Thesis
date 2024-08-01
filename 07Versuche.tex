@@ -38,7 +38,7 @@ Eigene, manuelle Messungen ergaben eine Genauigkeit von etwa 1,5~px. Vereinfacht
     dX  & Lage-Genauigkeit (Objektraum)
 \end{conditions}
 
-An diesem Wert muss dann noch der sogenannte Design-Faktor angebracht werden, dieser liegt bei Rundumverbänden zwischen 0,4 und 0,8, bei Stereoaufnahmen bei 1,5-3,0 \citep[S. 174]{luhmann}. Vereinfacht für eine grobe Abschätzung wird hier daher der Faktor weggelassen. Die erwartete Genauigkeit liegt damit deutlich unter einem Millimeter in der Lage.
+An diesem Wert muss dann noch der sogenannte Design-Faktor \todo{erklären} angebracht werden, dieser liegt bei Rundumverbänden zwischen 0,4 und 0,8, bei Stereoaufnahmen bei 1,5-3,0 \citep[S. 174]{luhmann}. Vereinfacht für eine grobe Abschätzung wird hier daher der Faktor weggelassen. Die erwartete Genauigkeit liegt damit deutlich unter einem Millimeter in der Lage.
 
 \begin{align}
     s_{px; min}' & = dX_{min} \\
@@ -68,7 +68,7 @@ Bei dem verwendeten System werden zwei Kameras eingesetzt, die sich ein massives
 \subsection{Ergebnisse}
 Die modellierte Oberfläche aus dem Streifenprojektionssystem und die Punktwolke aus dem Prototyp wurden in CloudCompare aufeinandergelegt und die Differenz berechnet. Die Visualisierung der Differenzen ist in \autoref{img:differenz_moai} dargestellt. Es ist zu erkennen, dass einige Bereiche gar nicht erfasst bzw. deren Genauigkeit deutlich von der erwarteten abweichen. Die größten Fehlstellen sind im Bereich des Kinnes und unterhalb des Bauches zu erkennen. Abweichungen im Bereich des restlichen Körpers sind deutlich geringer und liegen im Bereich von 0,21~mm. Sie sind auf die schlechtere Erfassung der nach unten gerichteten Flächen zurückzuführen. Diese Bildbereiche sind nur in wenigen Bildern sichtbar und können daher nicht so gut rekonstruiert werden.
 
-Die Abweichungen liegen in der Größenordnung der in \autoref{ss:erwartete_genauigkeit} berechneten Werte und sind nur minimal schlechter, als die Genauigkeit eines 3D-Modelles des Körpers, welches photogrammetrisch mit einer Spiegelreflexkamera Nikon D90 manuell aufgenommen wurde. Durch Kombinationen von anderen Perspektiven ist hier die Abdeckung subjektive betrachtet besser. Die Ergebnisse sind in \autoref{tab:vergleich_erg} zusammengefasst.
+Die Abweichungen liegen in der Größenordnung der in \autoref{ss:erwartete_genauigkeit} berechneten Werte und sind nur minimal schlechter, als die Genauigkeit eines 3D-Modelles des Körpers, welches photogrammetrisch mit einer Spiegelreflexkamera Nikon D90 manuell aufgenommen wurde. Durch Kombinationen von anderen Perspektiven ist hier die Abdeckung subjektiv betrachtet besser. Die Ergebnisse sind in \autoref{tab:vergleich_erg} zusammengefasst.
 
 \begin{figure}
     \centering
@@ -84,15 +84,15 @@ Die Abweichungen liegen in der Größenordnung der in \autoref{ss:erwartete_gena
     \label{tab:vergleich_erg}
     \begin{tabular}{l|r|r|r}
         \toprule
-                   & Durchschnittliche & Mittlerer & Maximaler \\
-                   & Fehler            & Fehler    & Fehler    \\
+                   & Durchschnittlicher & Mittlerer & Maximaler \\
+                   & Fehler             & Fehler    & Fehler    \\
+        %\midrule
+        %Gesamt     & 0,37~mm            & 1,09~mm   & 11,6~mm   \\  % Oberflächenmodell alt
+        %gefiltert  & 0,20~mm            & 0,72~mm   & 1,9~mm    \\
         \midrule
-        Gesamt     & 0,37~mm           & 1,09~mm   & 11,6~mm   \\  % Oberflächenmodell alt
-        gefiltert  & 0,20~mm           & 0,72~mm   & 1,9~mm    \\
+        Punktwolke & 0,04~mm            & 0,21~mm   & 3,3~mm    \\  % Vertices neu
         \midrule
-        Punktwolke & 0,04~mm           & 0,21~mm   & 3,3~mm    \\  % Vertices neu
-        \midrule
-        Nikon D90  & 0,27~mm           & 0,19~mm   & 1,2~mm    \\
+        Nikon D90  & 0,27~mm            & 0,19~mm   & 1,2~mm    \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -100,7 +100,8 @@ Die Abweichungen liegen in der Größenordnung der in \autoref{ss:erwartete_gena
 
 \section{Nutzung eines Drehtellers}
 \label{s:drehteller}
-Statt die reelle Zahl der Kameras zu verändern, kann auch ein Drehteller genutzt werden, sodass jede Kamera mehr als ein Bild zur Erfassung des Objektes liefert.
+Statt die reelle Zahl der Kameras zu erhöhen, kann auch ein Drehteller genutzt werden, sodass jede Kamera mehr als ein Bild zur Erfassung des Objektes liefert.
+\todo{<> Evaluation Kameraanzahl}
 
 \subsection{Durchführung}
 Hierzu wurde ein einfacher manueller Drehteller genutzt (IKEA SNUDDA). Dieser wurde mit Passpunkten beklebt und weißt ansonsten eine texturreiche Naturholzoberfläche auf (siehe \autoref{img:drehteller_moai}). Die Daten wurden in Metashape weiterverarbeitet und die einzelnen Aufnahmeschritte über die Passpunkte und die Punktwolke zusammengerechnet. Die Ergebnisse wurden mit denen des Streifenprojektionssystems und den Aufnahmen ohne Drehteller verglichen.
@@ -126,12 +127,12 @@ Die Ergebnisse sind in \autoref{tab:vergleich_drehteller} zusammengefasst.
     \label{tab:vergleich_drehteller}
     \begin{tabular}{l|r|r|r|r}
         \toprule
-                        & Durchschnittliche & Mittlerer & Maximaler & Punktanzahl \\
-                        & Fehler            & Fehler    & Fehler    &             \\
+                        & Durchschnittlicher & Mittlerer & Maximaler & Punktanzahl \\
+                        & Fehler             & Fehler    & Fehler    &             \\
         \midrule
-        ohne Drehteller & - 0,03~mm         & 0,22~mm   & 2,0~mm    & 3,3 Mio     \\
-        mit Drehteller  & - 0,03~mm         & 0,15~mm   & 1,6~mm    & 3,4 Mio     \\
-        Nikon D90       & 0,03~mm           & 0,17~mm   & 1,2~mm    & 0,05 Mio    \\
+        ohne Drehteller & - 0,03~mm          & 0,22~mm   & 2,0~mm    & 3,3 Mio     \\
+        mit Drehteller  & - 0,03~mm          & 0,15~mm   & 1,6~mm    & 3,4 Mio     \\
+        Nikon D90       & 0,03~mm            & 0,17~mm   & 1,2~mm    & 0,05 Mio    \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -146,6 +147,7 @@ Die Ergebnisse sind in \autoref{tab:vergleich_drehteller} zusammengefasst.
 
 
 \section{Evaluation der Kameraanzahl}
+\todo{ggf. Reihenfolge mit Drehteller tauschen, gesucht: unterste Grenze, Definition?}
 Die Kameras machen einen großen Teil des (Kosten-)Aufwandes zur Realisierung des Projektes aus. Es soll daher in diesem Schritt geprüft werden, ob die Anzahl der Kameras auch reduziert werden kann. Entsprechend \autoref{s:drehteller} wird auch der Einsatz des Drehtellers statt mehr Kameras geprüft.
 
 \subsection{Durchführung}

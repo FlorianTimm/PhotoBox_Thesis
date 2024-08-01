@@ -5,18 +5,17 @@
 
 \chapter{Photogrammetrische Grundlagen}
 \label{c:photogrammetrie}
-Das zu entwickelnde System soll 3D-Modelle von Objekten erstellen. Dieses Kapitel beschreibt die hierfür notwendigen Bedingungen und die Grundlagen der Rekonstruktion des Objektes als 3D-Modell. Hierfür wird Photogrammetrie in Form einer \gls{SfM}-Pipeline genutzt. Der allgemeine Ablauf ist in \autoref{img:ablauf} dargestellt. Grau dargestellte Schritte werden nicht von der entwickelten Software aus \autoref{c:software} sondern von externer Software durchgeführt.
+Dieses Kapitel beschreibt die notwendigen Bedingungen und die Grundlagen der Rekonstruktion des Objektes als 3D-Modell. Hierfür wird Photogrammetrie in Form einer SfM-Pipeline genutzt. Der allgemeine Ablauf ist in \autoref{img:ablauf} dargestellt. Grau dargestellte Schritte werden nicht von der entwickelten Software aus \autoref{c:software} sondern von externer Software durchgeführt.
 
-Zunächst werden die Bilder aufgenommen (siehe \autoref{s:bilder}). Hierbei ist wichtig, dass sich die Bildinhalte überlappen. Die Bilder werden dann verknüpft, indem identische Punkte in den Bildern identifiziert werden  (siehe \autoref{s:verknuepfung}). Hierfür können beispielsweise ArUco-Marker oder die SIFT-Methode genutzt werden.
+Zunächst werden die Bilder aufgenommen (siehe \autoref{s:bilder}). Hierbei ist wichtig, dass sich die Bildinhalte überlappen. Die Bilder werden dann verknüpft, indem identische Punkte in den Bildern identifiziert werden  (siehe \autoref{s:verknuepfung}).
 Aus den identifizierten Punkten werden dann die Positionen und Ausrichtung der Kameras und Verknüpfungspunkte in einem lokalen Koordinatensystem ohne bekannten Maßstab berechnet. Die so erzeugten Daten werden anschließend in einer Bündelblockausgleichung gemeinsam optimiert (siehe \autoref{s:buendelblock}). Durch die Nutzung von bekannten Größen, beispielsweise kalibrierten Maßstäben, kann dieses System transformiert werden.
 
 \begin{figure}
     \centering
     \includegraphics[width=0.8\textwidth]{./img/uml/uml_ablauf.pdf}
-    \caption{Ablauf der Bildverknüpfung, nach \citealt[S. 492]{luhmann}} %Bildunterschrift
+    \caption{Ablauf der Bildverknüpfung mittels Structure-from-Motion (SfM), nach \citealt[S. 492]{luhmann}} %Bildunterschrift
     \label{img:ablauf} %ID fürs Bild
 \end{figure}
-
 
 
 \section{Abbildung}
@@ -25,7 +24,7 @@ Grundlage der Photogrammetrie ist die Abbildungsgleichung. Diese beschreibt die 
 
 \subsection{Innere Orientierung}
 \label{s:innereorientierung}
-Die innere Orientierung beschreibt die Abbildungseigenschaften der Kamera mathematisch. Wichtigste Parameter sind hierbei die Lage des Bildhauptpunktes und die Kamerakonstante. Außerdem zählen hierzu auch die Parameter, die die Verzeichnung beschreiben. \citep[S. 179f]{luhmann}
+Die innere Orientierung beschreibt die Abbildungseigenschaften der Kamera auf mathematische Weise. Wichtigste Parameter sind hierbei die Lage des Bildhauptpunktes und die Kamerakonstante. Außerdem zählen hierzu auch die Parameter, die die Verzeichnung beschreiben. \citep[S. 179f]{luhmann}
 
 Normalerweise wird die Kamera hierbei vereinfacht als Lochkamera unter Verwendung der Zentralperspektive betrachtet (siehe \autoref{img:optische_achse}). Als Projektionszentrum wird hierbei der Punkt beschrieben, durch den alle Bildstrahlen geradlinig laufen. Sein Lot auf dem Sensor wird als Bildhauptpunkt $H$ bezeichnet und beispielsweise durch seine Lage in Pixeln oder Mikrometern beschrieben. Durch eine schiefe optische Achse kann dieser vom Mittelpunkt des Sensors abweichen. Die Kamerakonstante $c$ beschreibt idealisiert den Abstand des Projektionszentrums zum Sensor. \citep[S. 177]{luhmann}
 
@@ -105,7 +104,7 @@ Als weitere Parameter spielen die Verzeichnungen eine Rolle. Diese kann in die A
     \Delta x_{tan} & Tangentiale Verzeichnung \\
 \end{conditions}
 
-Die Verzeichnungen werden meist mit den Parametern $k1$ bis $k4$ für die radiale Verzeichnung und $p1$ und $p2$ für die tangentialen Verzeichnungen bezeichnet. Die Faktoren stellen dabei die Parameter einer Taylor-Reihe dar. Sie basieren auf dem Kameramodell von Brown und den von ihm in \cite[S. 859]{brown1971} vorgestellten Formeln (siehe \autoref{eq:brown_rad} und \ref{eq:brown_tan}).
+Die Verzeichnungen werden meist mit den Parametern $k1$ bis $k4$ für die radiale Verzeichnung und $p1$ und $p2$ für die tangentialen Verzeichnungen bezeichnet. Die Faktoren stellen dabei die Parameter einer Taylor-Reihe dar. Sie basieren auf dem Kameramodell von Brown und den von ihm in \cite[S. 859]{brown1971} vorgestellten Formeln (siehe \autoref{eq:brown_rad} und \ref{eq:brown_tan}). Diese Parameter werden so beispielsweise auch in Metashape, OpenDroneMap und OpenCV genutzt.
 
 \begin{align}
     \label{eq:brown_rad}
@@ -121,7 +120,6 @@ Die Verzeichnungen werden meist mit den Parametern $k1$ bis $k4$ für die radial
     p1, p2 & Tangentiale Verzeichnungsparameter \\
 \end{conditions}
 
-Diese Parameter werden beispielsweise auch in Metashape, OpenDroneMap und OpenCV genutzt.
 
 
 \section{Bilder}
@@ -130,7 +128,7 @@ Diese Parameter werden beispielsweise auch in Metashape, OpenDroneMap und OpenCV
 Die Berechnung der Position eines Objektes im Bild ist nur möglich, sofern der Punkt in mindestens einem weiteren Bild abgebildet ist. Die Genauigkeit der Berechnung ist vom Schnittwinkel dieser beiden Strahlen abhängig. Um möglichst gute Grundlagen zur Ver\-fügung zu haben und die innere und äußere Orientierung möglichst gut berechnen zu können, müssen diese Bilder einige Bedingungen erfüllen - auf diese wird hier eingegangen.
 
 \subsection{Überlappung und Bildinhalte}
-Da die Bilder durch identische Punkte verbunden werden, müssen sich die Bildinhalte überlappen und gemeinsame Punkte in den Bildern identifiziert werden. Die automatische Detektion von identischen Punkten ist auf verschiedene Weisen möglich: Entweder durch die Nutzung von codierten und uncodierten Passpunkten oder über eine Merkmalsextraktion. Für das letztere muss die Oberfläche genügend Textur bzw. Struktur aufweisen. Detailliert wird in \autoref{s:verknuepfung} hierauf eingegangen. \citep[S. 478]{luhmann}
+Da die Bilder durch identische Punkte verbunden werden, müssen sich die Bildinhalte überlappen und gemeinsame Punkte in den Bildern identifiziert werden. Die automatische Detektion von identischen Punkten ist auf verschiedene Weisen möglich: Entweder durch die Nutzung von codierten und uncodierten Passpunkten oder über eine Merkmalsextraktion. Für letzteres muss die Oberfläche genügend Textur bzw. Struktur aufweisen. Detailliert wird in \autoref{s:verknuepfung} hierauf eingegangen. \citep[S. 478]{luhmann}
 
 \subsection{Position und Ausrichtung der Kamera}
 Damit die Schnitte der Bildstrahlen optimal sind und die Berechnung der Tiefeninformationen möglichst genau ist, müssen die Kameras möglichst gleichmäßig um das Objekt verteilt sein.
@@ -145,7 +143,7 @@ Da die Objekte und die Kameras sich während der Aufnahme nicht bewegen, kann di
 
 \subsection{Fokussierung und Schärfentiefe}
 \label{s:schaerfe}
-Um genaue Punktwolken zu ermöglichen, muss das Objekt scharf abgebildet werden. Die Kameras müssen dafür entsprechend fokussiert sein. Jedoch wird durch die Fokussierung auch die innere Orientierung verändert. Normalerweise wird daher auf eine Umfokussierung verzichtet und mittels der Blende (kleine Blendenöffnung) die Schärfentiefe erhöht, sodass ein großer Bereich scharf abgebildet wird. Dieses ist aber bei vielen einfachen Kameras wie dem verwendeten Raspberry Pi Camera Module 3 nicht möglich.
+Um genaue Punktwolken erzeugen zu können, muss das Objekt scharf abgebildet werden. Die Kameras müssen dafür entsprechend fokussiert sein. Jedoch wird durch die Fokussierung auch die innere Orientierung verändert. Normalerweise wird daher auf eine Umfokussierung verzichtet und mittels der Blende (kleine Blendenöffnung) die Schärfentiefe erhöht, sodass ein großer Bereich scharf abgebildet wird. Dieses ist aber bei vielen einfachen Kameras wie dem verwendeten Raspberry Pi Camera Module 3 nicht möglich.
 
 Der Schärfebereich ergibt sich aus der Größe des tolerierbaren Unschärfekreis auf dem Sensor. Bei digitalen Kameras wird dieser durch die Pixelgröße bestimmt. Nach \citet[S. 148f]{luhmann} berechnet sich die Schärfentiefe nach folgender Formel:
 
@@ -191,11 +189,13 @@ Vorteilhaft ist jedoch die Verwendung von codierten Zielmarken. Hier können die
 \subsubsection{Zielmarken nach Schneider}
 Eine Form der codierten Zielmarken sind die Marker nach Schneider. Diese bestehen aus mehreren konzentrischen Kreisen und werden entsprechend auch als CCCT -- concentric circular coded target -- bezeichnet \citep{ccct}. Die Mitte des Markers wird durch den gemeinsamen Mittelpunkt der Kreise definiert.  Vorteilhaft ist, dass die Marker auch bei unscharfen Bildern erkannt werden können und ihr Zentrum manuell identifiziert werden kann, beispielsweise zum Aufmaß mit einem Tachymeter. Sie haben sich daher als Standardmarker in der Photogrammetrie etabliert. Sie werden beispielsweise von Agisoft Metashape verwendet.
 \todo{Quelle}
+\todo{Bild}
 
 
 \subsubsection{ArUco-Marker}
-Eine andere Variante der codierten Verknüpfungspunkte sind die sogenannten ArUco-Marker. Diese werden häufig für die Orientierung bei Augmented-Reality-An\-wend\-ungen genutzt. Sie werden als codierte Messmarken verwendet und können automatisch im Subpixelbereich erkannt werden. Jede Ecke kann hier einzeln identifiziert werden, sodass ein erkannter Marker vier Verknüpfungspunkte liefern kann. Nachteilig ist, dass die Ecken nicht eindeutig identifiziert werden können, wenn die Aufnahme unscharf ist. Durch ihre Verwendung in Augmented-Reality-Anwendungen sind auch viele kostenfreie Bibliotheken für ihre Erkennung verfügbar. Beispielsweise kann OpenCV ArUco-Marker identifizieren. %\citep[S. 536]{luhmann}
+Eine andere Variante der codierten Verknüpfungspunkte sind die sogenannten ArUco-Marker. Diese werden häufig für die Orientierung bei Augmented-Reality-An\-wend\-ungen genutzt. Jede Ecke kann hierbei automatisch im Subpixelbereich identifiziert werden, sodass ein erkannter Marker vier Verknüpfungspunkte liefern kann. Nachteilig ist, dass die Ecken nicht eindeutig identifiziert werden können, wenn die Aufnahme unscharf ist. Durch ihre Verwendung in Augmented-Reality-Anwendungen sind auch viele kostenfreie Bibliotheken für ihre Erkennung verfügbar. Beispielsweise kann OpenCV ArUco-Marker identifizieren. %\citep[S. 536]{luhmann}
 \todo{Quelle}
+\todo{Bild}
 
 \subsection{Merkmalsextraktion}
 Ohne das Anbringen von Markern können auch Merkmale in den Bildern erkannt werden. Hierfür gibt es verschiedene Methoden, eine dieser ist die SIFT-Methode, welche hier beispielhaft kurz dargestellt wird. Sie liefert Verknüpfungspunkte aus Mustern auf den photographierten Oberflächen. Es ist meist nicht notwendig explizit Marker an dem aufzunehmenden Objekt anzubringen, sofern seine Oberfläche nicht strukturlos ist (glatte weiße Wände etc.) oder in Bewegung ist.
@@ -217,13 +217,14 @@ Durch die beschriebenen Verfahren und die hieraus entstandenen Verknüpfungs\-pu
         \label{img:rueckwaertsschnitt} %ID fürs Bild
     \end{subfigure}
     \begin{subfigure}{0.45\textwidth}
-        \includesvg[height=0.9\linewidth]{./img/rueckwaertsschnitt}
+        \includesvg[height=0.9\linewidth]{./img/vorwaertsschnitt}
         \centering
         \caption{Vorwärtsschnitt, nach \citealt[S. 339]{luhmann}} %Bildunterschrift
         \label{img:vorwaertsschnitt} %ID fürs Bder an den Aluprofilen befestigt ist (ild
     \end{subfigure}
     \caption{Geometrische Grundlagen des Rückwärtsschnitt und Vorwärtsschnitt} %Bildunterschrift
 \end{figure}
+\todo{Verweis auf Bilder}
 
 
 \subsection{Rückwärtsschnitt}

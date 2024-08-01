@@ -5,7 +5,9 @@
 
 \chapter{Software-Entwicklung}
 \label{c:software}
-Für die Steuerung der Kameras und die anschließende Berechnung des 3D-Modelles muss eine Steuerungssoftware für das Kamerasystem und eine entsprechende Schnittstelle zu einer \gls{SfM}-Software geschaffen werden. Diese Entwicklung erfolgte hauptsächlich in Python in Form von Prototyping. Das Kapitel beschreibt die Anforderungen an die Software (\autoref{sec:Anforderungsanalyse}) und die zu implementierenden Anwendungsfälle (\autoref{sec:Anwendungsfallmodellierung}). Abschließend wird die Implementation (\autoref{sec:Implementierung}) erarbeitet.
+
+\todo{UML-Diagramme reparieren}
+Für die Steuerung der Kameras und die anschließende Berechnung des 3D-Modelles muss eine Steuerungssoftware für das Kamerasystem und eine entsprechende Schnittstelle zu einer SfM-Software geschaffen werden. Diese Entwicklung erfolgte hauptsächlich in Python in Form von Prototyping. Das Kapitel beschreibt die Anforderungen an die Software (\autoref{sec:Anforderungsanalyse}) und die zu implementierenden Anwendungsfälle (\autoref{sec:Anwendungsfallmodellierung}). Abschließend wird die Implementation (\autoref{sec:Implementierung}) erarbeitet.
 \todo{Erst Anwendungsfälle, dann Anforderungen?}
 
 \section{Anforderungsanalyse}
@@ -19,17 +21,18 @@ Die notwendigen Anforderungen an das System wurden aus \autoref{c:einleitung} un
 \begin{enumerate}[label=F\arabic*]
   \item \label{e:zeitgleich} Die Kameras sollen zeitgleich auslösbar sein. Es soll möglichst ver\-zögerungs\-frei ausgelöst werden.
   \item \label{e:button} Die Steuerung soll unabhängig von anderen Geräten möglich sein, beispielsweise per Tastensteuerung.
-  \item \label{e:status} Der Status des Systemes soll für den Nutzer erkennbar sein - auch ohne Anschluss eines Computers.
+  \item \label{e:status} Der Status des Systems soll für den Nutzer erkennbar sein - auch ohne Anschluss eines Computers.
   \item \label{e:passpunkte} Es sollen Passpunkte automatisch gefunden und für die Bestimmung der äußeren Orientierung genutzt werden.
   \item \label{e:scharf} Die Bilder sollen scharf und fokussiert sein.
   \item \label{e:licht} Die Belichtung soll automatisch erfolgen, jedoch die Helligkeit der Bilder identisch sein.
 \end{enumerate}
 
 \subsection{Schnittstellen}
+\todo{Gehören diese zu den funktionellen Anforderungen?}
 \begin{enumerate}[label=S\arabic*]
   \item \label{e:intspeicher} Die Daten sollen intern gespeichert werden.
   \item \label{e:usbspeicher} Eine Speicherung auf tragbaren Speichermedien wie USB-Sticks soll möglich sein.
-  \item \label{e:sfmsoftware} Eine direkte Übertragung an \gls{SfM}-Software soll möglich sein.
+  \item \label{e:sfmsoftware} Eine direkte Übertragung an SfM-Software soll möglich sein.
 \end{enumerate}
 
 \subsection{Nicht-funktionale Anforderungen}
@@ -41,7 +44,7 @@ Die notwendigen Anforderungen an das System wurden aus \autoref{c:einleitung} un
 \section{Anwendungsfallmodellierung}
 \label{sec:Anwendungsfallmodellierung}
 
-Entsprechend der benötigten Schritte aus \autoref{c:photogrammetrie} und \autoref{img:ablauf} wurden die Anwendungsfälle, die die Benutzeroberfläche ermöglichen soll, im Anwendungsfall-Dia\-gramm in \autoref{img:anwendungsfall} zusammengetragen. Entsprechend der Anforderung eines einfach gehaltenen Bedienung des Systemes, ist die Anzahl der verschiedenen Anwendungsfälle gering.
+Entsprechend der benötigten Schritte aus \autoref{c:photogrammetrie} und \autoref{img:ablauf} wurden die Anwendungsfälle, die die Benutzeroberfläche ermöglichen soll, im Anwendungsfall-Dia\-gramm in \autoref{img:anwendungsfall} zusammengetragen. Entsprechend der Anforderung einer einfach gehaltenen Bedienung des Systems, ist die Anzahl der verschiedenen Anwendungsfälle gering.
 
 \begin{figure}
   \centering
@@ -50,7 +53,11 @@ Entsprechend der benötigten Schritte aus \autoref{c:photogrammetrie} und \autor
   \label{img:anwendungsfall} %ID fürs Bild
 \end{figure}
 
+\subsection{Domänenmodell}
+
 Aus den benötigten Daten wurde das Domänen-Klassendiagramm aus \autoref{img:dokladia} erzeugt. Dieses zeigt vor allem die Abhängigkeiten der einzelnen Datensätze untereinander.
+
+\todo{Lieber breiter als hoch}
 
 \begin{figure}
   \centering
@@ -63,9 +70,9 @@ Aus den benötigten Daten wurde das Domänen-Klassendiagramm aus \autoref{img:do
 \label{sec:Implementierung}
 
 
-Die Programmierung des Systemes erfolgte iterativ. Einzelne Arbeitspakete wurden in einem Jupyter-Notebook ausprobiert und dann, wenn dieser Schritt erfolgreich war, in den Gesamtworkflow integriert - teilweise sind diese im \autoref{c:voruntersuchungen} beschrieben. Größtenteils wurde der Python-Code objektorientiert und typisiert geschrieben. Die Teile, die auf einem Desktoprechner ausgeführt werden sollen, wurden in Java geschrieben, da hier später die Einrichtung auf verschiedenen Rechnern und Plattformen einfacher ist.
+Die Programmierung des Systems erfolgte iterativ. Einzelne Arbeitspakete wurden in einem Jupyter-Notebook ausprobiert und dann, wenn dieser Schritt erfolgreich war, in den Gesamtworkflow integriert - teilweise sind diese im \autoref{c:voruntersuchungen} beschrieben. Größtenteils wurde der Python-Code objektorientiert und typisiert geschrieben. Die Teile, die auf einem Desktoprechner ausgeführt werden sollen, wurden in Java geschrieben, da hier später die Einrichtung auf verschiedenen Rechnern und Plattformen einfacher ist.
 
-Die Kommunikation innerhalb des Systemes ist in dem Ablaufdiagramm in \autoref{img:uml_sequence_capture} dargestellt. Auf die Details der einzelnen Module wird in den folgenden Abschnitten eingegangen.
+Die Kommunikation innerhalb des Systems ist in dem Ablaufdiagramm in \autoref{img:uml_sequence_capture} dargestellt. Auf die Details der einzelnen Module wird in den folgenden Abschnitten eingegangen.
 
 
 \begin{figure}
@@ -104,28 +111,28 @@ Es wurden einige Klassen erstellt, die in allen Modulen genutzt wurden. Diese si
 \begin{figure}
   \centering
   \includegraphics[width=1\textwidth]{./img/uml/uml_common_classdiagramm.pdf}
-  \caption{Common} %Bildunterschrift
+  \caption{Klassen des Common-Package} %Bildunterschrift
   \label{img:uml_common} %ID fürs Bild
 \end{figure}
 
 
 \subsubsection{Master-Steuerung}
 
-Auf einem Raspberry Pi 4 läuft die Gesamt\-steuerung des Systemes. Dieses stellt Schnitt\-stellen zur Steuerung auf drei verschiedenen Wegen bereit: per Taster, per Weboberfläche und per Socket-Verbindung. Außerdem stellt es die Daten per REST-Schnittstelle zur Verfügung. Die Klassen sind in \autoref{img:master} dargestellt.
+Auf einem Raspberry Pi 4 läuft die Gesamt\-steuerung des Systems. Dieses stellt Schnitt\-stellen zur Steuerung auf drei verschiedenen Wegen bereit: per Taster, per Weboberfläche und per Socket-Verbindung\todo{Erklären}. Außerdem stellt es die Daten per REST-Schnittstelle \todo{REST erläutern} zur Verfügung. Die Klassen sind in \autoref{img:master} dargestellt.
 
-Das Skript \texttt{Master} wird automatisch bei Systemstart über \texttt{systemctl} als Daemon gestartet. Hier ist die Webschnittstelle implementiert. Sie ermöglicht die komplette Steuerung, das Konfigurieren sowie das Anzeigen und Herunterladen der Bilder. Das Skript instanziert außerdem die Klasse \texttt{Control}, welche die hauptsächliche Steuerung übernimmt und den Kern des Systemes darstellt.
+Das Skript \texttt{Master} wird automatisch bei Systemstart über \texttt{systemd} als Daemon -- als im Hintergrund und dauerhaft laufender Service (\citep[S. 369]{negus2020linux}) -- gestartet . Hier ist die Webschnittstelle implementiert. Sie ermöglicht die komplette Steuerung, das Konfigurieren sowie das Anzeigen und Herunterladen der Bilder. Das Skript instanziert außerdem die Klasse \texttt{Control}, welche die hauptsächliche Steuerung übernimmt und den Kern des Systems darstellt.
 
 Die Steuerung per Taster implementiert die Klasse \texttt{ButtonControl}. Sie ermöglicht einfache Aufgaben wie das Suchen von Kameras, das Aufnehmen von Bilder und die Aktivierung des Standbys bzw. das Herunterfahren des Systems auch ohne PC durchzuführen (\autoref{e:button}). Die Klasse \texttt{DesktopControlThread} startet, wie der Name bereits vermuten lässt, als eigenständiger Thread und stellt eine Socket-Verbindung zur Kommunikation mit der Desktop-Software und die Steuerung hierüber bereit. Ein weiteren Thread stellt \texttt{CameraControlThread} zur Verfügung. Dieser überwacht das Netzwerk auf Nachrichten der Kameras und initiert die entsprechenden Schritte. Die eigentlichen Verarbeitungsschritte werden in der Klasse \texttt{Control} durchgeführt. Auch für diese Aufgaben werden zum Teil eigene Threads gestartet, damit die Verarbeitung parallel erfolgen kann. Beispielsweise wird der Download der Bilder und die Berechnung von Kamerapositionen in eigenen Threads durchgeführt.
 
-Die \texttt{Control}-Klasse steuert die Aufnahme, sammelt die Daten der einzelnen Kameras und stellt diese zur Weiterverarbeitung zur Verfügung. Sie sendet eingehende Aufträge als Broadcast-Nachrichten in das Netzwerk an die Raspberry Pi Zero W mit den Kameras, die dann beispielsweise Bilder aufnehmen. Hierdurch wird die nahezu zeitgleiche Auslösung gewährleistet (\autoref{e:zeitgleich}), die bei einer einzelnen Ansteuerung als Schleife nicht möglich wäre. Zur Vereinheitlichung der Belichtung kann eine Funktion aktiviert werden, dass erst einmal die Belichtung von jeder Kamera berechnet wird und diese dann von der \texttt{Control}-Klasse gemittelt wird. Dadurch werden dann alle Bilder mit der gleichen Einstellung aufgenommen, so dass keine Helligkeitsunterschiede zwischen den Aufnahmen bestehen (\autoref{e:licht}).
-Nach der Aufnahme der Bilder und der Erkennung der ArUco-Marker werden die Daten von den Raspberry Pi Zero W an den Raspberry Pi 4 übertragen. Aus den ArUco-markern wird die äußere Orientierung der Kameras als Näherungswerte bestimmt (\autoref{e:passpunkte}). Die Daten werden anschließend in einem Archiv gespeichert (\autoref{e:intspeicher}).
+Die \texttt{Control}-Klasse steuert die Aufnahme, sammelt die Daten der einzelnen Kameras und stellt diese zur Weiterverarbeitung zur Verfügung. Sie sendet eingehende Aufträge als Broadcast-Nachrichten in das Netzwerk an die Raspberry Pi Zero W mit den Kameras, die dann beispielsweise Bilder aufnehmen. Hierdurch wird die nahezu zeitgleiche Auslösung gewährleistet (\autoref{e:zeitgleich}), die bei einer einzelnen Ansteuerung als Schleife nicht möglich wäre. Zur Vereinheitlichung der Belichtung kann eine Funktion aktiviert werden, so dass erst einmal die Belichtung von jeder Kamera berechnet und diese dann von der \texttt{Control}-Klasse gemittelt wird. Dadurch werden dann alle Bilder mit der gleichen Einstellung aufgenommen, so dass keine Helligkeitsunterschiede zwischen den Aufnahmen bestehen (\autoref{e:licht}).
+Nach der Aufnahme der Bilder und der Erkennung der ArUco-Marker werden die Daten von den Raspberry Pi Zero W an den Raspberry Pi 4 übertragen. Aus den ArUco-Markern wird die äußere Orientierung der Kameras als Näherungswerte bestimmt (\autoref{e:passpunkte}). Die Daten werden anschließend in einem Archiv gespeichert (\autoref{e:intspeicher}).
 
 Die Datenübertragung an die Desktop-Software erfolgt über die REST-Schnittstelle, die wieder vom \texttt{Master}-Skript bereitgestellt wird. Alternativ kann auch ein USB-Stick an dem Raspberry Pi angesteckt werden (\autoref{e:usbspeicher}) oder die Daten über die Weboberfläche manuell heruntergeladen werden. Dazu wird bei der Verarbeitung der Daten geprüft, ob ein USB-Stick angeschlossen ist. Falls dieses der Fall ist, wird dieser gemountet, die Daten kopiert und der Stick wieder ausgehängt, damit dieser (fast) jederzeit getrennt werden kann. Das Datenformat auf dem USB-Stick und in den Archiv-Dateien aus der Weboberfläche entspricht dem, welches die Desktop-Software anlegt. So kann diese die Daten dann auch einladen und weiterverarbeiten.
 
 \begin{figure}
   \centering
   \includegraphics[width=1\textwidth]{./img/uml/uml_master_classdiagramm.pdf}
-  \caption{Master} %Bildunterschrift
+  \caption{Klassen des Master-Package} %Bildunterschrift
   \label{img:master} %ID fürs Bild
 \end{figure}
 
@@ -138,13 +145,13 @@ Die Raspberry Pi Zero W übernehmen die Steuerung der Kameras. Hierfür wurde ei
 \begin{figure}
   \centering
   \includegraphics[width=1\textwidth]{./img/uml/uml_camera_classdiagramm.pdf}
-  \caption{Camera} %Bildunterschrift
+  \caption{Klassen des Camera-Package} %Bildunterschrift
   \label{img:uml_camera} %ID fürs Bild
 \end{figure}
 
 
-\subsection{Desktop-Programm (Java)}
-Die Desktop-Software dient zur Steuerung des Systems und zur automatischen Über\-tragung der Daten an die \gls{SfM}-Software (\autoref{e:sfmsoftware}). Die Klassen sind in \autoref{img:uml_connector} dargestellt. Sie wurden in Java geschrieben, um eine einfache Installation auf verschiedenen Betriebssystemen zu ermöglichen. Die Kommunikation erfolgt über eine Socket-Verbindung zum Raspberry Pi 4. Neben der Übertragung der Bilder an die \gls{SfM}-Software ermöglicht die Software das Starten von Aufnahmen. Ein Screenshot der Benutzeroberfläche ist in \autoref{img:screenshot_connector} dargestellt. Die Software unterstützt als \gls{SfM}-Software aktuell Agisoft Metashape und OpenDroneMap, jedoch ist die Schnittstelle so gestaltet, dass auch andere Software ergänzt werden könnte.
+\subsection{Desktop-Schnittstelle (Java)}
+Die Desktop-Schnittstelle dient zur Steuerung des Systems und zur automatischen Über\-tragung der Daten an die SfM-Software (\autoref{e:sfmsoftware}). Die Klassen sind in \autoref{img:uml_connector} dargestellt. Sie wurden in Java geschrieben, um eine einfache Installation auf verschiedenen Betriebssystemen zu ermöglichen. Die Kommunikation erfolgt über eine Socket-Verbindung zum Raspberry Pi 4. Neben der Übertragung der Bilder an die SfM-Software ermöglicht die Software das Starten von Aufnahmen. Ein Screenshot der Benutzeroberfläche ist in \autoref{img:screenshot_connector} dargestellt. Die Schnittstellen-Software unterstützt als SfM-Software aktuell Agisoft Metashape und OpenDroneMap, jedoch ist die Schnittstelle so gestaltet, dass auch andere Software ergänzt werden könnte.
 
 \todo{mehr Details}
 
@@ -158,7 +165,7 @@ Die Desktop-Software dient zur Steuerung des Systems und zur automatischen Über
 \begin{figure}
   \centering
   \includegraphics[width=1\textwidth]{./img/uml/uml_connector_classdiagramm.pdf}
-  \caption{Connector} %Bildunterschrift
+  \caption{Connector-Package} %Bildunterschrift
   \label{img:uml_connector} %ID fürs Bild
 \end{figure}
 
