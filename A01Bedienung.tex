@@ -21,19 +21,15 @@ Das Abschalten erfolgt durch langes Drücken auf den roten Taster. Das System f�
 
 \section{Software-Einrichtung}
 \label{sec:SoftwareEinrichtung}
-Die Software zur Steuerung der Kameras und zur Übertragung der Bilder auf den Rechner ist in Java geschrieben. Sie kann unter Linux, Windows und MacOS genutzt werden. Auf dem Rechner muss entsprechend eine Java-Laufzeitumgebung installiert sein. Für die Nutzung von Metashape muss eine Lizenz vorhanden sein und neben der ausführbaren jar-Datei abgelegt werden. Für OpenDroneMap muss die Software in Form von NodeODM auf dem Rechner installiert sein. Die Verbindung zu einem Server ist nicht implementiert.
+Die Software zur Steuerung der Kameras und zur Übertragung der Bilder auf den Rechner ist in Java geschrieben. Sie kann unter Linux, Windows und MacOS genutzt werden. Auf dem Rechner muss entsprechend eine Java-Laufzeitumgebung installiert sein. Für die Nutzung von Metashape muss eine Lizenz vorhanden sein und im selben Order wie die ausführbare jar-Datei abgelegt werden. Für OpenDroneMap muss die Software in Form von NodeODM auf dem Rechner installiert sein. Alternativ kann OpenDroneMap auch auf einem externen Rechner installiert sein, der über das Netzwerk erreichbar ist.
 
 \section{Kalibrierung}
-Die letzten Koordinaten der Passpunkte wird im System gespeichert - daher sollten diese möglichst nicht verändert werden. Falls diese dennoch verändert werden, kann das System einzelne Veränderungen berechnen und nutzen. Bei Änderung einer Vielzahl muss das System jedoch extern neu kalibriert werden, beispielsweise durch Bilder mit einer externen Kamera, wo durch dann die Koordinaten der Passpunkte neu bestimmt werden können.
-
-Eine Kalibrierung mit Bordmitteln ist nicht möglich.
+Die letzten Koordinaten der Passpunkte werden im System gespeichert - daher sollten diese möglichst nicht verändert werden. Falls diese dennoch verändert werden, kann das System einzelne Veränderungen berechnen und nutzen. Bei Änderung einer Vielzahl muss das System jedoch extern neu kalibriert werden, beispielsweise durch Bilder mit einer externen Kamera, wodurch dann die Koordinaten der Passpunkte neu bestimmt werden können. Eine Kalibrierung mit Bordmitteln ist nicht möglich.
 
 \section{Durchführung}
-Das System wird gestartet, in dem die Stromversorgung hergestellt wird. Die Kameras starten selbstständig und die Beleuchtung wird eingeschaltet. Nach kurzer Zeit sollten kurz alle LEDs grün leuchten. Falls nicht, sind einige Kameras nicht erreichbar. Problemlösungen werden im \autoref{sec:Fehlerbehebung} behandelt.
-
+Das System wird gestartet, indem die Stromversorgung hergestellt wird. Die Kameras starten selbstständig und die Beleuchtung wird eingeschaltet. Nach kurzer Zeit sollten kurz alle LEDs grün leuchten. Falls nicht, sind einige Kameras nicht erreichbar. Problemlösungen werden im \autoref{sec:Fehlerbehebung} behandelt.
 Das Objekt wird mittig, ggf. auf einer Erhöhung im Rahmen positioniert.
-
-Ab hier trennen sich die Wege je nach verwendeten System. Die Bildaufnahme erfolgt in allen Fällen durch kurzen Druck auf den grünen Taster.
+Ab hier trennen sich die Wege je nach verwendetem System. Die Bildaufnahme erfolgt in allen Fällen durch kurzen Druck auf den grünen Taster.
 
 \begin{figure}
     \centering
@@ -43,10 +39,8 @@ Ab hier trennen sich die Wege je nach verwendeten System. Die Bildaufnahme erfol
 \end{figure}
 
 \subsection{... mit Netzwerkverbindung}
-Der zu verwendende Rechner wird mit dem System per WLAN (bevorzugt) oder Netzwerkkabel verbunden. Die Verbindungssoftware wird gestartet und die IP-Adresse des Systems angegeben werden. Standardmäßig lautet diese im WLAN 10.0.1.1, per Netzwerkkabel muss die IP von einem DHCP-Server festgelegt werden, beispielsweise in dem der angeschlossene Rechner als DHCP-Server konfiguriert wird. Unter Gnome ist dieses beispielsweise möglich, indem in den Netzwerkeinstellungen die Internetverbindung des PC freigegeben wird.
-
+Der zu verwendende Rechner wird mit dem System per WLAN (bevorzugt) oder Netzwerkkabel verbunden. Die Verbindungssoftware wird gestartet und die IP-Adresse des Systems angegeben. Standardmäßig lautet diese im WLAN 10.0.1.1, per Netzwerkkabel muss die IP von einem DHCP-Server festgelegt werden, beispielsweise in dem der angeschlossene Rechner als DHCP-Server konfiguriert wird. Unter Gnome ist dieses beispielsweise möglich, indem in den Netzwerkeinstellungen die Internetverbindung des PC freigegeben wird.
 Anschließend wird die zu nutzende Software ausgewählt und die Verbindung hergestellt.
-
 Nun können die Bilder aufgenommen werden (grüne Taste). Die Bilder werden auf den Rechner übertragen und dort in der ausgewählten Software weiterverarbeitet. Der Fortschritt ist in der rechten Hälfte der Verbindungssoftware zu erkennen.
 
 \subsection{... ohne Netzwerkverbindung}
