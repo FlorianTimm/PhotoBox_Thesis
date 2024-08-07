@@ -152,12 +152,19 @@ Die Ergebnisse sind in \autoref{tab:vergleich_drehteller} zusammengefasst.
 Die Kameras machen einen großen Teil des (Kosten-)Aufwandes zur Realisierung des Projektes aus. Es soll daher in diesem Schritt geprüft werden, ob die Anzahl der Kameras auch reduziert werden kann. Entsprechend \autoref{s:drehteller} wird auch der Einsatz des Drehtellers statt mehr Kameras geprüft.
 
 \subsection{Durchführung}
-Zur Abschätzung, wie viele Kameras für eine gute Genauigkeit notwendig sind, wurden verschiedene Konfigurationen getestet. Hierzu wurde die Aufnahme des Moai aus \autoref{s:genauigkeitsueberpruefung} genutzt und in Agisoft Metashape verschiedene Kameras deaktiviert und das 3D-Modell neu berechnet. Die Ergebnisse wurden wie in \autoref{s:genauigkeitsueberpruefung} mit dem Streifenprojektionssystem verglichen.
+Um abzuschätzen, wie viele Kameras für eine gute Genauigkeit notwendig sind, wurden verschiedene Konfigurationen getestet. Dazu wurde der Moai aus \autoref{s:genauigkeitsueberpruefung} verwendet und in Agisoft Metashape verschiedene Kameras deaktiviert und das 3D-Modell neu berechnet. Die Ergebnisse wurden wieder mit dem Streifenprojektionssystem verglichen. Als weiterer Parameter wurde die Abdeckung der Objektoberfläche mit Punkten bewertet. Dazu wurden die Punktwolken auf diejenigen gefiltert, die weniger als einen Millimeter vom Modell des Streifenprojektionssystems entfernt waren, auf eine Punktdichte von 1~mm Punktabstand reduziert und die Anzahl der Punkte gezählt. Darüber hinaus wurde die Anzahl der Punkte nur nach der Ausdünnung bestimmt (ohne Abstandsfilter) und mit der Anzahl mit Abstandsfilter in Beziehung gesetzt.
+
+Als Ausgleich für fehlenden Kameras wurde auch nochmal der Drehteller aus der vorherigen Untersuchung verwendet und geprüft, wie viele Kameras durch den Drehteller ersetzt werden können.
 
 \subsection{Ergebnisse}
-\todo{Ergebnisse}
+Wie zu erwarten nahm die Abdeckung und die Qualität der Punktwolke ab, je weniger Kameras verwendet wurden. Bei einer Aufnahme mit allen 24 Kameras wurde die Oberfläche (ohne Boden) zu 93 \% abgedeckt. Bei einer Aufnahme mit 18 Kameras waren es nur noch 68 \% und bei 12 Kameras 54 \%.  Schon bei 18 Kameras war der Moai kaum mehr zu erkennen, bei 12 war die Erkennbarkeit nicht mehr gegeben. Die Anzahl der Kameras scheint also für dieses Objekt angebracht zu sein, sofern kein Drehteller genutzt wird.
 
+Unter Nutzung des Drehtellers mit einer Drehung um 1/8 konnten sogar mit nur der Hälfte der Kamera ein ähnliches bzw. sogar minimal besseres Ergebnis erzielt werden, als bei der einfachen Aufnahme mit 24 Kameras. Bei der Verwendung von nur 6 Kameras in einer Ebene, so wie es bei der Planung des Rahmens auch einmal angedacht war, brachte auch die Verwendung des Drehtellers mit 4 Positionen kein brauchbares Ergebnis im direkten Anlauf. Erst durch manuelles mehrfaches Verarbeiten der Daten und die Nutzung weiterer Passpunkte konnte die Genauigkeit und Abdeckung auf ein ähnliches Niveau wie bei 12 Kameras und zwei Aufnahmen gebracht werden - dafür aber mit einem deutlich höheren personellen und technischen Aufwand.
+\todo{Bilder, Tabelle, Vergleiche}
 
+\section{Zusammenfassung}
+Das System erreichte die vorgesehene Genauigkeit. Die Anzahl der Kameras war gut und für die meisten getesteten Objekte ausreichend. Der Einsatz eines Drehtellers kann die Anzahl der Kameras reduzieren, jedoch ist die Verarbeitung der Daten deutlich aufwändiger. Der Einsatz des Drehtellers zur weiteren Genauigkeitssteigerung ist aber durchaus sinnvoll, wenn die Anzahl der Kameras nicht erhöht werden kann oder soll.
+\todo{weiter}
 
 \biblio
 \end{document}
