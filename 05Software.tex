@@ -70,7 +70,8 @@ Aus den benötigten Daten wurde das Domänen-Klassendiagramm aus \autoref{img:do
 
 Die Programmierung des Systems erfolgte iterativ. Einzelne Arbeitspakete wurden in einem Jupyter-Notebook ausprobiert und dann, wenn dieser Schritt erfolgreich war, in den Gesamtworkflow integriert - teilweise sind diese im \autoref{c:voruntersuchungen} beschrieben. Größtenteils wurde der Python-Code objektorientiert und typisiert geschrieben. Die Teile, die auf einem Desktoprechner ausgeführt werden sollen, wurden in Java geschrieben, da hier später die Einrichtung auf verschiedenen Rechnern und Plattformen einfacher ist.
 
-Die Kommunikation innerhalb des Systems ist in dem Ablaufdiagramm in \autoref{img:uml_sequence_capture} dargestellt. Auf die Details der einzelnen Module wird in den folgenden Abschnitten eingegangen.
+\subsection{Programmablauf}
+Die Kommunikation innerhalb des Systems ist in dem Ablaufdiagramm in \autoref{img:uml_sequence_capture} dargestellt. Die Auslösung der Kamera erfolgt über den Software-Button in der Desktop-Software, dem Webinterface oder über einen Taster. Optional werden die Belichtungen der Kameras synchronisiert und anschließend die Aufnahmen erzeugt. Die Raspberry Pi Zero W senden die Aufnahmen und die gefundenen Aruco-Marker an den Raspberry Pi 4. Dieser berechnet die Kamerapositionen und speichert die Daten. Die Desktop-Software kann die Daten dann herunterladen und an die SfM-Software übergeben. Diese erzeugt dann das 3D-Modell. Auf die Details der einzelnen Module wird in den folgenden Abschnitten eingegangen.
 
 
 \begin{figure}
