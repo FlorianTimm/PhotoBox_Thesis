@@ -6,7 +6,6 @@
 \chapter{Software-Entwicklung}
 \label{c:software}
 
-\todo{UML-Diagramme reparieren}
 Für die Steuerung der Kameras und die anschließende Berechnung des 3D-Modelles muss eine Steuerungssoftware für das Kamerasystem und eine entsprechende Schnittstelle zu einer SfM-Software geschaffen werden. Diese Entwicklung erfolgte hauptsächlich in Python in Form von Prototyping. Das Kapitel beschreibt die Anforderungen an die Software (\autoref{sec:Anforderungsanalyse}) und die zu implementierenden Anwendungsfälle (\autoref{sec:Anwendungsfallmodellierung}). Abschließend wird die Implementation (\autoref{sec:Implementierung}) erarbeitet.
 \todo{Erst Anwendungsfälle, dann Anforderungen?}
 
@@ -17,7 +16,6 @@ Die notwendigen Anforderungen an das System wurden aus \autoref{c:einleitung} un
 
 
 \subsection{Funktionale Anforderungen}
-\todo{Nummern weiterverwenden}
 \begin{enumerate}[label=F\arabic*]
   \item \label{e:zeitgleich} Die Kameras sollen zeitgleich auslösbar sein. Es soll möglichst ver\-zögerungs\-frei ausgelöst werden.
   \item \label{e:button} Die Steuerung soll unabhängig von anderen Geräten möglich sein, beispielsweise per Tastensteuerung.
@@ -41,10 +39,10 @@ Die notwendigen Anforderungen an das System wurden aus \autoref{c:einleitung} un
   \item \label{e:wlan} Jegliche Kommunikation soll über WLAN erfolgen.
 \end{enumerate}
 
-\section{Anwendungsfallmodellierung}
+\subsection{Anwendungsfallmodellierung}
 \label{sec:Anwendungsfallmodellierung}
 
-Entsprechend der benötigten Schritte aus \autoref{c:photogrammetrie} und \autoref{img:ablauf} wurden die Anwendungsfälle, die die Benutzeroberfläche ermöglichen soll, im Anwendungsfall-Dia\-gramm in \autoref{img:anwendungsfall} zusammengetragen. Entsprechend der Anforderung einer einfach gehaltenen Bedienung des Systems, ist die Anzahl der verschiedenen Anwendungsfälle gering.
+Entsprechend der benötigten Schritte aus \autoref{c:photogrammetrie} und \autoref{img:ablauf} wurden die Anwendungsfälle, die die Benutzeroberfläche ermöglichen soll, im Anwendungsfall-Dia\-gramm in \autoref{img:anwendungsfall} zusammengetragen. Entsprechend der Anforderung einer einfach gehaltenen Bedienung des Systems, ist die Anzahl der verschiedenen Anwendungsfälle gering. Hauptanwendungsfall ist die Erzeugung eines 3D-Modelles, welches in mehrere Unterfälle unterteilt ist, je nach verwendeter SfM-Software. Es soll aber auch möglich sein, Teilschritte dieser Anwednungsfälle wie das Aufnehmen der Bilder, das Identifizieren der Passpunkte oder das Verbinden der Kameras manuell auszulösen.
 
 \begin{figure}
   \centering
@@ -53,9 +51,15 @@ Entsprechend der benötigten Schritte aus \autoref{c:photogrammetrie} und \autor
   \label{img:anwendungsfall} %ID fürs Bild
 \end{figure}
 
-\section{Domänenmodell}
 
-Aus den benötigten Daten wurde das Domänen-Klassendiagramm aus \autoref{img:dokladia} erzeugt. Dieses zeigt vor allem die Abhängigkeiten der einzelnen Datensätze untereinander. Es bildet hiermit die Grundlage für die Datenschnittstellen der einzelnen Komponenten zueinander und den jeweils benötigten Datensätzen.
+\section{Anwendungsentwurf}
+Die Anwendunsentwurf legt die grundlegenden Strukturen der Software fest. Hierbei wird festgelegt, welche Module benötigt werden und wie diese miteinander kommunizieren. Diese Struktur wird einmalig festgelegt und bildet die Grundlage für die Implementierung.
+
+\subsection{Domänen-Klassendiagramm}
+Aus den für die Berechnungen des 3D-Modelles benötigten Daten wurde das Domänen-Klassendiagramm aus \autoref{img:dokladia} erzeugt. Dieses zeigt vor allem die Abhängigkeiten der einzelnen Datensätze untereinander. Es bildet hiermit die Grundlage für die Datenschnittstellen der einzelnen Komponenten zueinander und den jeweils benötigten Datensätzen.
+
+Da die innere Orientierung der Kameras sowieso instabil ist, wurde diese nicht pro Kameramodul sondern nur pro Modell festgehalten. \textit{CameraModel} hat entsprechend den Namen und die Parameter der inneren Orientierung in Form einer Geradengleichung abhängig von der Fokussierung als Attribute. Jede Kamera hat dann (pro Messung) eine Position  \textit{Point3D} und drei Drehwinkel, die dann die äußere Orientierung speichert. Um die Passpunktpositionen zu festzuhalten, wird das Objekt \textit{PasspointPosition} verwendet. Dieses speichert die Position des Passpunktes in den Bildern der Kameras als \textit{Point2D} und die Position im Raum als \textit{Passpoint}. Außerdem verweist die Klasse auf das entsprechende Bild \textit{Image}, welches wiederum auf die Kamera \textit{Camera} verweist. Die Klasse \textit{Image} hält des Weiteren die Attribute für den Dateinamen und die Fokussierung
+\todo{Zuende schreiben}
 
 \begin{figure}
   \centering
@@ -64,14 +68,8 @@ Aus den benötigten Daten wurde das Domänen-Klassendiagramm aus \autoref{img:do
   \label{img:dokladia} %ID fürs Bild
 \end{figure}
 
-\section{Implementierung}
-\label{sec:Implementierung}
-
-
-Die Programmierung des Systems erfolgte iterativ. Einzelne Arbeitspakete wurden in einem Jupyter-Notebook ausprobiert und dann, wenn dieser Schritt erfolgreich war, in den Gesamtworkflow integriert - teilweise sind diese im \autoref{c:voruntersuchungen} beschrieben. Größtenteils wurde der Python-Code objektorientiert und typisiert geschrieben. Die Teile, die auf einem Desktoprechner ausgeführt werden sollen, wurden in Java geschrieben, da hier später die Einrichtung auf verschiedenen Rechnern und Plattformen einfacher ist.
-
 \subsection{Programmablauf}
-Die Kommunikation innerhalb des Systems ist in dem Ablaufdiagramm in \autoref{img:uml_sequence_capture} dargestellt. Die Auslösung der Kamera erfolgt über den Software-Button in der Desktop-Software, dem Webinterface oder über einen Taster. Optional werden die Belichtungen der Kameras synchronisiert und anschließend die Aufnahmen erzeugt. Die Raspberry Pi Zero W senden die Aufnahmen und die gefundenen Aruco-Marker an den Raspberry Pi 4. Dieser berechnet die Kamerapositionen und speichert die Daten. Die Desktop-Software kann die Daten dann herunterladen und an die SfM-Software übergeben. Diese erzeugt dann das 3D-Modell. Auf die Details der einzelnen Module wird in den folgenden Abschnitten eingegangen.
+Die Kommunikation innerhalb des Systems ist in dem Ablaufdiagramm in \autoref{img:uml_sequence_capture} dargestellt. Die Auslösung der Kamera erfolgt über den Software-Button in der Desktop-Software, dem Webinterface oder über einen Taster. Optional werden die Belichtungen der Kameras synchronisiert und anschließend die Aufnahmen erzeugt. Die Raspberry Pi Zero W senden die Aufnahmen und die gefundenen Aruco-Marker an den Raspberry Pi 4. Dieser berechnet die Kamerapositionen und speichert die Daten. Die Desktop-Software kann die Daten dann herunterladen und an die SfM-Software übergeben. Diese erzeugt dann das 3D-Modell. Auf die Details der einzelnen Module wird in \autoref{sec:Implementierung} eingegangen.
 
 
 \begin{figure}
@@ -80,6 +78,12 @@ Die Kommunikation innerhalb des Systems ist in dem Ablaufdiagramm in \autoref{im
   \caption{Ablaufdiagramm zur Kommunikation bei der Aufnahme eines 3D-Modelles} %Bildunterschrift
   \label{img:uml_sequence_capture} %ID fürs Bild
 \end{figure}
+
+
+\section{Implementierung}
+\label{sec:Implementierung}
+
+Die Programmierung des Systems erfolgte iterativ. Einzelne Arbeitspakete wurden in einem Jupyter-Notebook ausprobiert und dann, wenn dieser Schritt erfolgreich war, in den Gesamtworkflow integriert - teilweise sind diese im \autoref{c:voruntersuchungen} beschrieben. Größtenteils wurde der Python-Code objektorientiert und typisiert geschrieben. Die Teile, die auf einem Desktoprechner ausgeführt werden sollen, wurden in Java geschrieben, da hier später die Einrichtung auf verschiedenen Rechnern und Plattformen einfacher ist.
 
 
 \subsection{Module auf den Raspberry Pi (Python)}
