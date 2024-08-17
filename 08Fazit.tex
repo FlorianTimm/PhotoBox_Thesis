@@ -7,6 +7,8 @@
 \chapter{Fazit und Ausblick}
 \label{c:fazitausblick}
 
+In dieser Arbeit wurde die Entwicklung und Implementierung eines Systems zur Erfassung und Erstellung von 3D-Modellen kleiner Objekte untersucht. Ausgangspunkt war die Frage, wie man mit geringem finanziellen und personellen Aufwand hochwertige 3D-Modelle erstellen kann, die für den Einsatz in Museen, Archiven oder Bildungseinrichtungen geeignet sind.
+
 Es hat  sich gezeigt, dass es möglich ist ein photogrammetrisches Messsystem auf Basis von Raspberry-Pi-Kameras zu entwickeln. Die Kameras sind in der Lage, Bilder in hoher Qualität aufzunehmen und diese an eine zentrale Steuereinheit zu übertragen. Die Steuereinheit kann die Kameras synchronisieren und die Bilder an eine SfM-Software übertragen. Durch die 24 Kameras ist eine schnelle Erfassung ohne das zum Beispiel ein Drehteller notwendig wird möglich.
 
 Die Verwendung von WLAN zur Datenübertragung hat sich als nicht optimal herausgestellt. Die Übertragungsgeschwindigkeit ist bei dieser Anzahl an Teilnehmern im Netzwerk gering, so dass die Übertragung der Bilder lange dauert. Eine Übertragung über LAN wäre hier effektiver, jedoch wäre der Verkabelungsaufwand deutlich höher und die Mobilität des Systems eingeschränkt. Da die Raspberry Pi Zero W über keinen RJ45-Anschluss verfügt, müsste ein zusätzlicher Adapter verwendet werden.
@@ -20,6 +22,7 @@ Die Verwendung des Raspberry Pi 4 als Schnittstelle vereinfacht zwar die Bedienu
     \item LED-Beamer mit Musterprojektion
     \item Modul 3 Wide statt "Normal"
     \item 3D-Modell in Weboberfläche zur visuellen Kontrolle der berechneten Kamera-Positionen
+    \item Verwendung zu Ausbildungszwecken
 \end{itemize}
 
 \biblio
