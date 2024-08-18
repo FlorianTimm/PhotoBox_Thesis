@@ -7,23 +7,31 @@
 \chapter{Fazit und Ausblick}
 \label{c:fazitausblick}
 
+% Fazit
+
 In dieser Arbeit wurde die Entwicklung und Implementierung eines Systems zur Erfassung und Erstellung von 3D-Modellen kleiner Objekte untersucht. Ausgangspunkt war die Frage, wie man mit geringem finanziellen und personellen Aufwand hochwertige 3D-Modelle erstellen kann, die für den Einsatz in Museen, Archiven oder Bildungseinrichtungen geeignet sind.
 
-Es hat  sich gezeigt, dass es möglich ist ein photogrammetrisches Messsystem auf Basis von Raspberry-Pi-Kameras zu entwickeln. Die Kameras sind in der Lage, Bilder in hoher Qualität aufzunehmen und diese an eine zentrale Steuereinheit zu übertragen. Die Steuereinheit kann die Kameras synchronisieren und die Bilder an eine SfM-Software übertragen. Durch die 24 Kameras ist eine schnelle Erfassung ohne das zum Beispiel ein Drehteller notwendig wird möglich.
+Es hat sich gezeigt, dass es möglich ist ein photogrammetrisches Messsystem auf Basis von Raspberry-Pi-Kameras zu entwickeln. Die Kameras sind in der Lage, Bilder in hoher Qualität aufzunehmen und diese an eine zentrale Steuereinheit zu übertragen. Die Steuereinheit kann die Kameras synchronisieren und die Bilder an eine SfM-Software übertragen. Durch die 24 Kameras ist eine schnelle Erfassung möglich, ohne das zum Beispiel ein Drehteller notwendig wird. Untersuchungen der Genauigkeit der 3D-Modelle zeigten, dass diese bis zu 0,1~mm genau sein können und damit im Bereich von manuellen photogrammetrischen Aufnahmen mit einer hochwertigen (Nichtmess-)Kamera liegen. Die Kosten des Systems belaufen sich auf ca. 2000~€, was im Vergleich zu professionellen Systemen sehr günstig ist und nur der Anschaffung einer entsprechenden Kamera zur manuellen Aufnahme entspricht.
 
-Die Verwendung von WLAN zur Datenübertragung hat sich als nicht optimal herausgestellt. Die Übertragungsgeschwindigkeit ist bei dieser Anzahl an Teilnehmern im Netzwerk gering, so dass die Übertragung der Bilder lange dauert. Eine Übertragung über LAN wäre hier effektiver, jedoch wäre der Verkabelungsaufwand deutlich höher und die Mobilität des Systems eingeschränkt. Da die Raspberry Pi Zero W über keinen RJ45-Anschluss verfügt, müsste ein zusätzlicher Adapter verwendet werden.
+
+% Ausblick
+
+Die Arbeit zeigt wie auch andere Arbeiten in diesem Themengebiet das Potenzial der Photogrammetrie zur automatischen Erzeugung von 3D-Modellen. Gerade durch die stetige Weiterentwicklung der Auswertesoftware und der Hardware wird es in Zukunft möglich sein, noch genauere und schnellere 3D-Modelle zu erstellen. Dadurch werden sich sehr wahrscheinlich noch weitere Anwendungsfelder für die Photogrammetrie ergeben.
+
+% Optimierungen
+Der in dieser Arbeit entwickelte Prototyp zeigt zwar das Potenzial der Photogrammetrie, jedoch gibt es noch einige Optimierungsmöglichkeiten. Im aktuellen Entwicklungsstand ist das System aber schon gut für Ausbildungszwecke geeignet, da es die Funktionsweise der Photogrammetrie gut veranschaulicht und viele Eingriffsmöglichkeiten bietet. Durch die Verwendung von Python sollte eine einfache Anpassung des Systems an spezielle Anforderungen möglich sein.
+
+Beispiele für mögliche Optimierungen wären die feste Integration von Fokusstacking, sofern größere Objekte erkannt werden. Hierdurch wird die Schärfe der Bilder und damit die Qualität der 3D-Modelle verbessert. Auch die Verwendung eines LED-Beamer mit Musterprojektion könnte die Qualität erhöhen, da so texturarme Objekte besser erfasst werden könnten.
+
+Die Verwendung von WLAN zur Datenübertragung hat sich als nicht optimal herausgestellt. Die Übertragungsgeschwindigkeit ist bei dieser Anzahl an Teilnehmern im Netzwerk gering, sodass die Übertragung der Bilder lange dauert. Eine Übertragung über LAN wäre hier effektiver, jedoch wäre der Verkabelungsaufwand deutlich höher und die Mobilität des Systems eingeschränkt. Da die Raspberry Pi Zero W über keinen RJ45-Anschluss verfügt, müsste ein zusätzlicher Adapter verwendet werden.
 
 Die Verwendung des Raspberry Pi 4 als Schnittstelle vereinfacht zwar die Bedienung und ermöglicht die Verwendung des Systems ohne externe Hardware, jedoch ist die Leistung des Raspberry Pi 4 für die Verarbeitung der Bilder zum 3D-Modell nicht ausreichend. Bei der Verwendung eines externen Rechners könnte hier eine Desktop-Software alle Aufgaben übernehmen, die dieser ausführt. Neben der Kostenersparnis würde dieses auch die räumliche Skalierbarkeit des Systems erhöhen und die Komplexität verringern.
 
+Ein weiterer Punkt ist die Verwendung des Moduls 3 Wide statt des Moduls 3 Normal. Dieses hat einen geringeren Mindestabstand zum Objekt und könnte so bei gleichem Montagerahmen größere Objekte erfassen. Nachteilig wäre hierbei jedoch, dass ein noch größerer Tiefenschärfebereich notwendig wäre - also dann auch Fokusstacking notwendig wäre. Zu Beginn des Projekts war die Verfügbarkeit des Moduls 3 Wide noch nicht gegeben, sodass das Modul 3 Normal verwendet wurde.
 
-\todo{Textform}
-\begin{itemize}
-    \item Integration von Fokusstacking
-    \item LED-Beamer mit Musterprojektion
-    \item Modul 3 Wide statt "Normal"
-    \item 3D-Modell in Weboberfläche zur visuellen Kontrolle der berechneten Kamera-Positionen
-    \item Verwendung zu Ausbildungszwecken
-\end{itemize}
+
+\todo{Abschlussfloskel?}
+
 
 \biblio
 \end{document}
