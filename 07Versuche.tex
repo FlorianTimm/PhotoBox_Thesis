@@ -5,6 +5,8 @@
 \chapter{Untersuchungen zur Genauigkeit und Systemaufbau}
 Nach Abschluss der Konstruktion und des Aufbaus des Prototyps, wurden verschiedene Untersuchungen durchgeführt, um die Genauigkeit des Systems zu überprüfen und die Anzahl der Kameras zu evaluieren. Hierzu wurden unter anderem Vergleichsmessungen mit verschiedenen Systemen durchgeführt.
 
+Zum Vergleich standen verschiedene Testobjekte zur Verfügung. Hauptsächlich wurde ein etwa 14~cm hohes Modell einer Moai-Statue der Osterinseln verwendet, da dieses Objekt eine gute Textur und viele Details aufweist. Neben einem texturierten Spielzeugdino standen noch zwei weiße Gipsmodelle zur Verfügung: Ein Abdruck einer Büste Einsteins und ein kerzenartiges Testobjekt. Alle Objekte wurden bereits in anderen Projekten an der HCU verwendet (z.B. \citet{kersten_scanner}) und bereits mit mehreren verschiedenen Systemen vermessen worden. Die Ergebnisse dieser Messungen wurden als Referenzwerte verwendet.
+
 \section{Genauigkeitsüberprüfung des 3D-Modelles}
 \label{s:genauigkeitsueberpruefung}
 Um die Genauigkeit der 3D-Modell-Erzeugung zu überprüfen, wurden mehrere Prüf\-körper mit dem Prototyp und im Folgenden einem kommerziellen Streifenprojektionssystem vermessen. Die Ergebnisse wurden miteinander verglichen.
@@ -73,7 +75,7 @@ Die Abweichungen liegen in der Größenordnung der in \autoref{ss:erwartete_gena
 \begin{figure}
     \centering
     \includegraphics[width=0.8\textwidth]{img/moai_fehler.jpg}
-    \caption{Differenzbild des Moai (rot: Fehler größer 0,5 mm)}
+    \caption{Differenzbild des Moai (rot: Fehler größer 0,5~mm)}
     \label{img:differenz_moai}
 \end{figure}
 \todo{Moai vorher erwähnen im Text}
@@ -140,7 +142,7 @@ Die Ergebnisse sind in \autoref{tab:vergleich_drehteller} zusammengefasst.
 \begin{figure}
     \centering
     \includegraphics[width=0.8\textwidth]{img/moai_fehler_drehteller.jpg}
-    \caption{Differenzbild des Moai (rot: Fehler größer 0,5 mm)}
+    \caption{Differenzbild des Moai (rot: Fehler größer 0,5~mm)}
     \label{img:drehteller_moai_fehler}
 \end{figure}
 
@@ -152,15 +154,94 @@ Die Ergebnisse sind in \autoref{tab:vergleich_drehteller} zusammengefasst.
 Die Kameras machen einen großen Teil des (Kosten-)Aufwandes zur Realisierung des Projektes aus. Es soll daher in diesem Schritt geprüft werden, ob die Anzahl der Kameras auch reduziert werden kann. Entsprechend \autoref{s:drehteller} wird auch der Einsatz des Drehtellers statt mehr Kameras geprüft.
 
 \subsection{Durchführung}
-Um abzuschätzen, wie viele Kameras für eine gute Genauigkeit notwendig sind, wurden verschiedene Konfigurationen getestet. Dazu wurde der Moai aus \autoref{s:genauigkeitsueberpruefung} verwendet und in Agisoft Metashape verschiedene Kameras deaktiviert und das 3D-Modell neu berechnet. Die Ergebnisse wurden wieder mit dem Streifenprojektionssystem verglichen. Als weiterer Parameter wurde die Abdeckung der Objektoberfläche mit Punkten bewertet. Dazu wurden die Punktwolken auf diejenigen gefiltert, die weniger als einen Millimeter vom Modell des Streifenprojektionssystems entfernt waren, auf eine Punktdichte von 1~mm Punktabstand reduziert und die Anzahl der Punkte gezählt. Darüber hinaus wurde die Anzahl der Punkte nur nach der Ausdünnung bestimmt (ohne Abstandsfilter) und mit der Anzahl mit Abstandsfilter in Beziehung gesetzt.
+Um abzuschätzen, wie viele Kameras für eine gute Genauigkeit notwendig sind, wurden verschiedene Konfigurationen getestet. Dazu wurde der Moai aus \autoref{s:genauigkeitsueberpruefung} verwendet und in Agisoft Metashape verschiedene Kameras deaktiviert und das 3D-Modell neu berechnet. Die Ergebnisse wurden wieder mit dem Streifenprojektionssystem ATOS 5 verglichen. Als weiterer Parameter wurde die Abdeckung der Objektoberfläche mit Punkten bewertet. Dazu wurden die Punktwolken auf diejenigen gefiltert, die weniger als einen Millimeter vom Modell des Streifenprojektionssystems entfernt waren, auf eine Punktdichte von 1~mm Punktabstand reduziert und die Anzahl der Punkte gezählt. Darüber hinaus wurde die Anzahl der Punkte nur nach der Ausdünnung bestimmt (ohne Abstandsfilter) und mit der Anzahl mit Abstandsfilter in Beziehung gesetzt. Dadurch konnte  die Richtigkeit unabhängig von der Anzahl der Punkte bewertet werden.
 
 Als Ausgleich für fehlenden Kameras wurde auch nochmal der Drehteller aus der vorherigen Untersuchung verwendet und geprüft, wie viele Kameras durch den Drehteller ersetzt werden können.
 
-\subsection{Ergebnisse}
-Wie zu erwarten nahm die Abdeckung und die Qualität der Punktwolke ab, je weniger Kameras verwendet wurden. Bei einer Aufnahme mit allen 24 Kameras wurde die Oberfläche (ohne Boden) zu 93 \% abgedeckt. Bei einer Aufnahme mit 18 Kameras waren es nur noch 68 \% und bei 12 Kameras 54 \%.  Schon bei 18 Kameras war der Moai kaum mehr zu erkennen, bei 12 war die Erkennbarkeit nicht mehr gegeben. Die Anzahl der Kameras scheint also für dieses Objekt angebracht zu sein, sofern kein Drehteller genutzt wird.
+Zur Bestimmung des Maßstabes wurden die Daten automatisiert bestmöglich an die Referenzdaten angepasst. Die Passpunkte wurden daher hier nur als Verknüpfungspunkte genutzt und nicht zur Bestimmung des Maßstabes.
 
-Unter Nutzung des Drehtellers mit einer Drehung um 1/8 konnten sogar mit nur der Hälfte der Kamera ein ähnliches bzw. sogar minimal besseres Ergebnis erzielt werden, als bei der einfachen Aufnahme mit 24 Kameras. Bei der Verwendung von nur 6 Kameras in einer Ebene, so wie es bei der Planung des Rahmens auch einmal angedacht war, brachte auch die Verwendung des Drehtellers mit 4 Positionen kein brauchbares Ergebnis im direkten Anlauf. Erst durch manuelles mehrfaches Verarbeiten der Daten und die Nutzung weiterer Passpunkte konnte die Genauigkeit und Abdeckung auf ein ähnliches Niveau wie bei 12 Kameras und zwei Aufnahmen gebracht werden - dafür aber mit einem deutlich höheren personellen und technischen Aufwand.
-\todo{Bilder, Tabelle, Vergleiche}
+\subsection{Ergebnisse}
+Wie zu erwarten nahm die Abdeckung und die Qualität der Punktwolke ab, je weniger Kameras verwendet wurden. Bei einer Aufnahme mit allen 24 Kameras wurde die Oberfläche (ohne Boden) zu 93~\% abgedeckt (\autoref{img:moai_normal}). Bei einer Aufnahme mit 18 Kameras (\autoref{img:moai_2von3}) waren es nur noch 68~\% und bei 12 Kameras (\autoref{img:moai_jede2K}) noch 54~\%.  Schon bei 18 Kameras war der Moai kaum mehr zu erkennen, bei 12 war die Erkennbarkeit nicht mehr gegeben. Die Anzahl der Kameras scheint also für dieses Objekt angebracht zu sein, sofern kein Drehteller genutzt wird.
+
+Unter Nutzung des Drehtellers mit einer Drehung um eine Achtel Drehung konnten sogar mit nur der Hälfte der Kameras (\autoref{img:moai_jede2K_mitDrehung}) ein ähnliches bzw. sogar minimal besseres Ergebnis erzielt werden, als bei der einfachen Aufnahme mit 24 Kameras. Bei der Verwendung von nur 6 Kameras in einer Ebene, so wie es bei der Planung des Rahmens auch einmal angedacht war, brachte auch die Verwendung des Drehtellers mit 4 Positionen kein brauchbares Ergebnis im direkten Anlauf (\autoref{img:moai_eineEbene}). Erst durch manuelles mehrfaches Verarbeiten der Daten und die Nutzung weiterer Passpunkte konnte die Genauigkeit und Abdeckung auf ein ähnliches Niveau wie bei 12 Kameras und zwei Aufnahmen gebracht werden (\autoref{img:moai_eineEbene_mitMarkern}) - dafür aber mit einem deutlich höheren personellen und technischen Aufwand.
+
+Im Vergleich des Parameters der Richtigkeit zeigt sich ein ähnliches Bild: Auch hier schneiden die Aufnahmen mit wenig Bildern und ohne Drehteller deutlich schlechter ab. Der Parameter zeigt, dass zwar die Punktwolken immer ähnlich viele Punkte haben, jedoch der Großteil davon außerhalb der 1-mm-Genauigkeit liegt. Die Aufnahmen mit Drehteller schneiden hier deutlich besser ab, als die ohne, erreichen aber nicht die Qualität der Aufnahmen mit 24 Kameras, vorallem nicht der Aufnahmen mit 24 Kameras und Nutzung des Drehtellers.
+
+Die Ergebnisse sind in \autoref{tab:vergleich_anzahl_drehteller} zusammengefasst. Zum Vergleich sind auch die Ergebnisse der Nutzung des Drehtellers mit 24 Kameras aufgeführt - einmal mit feinen Drehungen von $\frac{1}{32}$ (\autoref{img:moai_feinschritt}) und einmal mit groben Drehungen von $\frac{1}{8}$ (\autoref{img:moai_grobschritt}).
+
+\begin{table}
+    \centering
+    \caption{Ergebnisse mit verschiedenen Kameraanzahlen und Drehteller}
+    \label{tab:vergleich_anzahl_drehteller}
+    \resizebox{\textwidth}{!}{%
+        \begin{tabular}{l|l|l|l|l|l|l|l}
+            \textbf{Art}   & \textbf{\begin{tabular}[c]{@{}l@{}}Kamera-\\ Anzahl\end{tabular}} & \textbf{Drehungen}       & \textbf{\begin{tabular}[c]{@{}l@{}}Mittlerer\\ Fehler\end{tabular}} & \textbf{\begin{tabular}[c]{@{}l@{}}Maximaler\\ Fehler\end{tabular}} & \textbf{Punktanzahl} & \textbf{Abdeckung}             & \textbf{Richtigkeit}           \\ \hline
+            ATOS 5         & \cellcolor[HTML]{EEEEEE}                                          & \cellcolor[HTML]{EEEEEE} & \cellcolor[HTML]{EEEEEE}                                            & \cellcolor[HTML]{EEEEEE}                                            & 346830               & 100,0~\%                       & 100,0~\%                       \\ \hline
+            Automatik      & 24                                                                & 1                        & 0,18~mm                                                             & 2,52~mm                                                             & 628727               & 93,1~\%                        & 99,9~\%                        \\
+            Feinschritt    & 24                                                                & 4 x $\frac{1}{32}$       & 0,14~mm                                                             & 1,42~mm                                                             & 758364               & 100,2~\%                       & 100,0~\%                       \\
+            Grobschritt    & 24                                                                & 5 x $\frac{1}{8}$        & 0,16~mm                                                             & \cellcolor[HTML]{EEEEEE}                                            & 777533               & 98,8~\%                        & 100,0~\%                       \\ \hline
+            2 von 3        & 16                                                                & 1                        & {\color[HTML]{FF0000} 1,20~mm}                                      & {\color[HTML]{FF0000} 7,74~mm}                                      & 596979               & {\color[HTML]{FF0000} 68,4~\%} & {\color[HTML]{FF0000} 70,4~\%} \\ \hline
+            jede zweite K. & 12                                                                & 1                        & 0,49~mm                                                             & 4,01~mm                                                             & 346830               & {\color[HTML]{FF0000} 54,9~\%} & 94,1~\%                        \\
+            … mit Drehung  & 12                                                                & 2 x $\frac{1}{8}$        & 0,25~mm                                                             & 1,44~mm                                                             & 760538               & 95,7~\%                        & 99,8~\%                        \\ \hline
+            eine Ebene     & 6                                                                 & 4 x $\frac{1}{8}$        & {\color[HTML]{FF0000} 1,57~mm}                                      & 1,44~mm                                                             & 753062               & {\color[HTML]{FF0000} 77,8~\%} & {\color[HTML]{FF0000} 68,6~\%} \\
+            … mit Markern  & 6                                                                 & 5 x $\frac{1}{8}$        & 0,29~mm                                                             & 2,50~mm                                                             & 640810               & 94,2~\%                        & 98,9~\%
+        \end{tabular}
+    }
+\end{table}
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.24\textwidth}
+        \includegraphics[width=1\linewidth]{img/cam_anzahl/normal.png}
+        \centering
+        \caption{24 Kameras,\\ keine Drehung} %Bildunterschrift
+        \label{img:moai_normal} %ID fürs Bild
+    \end{subfigure}
+    \begin{subfigure}{0.24\textwidth}
+        \includegraphics[width=1\linewidth]{img/cam_anzahl/feinschritt.png}
+        \centering
+        \caption{24 Kameras,\\4 Drehungen $\frac{1}{32}$} %Bildunterschrift
+        \label{img:moai_feinschritt} %ID fürs Bild
+    \end{subfigure}
+    \begin{subfigure}{0.24\textwidth}
+        \includegraphics[width=1\linewidth]{img/cam_anzahl/allCamerasWithMask.png}
+        \centering
+        \caption{24 Kameras,\\5 Drehungen $\frac{1}{8}$} %Bildunterschrift
+        \label{img:moai_grobschritt} %ID fürs Bild
+    \end{subfigure}
+    \begin{subfigure}{0.24\textwidth}
+        \includegraphics[width=1\linewidth]{img/cam_anzahl/twothirds2.png}
+        \centering
+        \caption{16 Kameras,\\keine Drehung} %Bildunterschrift
+        \label{img:moai_2von3} %ID fürs Bild
+    \end{subfigure}
+    \begin{subfigure}{0.24\textwidth}
+        \includegraphics[width=1\linewidth]{img/cam_anzahl/second2.png}
+        \centering
+        \caption{12 Kameras,\\keine Drehung\\} %Bildunterschrift
+        \label{img:moai_jede2K} %ID fürs Bild
+    \end{subfigure}
+    \begin{subfigure}{0.24\textwidth}
+        \includegraphics[width=1\linewidth]{img/cam_anzahl/everysecondoneturn.png}
+        \centering
+        \caption{12 Kameras,\\2 Drehungen $\frac{1}{8}$\\} %Bildunterschrift
+        \label{img:moai_jede2K_mitDrehung} %ID fürs Bild
+    \end{subfigure}
+    \begin{subfigure}{0.24\textwidth}
+        \includegraphics[width=1\linewidth]{img/cam_anzahl/justOneRow4Turns.png}
+        \centering
+        \caption{6 Kameras,\\4 Drehungen $\frac{1}{8}$\\} %Bildunterschrift
+        \label{img:moai_eineEbene} %ID fürs Bild
+    \end{subfigure}
+    \begin{subfigure}{0.24\textwidth}
+        \includegraphics[width=1\linewidth]{img/cam_anzahl/justOneRow4TurnsRedefined.png}
+        \centering
+        \caption{6 Kameras,\\4 Drehungen $\frac{1}{8}$,\\Marker} %Bildunterschrift
+        \label{img:moai_eineEbene_mitMarkern} %ID fürs Bild
+    \end{subfigure}
+
+    \caption{Abweichungen der jeweiligen Punktwolken von den Referenzdaten (rot: +0,5~mm, blau: -0,5~mm)} %Bildunterschrift
+\end{figure}
 
 \section{Zusammenfassung}
 Das System erreichte die vorgesehene Genauigkeit. Die Anzahl der Kameras war gut und für die meisten getesteten Objekte ausreichend. Der Einsatz eines Drehtellers kann die Anzahl der Kameras reduzieren, jedoch ist die Verarbeitung der Daten deutlich aufwändiger. Der Einsatz des Drehtellers zur weiteren Genauigkeitssteigerung ist aber durchaus sinnvoll, wenn die Anzahl der Kameras nicht erhöht werden kann oder soll.
