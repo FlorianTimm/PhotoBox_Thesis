@@ -274,15 +274,13 @@ Die dünne Punktwolke aus dem Vorwärtsschnitt und der anschließenden Bündel\-
 \section{Mesh-Generierung}
 Bis zu diesem Schritt besteht das Modell nur aus einzelnen Punkten, die keine Oberfläche ergeben. Um ein geschlossenes 3D-Modell zu erhalten, muss eine Oberfläche generiert werden. Hierfür wird ein Mesh-Generierungsverfahren genutzt, welches die Punktwolke in Dreiecke unterteilt. Es gibt verschiedene Verfahren, die sich in der Art der Unterteilung und ihrem Umgang mit Einzelpunkten unterscheiden. OpenDroneMap nutzt beispielsweise die Screened Poisson Surface Reconstruction. \citep[S. 52f]{opendronemap}
 
-Die Screened Poisson Surface Reconstruction ist ein Verfahren, das auf der Poisson-Gleichung basiert. Diese Gleichung beschreibt die Beziehung zwischen einer Funktion und ihrer Ableitung und wird in der Mathematik und Physik verwendet. Bei der Screened Poisson Surface Reconstruction wird die Poisson-Gleichung verwendet, um die Oberfläche zu glätten und zu interpolieren. Dabei werden die Punkte in eine Gitterstruktur überführt und die Oberfläche durch die Lösung der Poisson-Gleichung bestimmt. Dieser Ansatz berücksichtigt auch die Ausrichtung der Punkte, um eine genauere Rekonstruktion zu erzielen. \citep{spsr}
-
-\todo{Details zur Poisson-Gleichung?}
+Die Screened Poisson Surface Reconstruction ist ein Verfahren, das auf der Poisson-Gleichung basiert. Diese Gleichung beschreibt die Beziehung zwischen einer Funktion und ihrer Ableitung und wird in der Mathematik und Physik verwendet\todo{Satz ergänzen/prüfen}. Bei der Screened Poisson Surface Reconstruction wird die Poisson-Gleichung verwendet, um die Oberfläche zu glätten und zu interpolieren. Dabei werden die Punkte in eine Gitterstruktur überführt und die Oberfläche durch die Lösung der Poisson-Gleichung bestimmt. Dieser Ansatz berücksichtigt auch die Ausrichtung der Punkte, um eine genauere Rekonstruktion zu erzielen. \citep{spsr}Details zur Poisson-Gleichung?
 \todo{Beispielbilder}
 
 \section{Texturierung}
 Abschließend wird das Modell texturiert. Hierfür werden die Bilder, die zur Erstellung des Modells genutzt wurden, auf das Modell projiziert. Außerdem werden Helligkeits- und Farbunterschiede der Bilder ausgeglichen. \citep[S. 54f]{opendronemap}
 
-Vorteil der Texturierung ist, dass das Modell meist realisitischer wirkt und auch bei fehlenden Informationen, beispielsweise durch fehlende Punkte, eine Oberfläche erzeugt wird. Nachteilig ist, dass die Texturierung hierdurch auch Informationen verdeckt. So kann bei einem nur schattierten Modell die Struktur des 3D-Modelles deutlich besser erkannt werden \citep[S. 702]{luhmann}.
+Vorteil der Texturierung ist, dass das Modell meist realistischer wirkt und fehlenden Informationen, beispielsweise fehlende Punkte, überdeckt werden können. Nachteilig ist, dass die Texturierung hierdurch auch Informationen verdeckt. So kann bei einem nur schattierten Modell die Struktur des 3D-Modelles deutlich besser erkannt werden \citep[S. 702]{luhmann}.
 \todo{Beispielbilder}
 
 \biblio
