@@ -5,11 +5,11 @@
 \chapter{Untersuchungen zur Genauigkeit und Systemaufbau}
 Nach Abschluss der Konstruktion und des Aufbaus des Prototyps, wurden verschiedene Untersuchungen durchgeführt, um die Genauigkeit des Systems zu überprüfen und die Anzahl der Kameras zu evaluieren. Hierzu wurden unter anderem Vergleichsmessungen mit verschiedenen Systemen durchgeführt.
 
-Zum Vergleich standen verschiedene Testobjekte zur Verfügung. Hauptsächlich wurde ein etwa 14~cm hohes Modell einer Moai-Statue der Osterinseln verwendet, da dieses Objekt eine gute Textur und viele Details aufweist. Neben einem texturierten Spielzeugdino standen noch zwei weiße Gipsmodelle zur Verfügung: Ein Abdruck einer Büste Einsteins und ein kerzenartiges Testobjekt. Alle Objekte wurden bereits in anderen Projekten an der HCU verwendet (z.B. \citet{kersten_scanner}) und bereits mit mehreren verschiedenen Systemen vermessen worden. Die Ergebnisse dieser Messungen wurden als Referenzwerte verwendet.
+Zum Vergleich standen verschiedene Testobjekte zur Verfügung. Hauptsächlich wurde ein etwa 14~cm hohes Modell einer Moai-Statue der Osterinseln verwendet, da dieses Objekt eine gute Textur und viele Details aufweist. Neben einem texturierten Spielzeugdino standen noch zwei weiße Gipsmodelle zur Verfügung: Ein Abdruck einer Büste Einsteins und ein kerzenartiges Testobjekt, im folgenden Testy genannt. Alle Objekte wurden bereits in anderen Projekten an der HCU verwendet (z.B. \citet{kersten_scanner}) und bereits mit mehreren verschiedenen Systemen vermessen worden. Die Ergebnisse dieser Messungen wurden als Referenzwerte verwendet.
 
 \section{Genauigkeitsüberprüfung des 3D-Modelles}
 \label{s:genauigkeitsueberpruefung}
-Um die Genauigkeit der 3D-Modell-Erzeugung zu überprüfen, wurden mehrere Prüf\-körper mit dem Prototyp und im Folgenden einem kommerziellen Streifenprojektionssystem vermessen. Die Ergebnisse wurden miteinander verglichen.
+Um die Genauigkeit der 3D-Modell-Erzeugung zu überprüfen, wurden mehrere Prüf\-körper mit dem Prototyp und mit einem kommerziellen Streifenprojektionssystem vermessen. Die Ergebnisse wurden miteinander verglichen.
 
 \subsection{Erwartete Genauigkeit}
 \label{ss:erwartete_genauigkeit}
@@ -68,17 +68,32 @@ Als Vergleichsmessung wurden die Objekte mit einem Zeiss GOM ATOS 5 aufgenommen.
 Bei dem verwendeten System werden zwei Kameras eingesetzt, die sich ein massives Gehäuse mit dem mittig angeordneten Projektor teilen. Bei dem verwendeten Messvolumen und Objektentfernung beträgt die Genauigkeit etwa \todo{Wert}. Aufgrund der deutlich höheren erwarteten Genauigkeit des Streifenprojektionssystems, kann davon ausgegangen werden, dass die Messungen deutlich genauer sind als die des Prototyps und als wahre Werte angenommen werden können.
 
 \subsection{Ergebnisse}
-Die modellierte Oberfläche aus dem Streifenprojektionssystem und die Punktwolke aus dem Prototyp wurden in CloudCompare aufeinandergelegt und die Differenz berechnet. Die Visualisierung der Differenzen ist in \autoref{img:differenz_moai} dargestellt. Es ist zu erkennen, dass einige Bereiche gar nicht erfasst bzw. deren Genauigkeit deutlich von der erwarteten abweichen. Die größten Fehlstellen sind im Bereich des Kinnes und unterhalb des Bauches zu erkennen. Abweichungen im Bereich des restlichen Körpers sind deutlich geringer und liegen im Bereich von 0,21~mm. Sie sind auf die schlechtere Erfassung der nach unten gerichteten Flächen zurückzuführen. Diese Bildbereiche sind nur in wenigen Bildern sichtbar und können daher nicht so gut rekonstruiert werden.
+Die modellierte Oberfläche aus dem Streifenprojektionssystem und die Punktwolke aus dem Prototyp wurden in CloudCompare aufeinandergelegt und die Differenz berechnet. Die Visualisierung der Differenzen ist in \autoref{img:differenz} dargestellt. Es ist zu erkennen, dass einige Bereiche gar nicht erfasst bzw. deren Genauigkeit deutlich von der erwarteten abweichen. Die größten Fehlstellen sind im Bereich des Kinnes und unterhalb des Bauches zu erkennen. Abweichungen im Bereich des restlichen Körpers sind deutlich geringer und liegen im Bereich von 0,21~mm. Sie sind auf die schlechtere Erfassung der nach unten gerichteten Flächen zurückzuführen. Diese Bildbereiche sind nur in wenigen Bildern sichtbar und können daher nicht so gut rekonstruiert werden.
+\todo{Text überarbeiten}
 
 Die Abweichungen liegen in der Größenordnung der in \autoref{ss:erwartete_genauigkeit} berechneten Werte und sind nur minimal schlechter, als die Genauigkeit eines 3D-Modelles des Körpers, welches photogrammetrisch mit einer Spiegelreflexkamera Nikon D90 manuell aufgenommen wurde. Durch Kombinationen von anderen Perspektiven ist hier die Abdeckung subjektiv betrachtet besser. Die Ergebnisse sind in \autoref{tab:vergleich_erg} zusammengefasst.
 
 \begin{figure}
+    \label{img:differenz}
     \centering
-    \includegraphics[width=0.8\textwidth]{img/moai_fehler.jpg}
-    \caption{Differenzbild des Moai (rot: Fehler größer 0,5~mm)}
-    \label{img:differenz_moai}
+    \begin{subfigure}{0.3\textwidth}
+        \includegraphics[width=0.95\textwidth]{img/cam_anzahl/normal.png}
+        \caption{Moai}
+        \label{img:differenz_moai}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+        \includegraphics[width=0.95\textwidth]{img/testy_diff.png}
+        \caption{Testy}
+        \label{img:differenz_testy}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+        \includegraphics[width=0.95\textwidth]{img/einstein_diff.png}
+        \caption{Einstein}
+        \label{img:differenz_einstein}
+    \end{subfigure}
+    \caption{Differenzbilder verschiedener 3D-Modelle  (rot: Fehler größer 0,5~mm)}
 \end{figure}
-\todo{Moai vorher erwähnen im Text}
+\todo{Testy neu erfassen, Einstein prüfen}
 
 \begin{table}
     \centering
@@ -98,6 +113,7 @@ Die Abweichungen liegen in der Größenordnung der in \autoref{ss:erwartete_gena
         \bottomrule
     \end{tabular}
 \end{table}
+\todo{Testy/Einstein}
 
 
 \section{Nutzung eines Drehtellers}
