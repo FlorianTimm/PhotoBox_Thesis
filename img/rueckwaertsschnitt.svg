@@ -9,6 +9,9 @@
    id="svg5"
    inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    sodipodi:docname="rueckwaertsschnitt.svg"
+   inkscape:export-filename="rueckwaertsschnitt.pdf"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -25,8 +28,8 @@
      inkscape:document-units="px"
      showgrid="false"
      inkscape:zoom="1.0120466"
-     inkscape:cx="56.815567"
-     inkscape:cy="194.16102"
+     inkscape:cx="259.86946"
+     inkscape:cy="298.89928"
      inkscape:window-width="1854"
      inkscape:window-height="1011"
      inkscape:window-x="0"
@@ -148,5 +151,77 @@
        rx="2.6043174"
        cy="694.53894"
        cx="1176.3093" />
+    <text
+       xml:space="preserve"
+       style="font-size:17.2916px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-position:sub;fill:#000000;stroke:#000000;stroke-width:1.62829"
+       x="969.23126"
+       y="735.77924"
+       id="text1846"
+       transform="scale(1.0147884,0.98542708)"><tspan
+         sodipodi:role="line"
+         x="969.23126"
+         y="735.77924"
+         id="tspan1848"
+         style="stroke-width:1.62829">P1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:17.2916px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-position:sub;fill:#000000;stroke:#000000;stroke-width:1.62829"
+       x="1045.9655"
+       y="519.32977"
+       id="text1846-2"
+       transform="scale(1.0147884,0.9854271)"><tspan
+         sodipodi:role="line"
+         x="1045.9655"
+         y="519.32977"
+         id="tspan1848-7"
+         style="stroke-width:1.62829">P'1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:17.2916px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-position:sub;fill:#000000;stroke:#000000;stroke-width:1.62829"
+       x="1168.6056"
+       y="711.414"
+       id="text1854"
+       transform="scale(1.0147884,0.98542708)"><tspan
+         sodipodi:role="line"
+         id="tspan1852"
+         x="1168.6056"
+         y="711.414"
+         style="stroke-width:1.62829">P2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:17.2916px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-position:sub;fill:#000000;stroke:#000000;stroke-width:1.62829"
+       x="1126.9333"
+       y="520.30115"
+       id="text1854-6"
+       transform="scale(1.0147884,0.9854271)"><tspan
+         sodipodi:role="line"
+         id="tspan1852-2"
+         x="1126.9333"
+         y="520.30115"
+         style="stroke-width:1.62829">P'2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:17.2916px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-position:sub;fill:#000000;stroke:#000000;stroke-width:1.62829"
+       x="1040.3043"
+       y="843.68719"
+       id="text1858"
+       transform="scale(1.0147884,0.98542708)"><tspan
+         sodipodi:role="line"
+         x="1040.3043"
+         y="843.68719"
+         id="tspan1860"
+         style="stroke-width:1.62829">P3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:17.2916px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-position:sub;fill:#000000;stroke:#000000;stroke-width:1.62829"
+       x="1093.8208"
+       y="554.89197"
+       id="text1858-9"
+       transform="scale(1.0147884,0.9854271)"><tspan
+         sodipodi:role="line"
+         x="1093.8208"
+         y="554.89197"
+         id="tspan1860-1"
+         style="stroke-width:1.62829">P'3</tspan></text>
   </g>
 </svg>

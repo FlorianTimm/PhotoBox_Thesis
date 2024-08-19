@@ -19,8 +19,8 @@ Aus den identifizierten Punkten werden dann die Positionen und Ausrichtung der K
 
 
 \section{Abbildung}
-
-Grundlage der Photogrammetrie ist die Abbildungsgleichung. Diese beschreibt die Abbildung eines Punktes im Raum auf dem Sensor beziehungsweise dem Film. Umgekehrt kann mit ihrer Hilfe aus der Position eines Punktes in einem Bild, ähnlich einer Messung mit einem Theodolit, die Richtung des Punktes in Relation zu der Kamera bestimmt werden. Die Abbildungsgleichung ist abhängig von der inneren und äußeren Orientierung der Kamera. Die innere Orientierung beschreibt die Abbildungseigenschaften der Kamera, die äußere Orientierung die Position und Ausrichtung der Kamera. Im folgenden wird zuerst auf die innere und äußere Orientierung eingegangen, bevor die Abbildungsgleichung vorgestellt wird.
+\label{s:abbildung}
+Grundlage der Photogrammetrie ist die Abbildungsgleichung. Diese beschreibt die Abbildung eines Punktes im Raum auf dem Sensor beziehungsweise dem Film. Umgekehrt kann mit ihrer Hilfe aus der Position eines Punktes in einem Bild, ähnlich einer Messung mit einem Theodolit, die Richtung des Punktes in Relation zu der Kamera bestimmt werden. Die Abbildungsgleichung ist abhängig von der inneren und äußeren Orientierung der Kamera. Die innere Orientierung beschreibt die Abbildungseigenschaften der Kamera, die äußere Orientierung die Position und Ausrichtung der Kamera. Im Folgenden wird zuerst auf die innere und äußere Orientierung eingegangen, bevor die Abbildungsgleichung vorgestellt wird.
 
 \subsection{Innere Orientierung}
 \label{s:innereorientierung}
@@ -187,15 +187,31 @@ Es gibt verschiedenste Formen von Markern, die automatisch erfasst werden könne
 Vorteilhaft ist jedoch die Verwendung von codierten Zielmarken. Hier können die Punkte direkt zugeordnet werden, sodass keine weitere Filterung und Berechnung zur Zuordnung notwendig ist. \citep[S.535ff]{luhmann}
 
 \subsubsection{Zielmarken nach Schneider}
-Eine Form der codierten Zielmarken sind die Marker nach Schneider. Diese bestehen aus mehreren konzentrischen Kreisen und werden entsprechend auch als CCCT -- concentric circular coded target -- bezeichnet \citep{ccct}. Die Mitte des Markers wird durch den gemeinsamen Mittelpunkt der Kreise definiert.  Vorteilhaft ist, dass die Marker auch bei unscharfen Bildern erkannt werden können und ihr Zentrum manuell identifiziert werden kann, beispielsweise zum Aufmaß mit einem Tachymeter. Sie haben sich daher als Standardmarker in der Photogrammetrie etabliert. Sie werden beispielsweise von Agisoft Metashape verwendet.
-\todo{Quelle}
-\todo{Bild}
+Eine Form der codierten Zielmarken sind die Marker nach Schneider. Diese bestehen aus mehreren konzentrischen Kreisen (\autoref{img:schneider}) und werden entsprechend auch als CCCT -- concentric circular coded target -- bezeichnet \citep{ccct}. Die Mitte des Markers wird durch den gemeinsamen Mittelpunkt der Kreise definiert \citep{schneider}. Vorteilhaft ist, dass die Marker auch bei unscharfen Bildern erkannt werden können und ihr Zentrum manuell identifiziert werden kann, beispielsweise zum Aufmaß mit einem Tachymeter. Sie haben sich daher als Standardmarker in der Photogrammetrie etabliert. Sie werden beispielsweise von Agisoft Metashape verwendet.
 
 
 \subsubsection{ArUco-Marker}
-Eine andere Variante der codierten Verknüpfungspunkte sind die sogenannten ArUco-Marker. Diese werden häufig für die Orientierung bei Augmented-Reality-An\-wend\-ungen genutzt. Jede Ecke kann hierbei automatisch im Subpixelbereich identifiziert werden, sodass ein erkannter Marker vier Verknüpfungspunkte liefern kann. Nachteilig ist, dass die Ecken nicht eindeutig identifiziert werden können, wenn die Aufnahme unscharf ist. Durch ihre Verwendung in Augmented-Reality-Anwendungen sind auch viele kostenfreie Bibliotheken für ihre Erkennung verfügbar. Beispielsweise kann OpenCV ArUco-Marker identifizieren. %\citep[S. 536]{luhmann}
-\todo{Quelle}
-\todo{Bild}
+Eine andere Variante der codierten Verknüpfungspunkte sind die sogenannten ArUco-Marker (\autoref{img:aruco}). Diese werden häufig für die Orientierung bei Augmented-Reality-An\-wend\-ungen genutzt. Jede Ecke kann hierbei automatisch im Subpixelbereich identifiziert werden, sodass ein erkannter Marker vier Verknüpfungspunkte liefern kann. Wenn deren (lokale) Koordinaten und die innere Orientierung bekannt sind, kann mit nur einem Marker die äußere Orientierung bestimmt werden. \citep[S. 545]{luhmann}
+
+Nachteilig zeigte sich in den Untersuchungen, dass die Ecken nicht eindeutig identifiziert werden können, wenn die Aufnahme unscharf ist. Durch ihre Verwendung in Augmented-Reality-Anwendungen sind auch viele kostenfreie Bibliotheken für ihre Erkennung verfügbar. Beispielsweise kann OpenCV ArUco-Marker identifizieren \citep{opencv}.
+
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=0.98\linewidth]{img/schneider.png}
+        \centering
+        \caption{CCCT nach \\ \cite{schneider},\\aus Agisoft Metashape} %Bildunterschrift
+        \label{img:schneider} %ID fürs Bild
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=0.98\linewidth]{img/aruco.png}
+        \centering
+        \caption{ArUco-Marker,\\generiert mit \cite{opencv}\\} %Bildunterschrift
+        \label{img:aruco} %ID fürs Bild
+    \end{subfigure}
+    \caption{Codierte Passpunkte} %Bildunterschrift
+\end{figure}
 
 \subsection{Merkmalsextraktion}
 Ohne das Anbringen von Markern können auch Merkmale in den Bildern erkannt werden. Hierfür gibt es verschiedene Methoden, eine dieser ist die SIFT-Methode, welche hier beispielhaft kurz dargestellt wird. Sie liefert Verknüpfungspunkte aus Mustern auf den photographierten Oberflächen. Es ist meist nicht notwendig explizit Marker an dem aufzunehmenden Objekt anzubringen, sofern seine Oberfläche nicht strukturlos ist (glatte weiße Wände etc.) oder in Bewegung ist.
@@ -211,20 +227,21 @@ Durch die beschriebenen Verfahren und die hieraus entstandenen Verknüpfungs\-pu
 \begin{figure}
     \centering
     \begin{subfigure}{0.45\textwidth}
-        \includesvg[height=0.9\linewidth]{./img/rueckwaertsschnitt}
+        \includegraphics[width=0.9\linewidth]{img/rueckwaertsschnitt.pdf}
+        %\includesvg[height=0.9\linewidth]{./img/rueckwaertsschnitt}
         \centering
         \caption{Rückwärtsschnitt, nach \citealt[S. 284]{luhmann}} %Bildunterschrift
         \label{img:rueckwaertsschnitt} %ID fürs Bild
     \end{subfigure}
     \begin{subfigure}{0.45\textwidth}
-        \includesvg[height=0.9\linewidth]{./img/vorwaertsschnitt}
+        \includegraphics[width=0.9\linewidth]{img/vorwaertsschnitt.pdf}
+        %\includesvg[height=0.9\linewidth]{./img/vorwaertsschnitt}
         \centering
         \caption{Vorwärtsschnitt, nach \citealt[S. 339]{luhmann}} %Bildunterschrift
         \label{img:vorwaertsschnitt} %ID fürs Bder an den Aluprofilen befestigt ist (ild
     \end{subfigure}
     \caption{Geometrische Grundlagen des Rückwärtsschnitt und Vorwärtsschnitt} %Bildunterschrift
 \end{figure}
-\todo{Verweis auf Bilder}
 
 
 \subsection{Rückwärtsschnitt}
@@ -232,19 +249,16 @@ Sofern Koordinaten von Passpunkten bekannt sind, können die Positionen und Ausr
 
 Durch die Nutzung des RANSAC-Ansatzes können veränderte Passpunkte identifiziert und als Ausreißer markiert werden. Hierzu werden mehrere Stichproben der Punkte gewählt, die Berechnung durchgeführt und die Lösung gewählt, zu denen die meisten Punkte passen. \citep[S. 134]{luhmann}
 
-\todo{Verweis und Erklärung}
+\autoref{img:rueckwaertsschnitt} zeigt die geometrischen Grundlagen des Rückwärtsschnitts. Es müssen mindestens 3 Passpunkte ($P_1 - - P_3$) mit Koordinaten bekannt und im Bild sichtbar sein. Außerdem muss die innere Orientierung bei Verwendung von nur drei Passpunkten bekannt sein. Die Position der Punkte $P'_1 - - P'_3$ wird dann bestimmt und ergibt im Beispiel 6 Kooridinatenkomponenten (jeweils $x'$ und $y'$). Durch Berechnungen -- auf die hier nicht weiter eingegangen und auf entsprechende Literatur verwiesen wird -- kann dann die Position (drei Parameter) und Ausrichtung (drei Parameter) der Kamera bestimmt werden. \citep[S. 284]{luhmann}
 
 \subsection{Vorwärtsschnitt}
-Um wiederum aus einem Stereopaar mit bekannter innerer und äußerer Orientierung Punktkoordinaten zu berechnen, wird der Vorwärtsschnitt genutzt. Hierfür sind die Bildkoordinaten des zu berechnenden Punktes in beiden Bildern notwendig.
+Um wiederum aus einem Stereopaar mit bekannter innerer und äußerer Orientierung Punktkoordinaten zu berechnen, wird der Vorwärtsschnitt genutzt. \autoref{img:vorwaertsschnitt} zeigt die geometrischen Grundlagen des Vorwärtsschnitts. Es werden die Bildkoordinaten der Punkte $P_1$ und $P_2$ benötigt, die im Bild sichtbar sind. Die Position des Punktes $P$ wird dann berechnet. Wie bereits erwähnt (\autoref{s:abbildung}), kann jeder Punkt im Bild durch die innere Orientierung als Horizontal- und Vertikalrichtungsmessung interpretiert werden. Durch die äußere Orientierung kann diese dann ins übergeordnete System überführt werden. Hieraus ergibt sich dann zur Berechnung der Position $P$ ein räumlicher Schnitt zweier (windschiefer) Geraden \citep[S. 95]{luhmann}.
 
-Mit dem Vorwärts\-schnitt können neben markierten Verknüpfungspunkten auch die Neupunkte, die mittels SIFT oder ähnlichen Bild\-erkennungs\-algorithmen erkannt wurden, berechnet werden. Dadurch kann eine dünne Punktwolke erzeugt werden.
-
-
+Mit dem Vorwärts\-schnitt können neben markierten Verknüpfungspunkten auch die Neupunkte, die mittels SIFT oder ähnlichen Bild\-erkennungs\-algorithmen erkannt wurden, berechnet werden. Dadurch kann eine dünne Punktwolke erzeugt werden, welche dann bei der Bündelblockausgleichung genutzt werden kann. Da die Berechnung bereits bei Bildkoordinaten aus zwei Bildern überbestimmt ist und oft Punkte in mehr Bildern abgebildet sind, bietet sich die Nutzung der Ausgleichung auch schon bei der Bestimmung an. \citep[S. 385]{luhmann}
 
 \begin{comment}
 Die Koordinaten der Passpunkt-Ausreißer aus der Berechnung der Kamerapositionen werden anschließend neu berechnet. Hierfür wird der Vorwärtsschnitt genutzt. Auch hier wird OpenCV zur Berechnung genutzt. Die Berechnung der Passpunkte erfolgt für jedes Bildpaar einzeln. Für alle Koordinaten wird dann pro Passpunkt der Z-Score berechnet. Passpunkte, die einen Z-Score von über 2 haben, werden als Ausreißer markiert und nicht weiter betrachtet.
 \end{comment}
-\todo{Bild + Erklärung}
 
 \section{Bündelblockausgleichung}
 \label{s:buendelblock}
@@ -261,6 +275,8 @@ Die dünne Punktwolke aus dem Vorwärtsschnitt und der anschließenden Bündel\-
 Bis zu diesem Schritt besteht das Modell nur aus einzelnen Punkten, die keine Oberfläche ergeben. Um ein geschlossenes 3D-Modell zu erhalten, muss eine Oberfläche generiert werden. Hierfür wird ein Mesh-Generierungsverfahren genutzt, welches die Punktwolke in Dreiecke unterteilt. Es gibt verschiedene Verfahren, die sich in der Art der Unterteilung und ihrem Umgang mit Einzelpunkten unterscheiden. OpenDroneMap nutzt beispielsweise die Screened Poisson Surface Reconstruction. \citep[S. 52f]{opendronemap}
 
 Die Screened Poisson Surface Reconstruction ist ein Verfahren, das auf der Poisson-Gleichung basiert. Diese wird genutzt, um die Oberfläche zu glätten und zu interpolieren. Ein Teil des Ansatzes ist es, die Ausrichtung der Punkte zu berücksichtigen. Die Punkte werden hierbei in eine Gitterstruktur überführt und die Oberfläche durch die Lösung der Poisson-Gleichung bestimmt. \citep{spsr}
+
+Die Poisson-Gleichung ist eine partielle Differentialgleichung, die in der Mathematik und Physik genutzt wird. Sie beschreibt die Beziehung zwischen einer Funktion und ihrer Ableitung. In der Bildverarbeitung wird sie beispielsweise zur Kantenerkennung genutzt. \citep{poisson}
 \todo{Details zur Poisson-Gleichung}
 
 \section{Texturierung}
