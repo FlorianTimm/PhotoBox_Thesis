@@ -176,11 +176,15 @@ Die Klassen sind in \autoref{img:uml_connector} dargestellt. \texttt{Connector} 
 Neben der eigentlichen Programmierung erfolgten noch verschiedene Konfigurationen, um das System zu betreiben. Diese sollen hier kurz vorgestellt werden.
 
 \paragraph{WLAN-Router}
-Der WLAN-Router wurde so konfiguriert, dass er ein WPA2-verschlüsseltes WLAN-Netzwerk aussendet. 
+Der WLAN-Router wurde so konfiguriert, dass er ein WPA2-verschlüsseltes WLAN-Netzwerk aussendet. Außerdem wurde er als DHCP-Server eingerichtet, der den angeschlossenen Geräten automatisch eine IP-Adresse zuweist. Die IP-Adressen der Raspberry Pi wurden fest vergeben, um die Kommunikation zu erleichtern. Der Router wurde so konfiguriert, dass er die Kommunikation zwischen den Raspberry Pi einem per Kabel angeschlossenen Desktop-PC zulässt, aber auch eine per Netzwerk-Kabel angeschlossene Internetverbindung durchleitet.
 
 \paragraph{Raspberry Pi 4}
+Der Raspberry Pi 4 wurde so konfiguriert, dass er automatisch das Skript \texttt{Master} startet. Hierzu wurde ein \texttt{systemd}-Service erstellt, der das Skript beim Systemstart ausführt. Vorher wird bei Vorliegen einer Internetverbindung geprüft, ob das git-Repository eine neue Version der Software zur Verfügung stellt. Falls dieses der Fall ist, wird dieses heruntergeladen und installiert.
+
+Zur Beschleunigung von Softwareupdates des Betriebssystemes, wurde ein entsprechender apt-Proxyservice eingerichtet. Dieser speichert die heruntergeladenen Pakete und stellt diese bei Bedarf den Raspberry Pi Zero W zur Verfügung. Hierdurch wird die Bandbreite des Internetanschlusses geschont und die Updates können schneller durchgeführt werden.
 
 \paragraph{Raspberry Pi Zero W}
+Die Raspberry Pi Zero W wurden so konfiguriert, dass sie automatisch das Skript \texttt{Camera} starten. Hierzu wurde ebenfalls ein \texttt{systemd}-Service erstellt, der das Skript beim Systemstart ausführt. AUch hier wurde der bereits beschriebene Update-Mechanismus eingabaut. Entsprechend des Cache-Konfiguration des Raspberry Pi 4 wurde hier der apt-Proxyservice als Paketquelle eingerichtet.
 
 
 \biblio
