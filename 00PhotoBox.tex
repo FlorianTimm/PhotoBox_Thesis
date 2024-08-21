@@ -1,7 +1,7 @@
 \documentclass[a4paper,12pt,bibliography=totoc, listof=totoc, titlepage]{scrreprt}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\usepackage[ngerman]{babel}
+\usepackage[british,ngerman]{babel}
 \usepackage[babel]{microtype}
 \usepackage[utf8]{inputenc}
 \usepackage[left=3cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
@@ -69,29 +69,6 @@
 \widowpenalties 4 10000 10000 1000 1000
 \displaywidowpenalty=10000
 
-% Listings
-\usepackage{listings}
-\lstset{
-   breaklines=true,
-   captionpos=t,
-   basicstyle=\scriptsize\ttfamily,
-   keywordstyle=\bfseries\ttfamily\color{orange},
-   stringstyle=\color{green}\ttfamily,
-   commentstyle=\color{gray}\ttfamily,
-   emph={square}, 
-   emphstyle=\color{blue}\texttt,
-   emph={[2]root,base},
-   emphstyle={[2]\color{yac}\texttt},
-   showstringspaces=false,
-   flexiblecolumns=false,
-   tabsize=2,
-   numbers=left,
-   numberstyle=\tiny,
-   numberblanklines=false,
-   stepnumber=1,
-   numbersep=10pt,
-   xleftmargin=15pt
- }
 
 % Zitierstil
 %\usepackage[style=authoryear,citestyle=authoryear,natbib=true]{biblatex}
@@ -187,7 +164,7 @@ Die Photogrammetrie ermöglicht die Erstellung von 3D-Modellen unter Zuhilfenahm
 
 Im Rahmen dieser Arbeit erfolgt eine Untersuchung des Lösungsansatzes, mehrere kostengünstige Kameras, die fest auf einem Rahmen montiert sind, zu verwenden. Der Kern dieser Untersuchung bildet der Aufbau eines photogrammetrischen Messsystems für kleine Objekte, welches aus Raspberry-Pi-Kameras besteht. Im Rahmen dessen ist die Programmierung einer Schnittstelle zur Synchronisation der Kameras sowie die Entwicklung einer Möglichkeit zur Kalibrierung der Kameras vorgesehen. In einem nächsten Schritt wird die Genauigkeit der Erfassung überprüft. Das Endergebnis soll es im Idealfall auch einem photogrammetrischen Laien ermöglichen, schnell und ohne lange Einarbeitungszeit 3D-Modelle in akzeptabler Auflösung und Qualität zu erzeugen.
 \vspace{2cm}\\
-\foreignlanguage{en-GB}{
+\foreignlanguage{british}{
     \noindent\textbf{\large Abstract}\\
     Photogrammetry enables the creation of 3D models using relatively simple technology. However, the time required to capture the images is often high, meaning that this method is not suitable for capturing numerous objects, for example when digitizing museum collections. Systems based on several permanently installed cameras generally use high-quality cameras. However, this results in a significant increase in hardware costs.
 
