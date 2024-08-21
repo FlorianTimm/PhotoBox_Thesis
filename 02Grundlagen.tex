@@ -5,7 +5,7 @@
 
 \chapter{Photogrammetrische Grundlagen}
 \label{c:photogrammetrie}
-Dieses Kapitel beschreibt die notwendigen Bedingungen und die Grundlagen der Rekonstruktion des Objektes als 3D-Modell. Hierfür wird Photogrammetrie in Form einer SfM-Pipeline genutzt. Der allgemeine Ablauf ist in \autoref{img:ablauf} dargestellt. Grau dargestellte Schritte werden nicht von der entwickelten Software aus \autoref{c:software} sondern von externer Software durchgeführt.
+Dieses Kapitel beschreibt die notwendigen Bedingungen und die Grundlagen der Rekonstruktion des Objektes als 3D-Modell. Hierfür wird Photogrammetrie in Form einer SfM-Pipeline genutzt. Der allgemeine Ablauf ist in \autoref{img:ablauf} dargestellt. Grau dargestellte Schritte werden nicht von der entwickelten Software aus \autoref{c:software}, sondern von externer Software durchgeführt.
 
 Zunächst werden die Bilder aufgenommen (siehe \autoref{s:bilder}). Hierbei ist wichtig, dass sich die Bildinhalte überlappen. Die Bilder werden dann verknüpft, indem identische Punkte in den Bildern identifiziert werden  (siehe \autoref{s:verknuepfung}).
 Aus den identifizierten Punkten werden dann die Positionen und Ausrichtung der Kameras und Verknüpfungspunkte in einem lokalen Koordinatensystem ohne bekannten Maßstab berechnet. Die so erzeugten Daten werden anschließend in einer Bündelblockausgleichung gemeinsam optimiert (siehe \autoref{s:buendelblock}). Durch die Nutzung von bekannten Größen, beispielsweise kalibrierten Maßstäben, kann dieses System transformiert werden.
@@ -155,14 +155,14 @@ Der Schärfebereich ergibt sich aus der Größe des tolerierbaren Unschärfekrei
     K   & = \frac{k(a-f)u'}{f^2}
 \end{align}
 \begin{conditions}
-    t   & Länge des Schärfebereich \\
+    t   & Länge des Schärfebereichs \\
     a_v, a_h & Vordere bzw. hintere Grenze der Schärfentiefe\\
     a   & Fokussierte Dingweite\\
     k   & Blendenzahl\\
     f   & Brennweite
 \end{conditions}
 
-Die Schärfentiefe des Raspberry Pi Camera Module 3 ist in \autoref{img:sschaerfentiefe_plot} für einen Unschärfekreis von drei Pixeln dargestellt (Plot der \autoref{eq:schaerfebereich}). Es zeigt sich, dass die Schärfentiefe im  verwendeten Makrobereich relativ klein ist. Problematisch ist dies vorallem bei größeren Objekten, die hierdurch näher an die Kameras rücken, aber durch ihre Größe einen größere Schärfentiefe benötigen. Ein Lösungsansatz durch Kombination mehrere Aufnahmen wird in \autoref{sec:fokusstacking} untersucht.
+Die Schärfentiefe des Raspberry Pi Camera Module 3 ist in \autoref{img:sschaerfentiefe_plot} für einen Unschärfekreis von drei Pixeln dargestellt (Plot der \autoref{eq:schaerfebereich}). Es zeigt sich, dass die Schärfentiefe im  verwendeten Makrobereich relativ klein ist. Problematisch ist dies vor allem bei größeren Objekten, die hierdurch näher an die Kameras rücken, aber durch ihre Größe eine größere Schärfentiefe benötigen. Ein Lösungsansatz durch Kombination mehrere Aufnahmen wird in \autoref{sec:fokusstacking} untersucht.
 
 \begin{figure}
     \centering
@@ -250,7 +250,7 @@ Sofern Koordinaten von Passpunkten bekannt sind, können die Positionen und Ausr
 
 Durch die Nutzung des RANSAC-Ansatzes können veränderte Passpunkte identifiziert und als Ausreißer markiert werden. Hierzu werden mehrere Stichproben der Punkte gewählt, die Berechnung durchgeführt und die Lösung gewählt, zu denen die meisten Punkte passen. \citep[S. 134]{luhmann}
 
-\autoref{img:rueckwaertsschnitt} zeigt die geometrischen Grundlagen des Rückwärtsschnitts. Es müssen mindestens 3 Passpunkte ($P_1 - - P_3$) mit Koordinaten bekannt und im Bild sichtbar sein. Außerdem muss die innere Orientierung bei Verwendung von nur drei Passpunkten bekannt sein. Die Position der Punkte $P'_1 - - P'_3$ wird dann bestimmt und ergibt im Beispiel 6 Kooridinatenkomponenten (jeweils $x'$ und $y'$). Durch Berechnungen -- auf die hier nicht weiter eingegangen und auf entsprechende Literatur verwiesen wird -- kann dann die Position (drei Parameter) und Ausrichtung (drei Parameter) der Kamera bestimmt werden. \citep[S. 284]{luhmann}
+\autoref{img:rueckwaertsschnitt} zeigt die geometrischen Grundlagen des Rückwärtsschnitts. Es müssen mindestens 3 Passpunkte ($P_1 - - P_3$) mit Koordinaten bekannt und im Bild sichtbar sein. Außerdem muss die innere Orientierung bei Verwendung von nur drei Passpunkten bekannt sein. Die Position der Punkte $P'_1 - - P'_3$ wird dann bestimmt und ergibt im Beispiel 6 Koordinatenkomponenten (jeweils $x'$ und $y'$). Durch Berechnungen -- auf die hier nicht weiter eingegangen und auf entsprechende Literatur verwiesen wird -- kann dann die Position (drei Parameter) und Ausrichtung (drei Parameter) der Kamera bestimmt werden. \citep[S. 284]{luhmann}
 
 \subsection{Vorwärtsschnitt}
 Um wiederum aus einem Stereopaar mit bekannter innerer und äußerer Orientierung Punktkoordinaten zu berechnen, wird der Vorwärtsschnitt genutzt. \autoref{img:vorwaertsschnitt} zeigt die geometrischen Grundlagen des Vorwärtsschnitts. Es werden die Bildkoordinaten der Punkte $P_1$ und $P_2$ benötigt, die im Bild sichtbar sind. Die Position des Punktes $P$ wird dann berechnet. Wie bereits erwähnt (\autoref{s:abbildung}), kann jeder Punkt im Bild durch die innere Orientierung als Horizontal- und Vertikalrichtungsmessung interpretiert werden. Durch die äußere Orientierung kann diese dann ins übergeordnete System überführt werden. Hieraus ergibt sich dann zur Berechnung der Position $P$ ein räumlicher Schnitt zweier (windschiefer) Geraden \citep[S. 95]{luhmann}.
@@ -259,11 +259,11 @@ Mit dem Vorwärts\-schnitt können neben markierten Verknüpfungspunkten auch di
 
 \subsection{Relative Orientierung}
 \label{ss:relative_orientierung}
-Wenn keine Passpunkte vorhanden sind und auch zum Beispiel durch AruCo-Marker keine lokalen Passpunkt-Koordinaten erzeugt werden können, kann die Bildorientierung auch in einem lokalen System erfolgen. Hierbei wird die relative Orientierung der Bilder zueinander bestimmt. Eines der Bilder wird als Ursprung des Systemes festgelegt (Projektionszentrum in $(0,0,0)$ und die optische Achse in $z$-Richtung). Die Position und Ausrichtung des zweiten Bildes wird dann relativ zu diesem bestimmt. \citep[S. 316]{luhmann}
+Wenn keine Passpunkte vorhanden sind und auch zum Beispiel durch ArUco-Marker keine lokalen Passpunkt-Koordinaten erzeugt werden können, kann die Bildorientierung auch in einem lokalen System erfolgen. Hierbei wird die relative Orientierung der Bilder zueinander bestimmt. Eines der Bilder wird als Ursprung des Systems festgelegt (Projektionszentrum in $(0,0,0)$ und die optische Achse in $z$-Richtung). Die Position und Ausrichtung des zweiten Bildes wird dann relativ zu diesem bestimmt. \citep[S. 316]{luhmann}
 
-Die klassische Variante der relativen Orientierung ist die Bestimmung der Essentiellen Matrix. Diese kann aus der inneren Orientierung und der Fundamentalmatrix berechnet werden, welche wiederum aus den Bildkoordinaten von mindestens 8 Verknüpfungspunkten berechnet werden kann. \citep[S. 328ff]{luhmann}
+Die klassische Variante der relativen Orientierung ist die Bestimmung der Essenziellen Matrix. Diese kann aus der inneren Orientierung und der Fundamentalmatrix berechnet werden, welche wiederum aus den Bildkoordinaten von mindestens 8 Verknüpfungspunkten berechnet werden kann. \citep[S. 328ff]{luhmann}
 
-Mittels Einzelwertzerlegung kann dann aus der Essentiellen Matrix die Rotation und Translation des zweiten Bildes bestimmt werden. \citep[S. 275]{hartley}
+Mittels Einzelwertzerlegung kann dann aus der Essenziellen Matrix die Rotation und Translation des zweiten Bildes bestimmt werden. \citep[S. 275]{hartley}
 
 Alternativ kann mit der Homographie die relative Orientierung über eine Ebene, die in beiden Bildern abgebildet wird, bestimmt werden. Dieser Fall tritt beispielsweise bei der Verwendung von flächenhaften Kalibriermustern auf. Die Homographie beschreibt die Abbildung einer Ebene auf eine andere Ebene. Sie wird durch eine 3x3-Matrix beschrieben, die die Transformation der Punkte beschreibt. Für die Bestimmung werden nur 4 Verknüpfungspunkte benötigt, die in beiden Bildern sichtbar sind und auf einer Ebene liegen. Die innere Orientierung der Kamera wird hierbei nicht benötigt. \citep[S. 33ff]{hartley}.
 
@@ -279,12 +279,13 @@ Die Koordinaten der Passpunkt-Ausreißer aus der Berechnung der Kamerapositionen
 \label{s:buendelblock}
 Mittels Bündelblockausgleichung können die grob mit den vorher genannten Verfahren bestimmten Positionen und Drehungen in einer Ausgleichung optimiert werden. Hierzu gehen alle Parameter der Bilder und die Positionen der Passpunkte in die gemeinsame Ausgleichung ein. Grundlage der Ausgleichung ist die in \autoref{ss:abbildungsgleichung} beschriebene Abbildungsgleichung. Als Ergebnis erhält man die ausgeglichenen Parameter und Genauigkeitsangaben für diese. \citep[S. 343ff]{luhmann}
 
-Neben der Optimierung der Parameter hat die Bündelblockausgleichung auch den Vorteil, dass instabile Kameras, wie sie in diesen Projekt verwendet werden, simultan kalibriert werden können. Hierbei werden die inneren und äußeren Orientierungen der Kameras gemeinsam optimiert. Die in vorherigen Untersuchungen festgestellten, jedoch nicht genauen Parameter der Kamera werden hierbei als Näherungswerte genutzt und die endgültigen Parameter erst durch die Ausgleichung bestimmt. Es ist daher unkritisch, wenn sich die Parameter der Kamera im geringen Rahmen zwischen den Aufnahmen verändern. \citep[S. 357f]{luhmann}
+Neben der Optimierung der Parameter hat die Bündelblockausgleichung auch den Vorteil, dass instabile Kameras, wie sie in diesem Projekt verwendet werden, simultan kalibriert werden können. Hierbei werden die inneren und äußeren Orientierungen der Kameras gemeinsam optimiert. Die in vorherigen Untersuchungen festgestellten, jedoch nicht genauen Parameter der Kamera werden hierbei als Näherungswerte genutzt und die endgültigen Parameter erst durch die Ausgleichung bestimmt. Es ist daher unkritisch, wenn sich die Parameter der Kamera im geringen Rahmen zwischen den Aufnahmen verändern. \citep[S. 357f]{luhmann}
 
 
-\section{Multi-view Stereo}
-Die dünne Punktwolke aus dem Vorwärtsschnitt und der anschließenden Bündel\-block\-ausgleichung kann durch das Multi-view Stereo-Verfahren zu einem 3D-Modell erweitert werden. Hierbei werden jeweils Bildpaare gebildet und die Disparitäten, also die Verschiebung des Objektes in der Abbildung, bestimmt. Diese sind abhängig von der Entfernung des Objektes. Bei einem unendlich weit entfernten Objekt tritt keine Disparität auf \citep[S. 313]{luhmann}. Die Disparitäten können dann in Tiefeninformationen umgerechnet, gemittelt und zu einem Tiefenbild zusammengefasst werden. \citep[S. 505]{luhmann}
+\section{Multi-View-Stereo}
+Die dünne Punktwolke aus dem Vorwärtsschnitt und der anschließenden Bündel\-block\-ausgleichung kann durch das Multi-View-Stereo-Verfahren zu einem 3D-Modell erweitert werden. Hierbei werden jeweils Bildpaare gebildet und die Disparitäten, also die Verschiebung des Objektes in der Abbildung, bestimmt. Diese sind abhängig von der Entfernung des Objektes. Bei einem unendlich weit entfernten Objekt tritt keine Disparität auf \citep[S. 313]{luhmann}. Die Disparitäten können dann in Tiefeninformationen umgerechnet, gemittelt und zu einem Tiefenbild zusammengefasst werden. \citep[S. 505]{luhmann}
 %\citep[S. 51]{opendronemap}
+\todo{Details zu Multi-View-Stereo}
 
 \section{Mesh-Generierung}
 Bis zu diesem Schritt besteht das Modell nur aus einzelnen Punkten, die keine Oberfläche ergeben. Um ein geschlossenes 3D-Modell zu erhalten, muss eine Oberfläche generiert werden. Hierfür wird ein Mesh-Generierungsverfahren genutzt, welches die Punktwolke in Dreiecke unterteilt. Es gibt verschiedene Verfahren, die sich in der Art der Unterteilung und ihrem Umgang mit Einzelpunkten unterscheiden. Meistens wird hierbei die Punktwolke auch gefiltert, um Ausreißer und nicht notwendige Punkte zu entfernen. OpenDroneMap nutzt beispielsweise die Screened Poisson Surface Reconstruction zur Vermaschung und Filterung. \citep[S. 52f]{opendronemap}

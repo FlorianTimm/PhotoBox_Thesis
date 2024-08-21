@@ -6,7 +6,7 @@
 \label{c:versuche}
 Nach Abschluss der Konstruktion und des Aufbaus des Prototyps, wurden verschiedene Untersuchungen durchgeführt, um die Genauigkeit des Systems zu überprüfen und die Anzahl der Kameras zu evaluieren. Hierzu wurden unter anderem Vergleichsmessungen mit verschiedenen Systemen durchgeführt.
 
-Zum Vergleich standen verschiedene Testobjekte zur Verfügung. Hauptsächlich wurde ein etwa 14~cm hohes Modell einer Moai-Statue der Osterinseln verwendet, da dieses Objekt eine gute Textur und viele Details aufweist. Neben einem texturierten Spielzeugdino standen noch zwei weiße Gipsmodelle zur Verfügung: Ein Abdruck einer Büste Einsteins und ein kerzenartiges Testobjekt, im folgenden Testy genannt. Alle Objekte wurden bereits in anderen Projekten an der HCU verwendet (z.B. \citet{kersten_scanner}) und bereits mit mehreren verschiedenen Systemen vermessen worden. Die Ergebnisse dieser Messungen wurden als Referenzwerte verwendet.
+Zum Vergleich standen verschiedene Testobjekte zur Verfügung. Hauptsächlich wurde ein etwa 14~cm hohes Modell einer Moai-Statue der Osterinseln verwendet, da dieses Objekt eine gute Textur und viele Details aufweist. Neben einem texturierten Spielzeugdino standen noch zwei weiße Gipsmodelle zur Verfügung: Ein Abdruck einer Büste Einsteins und ein kerzenartiges Testobjekt, im folgenden Testy genannt. Alle Objekte wurden bereits in anderen Projekten an der HafenCity Universität verwendet (z.B. \citet{kersten_scanner}) und bereits mit mehreren verschiedenen Systemen vermessen worden. Die Ergebnisse dieser Messungen wurden als Referenzwerte verwendet.
 
 \section{Genauigkeitsüberprüfung des 3D-Modelles}
 \label{s:genauigkeitsueberpruefung}
@@ -41,7 +41,7 @@ Eigene, manuelle Messungen ergaben eine Genauigkeit von etwa 1,5~px. Vereinfacht
     dX  & Lage-Genauigkeit (Objektraum)
 \end{conditions}
 
-An diesem Wert muss dann noch der sogenannte Design-Faktor $q$ angebracht werden. \cite[S. 174]{luhmann} beschreibt diesen als Beschreibung der Aufnahmegeometrie und den auftretenenden Schnitten. Dieser liege bei Rundumverbänden zwischen 0,4 und 0,8 und bei Stereoaufnahmen bei 1,5-3,0. Vereinfacht für eine grobe Abschätzung wird hier daher der Faktor weggelassen. Die erwartete Genauigkeit liegt damit deutlich unter einem Millimeter in der Lage.
+An diesem Wert muss dann noch der sogenannte Design-Faktor $q$ angebracht werden. \cite[S. 174]{luhmann} beschreibt diesen als Beschreibung der Aufnahmegeometrie und den auftretenden Schnitten. Dieser liege bei Rundumverbänden zwischen 0,4 und 0,8 und bei Stereoaufnahmen bei 1,5-3,0. Vereinfacht für eine grobe Abschätzung wird hier daher der Faktor weggelassen. Die erwartete Genauigkeit liegt damit deutlich unter einem Millimeter in der Lage.
 
 \begin{align}
     s_{px; min}' & = dX_{min} \\
@@ -123,7 +123,7 @@ Statt die reelle Zahl der Kameras zu erhöhen, kann auch ein Drehteller genutzt 
 \todo{<> Evaluation Kameraanzahl}
 
 \subsection{Durchführung}
-Hierzu wurde ein einfacher manueller Drehteller genutzt (IKEA SNUDDA). Dieser wurde mit Passpunkten beklebt und weißt ansonsten eine texturreiche Naturholzoberfläche auf (siehe \autoref{img:drehteller_moai}). Die Daten wurden in Metashape weiterverarbeitet und die einzelnen Aufnahmeschritte über die Passpunkte und die Punktwolke zusammengerechnet. Die Ergebnisse wurden mit denen des Streifenprojektionssystems und den Aufnahmen ohne Drehteller verglichen.
+Hierzu wurde ein einfacher manueller Drehteller genutzt (IKEA SNUDDA). Dieser wurde mit Passpunkten beklebt und weist ansonsten eine texturreiche Naturholzoberfläche auf (siehe \autoref{img:drehteller_moai}). Die Daten wurden in Metashape weiterverarbeitet und die einzelnen Aufnahmeschritte über die Passpunkte und die Punktwolke zusammengerechnet. Die Ergebnisse wurden mit denen des Streifenprojektionssystems und den Aufnahmen ohne Drehteller verglichen.
 
 \begin{figure}
     \centering
@@ -180,9 +180,9 @@ Zur Bestimmung des Maßstabes wurden die Daten automatisiert bestmöglich an die
 \subsection{Ergebnisse}
 Wie zu erwarten nahm die Abdeckung und die Qualität der Punktwolke ab, je weniger Kameras verwendet wurden. Bei einer Aufnahme mit allen 24 Kameras wurde die Oberfläche (ohne Boden) zu 93~\% abgedeckt (\autoref{img:moai_normal}). Bei einer Aufnahme mit 18 Kameras (\autoref{img:moai_2von3}) waren es nur noch 68~\% und bei 12 Kameras (\autoref{img:moai_jede2K}) noch 54~\%.  Schon bei 18 Kameras war der Moai kaum mehr zu erkennen, bei 12 war die Erkennbarkeit nicht mehr gegeben. Die Anzahl der Kameras scheint also für dieses Objekt angebracht zu sein, sofern kein Drehteller genutzt wird.
 
-Unter Nutzung des Drehtellers mit einer Drehung um eine Achtel Drehung konnten sogar mit nur der Hälfte der Kameras (\autoref{img:moai_jede2K_mitDrehung}) ein ähnliches bzw. sogar minimal besseres Ergebnis erzielt werden, als bei der einfachen Aufnahme mit 24 Kameras. Bei der Verwendung von nur 6 Kameras in einer Ebene, so wie es bei der Planung des Rahmens auch einmal angedacht war, brachte auch die Verwendung des Drehtellers mit 4 Positionen kein brauchbares Ergebnis im direkten Anlauf (\autoref{img:moai_eineEbene}). Erst durch manuelles mehrfaches Verarbeiten der Daten und die Nutzung weiterer Passpunkte konnte die Genauigkeit und Abdeckung auf ein ähnliches Niveau wie bei 12 Kameras und zwei Aufnahmen gebracht werden (\autoref{img:moai_eineEbene_mitMarkern}) - dafür aber mit einem deutlich höheren personellen und technischen Aufwand.
+Unter Nutzung des Drehtellers mit einer Drehung um eine Achtel-Drehung konnten sogar mit nur der Hälfte der Kameras (\autoref{img:moai_jede2K_mitDrehung}) ein ähnliches bzw. sogar minimal besseres Ergebnis erzielt werden, als bei der einfachen Aufnahme mit 24 Kameras. Bei der Verwendung von nur 6 Kameras in einer Ebene, so wie es bei der Planung des Rahmens auch einmal angedacht war, brachte auch die Verwendung des Drehtellers mit 4 Positionen kein brauchbares Ergebnis im direkten Anlauf (\autoref{img:moai_eineEbene}). Erst durch manuelles mehrfaches Verarbeiten der Daten und die Nutzung weiterer Passpunkte konnte die Genauigkeit und Abdeckung auf ein ähnliches Niveau wie bei 12 Kameras und zwei Aufnahmen gebracht werden (\autoref{img:moai_eineEbene_mitMarkern}) - dafür aber mit einem deutlich höheren personellen und technischen Aufwand.
 
-Im Vergleich des Parameters der Richtigkeit zeigt sich ein ähnliches Bild: Auch hier schneiden die Aufnahmen mit wenig Bildern und ohne Drehteller deutlich schlechter ab. Der Parameter zeigt, dass zwar die Punktwolken immer ähnlich viele Punkte haben, jedoch der Großteil davon außerhalb der 1-mm-Genauigkeit liegt. Die Aufnahmen mit Drehteller schneiden hier deutlich besser ab, als die ohne, erreichen aber nicht die Qualität der Aufnahmen mit 24 Kameras, vorallem nicht der Aufnahmen mit 24 Kameras und Nutzung des Drehtellers.
+Im Vergleich des Parameters der Richtigkeit zeigt sich ein ähnliches Bild: Auch hier schneiden die Aufnahmen mit wenig Bildern und ohne Drehteller deutlich schlechter ab. Der Parameter zeigt, dass zwar die Punktwolken immer ähnlich viele Punkte haben, jedoch der Großteil davon außerhalb der 1-mm-Genauigkeit liegt. Die Aufnahmen mit Drehteller schneiden hier deutlich besser ab, als die ohne, erreichen aber nicht die Qualität der Aufnahmen mit 24 Kameras, vor allem nicht der Aufnahmen mit 24 Kameras und Nutzung des Drehtellers.
 
 Die Ergebnisse sind in \autoref{tab:vergleich_anzahl_drehteller} zusammengefasst. Zum Vergleich sind auch die Ergebnisse der Nutzung des Drehtellers mit 24 Kameras aufgeführt - einmal mit feinen Drehungen von $\frac{1}{32}$ (\autoref{img:moai_feinschritt}) und einmal mit groben Drehungen von $\frac{1}{8}$ (\autoref{img:moai_grobschritt}).
 
