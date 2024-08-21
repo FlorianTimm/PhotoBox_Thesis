@@ -214,6 +214,7 @@ Nachteilig zeigte sich in den Untersuchungen, dass die Ecken nicht eindeutig ide
 \end{figure}
 
 \subsection{Merkmalsextraktion}
+\label{ss:sift}
 Ohne das Anbringen von Markern können auch Merkmale in den Bildern erkannt werden. Hierfür gibt es verschiedene Methoden, eine dieser ist die SIFT-Methode, welche hier beispielhaft kurz dargestellt wird. Sie liefert Verknüpfungspunkte aus Mustern auf den photographierten Oberflächen. Es ist meist nicht notwendig explizit Marker an dem aufzunehmenden Objekt anzubringen, sofern seine Oberfläche nicht strukturlos ist (glatte weiße Wände etc.) oder in Bewegung ist.
 
 Zur Erkennung von Merkmalen setzt das Verfahren auf die Detektion von Kanten. Diese werden in verschiedenen Stufen einer Bildpyramide erkannt und ihre Extrema berechnet. Sie werden anschließend weiter ausgedünnt, beispielsweise über den Kontrast. Sofern ein möglicher Marker identifiziert wurde, wird eine Beschreibung erzeugt. Diese erfolgt  durch Analyse der Helligkeitsabweichungen zu den Nachbar-Pixeln und wird an der stärksten Abweichung ausgerichtet. Hierdurch wird die Beschreibung dann richtungsunabhängig. Mit diesen kann dann die Übereinstimmung von zwei Markern in zwei Bildern bestimmt werden, auch wenn diese zueinander gekippt oder gedreht sind.
@@ -221,7 +222,7 @@ Zur Erkennung von Merkmalen setzt das Verfahren auf die Detektion von Kanten. Di
 
 \section{Verknüpfung von Bildern}
 \label{s:photogramm}
-Durch die beschriebenen Verfahren und die hieraus entstandenen Verknüpfungs\-punkte können die Bilder miteinander verknüpft werden. Da die Kamerapositionen am Rahmen veränderlich sind und die Montage auch keine ausreichend genaue Fixierung garantiert, können die bekannten Positionen aus vorherigen Messungen maximal als Näherungswerte genutzt werden. Die genaue Bestimmung der Position und Ausrichtung - die äußere Orientierung - muss daher mindestens für die verschobenen oder gedrehten Kameras neu berechnet werden. Gleiches gilt für neue Verknüpfungspunkte, für die noch keine Koordinate bekannt ist. Die beiden Verfahren, die so zur Verknüpfung der Bilder beitragen, werden im Folgenden vorgestellt.
+Durch die beschriebenen Verfahren und die hieraus entstandenen Verknüpfungs\-punkte können die Bilder miteinander verknüpft werden. Da die Kamerapositionen am Rahmen veränderlich sind und die Montage auch keine ausreichend genaue Fixierung garantiert, können die bekannten Positionen aus vorherigen Messungen maximal als Näherungswerte genutzt werden. Die genaue Bestimmung der Position und Ausrichtung - die äußere Orientierung - muss daher mindestens für die verschobenen oder gedrehten Kameras neu berechnet werden. Gleiches gilt für neue Verknüpfungspunkte, für die noch keine Koordinate bekannt ist. Die beiden Verfahren, die so zur Verknüpfung der Bilder beitragen, werden im Folgenden vorgestellt. Für einige Experimente wurde auch die relative Orientierung genutzt, die auch hier vorgestellt wird.
 
 
 \begin{figure}
@@ -256,6 +257,20 @@ Um wiederum aus einem Stereopaar mit bekannter innerer und äußerer Orientierun
 
 Mit dem Vorwärts\-schnitt können neben markierten Verknüpfungspunkten auch die Neupunkte, die mittels SIFT oder ähnlichen Bild\-erkennungs\-algorithmen erkannt wurden, berechnet werden. Dadurch kann eine dünne Punktwolke erzeugt werden, welche dann bei der Bündelblockausgleichung genutzt werden kann. Da die Berechnung bereits bei Bildkoordinaten aus zwei Bildern überbestimmt ist und oft Punkte in mehr Bildern abgebildet sind, bietet sich die Nutzung der Ausgleichung auch schon bei der Bestimmung an. \citep[S. 385]{luhmann}
 
+\subsection{Relative Orientierung}
+\label{ss:relative_orientierung}
+Wenn keine Passpunkte vorhanden sind und auch zum Beispiel durch AruCo-Marker keine lokalen Passpunkt-Koordinaten erzeugt werden können, kann die Bildorientierung auch in einem lokalen System erfolgen. Hierbei wird die relative Orientierung der Bilder zueinander bestimmt. Eines der Bilder wird als Ursprung des Systemes festgelegt (Projektionszentrum in $(0,0,0)$ und die optische Achse in $z$-Richtung). Die Position und Ausrichtung des zweiten Bildes wird dann relativ zu diesem bestimmt. \citep[S. 316]{luhmann}
+
+Die klassische Variante der relativen Orientierung ist die Bestimmung der Essentiellen Matrix. Diese kann aus der inneren Orientierung und der Fundamentalmatrix berechnet werden, welche wiederum aus den Bildkoordinaten von mindestens 8 Verknüpfungspunkten berechnet werden kann. \citep[S. 328ff]{luhmann}
+
+Mittels Einzelwertzerlegung kann dann aus der Essentiellen Matrix die Rotation und Translation des zweiten Bildes bestimmt werden. \citep[S. 275]{hartley}
+
+Alternativ kann mit der Homographie die relative Orientierung über eine Ebene, die in beiden Bildern abgebildet wird, bestimmt werden. Dieser Fall tritt beispielsweise bei der Verwendung von flächenhaften Kalibriermustern auf. Die Homographie beschreibt die Abbildung einer Ebene auf eine andere Ebene. Sie wird durch eine 3x3-Matrix beschrieben, die die Transformation der Punkte beschreibt. Für die Bestimmung werden nur 4 Verknüpfungspunkte benötigt, die in beiden Bildern sichtbar sind und auf einer Ebene liegen. Die innere Orientierung der Kamera wird hierbei nicht benötigt. \citep[S. 33ff]{hartley}.
+
+Aus der Homographie kann zusammen mit der inneren Orientierung die Rotation und Translation des zweiten Bildes bestimmt werden.
+\citep[S. 74]{homography_decomposition}
+
+
 \begin{comment}
 Die Koordinaten der Passpunkt-Ausreißer aus der Berechnung der Kamerapositionen werden anschließend neu berechnet. Hierfür wird der Vorwärtsschnitt genutzt. Auch hier wird OpenCV zur Berechnung genutzt. Die Berechnung der Passpunkte erfolgt für jedes Bildpaar einzeln. Für alle Koordinaten wird dann pro Passpunkt der Z-Score berechnet. Passpunkte, die einen Z-Score von über 2 haben, werden als Ausreißer markiert und nicht weiter betrachtet.
 \end{comment}
@@ -272,16 +287,52 @@ Die dünne Punktwolke aus dem Vorwärtsschnitt und der anschließenden Bündel\-
 %\citep[S. 51]{opendronemap}
 
 \section{Mesh-Generierung}
-Bis zu diesem Schritt besteht das Modell nur aus einzelnen Punkten, die keine Oberfläche ergeben. Um ein geschlossenes 3D-Modell zu erhalten, muss eine Oberfläche generiert werden. Hierfür wird ein Mesh-Generierungsverfahren genutzt, welches die Punktwolke in Dreiecke unterteilt. Es gibt verschiedene Verfahren, die sich in der Art der Unterteilung und ihrem Umgang mit Einzelpunkten unterscheiden. OpenDroneMap nutzt beispielsweise die Screened Poisson Surface Reconstruction. \citep[S. 52f]{opendronemap}
+Bis zu diesem Schritt besteht das Modell nur aus einzelnen Punkten, die keine Oberfläche ergeben. Um ein geschlossenes 3D-Modell zu erhalten, muss eine Oberfläche generiert werden. Hierfür wird ein Mesh-Generierungsverfahren genutzt, welches die Punktwolke in Dreiecke unterteilt. Es gibt verschiedene Verfahren, die sich in der Art der Unterteilung und ihrem Umgang mit Einzelpunkten unterscheiden. Meistens wird hierbei die Punktwolke auch gefiltert, um Ausreißer und nicht notwendige Punkte zu entfernen. OpenDroneMap nutzt beispielsweise die Screened Poisson Surface Reconstruction zur Vermaschung und Filterung. \citep[S. 52f]{opendronemap}
 
-Die Screened Poisson Surface Reconstruction ist ein Verfahren, das auf der Poisson-Gleichung basiert. Diese Gleichung beschreibt die Beziehung zwischen einer Funktion und ihrer Ableitung und wird in der Mathematik und Physik verwendet\todo{Satz ergänzen/prüfen}. Bei der Screened Poisson Surface Reconstruction wird die Poisson-Gleichung verwendet, um die Oberfläche zu glätten und zu interpolieren. Dabei werden die Punkte in eine Gitterstruktur überführt und die Oberfläche durch die Lösung der Poisson-Gleichung bestimmt. Dieser Ansatz berücksichtigt auch die Ausrichtung der Punkte, um eine genauere Rekonstruktion zu erzielen. \citep{spsr}Details zur Poisson-Gleichung?
-\todo{Beispielbilder}
+\autoref{img:meshing} zeigt beispielhaft eine Ecke aus einer Punktwolke vor und nach der Vermaschung. Gut zu erkennen ist, dass die Anzahl der Punkte reduziert wurde und die Oberfläche durch Dreiecke angenähert wurde, jedoch sich die äußeren Konturen nicht verändert haben.
+
+Die Screened Poisson Surface Reconstruction ist ein Verfahren, das auf der Poisson-Gleichung basiert. Diese Gleichung beschreibt die Beziehung zwischen einer Funktion. Bei der Screened Poisson Surface Reconstruction wird diese verwendet, um die Oberfläche zu glätten und zu interpolieren. Dabei werden die Punkte in eine Gitterstruktur überführt und die Oberfläche durch die Lösung der Poisson-Gleichung bestimmt. Dieser Ansatz berücksichtigt auch die Ausrichtung der Punkte, um eine genauere Rekonstruktion der Oberfläche zu erzielen. \citep{spsr}
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=0.95\linewidth]{img/points.jpg}
+        \centering
+        \caption{Ungefilterte Punktewolke} %Bildunterschrift
+        \label{img:points} %ID fürs Bild
+    \end{subfigure}
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=0.95\linewidth]{img/mesh.jpg}
+        \centering
+        \caption{3D-Mesh mit gefilterten Punkten} %Bildunterschrift
+        \label{img:mesh} %ID fürs Bild
+    \end{subfigure}
+    \caption{Vermaschung der Punktwolke} %Bildunterschrift
+    \label{img:meshing} %ID fürs Bild
+\end{figure}
 
 \section{Texturierung}
 Abschließend wird das Modell texturiert. Hierfür werden die Bilder, die zur Erstellung des Modells genutzt wurden, auf das Modell projiziert. Außerdem werden Helligkeits- und Farbunterschiede der Bilder ausgeglichen. \citep[S. 54f]{opendronemap}
 
-Vorteil der Texturierung ist, dass das Modell meist realistischer wirkt und fehlenden Informationen, beispielsweise fehlende Punkte, überdeckt werden können. Nachteilig ist, dass die Texturierung hierdurch auch Informationen verdeckt. So kann bei einem nur schattierten Modell die Struktur des 3D-Modelles deutlich besser erkannt werden \citep[S. 702]{luhmann}.
-\todo{Beispielbilder}
+Vorteil der Texturierung ist, dass das Modell meist realistischer wirkt und fehlenden Informationen, beispielsweise fehlende Punkte, überdeckt werden können. Nachteilig ist, dass die Texturierung hierdurch auch Informationen verdeckt. So kann bei einem nur schattierten Modell die Struktur des 3D-Modelles deutlich besser erkannt werden \citep[S. 702]{luhmann}. Beispielhaft ist dieses in \autoref{img:texturierung} an dem später auch für die Überprüfungen (\autoref{c:versuche}) verwendeten Testkörper dargestellt. Dieser hat beispielsweise auf der Rückseite (rechts im Bild) einige Einkerbungen. Diese sind im texturierten Modell nicht mehr sichtbar, im schattierten, jedoch nicht texturierten Modell sind sie deutlich erkennbar.
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.49\textwidth}
+        \includegraphics[width=1\linewidth]{img/solid.jpg}
+        \centering
+        \caption{3D-Modell ohne Textur} %Bildunterschrift
+        \label{img:ohne_textur} %ID fürs Bild
+    \end{subfigure}
+    \begin{subfigure}{0.49\textwidth}
+        \includegraphics[width=1\linewidth]{img/textur.jpg}
+        \centering
+        \caption{3D-Modell mit Textur} %Bildunterschrift
+        \label{img:mit_textur} %ID fürs Bild
+    \end{subfigure}
+    \caption{3D-Modell ohne und mit Textur} %Bildunterschrift
+    \label{img:texturierung} %ID fürs Bild
+\end{figure}
 
 \biblio
 \end{document}
