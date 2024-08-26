@@ -78,6 +78,7 @@
 \def\biblio{
     \ifSubfilesClassLoaded{%
         \nocite{timm}
+        \printglossaries
         \bibliography{./00PhotoBox}
         \listoffigures
         \listoftables
@@ -92,9 +93,9 @@
 
 \usepackage[acronym, toc]{glossaries}
 
-%\makeglossaries
+\makeglossaries
 
-%\loadglsentries{99Glossar.tex}
+\loadglsentries{99Glossar.tex}
 \usepackage{{booktabs}}
 
 
@@ -196,7 +197,7 @@ Im Rahmen dieser Arbeit erfolgt eine Untersuchung des Lösungsansatzes, mehrere 
 
 \clearpage
 
-%\printglossaries
+\printglossaries
 
 \clearpage
 %Literatur

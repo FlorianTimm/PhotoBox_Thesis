@@ -5,7 +5,7 @@
 
 \chapter{Photogrammetrische Grundlagen}
 \label{c:photogrammetrie}
-Dieses Kapitel beschreibt die notwendigen Bedingungen und die Grundlagen der Rekonstruktion des Objektes als 3D-Modell. Hierfür wird Photogrammetrie in Form einer SfM-Pipeline genutzt. Der allgemeine Ablauf ist in \autoref{img:ablauf} dargestellt. Grau dargestellte Schritte werden nicht von der entwickelten Software aus \autoref{c:software}, sondern von externer Software durchgeführt.
+Dieses Kapitel beschreibt die notwendigen Bedingungen und die Grundlagen der Rekonstruktion des Objektes als 3D-Modell. Hierfür wird Photogrammetrie in Form einer \Gls{SfM}-Pipeline genutzt. Der allgemeine Ablauf ist in \autoref{img:ablauf} dargestellt. Grau dargestellte Schritte werden nicht von der entwickelten Software aus \autoref{c:software}, sondern von externer Software durchgeführt.
 
 Zunächst werden die Bilder aufgenommen (siehe \autoref{s:bilder}). Hierbei ist wichtig, dass sich die Bildinhalte überlappen. Die Bilder werden dann verknüpft, indem identische Punkte in den Bildern identifiziert werden  (siehe \autoref{s:verknuepfung}).
 Aus den identifizierten Punkten werden dann die Positionen und Ausrichtung der Kameras und Verknüpfungspunkte in einem lokalen Koordinatensystem ohne bekannten Maßstab berechnet. Die so erzeugten Daten werden anschließend in einer Bündelblockausgleichung gemeinsam optimiert (siehe \autoref{s:buendelblock}). Durch die Nutzung von bekannten Größen, beispielsweise kalibrierten Maßstäben, kann dieses System transformiert werden.
@@ -13,24 +13,24 @@ Aus den identifizierten Punkten werden dann die Positionen und Ausrichtung der K
 \begin{figure}
     \centering
     \includegraphics[width=0.8\textwidth]{./img/uml/uml_ablauf.pdf}
-    \caption{Ablauf der Bildverknüpfung mittels Structure-from-Motion (SfM), nach \citealt[S. 492]{luhmann}} %Bildunterschrift
+    \caption{Ablauf der Bildverknüpfung mittels \acrfull{SfM}, nach \citealt[S. 492]{luhmann}} %Bildunterschrift
     \label{img:ablauf} %ID fürs Bild
 \end{figure}
 
 
 \section{Abbildung}
 \label{s:abbildung}
-Grundlage der Photogrammetrie ist die Abbildungsgleichung. Diese beschreibt die Abbildung eines Punktes im Raum auf dem Sensor beziehungsweise dem Film. Umgekehrt kann mit ihrer Hilfe aus der Position eines Punktes in einem Bild, ähnlich einer Messung mit einem Theodolit, die Richtung des Punktes in Relation zu der Kamera bestimmt werden. Die Abbildungsgleichung ist abhängig von der inneren und äußeren Orientierung der Kamera. Die innere Orientierung beschreibt die Abbildungseigenschaften der Kamera, die äußere Orientierung die Position und Ausrichtung der Kamera. Im Folgenden wird zuerst auf die innere und äußere Orientierung eingegangen, bevor die Abbildungsgleichung vorgestellt wird.
+Grundlage der Photogrammetrie ist die Abbildungsgleichung. Diese beschreibt die Abbildung eines Punktes im Raum auf dem Sensor beziehungsweise dem Film. Umgekehrt kann mit ihrer Hilfe aus der Position eines Punktes in einem Bild, ähnlich einer Messung mit einem Theodolit, die Richtung des Punktes in Relation zu der Kamera bestimmt werden. Die Abbildungsgleichung ist abhängig von der inneren und äußeren Orientierung der Kamera. Die \gls{innereOrientierung} beschreibt die Abbildungseigenschaften der Kamera, die \gls{aeussereOrientierung} die Position und Ausrichtung der Kamera. Im Folgenden wird zuerst auf die innere und \gls{aeussereOrientierung} eingegangen, bevor die Abbildungsgleichung vorgestellt wird.
 
 \subsection{Innere Orientierung}
 \label{s:innereorientierung}
-Die innere Orientierung beschreibt die Abbildungseigenschaften der Kamera auf mathematische Weise. Wichtigste Parameter sind hierbei die Lage des Bildhauptpunktes und die Kamerakonstante. Außerdem zählen hierzu auch die Parameter, die die Verzeichnung beschreiben. \citep[S. 179f]{luhmann}
+Die \gls{innereOrientierung} beschreibt die Abbildungseigenschaften der Kamera auf mathematische Weise. Wichtigste Parameter sind hierbei die Lage des \Gls{Bildhauptpunkt}es und die Kamerakonstante. Außerdem zählen hierzu auch die Parameter, die die \Gls{Verzeichnung} beschreiben. \citep[S. 179f]{luhmann}
 
-Normalerweise wird die Kamera hierbei vereinfacht als Lochkamera unter Verwendung der Zentralperspektive betrachtet (siehe \autoref{img:optische_achse}). Als Projektionszentrum wird hierbei der Punkt beschrieben, durch den alle Bildstrahlen geradlinig laufen. Sein Lot auf dem Sensor wird als Bildhauptpunkt $H$ bezeichnet und beispielsweise durch seine Lage in Pixeln oder Mikrometern beschrieben. Durch eine schiefe optische Achse kann dieser vom Mittelpunkt des Sensors abweichen. Die Kamerakonstante $c$ beschreibt idealisiert den Abstand des Projektionszentrums zum Sensor. \citep[S. 177]{luhmann}
+Normalerweise wird die Kamera hierbei vereinfacht als Lochkamera unter Verwendung der Zentralperspektive betrachtet (siehe \autoref{img:optische_achse}). Als Projektionszentrum wird hierbei der Punkt beschrieben, durch den alle Bildstrahlen geradlinig laufen. Sein Lot auf dem Sensor wird als \Gls{Bildhauptpunkt} $H$ bezeichnet und beispielsweise durch seine Lage in Pixeln oder Mikrometern beschrieben. Durch eine schiefe optische Achse kann dieser vom Mittelpunkt des Sensors abweichen. Die \Gls{Kamerakonstante} $c$ beschreibt idealisiert den Abstand des Projektionszentrums zum Sensor. \citep[S. 177]{luhmann}
 
-Als Verzeichnung wird die Abweichung der Abbildung von der idealen Lochkamera bezeichnet. Diese kann durch die Nutzung von Linsen oder durch die Bauweise der Kamera entstehen. Die Verzeichnung wird in radialer und tangentialer Verzeichnung unterschieden. Die radiale Verzeichnung beschreibt die Verzerrung der Bildpunkte in radialer Richtung, die tangentialen Verzeichnungen die Verzerrung in tangentialer Richtung. Am wichtigsten ist hierbei die radialsymmetrische Verzeichnung, da diese die größte Auswirkung hat. \citep[S. 178]{luhmann}
+Als \Gls{Verzeichnung} wird die Abweichung der Abbildung von der idealen Lochkamera bezeichnet. Diese kann durch die Nutzung von Linsen oder durch die Bauweise der Kamera entstehen. Die \Gls{Verzeichnung} wird in radialer und tangentialer \Gls{Verzeichnung} unterschieden. Die radiale \Gls{Verzeichnung} beschreibt die Verschiebung der Bildpunkte in radialer Richtung, die tangentialen \Gls{Verzeichnung}en die Verschiebung in tangentialer Richtung. Am wichtigsten ist hierbei die radialsymmetrische \Gls{Verzeichnung}, da diese die größte Auswirkung hat. \citep[S. 178]{luhmann}
 
-Jede Einstellung der Kameraoptik verändert die innere Orientierung und auch jede Kamera, selbst in derselben Modellreihe, muss je nach Genauigkeitsanspruch als unterschiedlich angesehen werden. Änderungen können sich beispielsweise durch Umfokussierung oder die Nutzung eines optischen Zoom ergeben, aber auch durch einen mechanisch instabilen Aufbau der Kameras. Daher sollten die Bilder normalerweise möglichst mit nur einer Kamera mit festen Einstellungen (Brennweite, Fokus, Blende, Objektiv) aufgenommen werden. Änderungen der Empfindlichkeit (ISO-Zahl) oder Belichtungszeit sind unproblematisch für die innere Orientierung, da hierbei die Abbildungseigenschaften der Kamera nicht verändert werden. \citep[S. 176]{luhmann}
+Jede Einstellung der Kameraoptik verändert die \gls{innereOrientierung} und auch jede Kamera, selbst in derselben Modellreihe, muss je nach Genauigkeitsanspruch als unterschiedlich angesehen werden. Änderungen können sich beispielsweise durch Umfokussierung oder die Nutzung eines optischen Zoom ergeben, aber auch durch einen mechanisch instabilen Aufbau der Kameras. Daher sollten die Bilder normalerweise möglichst mit nur einer Kamera mit festen Einstellungen (Brennweite, Fokus, Blende, Objektiv) aufgenommen werden. Änderungen der Empfindlichkeit (ISO-Zahl) oder Belichtungszeit sind unproblematisch für die \gls{innereOrientierung}, da hierbei die Abbildungseigenschaften der Kamera nicht verändert werden. \citep[S. 176]{luhmann}
 
 Die Bestimmung der inneren Orientierung, auch Kalibrierung genannt, kann wäh\-rend der Messung beispielsweise als Parameter in der Bündel\-block\-ausgleichung erfolgen. Je nach Anzahl der Kameras und Stabilität der inneren Orientierung sind hier verschiedene Varianten möglich. Bei stabilen Kameras wird ein Parameter-Satz pro Kamera für eine ganze Messreihe ausgeglichen, bei instabilen Kameras kann die Kalibrierung jedes einzelnen Bildes notwendig werden. \citep[S. 181f]{luhmann}
 
@@ -44,16 +44,16 @@ Die Bestimmung der inneren Orientierung, auch Kalibrierung genannt, kann wäh\-r
 
 \subsection{Äußere Orientierung}
 \label{s:aeussereorientierung}
-Die äußere Orientierung beschreibt die Lage der Kamera im Raum und ihre Ausrichtung. Sie wird durch die Position des Projektionszentrums und die Richtung der optischen Achse beschrieben. Die Position wird durch die Koordinaten des Projektionszentrums in einem Koordinatensystem -- in der Nahbereichsphotogrammetrie oft einem lokalen -- beschrieben. Die Richtung der optischen Achse wird mit der Rotation der Kamera beschrieben, beispielsweise durch eine Rotationsmatrix, eulersche Winkel oder Quaternionen. Durch die Nutzung von Passpunkten oder bekannten Koordinaten der Kamera kann die äußere Orientierung bestimmt werden. \citep[S. 273ff]{luhmann}
+Die \gls{aeussereOrientierung} beschreibt die Lage der Kamera im Raum und ihre Ausrichtung. Sie wird durch die Position des Projektionszentrums und die Richtung der optischen Achse beschrieben. Die Position wird durch die Koordinaten des Projektionszentrums in einem Koordinatensystem -- in der Nahbereichsphotogrammetrie oft einem lokalen -- beschrieben. Die Richtung der optischen Achse wird mit der Rotation der Kamera beschrieben, beispielsweise durch eine Rotationsmatrix, eulersche Winkel oder Quaternionen. Durch die Nutzung von Passpunkten oder bekannten Koordinaten der Kamera kann die \gls{aeussereOrientierung} bestimmt werden. \citep[S. 273ff]{luhmann}
 
 Die Darstellung der Rotation der Kamera als Quaternionen hat den Vorteil, dass diese dann mit nur vier Parametern in eine Bündelblockausgleichung eingeht. Bei der Nutzung der Rotationsmatrix hätte man hier neun bzw. acht unabhängige Parameter. Die Nutzung von eulerschen Winkeln hat den Nachteil, dass hier ein sogenannter Gimbal-Lock auftreten kann, bei dem zwei Achsen zusammenfallen und die Rotation nicht mehr eindeutig bestimmt werden kann. \citep[S. 63]{luhmann}
 
 \subsection{Abbildungsgleichung}
 \label{ss:abbildungsgleichung}
-Die Abbildung eines Punktes auf einem Bild wird durch die Abbildungsgleichung beschrieben. Hierfür gibt es verschiedene Schreibweisen. In der Matrizenrechnung besteht diese aus der Multiplikation der homogenen Punktkoordinaten $X$ mit der Projektionsmatrix $P$ (\autoref{eq:abbildungsgleichung}). $P$ ergibt sich aus der Kalibrier- oder Kameramatrix $K$, der Rotation $R$ und dem Projektionszentrum $X_0$ (\autoref{eq:pkr}). Die Kalibriermatrix wiederum besteht aus der Kamerakonstante und der Lage des Bildhauptpunktes (\autoref{eq:k}).
+Die Abbildung eines Punktes auf einem Bild wird durch die Abbildungsgleichung beschrieben. Hierfür gibt es verschiedene Schreibweisen. In der Matrizenrechnung besteht diese aus der Multiplikation der homogenen Punktkoordinaten $X$ mit der Projektionsmatrix $P$ (\autoref{eq:abbildungsgleichung}). $P$ ergibt sich aus der Kalibrier- oder Kameramatrix $K$, der Rotation $R$ und dem Projektionszentrum $X_0$ (\autoref{eq:pkr}). Die Kalibriermatrix wiederum besteht aus der \Gls{Kamerakonstante} und der Lage des \Gls{Bildhauptpunkt}es (\autoref{eq:k}).
 (nach \citealp[S. 244]{hartley} und \citealp[S. 290]{luhmann})
 
-Die äußere Orientierung ist durch die Matrix $[R|X_0]$ beschrieben (\autoref{eq:r}). Diese besteht aus der Rotationsmatrix $R$ und dem Projektionszentrum $X_0$. Die Rotationsmatrix beschreibt die Ausrichtung der Kamera im Raum, das Projektionszentrum beschreibt die Position der Kamera bzw. des Projektionszentrums im Raum.
+Die \gls{aeussereOrientierung} ist durch die Matrix $[R|X_0]$ beschrieben (\autoref{eq:r}). Diese besteht aus der Rotationsmatrix $R$ und dem Projektionszentrum $X_0$. Die Rotationsmatrix beschreibt die Ausrichtung der Kamera im Raum, das Projektionszentrum beschreibt die Position der Kamera bzw. des Projektionszentrums im Raum.
 
 \begin{align}
     \label{eq:abbildungsgleichung}
@@ -82,8 +82,8 @@ Die äußere Orientierung ist durch die Matrix $[R|X_0]$ beschrieben (\autoref{e
     K  & Kalibrier- oder Kameramatrix \\
     R  & Rotationsmatrix \\
     X_0 & Projektionszentrum \\
-    c_x, c_y & Kamerakonstante in x- und y-Richtung \\
-    x'_0, y'_0 & Lage des Bildhauptpunktes in x- und y-Richtung \\
+    c_x, c_y & \Gls{Kamerakonstante} in x- und y-Richtung \\
+    x'_0, y'_0 & Lage des \Gls{Bildhauptpunkt}es in x- und y-Richtung \\
     r_{...} & Parameter der Rotationsmatrix \\
 \end{conditions}
 
@@ -91,20 +91,20 @@ Die äußere Orientierung ist durch die Matrix $[R|X_0]$ beschrieben (\autoref{e
 
 Grundlage dieser Formel ist das Lochkamera-Modell (siehe \autoref{img:optische_achse}). Dabei wird rechnerisch das Bild an dem Projektionszentrum in den Objektraum gespiegelt (rot im Bild). Dadurch kann mit einem aufrechten Bild gerechnet werden.
 
-Als weitere Parameter spielen die Verzeichnungen eine Rolle. Diese kann in die Abbildungsgleichung integriert werden, in dem $x'$ durch $\Delta x'$ korrigiert wird. \citep[S. 277]{luhmann}
+Als weitere Parameter spielen die \Gls{Verzeichnung}en eine Rolle. Diese kann in die Abbildungsgleichung integriert werden, in dem $x'$ durch $\Delta x'$ korrigiert wird. \citep[S. 277]{luhmann}
 
 \begin{align}
-    \label{abbildungsgleichung_verzerrung}
+    \label{abbildungsgleichung_verzeichnung}
     x'        & = P \cdot X + \Delta x'                 \\
     \Delta x' & = \Delta x_{rad} + \Delta x_{tan} + ...
 \end{align}
 \begin{conditions}
-    \Delta x' & Verzeichnung \\
-    \Delta x_{rad} & Radiale Verzeichnung \\
-    \Delta x_{tan} & Tangentiale Verzeichnung \\
+    \Delta x' & \Gls{Verzeichnung} \\
+    \Delta x_{rad} & Radiale \Gls{Verzeichnung} \\
+    \Delta x_{tan} & Tangentiale \Gls{Verzeichnung} \\
 \end{conditions}
 
-Die Verzeichnungen werden meist mit den Parametern $k1$ bis $k4$ für die radiale Verzeichnung und $p1$ und $p2$ für die tangentialen Verzeichnungen bezeichnet. Die Faktoren stellen dabei die Parameter einer Taylor-Reihe dar. Sie basieren auf dem Kameramodell von Brown und den von ihm in \cite[S. 859]{brown1971} vorgestellten Formeln (siehe \autoref{eq:brown_rad} und \ref{eq:brown_tan}). Diese Parameter werden so beispielsweise auch in Metashape, OpenDroneMap und OpenCV genutzt.
+Die \Gls{Verzeichnung}en werden meist mit den Parametern $k1$ bis $k4$ für die radiale \Gls{Verzeichnung} und $p1$ und $p2$ für die tangentialen \Gls{Verzeichnung}en bezeichnet. Die Faktoren stellen dabei die Parameter einer Taylor-Reihe dar. Sie basieren auf dem Kameramodell von Brown und den von ihm in \cite[S. 859]{brown1971} vorgestellten Formeln (siehe \autoref{eq:brown_rad} und \ref{eq:brown_tan}). Diese Parameter werden so beispielsweise auch in Metashape, OpenDroneMap und OpenCV genutzt.
 
 \begin{align}
     \label{eq:brown_rad}
@@ -113,11 +113,11 @@ Die Verzeichnungen werden meist mit den Parametern $k1$ bis $k4$ für die radial
     \Delta x_{tan} = 2 \cdot p1 \cdot x \cdot y + p2 \cdot (r^2 + 2 \cdot x^2)
 \end{align}
 \begin{conditions}
-    r & Abstand des Punktes zum Bildhauptpunkt \\
+    r & Abstand des Punktes zum \Gls{Bildhauptpunkt} \\
     x & Bild-x-Koordinate des Punktes \\
     y & Bild-y-Koordinate des Punktes \\
-    k1, k2, k3, k4 & Radiale Verzeichnungsparameter \\
-    p1, p2 & Tangentiale Verzeichnungsparameter \\
+    k1, k2, k3, k4 & Radiale \Gls{Verzeichnung}sparameter \\
+    p1, p2 & Tangentiale \Gls{Verzeichnung}sparameter \\
 \end{conditions}
 
 
@@ -125,7 +125,7 @@ Die Verzeichnungen werden meist mit den Parametern $k1$ bis $k4$ für die radial
 \section{Bilder}
 \label{s:bilder}
 
-Die Berechnung der Position eines Objektes im Bild ist nur möglich, sofern der Punkt in mindestens einem weiteren Bild abgebildet ist. Die Genauigkeit der Berechnung ist vom Schnittwinkel dieser beiden Strahlen abhängig. Um möglichst gute Grundlagen zur Ver\-fügung zu haben und die innere und äußere Orientierung möglichst gut berechnen zu können, müssen diese Bilder einige Bedingungen erfüllen - auf diese wird hier eingegangen.
+Die Berechnung der Position eines Objektes im Bild ist nur möglich, sofern der Punkt in mindestens einem weiteren Bild abgebildet ist. Die Genauigkeit der Berechnung ist vom Schnittwinkel dieser beiden Strahlen abhängig. Um möglichst gute Grundlagen zur Ver\-fügung zu haben und die innere und \gls{aeussereOrientierung} möglichst gut berechnen zu können, müssen diese Bilder einige Bedingungen erfüllen - auf diese wird hier eingegangen.
 
 \subsection{Überlappung und Bildinhalte}
 Da die Bilder durch identische Punkte verbunden werden, müssen sich die Bildinhalte überlappen und gemeinsame Punkte in den Bildern identifiziert werden. Die automatische Detektion von identischen Punkten ist auf verschiedene Weisen möglich: Entweder durch die Nutzung von codierten und uncodierten Passpunkten oder über eine Merkmalsextraktion. Für letzteres muss die Oberfläche genügend Textur bzw. Struktur aufweisen. Detailliert wird in \autoref{s:verknuepfung} hierauf eingegangen. \citep[S. 478]{luhmann}
@@ -143,7 +143,7 @@ Da die Objekte und die Kameras sich während der Aufnahme nicht bewegen, kann di
 
 \subsection{Fokussierung und Schärfentiefe}
 \label{s:schaerfe}
-Um genaue Punktwolken erzeugen zu können, muss das Objekt scharf abgebildet werden. Die Kameras müssen dafür entsprechend fokussiert sein. Jedoch wird durch die Fokussierung auch die innere Orientierung verändert. Normalerweise wird daher auf eine Umfokussierung verzichtet und mittels der Blende (kleine Blendenöffnung) die Schärfentiefe erhöht, sodass ein großer Bereich scharf abgebildet wird. Dieses ist aber bei vielen einfachen Kameras wie dem verwendeten Raspberry Pi Camera Module 3 nicht möglich.
+Um genaue Punktwolken erzeugen zu können, muss das Objekt scharf abgebildet werden. Die Kameras müssen dafür entsprechend fokussiert sein. Jedoch wird durch die Fokussierung auch die \gls{innereOrientierung} verändert. Normalerweise wird daher auf eine Umfokussierung verzichtet und mittels der Blende (kleine Blendenöffnung) die Schärfentiefe erhöht, sodass ein großer Bereich scharf abgebildet wird. Dieses ist aber bei vielen einfachen Kameras wie dem verwendeten Raspberry Pi Camera Module 3 nicht möglich.
 
 Der Schärfebereich ergibt sich aus der Größe des tolerierbaren Unschärfekreis auf dem Sensor. Bei digitalen Kameras wird dieser durch die Pixelgröße bestimmt. Nach \citet[S. 148f]{luhmann} berechnet sich die Schärfentiefe nach folgender Formel:
 
@@ -174,7 +174,7 @@ Die Schärfentiefe des Raspberry Pi Camera Module 3 ist in \autoref{img:sschaerf
 
 \section{Skalierung/Maßstab}
 \label{sec:massstab}
-Die Skalierung eines rein photogrammetrisch bestimmten 3D-Modelles ist nicht bekannt, da die Berechnungen nur auf Richtungen ohne Längenangaben basieren. Daher werden Referenzen in Form einer bekannten Länge benötigt, um die Skalierung zu bestimmen. Alternativ können auch Passpunkte (siehe \autoref{s:verknuepfung}) mit bekannten Koordinaten verwendet werden oder im Falle von Mehrkamerasystemen bekannte äußere Orientierungen der Kameras. \citep[S. 546]{luhmann}
+Die Skalierung eines rein photogrammetrisch bestimmten 3D-Modelles ist nicht bekannt, da die Berechnungen nur auf Richtungen ohne Längenangaben basieren. Daher werden Referenzen in Form einer bekannten Länge benötigt, um die Skalierung zu bestimmen. Alternativ können auch Passpunkte (siehe \autoref{s:verknuepfung}) mit bekannten Koordinaten verwendet werden oder im Falle von Mehrkamerasystemen bekannte \gls{aeussereOrientierung}en der Kameras. \citep[S. 546]{luhmann}
 
 
 \section{Verknüpfungs- und Passpunkte}
@@ -187,11 +187,11 @@ Es gibt verschiedenste Formen von Markern, die automatisch erfasst werden könne
 Vorteilhaft ist jedoch die Verwendung von codierten Zielmarken. Hier können die Punkte direkt zugeordnet werden, sodass keine weitere Filterung und Berechnung zur Zuordnung notwendig ist. \citep[S.535ff]{luhmann}
 
 \subsubsection{Zielmarken nach Schneider}
-Eine Form der codierten Zielmarken sind die Marker nach Schneider. Diese bestehen aus mehreren konzentrischen Kreisen (\autoref{img:schneider}) und werden entsprechend auch als CCCT -- concentric circular coded target -- bezeichnet \citep{ccct}. Die Mitte des Markers wird durch den gemeinsamen Mittelpunkt der Kreise definiert \citep{schneider}. Vorteilhaft ist, dass die Marker auch bei unscharfen Bildern erkannt werden können und ihr Zentrum manuell identifiziert werden kann, beispielsweise zum Aufmaß mit einem Tachymeter. Sie haben sich daher als Standardmarker in der Photogrammetrie etabliert. Sie werden beispielsweise von Agisoft Metashape verwendet.
+Eine Form der codierten Zielmarken sind die Marker nach Schneider. Diese bestehen aus mehreren konzentrischen Kreisen (\autoref{img:schneider}) und werden entsprechend auch als \Gls{CCCT} bezeichnet \citep{ccct}. Die Mitte des Markers wird durch den gemeinsamen Mittelpunkt der Kreise definiert \citep{schneider}. Vorteilhaft ist, dass die Marker auch bei unscharfen Bildern erkannt werden können und ihr Zentrum manuell identifiziert werden kann, beispielsweise zum Aufmaß mit einem Tachymeter. Sie haben sich daher als Standardmarker in der Photogrammetrie etabliert. Sie werden beispielsweise von Agisoft Metashape verwendet.
 
 
 \subsubsection{ArUco-Marker}
-Eine andere Variante der codierten Verknüpfungspunkte sind die sogenannten ArUco-Marker (\autoref{img:aruco}). Diese werden häufig für die Orientierung bei Augmented-Reality-An\-wend\-ungen genutzt. Jede Ecke kann hierbei automatisch im Subpixelbereich identifiziert werden, sodass ein erkannter Marker vier Verknüpfungspunkte liefern kann. Wenn deren (lokale) Koordinaten und die innere Orientierung bekannt sind, kann mit nur einem Marker die äußere Orientierung bestimmt werden. \citep[S. 545]{luhmann}
+Eine andere Variante der codierten Verknüpfungspunkte sind die sogenannten ArUco-Marker (\autoref{img:aruco}). Diese werden häufig für die Orientierung bei Augmented-Reality-An\-wend\-ungen genutzt. Jede Ecke kann hierbei automatisch im Subpixelbereich identifiziert werden, sodass ein erkannter Marker vier Verknüpfungspunkte liefern kann. Wenn deren (lokale) Koordinaten und die \gls{innereOrientierung} bekannt sind, kann mit nur einem Marker die \gls{aeussereOrientierung} bestimmt werden. \citep[S. 545]{luhmann}
 
 Nachteilig zeigte sich in den Untersuchungen, dass die Ecken nicht eindeutig identifiziert werden können, wenn die Aufnahme unscharf ist. Durch ihre Verwendung in Augmented-Reality-Anwendungen sind auch viele kostenfreie Bibliotheken für ihre Erkennung verfügbar. Beispielsweise kann OpenCV ArUco-Marker identifizieren \citep{opencv}.
 
@@ -201,7 +201,7 @@ Nachteilig zeigte sich in den Untersuchungen, dass die Ecken nicht eindeutig ide
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[width=0.98\linewidth]{img/schneider.png}
         \centering
-        \caption{CCCT nach \\ \cite{schneider},\\aus Agisoft Metashape} %Bildunterschrift
+        \caption{\Glsentryshort{CCCT} nach \\ \cite{schneider},\\aus Agisoft Metashape} %Bildunterschrift
         \label{img:schneider} %ID fürs Bild
     \end{subfigure}
     \begin{subfigure}{0.45\textwidth}
@@ -222,7 +222,7 @@ Zur Erkennung von Merkmalen setzt das Verfahren auf die Detektion von Kanten. Di
 
 \section{Verknüpfung von Bildern}
 \label{s:photogramm}
-Durch die beschriebenen Verfahren und die hieraus entstandenen Verknüpfungs\-punkte können die Bilder miteinander verknüpft werden. Da die Kamerapositionen am Rahmen veränderlich sind und die Montage auch keine ausreichend genaue Fixierung garantiert, können die bekannten Positionen aus vorherigen Messungen maximal als Näherungswerte genutzt werden. Die genaue Bestimmung der Position und Ausrichtung - die äußere Orientierung - muss daher mindestens für die verschobenen oder gedrehten Kameras neu berechnet werden. Gleiches gilt für neue Verknüpfungspunkte, für die noch keine Koordinate bekannt ist. Die beiden Verfahren, die so zur Verknüpfung der Bilder beitragen, werden im Folgenden vorgestellt. Für einige Experimente wurde auch die relative Orientierung genutzt, die auch hier vorgestellt wird.
+Durch die beschriebenen Verfahren und die hieraus entstandenen Verknüpfungs\-punkte können die Bilder miteinander verknüpft werden. Da die Kamerapositionen am Rahmen veränderlich sind und die Montage auch keine ausreichend genaue Fixierung garantiert, können die bekannten Positionen aus vorherigen Messungen maximal als Näherungswerte genutzt werden. Die genaue Bestimmung der Position und Ausrichtung - die \gls{aeussereOrientierung} - muss daher mindestens für die verschobenen oder gedrehten Kameras neu berechnet werden. Gleiches gilt für neue Verknüpfungspunkte, für die noch keine Koordinate bekannt ist. Die beiden Verfahren, die so zur Verknüpfung der Bilder beitragen, werden im Folgenden vorgestellt. Für einige Experimente wurde auch die relative Orientierung genutzt, die auch hier vorgestellt wird.
 
 
 \begin{figure}
@@ -250,10 +250,10 @@ Sofern Koordinaten von Passpunkten bekannt sind, können die Positionen und Ausr
 
 Durch die Nutzung des RANSAC-Ansatzes können veränderte Passpunkte identifiziert und als Ausreißer markiert werden. Hierzu werden mehrere Stichproben der Punkte gewählt, die Berechnung durchgeführt und die Lösung gewählt, zu denen die meisten Punkte passen. \citep[S. 134]{luhmann}
 
-\autoref{img:rueckwaertsschnitt} zeigt die geometrischen Grundlagen des Rückwärtsschnitts. Es müssen mindestens 3 Passpunkte ($P_1 - - P_3$) mit Koordinaten bekannt und im Bild sichtbar sein. Außerdem muss die innere Orientierung bei Verwendung von nur drei Passpunkten bekannt sein. Die Position der Punkte $P'_1 - - P'_3$ wird dann bestimmt und ergibt im Beispiel 6 Koordinatenkomponenten (jeweils $x'$ und $y'$). Durch Berechnungen -- auf die hier nicht weiter eingegangen und auf entsprechende Literatur verwiesen wird -- kann dann die Position (drei Parameter) und Ausrichtung (drei Parameter) der Kamera bestimmt werden. \citep[S. 284]{luhmann}
+\autoref{img:rueckwaertsschnitt} zeigt die geometrischen Grundlagen des Rückwärtsschnitts. Es müssen mindestens 3 Passpunkte ($P_1 - - P_3$) mit Koordinaten bekannt und im Bild sichtbar sein. Außerdem muss die \gls{innereOrientierung} bei Verwendung von nur drei Passpunkten bekannt sein. Die Position der Punkte $P'_1 - - P'_3$ wird dann bestimmt und ergibt im Beispiel 6 Koordinatenkomponenten (jeweils $x'$ und $y'$). Durch Berechnungen -- auf die hier nicht weiter eingegangen und auf entsprechende Literatur verwiesen wird -- kann dann die Position (drei Parameter) und Ausrichtung (drei Parameter) der Kamera bestimmt werden. \citep[S. 284]{luhmann}
 
 \subsection{Vorwärtsschnitt}
-Um wiederum aus einem Stereopaar mit bekannter innerer und äußerer Orientierung Punktkoordinaten zu berechnen, wird der Vorwärtsschnitt genutzt. \autoref{img:vorwaertsschnitt} zeigt die geometrischen Grundlagen des Vorwärtsschnitts. Es werden die Bildkoordinaten der Punkte $P_1$ und $P_2$ benötigt, die im Bild sichtbar sind. Die Position des Punktes $P$ wird dann berechnet. Wie bereits erwähnt (\autoref{s:abbildung}), kann jeder Punkt im Bild durch die innere Orientierung als Horizontal- und Vertikalrichtungsmessung interpretiert werden. Durch die äußere Orientierung kann diese dann ins übergeordnete System überführt werden. Hieraus ergibt sich dann zur Berechnung der Position $P$ ein räumlicher Schnitt zweier (windschiefer) Geraden \citep[S. 95]{luhmann}.
+Um wiederum aus einem Stereopaar mit bekannter innerer und äußerer Orientierung Punktkoordinaten zu berechnen, wird der Vorwärtsschnitt genutzt. \autoref{img:vorwaertsschnitt} zeigt die geometrischen Grundlagen des Vorwärtsschnitts. Es werden die Bildkoordinaten der Punkte $P_1$ und $P_2$ benötigt, die im Bild sichtbar sind. Die Position des Punktes $P$ wird dann berechnet. Wie bereits erwähnt (\autoref{s:abbildung}), kann jeder Punkt im Bild durch die \gls{innereOrientierung} als Horizontal- und Vertikalrichtungsmessung interpretiert werden. Durch die \gls{aeussereOrientierung} kann diese dann ins übergeordnete System überführt werden. Hieraus ergibt sich dann zur Berechnung der Position $P$ ein räumlicher Schnitt zweier (windschiefer) Geraden \citep[S. 95]{luhmann}.
 
 Mit dem Vorwärts\-schnitt können neben markierten Verknüpfungspunkten auch die Neupunkte, die mittels SIFT oder ähnlichen Bild\-erkennungs\-algorithmen erkannt wurden, berechnet werden. Dadurch kann eine dünne Punktwolke erzeugt werden, welche dann bei der Bündelblockausgleichung genutzt werden kann. Da die Berechnung bereits bei Bildkoordinaten aus zwei Bildern überbestimmt ist und oft Punkte in mehr Bildern abgebildet sind, bietet sich die Nutzung der Ausgleichung auch schon bei der Bestimmung an. \citep[S. 385]{luhmann}
 
@@ -265,7 +265,7 @@ Die klassische Variante der relativen Orientierung ist die Bestimmung der Essenz
 
 Mittels Einzelwertzerlegung kann dann aus der Essenziellen Matrix die Rotation und Translation des zweiten Bildes bestimmt werden. \citep[S. 275]{hartley}
 
-Alternativ kann mit der Homographie die relative Orientierung über eine Ebene, die in beiden Bildern abgebildet wird, bestimmt werden. Dieser Fall tritt beispielsweise bei der Verwendung von flächenhaften Kalibriermustern auf. Die Homographie beschreibt die Abbildung einer Ebene auf eine andere Ebene. Sie wird durch eine 3x3-Matrix beschrieben, die die Transformation der Punkte beschreibt. Für die Bestimmung werden nur 4 Verknüpfungspunkte benötigt, die in beiden Bildern sichtbar sind und auf einer Ebene liegen. Die innere Orientierung der Kamera wird hierbei nicht benötigt. \citep[S. 33ff]{hartley}.
+Alternativ kann mit der Homographie die relative Orientierung über eine Ebene, die in beiden Bildern abgebildet wird, bestimmt werden. Dieser Fall tritt beispielsweise bei der Verwendung von flächenhaften Kalibriermustern auf. Die Homographie beschreibt die Abbildung einer Ebene auf eine andere Ebene. Sie wird durch eine 3x3-Matrix beschrieben, die die Transformation der Punkte beschreibt. Für die Bestimmung werden nur 4 Verknüpfungspunkte benötigt, die in beiden Bildern sichtbar sind und auf einer Ebene liegen. Die \gls{innereOrientierung} der Kamera wird hierbei nicht benötigt. \citep[S. 33ff]{hartley}.
 
 Aus der Homographie kann zusammen mit der inneren Orientierung die Rotation und Translation des zweiten Bildes bestimmt werden.
 \citep[S. 74]{homography_decomposition}

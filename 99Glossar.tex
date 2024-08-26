@@ -1,19 +1,94 @@
+% Photogrammetrie
+
 \newglossaryentry{Bildweite}
 {
     name=Bildweite,
-    description={Die Bildweite ist der Abstand zwischen der Bildebene und dem Hauptpunkt der Linse. Sie entspricht der KamerakonstanteBei Fokussierung auf unendlich ist die Bildweite gleich der Brennweite}
+    description={Abstand zwischen der Bildebene und dem Hauptpunkt der Linse, entspricht der \Gls{Kamerakonstante}, bei Fokussierung auf unendlich ist die Bildweite gleich der \Gls{Brennweite}}
 }
 
 \newglossaryentry{Brennweite}
 {
     name=Brennweite,
-    description={Die Brennweite ist der Abstand zwischen dem Hauptpunkt der Linse und dem Brennpunkt}
+    description={Abstand zwischen dem Hauptpunkt der Linse und dem Brennpunkt}
 }
 
 \newglossaryentry{Kamerakonstante}
 {
     name=Kamerakonstante,
-    description={Die Kamerakonstante, auch Kammerkonstante, ist der photogrammetrische Begriff für die Bildweite.}
+    description={auch Kammerkonstante, photogrammetrische Begriff für die Bildweite}
 }
 
+\newglossaryentry{Bildhauptpunkt}
+{
+    name=Bildhauptpunkt,
+    description={Punkt, an dem die optische Achse die Bildebene schneidet}
+}
+
+\newglossaryentry{Verzeichnung}
+{
+    name=Verzeichnung,
+    description={Verzeichnung ist die Abweichung der Abbildung eines Objektes von der idealen Abbildung. Es gibt verschiedene Arten von Verzeichnungen, siehe \autoref{s:innereorientierung}
+        }
+}
+
+\newglossaryentry{aeussereOrientierung}
+{
+    name=Äußere Orientierung,
+    description={Lage und Ausrichtung der Kamera im Raum, siehe \autoref{s:aeussereorientierung}}
+}
+
+\newglossaryentry{innereOrientierung}
+{
+    name=Innere Orientierung,
+    description={Kalibrierung der Kamera, beinhaltet die \Gls{Kamerakonstante}, Lage des \Gls{Bildhauptpunkt} und der Verzeichnungskoeffizienten, siehe \autoref{s:innereorientierung}}
+}
+
+% IT
+
+\newglossaryentry{WLAN}
+{
+    name=WLAN,
+    description={Wireless Local Area Network, drahtloses lokales Netzwerk}
+}
+
+\newglossaryentry{WPA2}
+{
+    name=WPA2,
+    description={Wi-Fi Protected Access 2, Verschlüsselungsstandard für \Gls{WLAN}}
+}
+
+\newglossaryentry{Socket}
+{
+    name=Socket,
+    description={Kommunikationsendpunkt, ermöglicht die Kommunikation zwischen zwei Prozessen}
+}
+
+\newacronym[
+    description={Representational State Transfer, Architekturstil für verteilte Systeme, oft in Verbindung mit Webanwendungen verwendet, basiert auf dem \gls{HTTP}-Protokoll, Zustand wird mit übertragen, so dass dieser nicht gespeichert werden muss}]{REST}{REST}{Representational-State-Transfer}
+
+
+% Abkürzungen
+
+\newacronym{dpt}{dpt}{Dioptrien}
+
 \newacronym{SfM}{SfM}{Structure-from-Motion}
+
+\newacronym{CCCT}{CCCT}{concentric circular coded target}
+
+\newacronym{API}{API}{Application Programming Interface}
+
+\newacronym{HTTP}{HTTP}{Hypertext Transfer Protocol}
+
+
+
+% Unverwendet
+
+\newacronym{JSON}{JSON}{JavaScript Object Notation}
+
+\newacronym{CSV}{CSV}{Comma Separated Values}
+
+\newacronym{XML}{XML}{Extensible Markup Language}
+
+\newacronym{HTML}{HTML}{Hypertext Markup Language}
+
+\newacronym{URL}{URL}{Uniform Resource Locator}

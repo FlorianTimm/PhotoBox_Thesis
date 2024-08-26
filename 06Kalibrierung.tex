@@ -20,23 +20,23 @@ Zur Bestimmung der Skalierung (vergleiche \autoref{sec:massstab}) wurde sich fü
 Die Passpunkte in Form von ArUco-Markern wurden fest am Rahmen montiert. Diese sollen später als dauerhafte Realisierung des Maßstabes dienen. Außerdem wurden kalibrierte Maßstäbe im Objektraum verteilt, welche für die erstmalige Bestimmung der Passpunktkoordinaten den Maßstab bilden. Zur Unterstützung der Bildverknüpfung wurden weitere Punkte in Form von Schneider-Markern im Bildbereich verteilt (ähnlich dem Aufbau in \autoref{img:drehteller_moai}). Anschließend wurden Bilder vom gesamten System mit  einer externen Kamera mit festen Einstellungen aufgenommen. Diese Bilder wurden dann in Agisoft Metashape verarbeitet und Koordinaten der Passpunkte bestimmt. Über manuell in Agisoft bestimmte Punkte am Boden des Systems wurde das System so transformiert, dass der Boden die XY-Ebene darstellt.
 
 \section{Kamerakalibrierung}
-Die verwendeten Kameras weisen keine stabile innere Orientierung auf. Daher ist eine Kalibrierung in Form von festen Parametern nicht möglich. Es wurde die Annahme verfolgt, dass die innere Orientierung linear von der Fokussierung abhängig ist. Daraus wurde eine Formel zur Bestimmung von Näherungswerten für die innere Orientierung in Abhängigkeit der Fokussierung ermittelt.
+Die verwendeten Kameras weisen keine stabile \gls{innereOrientierung} auf. Daher ist eine Kalibrierung in Form von festen Parametern nicht möglich. Es wurde die Annahme verfolgt, dass die \gls{innereOrientierung} linear von der Fokussierung abhängig ist. Daraus wurde eine Formel zur Bestimmung von Näherungswerten für die \gls{innereOrientierung} in Abhängigkeit der Fokussierung ermittelt.
 
 Die eigentliche Bestimmung der inneren Orientierung erfolgt im Betrieb in Form einer Simultankalibrierung (vgl. \autoref{s:innereorientierung}). Die Näherungswerte sollen dabei als Startwerte dienen.
 
 \paragraph{Vorgehen}
 
-Es wurden mit fünf verschiedenen Fokussierungen mit jeweils 24 Rasp\-berry-Pi-Kameras Bilder aufgenommen und die Bilder in Agisoft Metashape mittels ArUco-Markern orientiert, dessen Position aus \autoref{sec:passpunkt_bestimmung} bekannt ist. Außerdem wurden etwa 100 Schneider-Marker im Bildbereich der Kameras verteilt und als Verknüpfungspunkte benutzt. Es wurden jeweils in Metashape alle Bilder mit der gleichen Fokussierung als eine Kamera angenommen und die innere Orientierung bestimmt. Anschließend wurden alle Kameras nochmal einzeln ausgeglichen. Dieses zweistufige Vorgehen bewirkt, dass die Näherungswerte schrittweise verbessert werden. Ein einstufiges Vorgehen ohne Näherungswerte führte zu falschen Werten. Die innere Orientierung wurde in Form von Brennweite, Bildhauptpunktverschiebung und Verzeichnung ermittelt und die Ergebnisse wurden in einem Box-Whisker-Plot dargestellt und eine ausgleichende Gerade ermittelt.
+Es wurden mit fünf verschiedenen Fokussierungen mit jeweils 24 Rasp\-berry-Pi-Kameras Bilder aufgenommen und die Bilder in Agisoft Metashape mittels ArUco-Markern orientiert, dessen Position aus \autoref{sec:passpunkt_bestimmung} bekannt ist. Außerdem wurden etwa 100 Schneider-Marker im Bildbereich der Kameras verteilt und als Verknüpfungspunkte benutzt. Es wurden jeweils in Metashape alle Bilder mit der gleichen Fokussierung als eine Kamera angenommen und die \gls{innereOrientierung} bestimmt. Anschließend wurden alle Kameras nochmal einzeln ausgeglichen. Dieses zweistufige Vorgehen bewirkt, dass die Näherungswerte schrittweise verbessert werden. Ein einstufiges Vorgehen ohne Näherungswerte führte zu falschen Werten. Die \gls{innereOrientierung} (vgl. \autoref{s:innereorientierung}) wurde in Form von Brennweite, \Gls{Bildhauptpunkt}verschiebung und \Gls{Verzeichnung} ermittelt und die Ergebnisse wurden in einem Box-Whisker-Plot dargestellt und eine ausgleichende Gerade ermittelt.
 
 \paragraph{Ergebnis}
 
-Die Ergebnisse sind in \autoref{img:naeherungswerte} dargestellt. Wie auch schon in der Voruntersuchung in \autoref{sec:fokus} zeigt sich, dass die Brennweite linear zur Fokussierung ist. Bei der Bildhauptpunktverschiebung und der Verzeichnung ist die Abhängigkeit nicht eindeutig. \autoref{tab:naeherungswerte_corr} zeigt die Korrelationsmatrix der Näherungswerte. Die Fokussierung und die Brennweite sind stark korreliert. Die Korrelation der Bildhauptpunktverschiebung ist nur schwach, die der Verzeichnung nicht vorhanden. Es zeigt sich, dass die innere Orientierung durch die Fokussierung beeinflusst wird. Die Brennweite ist dabei erwartungsgemäß am stärksten betroffen.
+Die Ergebnisse sind in \autoref{img:naeherungswerte} dargestellt. Wie auch schon in der Voruntersuchung in \autoref{sec:fokus} zeigt sich, dass die \Gls{Brennweite} $f$ linear zur Fokussierung ist. Bei der \Gls{Bildhauptpunkt}verschiebung $cx,cy$ und der radialen \Gls{Verzeichnung} $k1,k2,k3$ ist die Abhängigkeit nicht eindeutig. \autoref{tab:naeherungswerte_corr} zeigt die Korrelationsmatrix der Näherungswerte. Die Fokussierung und die \Gls{Brennweite} sind stark korreliert. Die Korrelation der \Gls{Bildhauptpunkt}verschiebung ist nur schwach, die der \Gls{Verzeichnung} nicht vorhanden. Es zeigt sich, dass die \gls{innereOrientierung} durch die Fokussierung beeinflusst wird. Die \Gls{Brennweite} ist dabei erwartungsgemäß am stärksten betroffen.
 
 \begin{figure}
-  \centering
-  \includegraphics[width=1\textwidth]{./img/naeherungswerte_diagramm.pdf}
-  \caption{Box-Whisker-Plots und ausgleichende Gerade der inneren Orientierung in Abhängigkeit von der Fokussierung [dpt]} %Bildunterschrift
-  \label{img:naeherungswerte} %ID fürs Bild
+    \centering
+    \includegraphics[width=1\textwidth]{./img/naeherungswerte_diagramm.pdf}
+    \caption{Box-Whisker-Plots und ausgleichende Gerade der inneren Orientierung in Abhängigkeit von der Fokussierung [\Glsentryshort{dpt}]} %Bildunterschrift
+    \label{img:naeherungswerte} %ID fürs Bild
 \end{figure}
 
 \input{tabs/naeherungswerte_corr}
