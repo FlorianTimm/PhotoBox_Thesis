@@ -6,11 +6,42 @@
 \label{c:versuche}
 Nach Abschluss der Konstruktion und des Aufbaus des Prototyps, wurden verschiedene Untersuchungen durchgeführt, um die Genauigkeit des Systems zu überprüfen und die Anzahl der Kameras zu evaluieren. Hierzu wurden unter anderem Vergleichsmessungen mit verschiedenen Systemen durchgeführt.
 
-Zum Vergleich standen verschiedene Testobjekte zur Verfügung. Hauptsächlich wurde ein etwa 14~cm hohes Modell einer Moai-Statue der Osterinsel verwendet, da dieses Objekt eine gute Textur und viele Details aufweist. Neben einem texturierten Spielzeugdino standen noch zwei weiße Gipsmodelle zur Verfügung: Ein Abdruck einer Büste Einsteins und ein kerzenartiges Testobjekt, im folgenden Testy genannt. Alle Objekte wurden bereits in anderen Projekten an der HafenCity Universität verwendet (z.B. \citet{kersten_scanner}) und bereits mit mehreren verschiedenen Systemen vermessen worden. Die Ergebnisse dieser Messungen wurden als Referenzwerte verwendet.
+\section{Referenzdaten}
+\label{s:referenzdaten}
+Zum Vergleich standen verschiedene Testobjekte zur Verfügung. Hauptsächlich wurde ein etwa 14~cm hohes Modell einer Moai-Statue der Osterinsel verwendet, da dieses Objekt eine gute Textur und viele Details aufweist (\autoref{img:bild_moai}). Neben einem texturierten Spielzeugdino standen noch zwei weiße Gipsmodelle zur Verfügung: Ein Abdruck einer Büste Einsteins  (\autoref{img:bild_einstein}) und ein kerzenartiges Testobjekt, im folgenden Testy genannt (\autoref{img:bild_testy}). Alle Objekte wurden bereits in anderen Projekten an der HafenCity Universität verwendet (z.B. \citet{kersten_scanner}) und bereits mit mehreren verschiedenen Systemen vermessen worden. Die Ergebnisse dieser Messungen wurden als Referenzwerte verwendet. Für die Messung mit dem Streifenprojektionssystem ATOS 5 wurden auf den Objekten kreisförmige Verknüpfungspunkte angebracht, um die verschiedenen Aufnahmen zu verknüpfen.
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.32\textwidth}
+        \includegraphics[width=1\textwidth]{img/bild_moai.jpg}
+        \caption{Moai}
+        \label{img:bild_moai}
+    \end{subfigure}
+    \begin{subfigure}{0.32\textwidth}
+        \includegraphics[width=1\textwidth]{img/bild_testy.jpg}
+        \caption{Testy}
+        \label{img:bild_testy}
+    \end{subfigure}
+    \begin{subfigure}{0.32\textwidth}
+        \includegraphics[width=1\textwidth]{img/bild_einstein}
+        \caption{Einstein}
+        \label{img:bild_einstein}
+    \end{subfigure}
+    \caption{Verschiedene Testobjekte}
+    \label{img:bilder_testobjekte}
+\end{figure}
+
+Als Vergleichsmessung wurden die Objekte mit einem Zeiss GOM ATOS 5 aufgenommen. Hierbei handelt es sich um ein Streifenprojektionssystem, welches hauptsächlich in der Industrie zur Vermessung von Bauteilen eingesetzt wird. Streifenprojektionssysteme arbeiten auch photogrammetrisch, haben aber den Vorteil, das sie durch das Projektionssystem auch texturarme Objekte erfassen können. Wie der Name bereits andeutet, wird ein Streifenmuster auf das Objekt projiziert, welches dann von mindestens einer Kamera aufgenommen wird. Projektor und Kamera sind auf einer festen Basis montiert. \citep[S. 581f]{luhmann}
+
+Bei dem verwendeten System werden zwei Kameras eingesetzt, die sich ein massives Gehäuse mit dem mittig angeordneten Projektor teilen. Bei dem verwendeten Messvolumen und Objektentfernung beträgt die Genauigkeit etwa \todo{Wert}. Aufgrund der deutlich höheren erwarteten Genauigkeit des Streifenprojektionssystems, kann davon ausgegangen werden, dass die Messungen deutlich genauer sind als die des Prototyps und als wahre Werte angenommen werden können.
+
+Ausnahmen hiervon stellen die Positionen der Passpunktmarken dar. Diese werden vom Streifenprojektionssystem automatisch erkannt und die Bereiche interpoliert. Dadurch können hier größere Abweichungen entstehen, sofern die Oberfläche nicht eben ist oder die Dicke der Passpunktmarken nicht korrekt ist.
+
+Die Moai-Figur wurden auch bereits mit einer Spiegelreflexkamera Nikon D90 vermessen. Hierbei wurden manuell Bilder aufgenommen und diese mit Agisoft Metashape ausgewertet. Hiermit steht damit auch ein klassisches photogrammetrisches Modell zur Verfügung.
 
 \section{Genauigkeitsüberprüfung des 3D-Modelles}
 \label{s:genauigkeitsueberpruefung}
-Um die Genauigkeit der 3D-Modell-Erzeugung zu überprüfen, wurden mehrere Prüf\-körper mit dem Prototyp und mit einem kommerziellen Streifenprojektionssystem vermessen. Die Ergebnisse wurden miteinander verglichen.
+Um die Genauigkeit der 3D-Modell-Erzeugung zu überprüfen, wurden mehrere Prüf\-körper mit dem Prototyp vermessen. Die Ergebnisse wurden anschließend im Vergleich zu dem Streifenprojektionssystem und der Aufnahme des Moais mit einer Spiegelreflexkamera betrachtet.
 
 \subsection{Erwartete Genauigkeit}
 \label{ss:erwartete_genauigkeit}
@@ -63,35 +94,44 @@ Die Genauigkeit der Tiefeninformationen ist von dem Verhältnis des Abstandes de
 Die erwartete Genauigkeit und auch die Auflösung der Kameras liegt demnach im Bereich eines Fünftel Millimeters.
 
 
-\subsection{Vergleichsmessung mit Streifenprojektionssystem}
-Als Vergleichsmessung wurden die Objekte mit einem Zeiss GOM ATOS 5 aufgenommen. Hierbei handelt es sich um ein Streifenprojektionssystem, welches hauptsächlich in der Industrie zur Vermessung von Bauteilen eingesetzt wird. Streifenprojektionssysteme arbeiten auch photogrammetrisch, haben aber den Vorteil, das sie durch das Projektionssystem auch texturarme Objekte erfassen können. Wie der Name bereits andeutet, wird ein Streifenmuster auf das Objekt projiziert, welches dann von mindestens einer Kamera aufgenommen wird. Projektor und Kamera sind auf einer festen Basis montiert. \citep[S. 581f]{luhmann}
-
-Bei dem verwendeten System werden zwei Kameras eingesetzt, die sich ein massives Gehäuse mit dem mittig angeordneten Projektor teilen. Bei dem verwendeten Messvolumen und Objektentfernung beträgt die Genauigkeit etwa \todo{Wert}. Aufgrund der deutlich höheren erwarteten Genauigkeit des Streifenprojektionssystems, kann davon ausgegangen werden, dass die Messungen deutlich genauer sind als die des Prototyps und als wahre Werte angenommen werden können.
-
 \subsection{Ergebnisse}
-Die modellierte Oberfläche aus dem Streifenprojektionssystem und die Punktwolke aus dem Prototyp wurden in CloudCompare aufeinandergelegt und die Differenz berechnet. Die Visualisierung der Differenzen ist in \autoref{img:differenz} dargestellt. Es ist zu erkennen, dass einige Bereiche gar nicht erfasst bzw. deren Genauigkeit deutlich von der erwarteten abweichen. Die größten Fehlstellen sind im Bereich des Kinnes und unterhalb des Bauches zu erkennen. Abweichungen im Bereich des restlichen Körpers sind deutlich geringer und liegen im Bereich von 0,21~mm. Sie sind auf die schlechtere Erfassung der nach unten gerichteten Flächen zurückzuführen. Diese Bildbereiche sind nur in wenigen Bildern sichtbar und können daher nicht so gut rekonstruiert werden.
-\todo{Text überarbeiten}
+Die modellierte Oberfläche aus dem Streifenprojektionssystem und die Punktwolke aus dem Prototyp wurden in CloudCompare aufeinandergelegt und die Differenz berechnet. Die Visualisierung der Differenzen ist in \autoref{img:differenz} dargestellt. Es ist zu erkennen, dass einige Bereiche gar nicht erfasst bzw. deren Genauigkeit deutlich von der erwarteten abweichen.
 
-Die Abweichungen liegen in der Größenordnung der in \autoref{ss:erwartete_genauigkeit} berechneten Werte und sind nur minimal schlechter, als die Genauigkeit eines 3D-Modelles des Körpers, welches photogrammetrisch mit einer Spiegelreflexkamera Nikon D90 manuell aufgenommen wurde. Durch Kombinationen von anderen Perspektiven ist hier die Abdeckung subjektiv betrachtet besser. Die Ergebnisse sind in \autoref{tab:vergleich_erg} zusammengefasst.
+\paragraph{Moai}
+Beim Moai (\autoref{img:differenz_moai_einzel}) sind die größten Fehlstellen im Bereich des Kinnes und unterhalb des Bauches zu erkennen. Abweichungen im Bereich des restlichen Körpers sind deutlich geringer und liegen im Bereich von 0,21~mm. Sie sind auf die schlechtere Erfassung der nach unten gerichteten Flächen zurückzuführen. Diese Bildbereiche sind nur in wenigen Bildern sichtbar und können daher nicht so gut rekonstruiert werden. Weitere Abweichungen sind im Bereich der Passpunktmarken zu erkennen, hier ist unklar, welche Daten korrekt sind (vgl. \autoref{s:referenzdaten}).
+
+\paragraph{Testy}
+Das Modell des Testy (\autoref{img:differenz_testy}) ist kaum erkennbar. Die weiße und sich wiederholenden Oberfläche führte zu schlechten Ergebnissen. \todo{Text}
+
+\paragraph{Einstein}
+Das Modell von Einstein (\autoref{img:differenz_einstein}) zeigt ebenfalls größere Abweichungen im Bereich des Kinnes und des Halses. Die Abweichungen sind hier jedoch deutlich geringer. Die Passpunktmarken sind zwar auch in der Differenzdarstellung erkennbar, jedoch nicht mit so großen Abweichungen wie beim Moai.
+\todo{Text}
+
+
+Die Abweichungen des Moai und der Einstein-Büste liegen in der Größenordnung der in \autoref{ss:erwartete_genauigkeit} berechneten Werte und sind nur minimal schlechter, als die Genauigkeit eines 3D-Modelles des Moai, welches photogrammetrisch mit einer Spiegelreflexkamera Nikon D90 manuell aufgenommen wurde. Durch Kombinationen von anderen Perspektiven bei der manuellen Aufnahme ist hier die Abdeckung subjektiv betrachtet besser. Die Ergebnisse sind in \autoref{tab:vergleich_erg} zusammengefasst.
 
 \begin{figure}
     \centering
-    \begin{subfigure}{0.3\textwidth}
-        \includegraphics[width=0.95\textwidth]{img/cam_anzahl/normal.png}
-        \caption{Moai}
-        \label{img:differenz_moai}
+    \begin{subfigure}{0.11\textwidth}
+        \includegraphics[width=0.98\textwidth]{img/cam_anzahl/scala.png}
+
     \end{subfigure}
-    \begin{subfigure}{0.3\textwidth}
-        \includegraphics[width=0.95\textwidth]{img/testy_diff.png}
+    \begin{subfigure}{0.27\textwidth}
+        \includegraphics[width=1\textwidth]{img/cam_anzahl/normal.png}
+        \caption{Moai}
+        \label{img:differenz_moai_einzel}
+    \end{subfigure}
+    \begin{subfigure}{0.27\textwidth}
+        \includegraphics[width=1\textwidth]{img/testy_diff.png}
         \caption{Testy}
         \label{img:differenz_testy}
     \end{subfigure}
-    \begin{subfigure}{0.3\textwidth}
-        \includegraphics[width=0.95\textwidth]{img/einstein_diff.png}
+    \begin{subfigure}{0.27\textwidth}
+        \includegraphics[width=1\textwidth]{img/einstein_diff.png}
         \caption{Einstein}
         \label{img:differenz_einstein}
     \end{subfigure}
-    \caption{Differenzbilder verschiedener 3D-Modelle  (rot: Fehler größer 0,5~mm)}
+    \caption{Differenzbilder verschiedener 3D-Modelle}
     \label{img:differenz}
 \end{figure}
 \todo{Testy neu erfassen, Einstein prüfen}
@@ -134,7 +174,7 @@ Hierzu wurde ein einfacher manueller Drehteller genutzt (IKEA SNUDDA). Dieser wu
 
 \subsection{Ergebnisse}
 
-In \autoref{img:drehteller_moai_fehler} ist das Differenzbild des Moai zu sehen. Es zeigt sich, dass die Genauigkeit des Modells mit Drehteller deutlich besser ist, als die des Modells ohne Drehteller (\autoref{img:differenz_moai}). Auch ist die visuelle Vollständigkeit deutlich höher, die nach unten gerichteten Flächen sind auch erfasst und passen gut zu dem Modell des Streifenprojektionssystems. Die Anzahl der Punkte hat sich nicht relevant verändert -- im Vergleich zu dem vollständigen Modell der Spiegelreflexkamera zeigt sich, dass über die Punktanzahl selbst keine sinnvollen Aussagen zur Abdeckung getroffen werden können.
+In \autoref{img:drehteller_moai_fehler} ist das Differenzbild des Moai zu sehen. Es zeigt sich, dass die Genauigkeit des Modells mit Drehteller deutlich besser ist, als die des Modells ohne Drehteller (\autoref{img:differenz_moai_einzel}). Auch ist die visuelle Vollständigkeit deutlich höher, die nach unten gerichteten Flächen sind auch erfasst und passen gut zu dem Modell des Streifenprojektionssystems. Die Anzahl der Punkte hat sich nicht relevant verändert -- im Vergleich zu dem vollständigen Modell der Spiegelreflexkamera zeigt sich, dass über die Punktanzahl selbst keine sinnvollen Aussagen zur Abdeckung getroffen werden können.
 
 Der geringe durchschnittliche Fehler ist auf die automatische Anpassung des Maßstabes zurückzuführen.
 
@@ -158,9 +198,14 @@ Die Ergebnisse sind in \autoref{tab:vergleich_drehteller} zusammengefasst.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\textwidth]{img/moai_fehler_drehteller.jpg}
-    \caption{Differenzbild des Moai (rot: Fehler größer 0,5~mm)}
-    \label{img:drehteller_moai_fehler}
+    \begin{subfigure}{0.10\textwidth}
+        \includegraphics[width=0.98\textwidth]{img/cam_anzahl/scala.png}
+    \end{subfigure}
+    \begin{subfigure}{0.85\textwidth}
+        \includegraphics[width=0.98\textwidth]{img/moai_fehler_drehteller.jpg}
+    \end{subfigure}
+    \caption{Differenzbild des Moai}
+    \label{img:differenz_moai}
 \end{figure}
 
 
@@ -184,80 +229,120 @@ Unter Nutzung des Drehtellers mit einer Drehung um eine Achtel-Drehung konnten s
 
 Im Vergleich des Parameters der Richtigkeit zeigt sich ein ähnliches Bild: Auch hier schneiden die Aufnahmen mit wenig Bildern und ohne Drehteller deutlich schlechter ab. Der Parameter zeigt, dass zwar die Punktwolken immer ähnlich viele Punkte haben, jedoch der Großteil davon außerhalb der 1-mm-Genauigkeit liegt. Die Aufnahmen mit Drehteller schneiden hier deutlich besser ab, als die ohne, erreichen aber nicht die Qualität der Aufnahmen mit 24 Kameras, vor allem nicht der Aufnahmen mit 24 Kameras und Nutzung des Drehtellers.
 
-Die Ergebnisse sind in \autoref{tab:vergleich_anzahl_drehteller} zusammengefasst. Zum Vergleich sind auch die Ergebnisse der Nutzung des Drehtellers mit 24 Kameras aufgeführt - einmal mit feinen Drehungen von $\frac{1}{32}$ (\autoref{img:moai_feinschritt}) und einmal mit groben Drehungen von $\frac{1}{8}$ (\autoref{img:moai_grobschritt}).
+Die Ergebnisse sind in \autoref{tab:vergleich_anzahl_drehteller} zusammengefasst. Zum Vergleich sind auch die Ergebnisse der Nutzung des Drehtellers mit 24 Kameras aufgeführt - einmal mit feinen Drehungen von $\frac{1}{32}$ (\autoref{img:moai_feinschritt}) und einmal mit groben Drehungen von $\frac{1}{8}$ (\autoref{img:moai_grobschritt}). \autoref{img:ueberblick_cam_anzahl} zeigt die Abweichungen der jeweiligen Punktwolken von den Referenzdaten in grafischer Form.
+
+\todo{Auf Drehungen detaillierter eingehen}
 
 \begin{table}
     \centering
     \caption{Ergebnisse mit verschiedenen Kameraanzahlen und Drehteller}
     \label{tab:vergleich_anzahl_drehteller}
     \resizebox{\textwidth}{!}{%
-        \begin{tabular}{l|l|l|l|l|l|l|l}
-            \textbf{Art}   & \textbf{\begin{tabular}[c]{@{}l@{}}Kamera-\\ Anzahl\end{tabular}} & \textbf{Drehungen}       & \textbf{\begin{tabular}[c]{@{}l@{}}Mittlerer\\ Fehler\end{tabular}} & \textbf{\begin{tabular}[c]{@{}l@{}}Maximaler\\ Fehler\end{tabular}} & \textbf{Punktanzahl} & \textbf{Abdeckung}             & \textbf{Richtigkeit}           \\ \hline
-            ATOS 5         & \cellcolor[HTML]{EEEEEE}                                          & \cellcolor[HTML]{EEEEEE} & \cellcolor[HTML]{EEEEEE}                                            & \cellcolor[HTML]{EEEEEE}                                            & 346830               & 100,0~\%                       & 100,0~\%                       \\ \hline
-            Automatik      & 24                                                                & 1                        & 0,18~mm                                                             & 2,52~mm                                                             & 628727               & 93,1~\%                        & 99,9~\%                        \\
-            Feinschritt    & 24                                                                & 4 x $\frac{1}{32}$       & 0,14~mm                                                             & 1,42~mm                                                             & 758364               & 100,2~\%                       & 100,0~\%                       \\
-            Grobschritt    & 24                                                                & 5 x $\frac{1}{8}$        & 0,16~mm                                                             & \cellcolor[HTML]{EEEEEE}                                            & 777533               & 98,8~\%                        & 100,0~\%                       \\ \hline
-            2 von 3        & 16                                                                & 1                        & {\color[HTML]{FF0000} 1,20~mm}                                      & {\color[HTML]{FF0000} 7,74~mm}                                      & 596979               & {\color[HTML]{FF0000} 68,4~\%} & {\color[HTML]{FF0000} 70,4~\%} \\ \hline
-            jede zweite K. & 12                                                                & 1                        & 0,49~mm                                                             & 4,01~mm                                                             & 346830               & {\color[HTML]{FF0000} 54,9~\%} & 94,1~\%                        \\
-            … mit Drehung  & 12                                                                & 2 x $\frac{1}{8}$        & 0,25~mm                                                             & 1,44~mm                                                             & 760538               & 95,7~\%                        & 99,8~\%                        \\ \hline
-            eine Ebene     & 6                                                                 & 4 x $\frac{1}{8}$        & {\color[HTML]{FF0000} 1,57~mm}                                      & 1,44~mm                                                             & 753062               & {\color[HTML]{FF0000} 77,8~\%} & {\color[HTML]{FF0000} 68,6~\%} \\
-            … mit Markern  & 6                                                                 & 5 x $\frac{1}{8}$        & 0,29~mm                                                             & 2,50~mm                                                             & 640810               & 94,2~\%                        & 98,9~\%
+        \begin{tabular}{l|l|l|l|l|l|l|l|l}
+            \textbf{Art}   & \textbf{\begin{tabular}[c]{@{}l@{}}Kamera-\\ Anzahl\end{tabular}} & \textbf{Drehungen}       & \textbf{Bilder}          & \textbf{\begin{tabular}[c]{@{}l@{}}Mittlerer\\ Fehler\end{tabular}} & \textbf{\begin{tabular}[c]{@{}l@{}}Maximaler\\ Fehler\end{tabular}} & \textbf{Punktanzahl} & \textbf{Abdeckung}             & \textbf{Richtigkeit}           \\ \hline
+            ATOS 5         & \cellcolor[HTML]{EEEEEE}                                          & \cellcolor[HTML]{EEEEEE} & \cellcolor[HTML]{EEEEEE} & \cellcolor[HTML]{EEEEEE}                                            & \cellcolor[HTML]{EEEEEE}                                            & 346830               & 100,0~\%                       & 100,0~\%                       \\ \hline
+            Automatik      & 24                                                                & 1                        & 24                       & 0,18~mm                                                             & 2,52~mm                                                             & 628727               & 93,1~\%                        & 99,9~\%                        \\
+            Feinschritt    & 24                                                                & 4 x $\frac{1}{32}$       & 96                       & 0,14~mm                                                             & 1,42~mm                                                             & 758364               & 100,2~\%                       & 100,0~\%                       \\
+            Grobschritt    & 24                                                                & 5 x $\frac{1}{8}$        & 120                      & 0,16~mm                                                             & \cellcolor[HTML]{EEEEEE}                                            & 777533               & 98,8~\%                        & 100,0~\%                       \\ \hline
+            2 von 3        & 16                                                                & 1                        & 16                       & {\color[HTML]{FF0000} 1,20~mm}                                      & {\color[HTML]{FF0000} 7,74~mm}                                      & 596979               & {\color[HTML]{FF0000} 68,4~\%} & {\color[HTML]{FF0000} 70,4~\%} \\ \hline
+            jede zweite K. & 12                                                                & 1                        & 12                       & 0,49~mm                                                             & 4,01~mm                                                             & 346830               & {\color[HTML]{FF0000} 54,9~\%} & 94,1~\%                        \\
+            … mit Drehung  & 12                                                                & 2 x $\frac{1}{8}$        & 24                       & 0,25~mm                                                             & 1,44~mm                                                             & 760538               & 95,7~\%                        & 99,8~\%                        \\ \hline
+            eine Ebene     & 6                                                                 & 4 x $\frac{1}{8}$        & 24                       & {\color[HTML]{FF0000} 1,57~mm}                                      & 1,44~mm                                                             & 753062               & {\color[HTML]{FF0000} 77,8~\%} & {\color[HTML]{FF0000} 68,6~\%} \\
+            … mit Markern  & 6                                                                 & 5 x $\frac{1}{8}$        & 30                       & 0,29~mm                                                             & 2,50~mm                                                             & 640810               & 94,2~\%                        & 98,9~\%
         \end{tabular}
     }
 \end{table}
 
 \begin{figure}
     \centering
-    \begin{subfigure}{0.24\textwidth}
+    \begin{subfigure}{0.30\textwidth}
         \includegraphics[width=1\linewidth]{img/cam_anzahl/normal.png}
         \centering
-        \caption{24 Kameras,\\ keine Drehung} %Bildunterschrift
-        \label{img:moai_normal} %ID fürs Bild
+        \caption{
+            24 Kameras,\\
+            keine Drehung\\
+            $\rightarrow 24$ Bilder
+        }
+        \label{img:moai_normal}
     \end{subfigure}
-    \begin{subfigure}{0.24\textwidth}
+    \begin{subfigure}{0.30\textwidth}
         \includegraphics[width=1\linewidth]{img/cam_anzahl/feinschritt.png}
         \centering
-        \caption{24 Kameras,\\4 Drehungen $\frac{1}{32}$} %Bildunterschrift
-        \label{img:moai_feinschritt} %ID fürs Bild
+        \caption{
+            24 Kameras,\\
+            $4 \times \frac{1}{32}$-Drehung\\
+            $\rightarrow 96$ Bilder
+        }
+        \label{img:moai_feinschritt}
     \end{subfigure}
-    \begin{subfigure}{0.24\textwidth}
+    \begin{subfigure}{0.30\textwidth}
         \includegraphics[width=1\linewidth]{img/cam_anzahl/allCamerasWithMask.png}
         \centering
-        \caption{24 Kameras,\\5 Drehungen $\frac{1}{8}$} %Bildunterschrift
-        \label{img:moai_grobschritt} %ID fürs Bild
+        \caption{
+            24 Kameras,\\
+            $5 \times \frac{1}{8}$-Drehung\\
+            $\rightarrow 120$ Bilder
+        }
+        \label{img:moai_grobschritt}
     \end{subfigure}
-    \begin{subfigure}{0.24\textwidth}
+    \begin{subfigure}{0.30\textwidth}
         \includegraphics[width=1\linewidth]{img/cam_anzahl/twothirds2.png}
         \centering
-        \caption{16 Kameras,\\keine Drehung} %Bildunterschrift
-        \label{img:moai_2von3} %ID fürs Bild
+        \caption{
+            16 Kameras,\\
+            keine Drehung\\
+            $\rightarrow 16$ Bilder
+        }
+        \label{img:moai_2von3}
     \end{subfigure}
-    \begin{subfigure}{0.24\textwidth}
+    \begin{subfigure}{0.30\textwidth}
         \includegraphics[width=1\linewidth]{img/cam_anzahl/second2.png}
         \centering
-        \caption{12 Kameras,\\keine Drehung\\} %Bildunterschrift
+        \caption{
+            12 Kameras,\\
+            keine Drehung\\
+            $\rightarrow 12$ Bilder
+        }
         \label{img:moai_jede2K} %ID fürs Bild
     \end{subfigure}
-    \begin{subfigure}{0.24\textwidth}
+    \begin{subfigure}{0.30\textwidth}
         \includegraphics[width=1\linewidth]{img/cam_anzahl/everysecondoneturn.png}
         \centering
-        \caption{12 Kameras,\\2 Drehungen $\frac{1}{8}$\\} %Bildunterschrift
+        \caption{
+            12 Kameras,\\
+            $2 \times \frac{1}{8}$-Drehung\\
+            $\rightarrow 24$ Bilder
+        }
         \label{img:moai_jede2K_mitDrehung} %ID fürs Bild
     \end{subfigure}
-    \begin{subfigure}{0.24\textwidth}
+    \begin{subfigure}{0.30\textwidth}
         \includegraphics[width=1\linewidth]{img/cam_anzahl/justOneRow4Turns.png}
         \centering
-        \caption{6 Kameras,\\4 Drehungen $\frac{1}{8}$\\} %Bildunterschrift
+        \caption{
+            6 Kameras,\\
+            $4 \times \frac{1}{8}$-Drehung\\
+            $\rightarrow 24$ Bilder
+        }
         \label{img:moai_eineEbene} %ID fürs Bild
     \end{subfigure}
-    \begin{subfigure}{0.24\textwidth}
+    \begin{subfigure}{0.30\textwidth}
         \includegraphics[width=1\linewidth]{img/cam_anzahl/justOneRow4TurnsRedefined.png}
         \centering
-        \caption{6 Kameras,\\4 Drehungen $\frac{1}{8}$,\\Marker} %Bildunterschrift
-        \label{img:moai_eineEbene_mitMarkern} %ID fürs Bild
+        \caption{
+            6 Kameras,\\
+            $4 \times \frac{1}{8}$-Drehung\\
+            $\rightarrow 24$ Bilder + Marker
+        }
+        \label{img:moai_eineEbene_mitMarkern}
+    \end{subfigure}
+    \begin{subfigure}{0.30\textwidth}
+        \centering{
+            \includegraphics[width=0.33\linewidth]{img/cam_anzahl/scala.png}}
+        \caption{Skala\\~\\~}
     \end{subfigure}
 
-    \caption{Abweichungen der jeweiligen Punktwolken von den Referenzdaten (rot: +0,5~mm, blau: -0,5~mm)} %Bildunterschrift
+    \caption{Abweichungen der jeweiligen Punktwolken von den Referenzdaten}
+    \label{img:ueberblick_cam_anzahl}
 \end{figure}
 
 \section{Zusammenfassung}
