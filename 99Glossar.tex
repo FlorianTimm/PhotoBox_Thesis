@@ -33,14 +33,20 @@
 
 \newglossaryentry{aeussereOrientierung}
 {
-    name=Äußere Orientierung,
+    name=äußere Orientierung,
     description={Lage und Ausrichtung der Kamera im Raum, siehe \autoref{s:aeussereorientierung}}
 }
 
 \newglossaryentry{innereOrientierung}
 {
-    name=Innere Orientierung,
+    name=innere Orientierung,
     description={Kalibrierung der Kamera, beinhaltet die \Gls{Kamerakonstante}, Lage des \Gls{Bildhauptpunkt} und der Verzeichnungskoeffizienten, siehe \autoref{s:innereorientierung}}
+}
+
+\newglossaryentry{Homografie}
+{
+    name=Homografie,
+    description={projektive Abbildung einer Ebene auf eine andere, z.B. in zwei Bildern, siehe \autoref{s:homografie}}
 }
 
 % IT
@@ -63,8 +69,6 @@
     description={Kommunikationsendpunkt, ermöglicht die Kommunikation zwischen zwei Prozessen}
 }
 
-\newacronym[
-    description={Representational State Transfer, Architekturstil für verteilte Systeme, oft in Verbindung mit Webanwendungen verwendet, basiert auf dem \gls{HTTP}-Protokoll, Zustand wird mit übertragen, so dass dieser nicht gespeichert werden muss}]{REST}{REST}{Representational-State-Transfer}
 
 
 % Abkürzungen
@@ -75,10 +79,17 @@
 
 \newacronym{CCCT}{CCCT}{concentric circular coded target}
 
+\newacronym[
+    description={Scale-Invariant Feature Transform, Algorithmus zur Bestimmung von Merkmalen in Bildern, die invariant gegenüber Skalierung, Rotation und Beleuchtung sind, siehe \autoref{ss:sift}}
+]{SIFT}{SIFT}{Scale-Invariant Feature Transform}
+
+
 \newacronym{API}{API}{Application Programming Interface}
 
 \newacronym{HTTP}{HTTP}{Hypertext Transfer Protocol}
 
+\newacronym[
+    description={Representational State Transfer, Architekturstil für verteilte Systeme, oft in Verbindung mit Webanwendungen verwendet, basiert auf dem \gls{HTTP}-Protokoll, Zustand wird mit übertragen, so dass dieser nicht gespeichert werden muss}]{REST}{REST}{Representational-State-Transfer}
 
 
 % Unverwendet

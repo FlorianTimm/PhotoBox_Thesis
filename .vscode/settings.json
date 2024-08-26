@@ -20,7 +20,9 @@
         "*.glo": true,
         "*.gls": true,
         "*.ist": true,
-        "*.synctex(busy)": true
+        "*.synctex(busy)": true,
+        "svg-inkscape": true,
+        ".github": true,
     },
     "latex-workshop.latex.recipe.default": "lastUsed",
     "latex-workshop.view.pdf.viewer": "tab",
