@@ -28,6 +28,11 @@
 \setlength {\marginparwidth }{2cm}
 \usepackage{todonotes}
 \usepackage{amsmath}
+\usepackage{siunitx}
+\sisetup{locale = DE}
+\usepackage{icomma}
+\newcommand\nlabel[1]{\addtocounter{equation}{1}\tag{\theequation}\label{#1}}
+
 \usepackage{cancel}
 \usepackage{scrhack}
 \usepackage{scrtime}

@@ -55,26 +55,26 @@ Die Abbildung eines Punktes auf einem Bild wird durch die Abbildungsgleichung be
 
 Die \gls{aeussereOrientierung} ist durch die Matrix $[R|X_0]$ beschrieben (\autoref{eq:r}). Diese besteht aus der Rotationsmatrix $R$ und dem Projektionszentrum $X_0$. Die Rotationsmatrix beschreibt die Ausrichtung der Kamera im Raum, das Projektionszentrum beschreibt die Position der Kamera bzw. des Projektionszentrums im Raum.
 
-\begin{align}
-    \label{eq:abbildungsgleichung}
+\begin{align*}
+    \nlabel{eq:abbildungsgleichung}
     x'      & = P \cdot X       \\
-    \label{eq:pkr}
+    \nlabel{eq:pkr}
     P       & = K \cdot [R|X_0] \\
-    \label{eq:k}
+    \nlabel{eq:k}
     K       & =
     \begin{bmatrix}
         c_x & 0   & x'_0 \\
         0   & c_y & y'_0 \\
         0   & 0   & 1    \\
     \end{bmatrix}            \\
-    \label{eq:r}
+    \nlabel{eq:r}
     [R|X_0] & =
     \begin{bmatrix}
-        r_11 & r_21 & r_31 & X_0 \\
-        r_12 & r_22 & r_32 & Y_0 \\
-        r_13 & r_23 & r_33 & Z_0 \\
+        r_{11} & r_{21} & r_{31} & X_0 \\
+        r_{12} & r_{22} & r_{32} & Y_0 \\
+        r_{13} & r_{23} & r_{33} & Z_0 \\
     \end{bmatrix}
-\end{align}
+\end{align*}
 \begin{conditions}
     x' & Bildkoordinate \\
     P  & Projektionsmatrix \\
@@ -84,7 +84,7 @@ Die \gls{aeussereOrientierung} ist durch die Matrix $[R|X_0]$ beschrieben (\auto
     X_0 & Projektionszentrum \\
     c_x, c_y & \Gls{Kamerakonstante} in x- und y-Richtung \\
     x'_0, y'_0 & Lage des \Gls{Bildhauptpunkt}es in x- und y-Richtung \\
-    r_{...} & Parameter der Rotationsmatrix \\
+    r_{mn} & Parameter der Rotationsmatrix \\
 \end{conditions}
 
 % Um die Beziehung zwischen zwei Bildern aufzustellen, kann man diese Abbildungsgleichung nutzen. Da es hier nur um die Beziehung zwischen zwei Bildern geht, kann die Rotation und Translation des ersten Bildes auf 0 gesetzt werden ($R$ ist dann eine 3x3-Einheitsmatrix und $X_0$ ein Nullvektor). $X_0$ des zweiten Bildes wird zur Translation zwischen den beiden Bildern. \citep[S. 330]{luhmann}
@@ -93,11 +93,11 @@ Grundlage dieser Formel ist das Lochkamera-Modell (siehe \autoref{img:optische_a
 
 Als weitere Parameter spielen die \Gls{Verzeichnung}en eine Rolle. Diese kann in die Abbildungsgleichung integriert werden, in dem $x'$ durch $\Delta x'$ korrigiert wird. \citep[S. 277]{luhmann}
 
-\begin{align}
-    \label{abbildungsgleichung_verzeichnung}
+\begin{align*}
+    \nlabel{abbildungsgleichung_verzeichnung}
     x'        & = P \cdot X + \Delta x'                 \\
     \Delta x' & = \Delta x_{rad} + \Delta x_{tan} + ...
-\end{align}
+\end{align*}
 \begin{conditions}
     \Delta x' & \Gls{Verzeichnung} \\
     \Delta x_{rad} & Radiale \Gls{Verzeichnung} \\
@@ -106,18 +106,23 @@ Als weitere Parameter spielen die \Gls{Verzeichnung}en eine Rolle. Diese kann in
 
 Die \Gls{Verzeichnung}en werden meist mit den Parametern $k_1$ bis $k_4$ für die radiale \Gls{Verzeichnung} und $p_1$ und $p_2$ für die tangentialen \Gls{Verzeichnung}en bezeichnet. Die Faktoren stellen dabei die Parameter einer Taylor-Reihe dar. Sie basieren auf dem Kameramodell von Brown und den von ihm in \cite[S. 859]{brown1971} vorgestellten Formeln (siehe \autoref{eq:brown_rad} und \ref{eq:brown_tan}). Diese Parameter werden so beispielsweise auch in Metashape, OpenDroneMap und OpenCV genutzt.
 
-\begin{align}
-    \label{eq:brown_rad}
-    \Delta x_{rad} = k_1 \cdot r^2 + k_2 \cdot r^4 + k_3 \cdot r^6 + k_4 \cdot r^8 \\
-    \label{eq:brown_tan}
-    \Delta x_{tan} = 2 \cdot p_1 \cdot x \cdot y + p_2 \cdot (r^2 + 2 \cdot x^2)
-\end{align}
+\begin{align*}
+    \nlabel{eq:brown_rad}
+    \Delta x_{rad} & = k_1 \, r^2 + k_2 \, r^4 + k_3 \, r^6 + k_4 \, r^8                  \\
+    \Delta y_{rad} & = k_1 \, r^2 + k_2 \, r^4 + k_3 \, r^6 + k_4 \, r^8                  \\
+    \nlabel{eq:brown_tan}
+    \Delta x_{tan} & = p_1 \, (r^2 + 2 \,\bar{x}^2) + 2\, p_2  \,  \bar{x}  \, \bar{y}    \\
+    \Delta y_{tan} & = 2  \, p_1 \,  \bar{x}  \, \bar{y} +  p_2 \, (r^2 + 2 \, \bar{y}^2) \\
+    r              & = \sqrt{\bar{x}^2 + \bar{y}^2}                                       \\
+    \bar{x}        & = x' - x'_0                                                          \\
+    \bar{y}        & = y' - y'_0
+\end{align*}
 \begin{conditions}
-    r & Abstand des Punktes zum \Gls{Bildhauptpunkt} \\
-    x & Bild-x-Koordinate des Punktes \\
-    y & Bild-y-Koordinate des Punktes \\
-    k1, k2, k3, k4 & Radiale \Gls{Verzeichnung}sparameter \\
-    p1, p2 & Tangentiale \Gls{Verzeichnung}sparameter \\
+    r                   & Abstand des Punktes zum \Gls{Bildhauptpunkt}          \\
+    x', y'              & Bild-Koordinaten                                      \\
+    \bar{x}, \bar{y}    & Abstand von Bildhauptpunkt in x- bzw. y-Richtung      \\
+    k_1, k_2, k_3, k_4  & Radiale \Gls{Verzeichnung}sparameter                  \\
+    p_1, p_2            & Tangentiale \Gls{Verzeichnung}sparameter              \\
 \end{conditions}
 
 
@@ -147,13 +152,13 @@ Um genaue Punktwolken erzeugen zu können, muss das Objekt scharf abgebildet wer
 
 Der Schärfebereich ergibt sich aus der Größe des tolerierbaren Unschärfekreis auf dem Sensor. Bei digitalen Kameras wird dieser durch die Pixelgröße bestimmt. Nach \citet[S. 148f]{luhmann} berechnet sich die Schärfentiefe nach folgender Formel:
 
-\begin{align}
-    \label{eq:schaerfebereich}
+\begin{align*}
+    \nlabel{eq:schaerfebereich}
     t   & = a_h - a_v            \\
     a_v & = \frac{a}{1+K}        \\
     a_h & = \frac{a}{1-K}        \\
     K   & = \frac{k(a-f)u'}{f^2}
-\end{align}
+\end{align*}
 \begin{conditions}
     t   & Länge des Schärfebereichs \\
     a_v, a_h & Vordere bzw. hintere Grenze der Schärfentiefe\\

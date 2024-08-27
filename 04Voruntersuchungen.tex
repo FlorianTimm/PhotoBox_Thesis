@@ -25,7 +25,7 @@ Es wurden Bilder von einem Siemensstern unter verschiedenen Belichtungssituation
 
 \paragraph{Ergebnis}
 
-Der Unschärfekreis war durchschnittlich 28 Pixel groß. Dies entspricht einer Linienauflösung von 292 Linien pro Millimeter, die Linienbreite beträgt 0,0034~mm beziehungsweise 2,44~Pixel. Die Linienauflösung ist mit etwa 80~\% der Sensorauflösung sehr hoch. Die Linienbreite in Pixeln entsprach der zum Vergleich genutzten Spiegelreflexkamera. Sie kann im Maximalfall (beste Auflösung) 2 Pixel betragen, entsprechend je eines weißen und schwarzen Pixels pro Linie.
+Der Unschärfekreis war durchschnittlich $28$\,\gls{px} groß. Dies entspricht einer Linienauflösung von 292 Linien pro Millimeter, die Linienbreite beträgt \SI{0,0034}{\milli\metre} beziehungsweise $2,44$\,\gls{px}. Die Linienauflösung ist mit etwa \SI{80}{\percent} der Sensorauflösung sehr hoch. Die Linienbreite in Pixeln entsprach der zum Vergleich genutzten Spiegelreflexkamera. Sie kann im Maximalfall (beste Auflösung) $2$\,\gls{px} betragen, entsprechend je eines weißen und schwarzen Pixels pro Linie.
 
 \todo{Siemenssternbild beschriften}
 \begin{figure}
@@ -45,10 +45,10 @@ Die \Gls{Kamerakonstante} einer Kamera ändert sich durch die Fokussierung. Bei 
 \paragraph{Ziel}
 \citet[S. 59]{kraus} gibt eine Formel (siehe \autoref{eq:kraus_fokus}) für die \Gls{Bildweite} $b$ in Abhängigkeit der Gegenstandsweite $g$ an. Näherungsweise entspricht die \Gls{Bildweite} der \Gls{Kamerakonstante} \citep[S. 59]{kraus}. Die Nutzung der Formel als Näherungswert soll überprüft werden und eine optimierte Formel für die Raspberry-Pi-Kamera ermittelt werden.
 
-\begin{align}
+\begin{align*}
+    \nlabel{eq:kraus_fokus}
     \frac{1}{f} = \frac{1}{g} + \frac{1}{b}
-    \label{eq:kraus_fokus}
-\end{align}
+\end{align*}
 \begin{conditions}
     f & \Gls{Brennweite} der Kamera \\
     g & Gegenstandsweite \\
@@ -56,22 +56,22 @@ Die \Gls{Kamerakonstante} einer Kamera ändert sich durch die Fokussierung. Bei 
 \end{conditions}
 
 \paragraph{Vorgehen}
-Die Änderungen der Parameter wurden in einem Versuch beobachtet. Hierzu wurde der Raspberry Pi Zero mit montierter Kamera fest vor einem ChArUco-Kalibriermuster platziert. Das Kalibriermuster besteht aus einer Kombination von ArUco-Markern und einem Schachbrettmuster (siehe \autoref{img:charuco}). Durch das Schachbrettmuster ermöglicht es auch bei unscharfen Bildern eine gute automatische Erkennung der zu beobachtenden Punkte. Es wurden je 11 Bilder mit unterschiedlichen Fokussierungen von $2~\text{m}$ bis  $10~\text{cm}$ aufgenommen. Dieser Vorgang wurde insgesamt viermal wiederholt, um auch die Wiederholungsgenauigkeit zu ermitteln. Die Bilder wurden anschließend mit einem Python-Script unter Nutzung von OpenCV ausgewertet. Hierbei wurde die relative Veränderung der \Gls{Kamerakonstante} ermittelt und mit dem erwarteten Wert verglichen. Die relativen Änderungen wurden auf eine Fokusdistanz von $20~\text{cm}$, entsprechend einer Fokussierung von $5~$\Gls{dpt}, normiert. Es wurden relative Angaben genutzt, da noch keine genaue Kenntnis über die tatsächliche \Gls{Kamerakonstante} bestand. Die Ergebnisse wurden in einem Box-Whisker-Plot dargestellt.
+Die Änderungen der Parameter wurden in einem Versuch beobachtet. Hierzu wurde der Raspberry Pi Zero mit montierter Kamera fest vor einem ChArUco-Kalibriermuster platziert. Das Kalibriermuster besteht aus einer Kombination von ArUco-Markern und einem Schachbrettmuster (siehe \autoref{img:charuco}). Durch das Schachbrettmuster ermöglicht es auch bei unscharfen Bildern eine gute automatische Erkennung der zu beobachtenden Punkte. Es wurden je 11 Bilder mit unterschiedlichen Fokussierungen von \SI{2}{\metre} bis  \SI{10}{\centi\metre} aufgenommen. Dieser Vorgang wurde insgesamt viermal wiederholt, um auch die Wiederholungsgenauigkeit zu ermitteln. Die Bilder wurden anschließend mit einem Python-Script unter Nutzung von OpenCV ausgewertet. Hierbei wurde die relative Veränderung der \Gls{Kamerakonstante} ermittelt und mit dem erwarteten Wert verglichen. Die relativen Änderungen wurden auf eine Fokusdistanz von \SI{20}{\centi\metre}, entsprechend einer Fokussierung von \SI{5}{}\,\Gls{dpt}, normiert. Es wurden relative Angaben genutzt, da noch keine genaue Kenntnis über die tatsächliche \Gls{Kamerakonstante} bestand. Die Ergebnisse wurden in einem Box-Whisker-Plot dargestellt.
 
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]{./img/charuco.png}
-    \caption{ChArUco-Board mit Fokus auf 5 \gls{dpt}} %Bildunterschrift
+    \caption{ChArUco-Board mit Fokus auf \SI{5}{}\,\Gls{dpt}} %Bildunterschrift
     \label{img:charuco} %ID fürs Bild
 \end{figure}
 
 \paragraph{Ergebnis}
-Die Ergebnisse sind in \autoref{img:fokus_faktor} dargestellt. Es zeigt sich, dass die Änderungen der \Gls{Kamerakonstante} durch die Fokussierung linear zu der Dioptrienzahl (Kehrwert der Gegenstandsweite) sind. Ein lineares Verhältnis ergibt sich auch mit der im Datenblatt angegebenen \Gls{Brennweite} von $4,74~\text{mm}$, jedoch eine etwas flachere Gerade (blau). Die ausgleichende Gerade (rot) ergab eine \Gls{Brennweite} von $6,97~\text{mm}$ (\Gls{Kamerakonstante} bei Fokussierung auf unendlich bzw. $0~$\gls{dpt}). Die Abweichung von $2,23~\text{mm}$ entspricht einer Abweichung von $47\%$, was als unrealistisch hoch eingeschätzt wird. Hier scheinen sich weitere Effekte bemerkbar zu machen, die noch nicht berücksichtigt wurden. Es wurde daher auch die \Gls{Verzeichnung} weiter untersucht.
+Die Ergebnisse sind in \autoref{img:fokus_faktor} dargestellt. Es zeigt sich, dass die Änderungen der \Gls{Kamerakonstante} durch die Fokussierung linear zu der Dioptrienzahl (Kehrwert der Gegenstandsweite) sind. Ein lineares Verhältnis ergibt sich auch mit der im Datenblatt angegebenen \Gls{Brennweite} von \SI{4,74}{\milli\metre}, jedoch eine etwas flachere Gerade (blau). Die ausgleichende Gerade (rot) ergab eine \Gls{Brennweite} von \SI{6,97}{\milli\metre} (\Gls{Kamerakonstante} bei Fokussierung auf unendlich bzw. \SI{0}{\gls{dpt}}). Die Abweichung von \SI{2,23}{\milli\metre} entspricht einer Abweichung von \SI{47}{\percent}, was als unrealistisch hoch eingeschätzt wird. Hier scheinen sich weitere Effekte bemerkbar zu machen, die noch nicht berücksichtigt wurden. Es wurde daher auch die \Gls{Verzeichnung} weiter untersucht.
 
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]{./img/fokus_faktor_diagramm_box.pdf}
-    \caption{Box-Whisker-Plot der relativen Veränderung der \Gls{Kamerakonstante} normalisiert auf eine Fokusdistanz von 20 cm (5 \glsentryshort{dpt})} %Bildunterschrift
+    \caption{Box-Whisker-Plot der relativen Veränderung der \Gls{Kamerakonstante} normalisiert auf eine Fokusdistanz von \SI{20}{\centi\metre} (\SI{5}{\glsentryshort{dpt}})} %Bildunterschrift
     \label{img:fokus_faktor} %ID fürs Bild
 \end{figure}
 
@@ -103,11 +103,11 @@ Die Schärfentiefe der Kameras ist gering. Durch Fokusstacking kann ein besseres
 Es wird vermutet, dass die geringe Schärfentiefe (siehe \autoref{s:schaerfe}) die Qualität der 3D-Modelle begrenzt. Daher soll geprüft werden, ob durch Fokusstacking die Qualität des 3D-Modell verbessert werden kann.
 
 \paragraph{Vorgehen}
-Mittels eines Pythonskriptes wurden die notwendigen Fokusschritte berechnet, damit der Bereich von 0,1 bis 1 m scharf abgebildet wird. Hierbei wurden die Werte so bestimmt, dass jeweils die hintere Schärfegrenze $a_h$ einer Aufnahme der vorderen $a_v$ des nächsten Bildes entspricht. Im Gegensatz zu den Berechnungen in \autoref{s:schaerfe} wurde hier ein Unschärfekreis von 6 Pixeln akzeptiert, da ansonsten die Anzahl der notwendigen Aufnahmen zu groß geworden wäre. Die berechneten Werte mit ihren Grenzen sind in \autoref{tab:fokusstack} aufgelistet und in \autoref{img:fokusstack_plot} dargestellt -- die blauen Striche stellen hierbei die Abdeckung einer Aufnahme dar.
+Mittels eines Pythonskriptes wurden die notwendigen Fokusschritte berechnet, damit der Bereich von \SI{10}{\centi\metre} bis \SI{1}{\metre} scharf abgebildet wird. Hierbei wurden die Werte so bestimmt, dass jeweils die hintere Schärfegrenze $a_h$ einer Aufnahme der vorderen $a_v$ des nächsten Bildes entspricht. Im Gegensatz zu den Berechnungen in \autoref{s:schaerfe} wurde hier ein Unschärfekreis von $6$\,\gls{px} akzeptiert, da ansonsten die Anzahl der notwendigen Aufnahmen zu groß geworden wäre. Die berechneten Werte mit ihren Grenzen sind in \autoref{tab:fokusstack} aufgelistet und in \autoref{img:fokusstack_plot} dargestellt -- die blauen Striche stellen hierbei die Abdeckung einer Aufnahme dar.
 
 \begin{table}
     \centering
-    \caption{Notwendige Fokusschritte für den Bereich von 0,1 bis 1 m}
+    \caption{Notwendige Fokusschritte für den Bereich von $0,1$ bis \SI{1}{\metre}} %Tabellenüberschrift
     \label{tab:fokusstack}
     \begin{tabular}{rr|r|r}
         \multicolumn{2}{c|}{\textbf{Fokussierung}} & \multicolumn{1}{c|}{\textbf{Nahgrenze}} & \multicolumn{1}{c}{\textbf{Ferngrenze}}                    \\ \hline
@@ -125,7 +125,7 @@ Mittels eines Pythonskriptes wurden die notwendigen Fokusschritte berechnet, dam
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]{./img/fokusstack_plot.png}
-    \caption{Notwendige Fokusschritte, um den Bereich von 10 cm bis 1 m scharf abzubilden} %Bildunterschrift
+    \caption{Notwendige Fokusschritte, um den Bereich von \SI{10}{\centi\metre} bis \SI{1}{\metre} scharf abzubilden} %Bildunterschrift
     \label{img:fokusstack_plot} %ID fürs Bild
 \end{figure}
 
@@ -137,9 +137,9 @@ Anschließend wurden die Bilder mit einem Python-Skript unter Verwendung von Ope
 
 \section{Überprüfung der Kamerasynchronität}
 \label{s:kamerasynchronitaet}
-Eine Anforderung war die simultane Auslösung aller Kameras. Um dieses zu überprüfen, wurden die Kameras auf eine Stoppuhr mit Anzeige von hunderstel Sekunden gerichtet und eine Aufnahme entsprechend der automatischen Aufnahme eines 3D-Modelles durchgeführt. Die Bilder wurden anschließend ausgewertet und hieraus das erste und letzte Bild bestimmt. Dieser Vorgang wurde dreimal wiederholt.
+Eine Anforderung war die simultane Auslösung aller Kameras. Um dieses zu überprüfen, wurden die Kameras auf eine Stoppuhr mit Anzeige von Hundertstel Sekunden gerichtet und eine Aufnahme entsprechend der automatischen Aufnahme eines 3D-Modelles durchgeführt. Die Bilder wurden anschließend ausgewertet und hieraus das erste und letzte Bild bestimmt. Dieser Vorgang wurde dreimal wiederholt.
 
-Die Messung zeigte eine Abweichung zwischen dem ersten und letzten Bild von maximal 0,2~Sekunden. Die Sychronität der Kameras ist damit für den Anwendungsfall gegeben. Eine Aufnahme von bewegten Objekten ist damit jedoch nicht möglich. Die Abweichung ist auf die unterschiedlichen Reaktionszeiten der Kameras zurückzuführen, auch weil es sich bei dem Betriebssystem der Raspberry Pi nicht um ein Echtzeitbetriebssystem handelt. Außerdem kann die Netzwerkverbindung das Signal weiter verzögern. Die Daten an die verschiedenen Kameras werden zwar gleichzeitig abgesendet, aber durch das Zeitschlitzverfahren des WLAN werden diese nicht gleichzeitig empfangen.
+Die Messung zeigte eine Abweichung zwischen dem ersten und letzten Bild von maximal \SI{0,2}{Sekunden}. Die Synchronität der Kameras ist damit für den Anwendungsfall gegeben. Eine Aufnahme von bewegten Objekten ist damit jedoch nicht möglich. Die Abweichung ist auf die unterschiedlichen Reaktionszeiten der Kameras zurückzuführen, auch weil es sich bei dem Betriebssystem der Raspberry Pi nicht um ein Echtzeitbetriebssystem handelt. Außerdem kann die Netzwerkverbindung das Signal weiter verzögern. Die Daten an die verschiedenen Kameras werden zwar gleichzeitig abgesendet, aber durch das Zeitschlitzverfahren des WLAN werden diese nicht gleichzeitig empfangen.
 \todo{Zeitschlitz/Echtzeit Quelle}
 
 \biblio
