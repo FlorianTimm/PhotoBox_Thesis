@@ -40,9 +40,10 @@ Ausnahmen hiervon stellen die Positionen der Passpunktmarken dar. Diese werden v
 Die Moai-Figur wurden auch bereits mit einer Spiegelreflexkamera Nikon D90 vermessen. Hierbei wurden manuell Bilder aufgenommen und diese mit Agisoft Metashape ausgewertet. Hiermit steht damit auch ein klassisches photogrammetrisches Modell zur Verfügung.
 
 
-\section{Genauigkeitsüberprüfung des 3D-Modelles}
-\label{s:genauigkeitsueberpruefung}
-Um die Genauigkeit der 3D-Modell-Erzeugung zu überprüfen, wurden mehrere Prüf\-körper mit dem Prototyp vermessen. Die Ergebnisse wurden anschließend im Vergleich zu dem Streifenprojektionssystem und der Aufnahme des Moais mit einer Spiegelreflexkamera betrachtet.
+\section{Vorgehen zur Genauigkeitsüberprüfung}
+
+Das Vorgehen zur Bewertung der erzeugten Daten unterscheidet sich zwischen den verschiedenen Untersuchungen kaum. Dieser Abschnitt beschreibt daher allgemein das Vorgehen und die verwendeten Parameter zur Bewertung der Punktwolken. Außerdem wird eine Abschätzung der erwarteten Genauigkeit des Systems vorgenommen.
+
 
 \subsection{Erwartete Genauigkeit}
 \label{ss:erwartete_genauigkeit}
@@ -100,6 +101,70 @@ Die Genauigkeit der Tiefeninformationen ist von dem Verhältnis des Abstandes de
 
 Die erwartete Genauigkeit und auch die Auflösung der Kameras liegt demnach im Bereich eines Fünftel Millimeters.
 
+
+\subsection{Verwendete Parameter}
+\label{ss:verwendete_parameter}
+Zum Vergleich der Ergebnisse wurden verschiedene Parameter in den Auswertungen betrachtet. Diese sind im Folgenden kurz erläutert.
+
+\subsubsection{Quasi-wahrer Wert/Fehler}
+Die Messung mit dem Streifenprojektionssystem ist nach der Genauigkeitsabschätzung des Prototypes etwa zehnmal genauer. Daher kann das Ergebnis des Streifenprojektionssystems hier als quasi-wahrer Wert angenommen werden \cite[S. 43]{hoepcke}. Der quasi-wahre Fehler ist nach \citet[S. 44, Formel 2-2, siehe \autoref{eq:quasi_wahrer_wert}]{hoepcke} dann die Differenz zwischen quasi-wahren Wert und der Beobachtung. Im Fall dieser dreidimensionalen Messung wurde der Abstand zwischen einem Punkt der Punktwolken des Prototyps und der Oberfläche aus der Messung des Streifenprojektionssystems als quasi-wahrer Fehler angenommen. Punkte innerhalb des Objektes wurden mit einem negativen Vorzeichen versehen.
+
+\begin{align*}
+    \nlabel{eq:quasi_wahrer_wert}
+    l + \varepsilon' & = \lambda'
+\end{align*}
+\begin{conditions}
+    l & Beobachtung \\
+    \varepsilon'   & quasi-wahrer Fehler \\
+    \lambda' &  quasi-wahrer Wert
+\end{conditions}
+
+\subsubsection{Durchschnittlicher Fehler / Mittelwert des quasi-wahren Fehlers}
+
+Der durchschnittliche Fehler ist der Mittelwert des Betrages des quasi-wahren Fehlers \citep[S.44, Gleichung 2-4, siehe \autoref{eq:durchschnittlicher_fehler}]{hoepcke}. Er gibt an, wie stark die Punktwolke von der Referenz abweicht. Der Mittelwert des quasi-wahren Fehlers ist eher unüblich (\autoref{eq:mittelwert_quasi_wahrer_fehler}). Da hier das Vorzeichen mitberücksichtigt wird, gibt er an, ob die Punktwolke systematisch zu groß oder zu klein ist, also ob die Realisierung des Maßstabes ungenau war.
+
+\begin{align*}
+    \nlabel{eq:durchschnittlicher_fehler}
+    t                       & = \frac{1}{n} \sum_{i=1}^{n} \left| \varepsilon'_i \right| \\
+    \nlabel{eq:mittelwert_quasi_wahrer_fehler}
+    \overline{\varepsilon'} & = \frac{1}{n} \sum_{i=1}^{n}  \varepsilon'_i
+\end{align*}
+
+
+\subsubsection{Mittlerer Fehler}
+
+Der mittlere Fehler ergibt sich aus der Quadratsumme des quasi-wahren Fehlers, geteilt durch die Anzahl der Messungen.  Er ist das wichtigste Maß für die Genauigkeit der Punktwolke \citep[S. 45, Gleichung 2-5b, siehe \autoref{eq:mittlerer_fehler}]{hoepcke}.
+
+\begin{align*}
+    \nlabel{eq:mittlerer_fehler}
+    m = \sqrt{\frac{1}{n} \sum_{i=1}^{n} \varepsilon_i^2}
+\end{align*}
+
+
+\subsubsection{Maximaler Fehler}
+
+Der maximale Fehler gibt den größten Fehler an, der in der Punktwolke auftritt. Er gibt an, wie stark die Punktwolke von der Referenz abweicht und ob es Ausreißer gibt.
+
+
+
+\subsubsection{Punktanzahl}
+Die Anzahl der Punkte der Punktwolke alleine ist kein Maß für die Qualität der Punktwolke. Sie kann zwar als Indikator für die Abdeckung der Oberfläche genutzt werden, jedoch nicht für die Genauigkeit. Die Anzahl der Punkte wurde daher nur als zusätzlicher Parameter betrachtet bzw. aufgrund der einfachheit der Bestimmung als Hilfsparameter genutzt, welcher durch die beiden folgenden Parameter ergänzt wird.
+
+\subsubsection{Abdeckung}
+Als weiterer Parameter wurde die Abdeckung der Objektoberfläche mit Punkten bewertet. Dazu wurden die Punktwolken auf diejenigen gefiltert, die weniger als einen Millimeter vom Modell des Streifenprojektionssystems entfernt waren. Diese wurden dann auf eine Punktdichte von \SI{1}{\milli\metre} Punktabstand reduziert und die Anzahl der Punkte gezählt. Die Anzahl dieser Punkte wurde mit der genauso bestimmten Anzahl des Referenzdatensatz in Beziehung gesetzt. Dadurch konnte die Abdeckung der Oberfläche bewertet werden. Eine Abdeckung von \SI{100}{\percent} bedeutet, dass die Punktwolke die Oberfläche des Referenzdatensatzes vollständig abdeckt. Kleinere Werte zeigen an, dass die Oberfläche nicht vollständig erfasst wurde.
+
+\subsubsection{Richtigkeit}
+Darüber hinaus wurde die Anzahl der Punkte nach der Ausdünnung bestimmt ohne Nutzung des zuvor beschriebenen Abstandsfilter. Dieser wurde dann mit der Anzahl der Punkte unter Nutzung des Abstandsfilter in Beziehung gesetzt. Dadurch konnte der Anteil der richtig liegenenden Punkte unabhängig von der Anzahl der Punkte bewertet werden. Auch hier bedeutet ein Wert von \SI{100}{\percent}, dass alle Punkte richtig bzw. maximal \SI{1}{\milli\metre} von der Oberfläche der Referenzdaten entfernt liegen. Kleinere Werte zeigen an, dass die Punktwolke Ausreißer enthält.
+
+
+
+
+\section{Genauigkeitsüberprüfung des 3D-Modelles}
+\label{s:genauigkeitsueberpruefung}
+Um die Genauigkeit der 3D-Modell-Erzeugung zu überprüfen, wurden mehrere Prüf\-körper mit dem Prototyp vermessen. Die Ergebnisse wurden anschließend im Vergleich zu dem Streifenprojektionssystem und der Aufnahme des Moais mit einer Spiegelreflexkamera betrachtet.
+
+\subsection{Durchführung}
+Die Objekte wurden mit dem Prototypen aufgenommen und die Daten in Agisoft Metashape verarbeitet. Die Daten wurden mit den Referenzdaten des Streifenprojektionssystems und der Spiegelreflexkamera verglichen. Die Genauigkeit wurde anhand der Differenz der Punktwolken zum Oberflächenmodell des Streifenprojektionssystemes berechnet.
 
 \subsection{Ergebnisse}
 Die modellierte Oberfläche aus dem Streifenprojektionssystem und die Punktwolke aus dem Prototyp wurden in CloudCompare aufeinandergelegt und die Differenz berechnet. Die Visualisierung der Differenzen ist in \autoref{img:differenz} dargestellt. Es ist zu erkennen, dass einige Bereiche gar nicht erfasst bzw. deren Genauigkeit deutlich von der erwarteten abweichen.
@@ -223,7 +288,7 @@ Die Ergebnisse sind in \autoref{tab:vergleich_drehteller} zusammengefasst.
 Die Kameras machen einen großen Teil des (Kosten-)Aufwandes zur Realisierung des Projektes aus. Es soll daher in diesem Schritt geprüft werden, ob die Anzahl der Kameras auch reduziert werden kann. Entsprechend \autoref{s:drehteller} wird auch der Einsatz des Drehtellers statt mehr Kameras geprüft.
 
 \subsection{Durchführung}
-Um abzuschätzen, wie viele Kameras für eine gute Genauigkeit notwendig sind, wurden verschiedene Konfigurationen getestet. Dazu wurde der Moai aus \autoref{s:genauigkeitsueberpruefung} verwendet und in Agisoft Metashape verschiedene Kameras deaktiviert und das 3D-Modell neu berechnet. Die Ergebnisse wurden wieder mit dem Streifenprojektionssystem ATOS 5 verglichen. Als weiterer Parameter wurde die Abdeckung der Objektoberfläche mit Punkten bewertet. Dazu wurden die Punktwolken auf diejenigen gefiltert, die weniger als einen Millimeter vom Modell des Streifenprojektionssystems entfernt waren, auf eine Punktdichte von \SI{1}{\milli\metre} Punktabstand reduziert und die Anzahl der Punkte gezählt. Darüber hinaus wurde die Anzahl der Punkte nur nach der Ausdünnung bestimmt (ohne Abstandsfilter) und mit der Anzahl mit Abstandsfilter in Beziehung gesetzt. Dadurch konnte  die Richtigkeit unabhängig von der Anzahl der Punkte bewertet werden.
+Um abzuschätzen, wie viele Kameras für eine gute Genauigkeit notwendig sind, wurden verschiedene Konfigurationen getestet. Dazu wurde der Moai aus \autoref{s:genauigkeitsueberpruefung} verwendet und in Agisoft Metashape verschiedene Kameras deaktiviert und das 3D-Modell neu berechnet. Die Ergebnisse wurden wieder mit dem Streifenprojektionssystem ATOS 5 verglichen. Als weitere Parameter wurden die Abdeckung und die Richtigkeit der Punktwolke bestimmt.
 
 Als Ausgleich für fehlenden Kameras wurde auch nochmal der Drehteller aus der vorherigen Untersuchung verwendet und geprüft, wie viele Kameras durch den Drehteller ersetzt werden können.
 
