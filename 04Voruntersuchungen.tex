@@ -36,7 +36,7 @@ Der Unschärfekreis war durchschnittlich 28 Pixel groß. Dies entspricht einer L
 \end{figure}
 
 
-\section{Änderung der \Gls{Kamerakonstante} durch Fokussierung}
+\section{Änderung der Kamerakonstante durch Fokussierung}
 \label{sec:fokus}
 
 \paragraph{These}
@@ -77,7 +77,7 @@ Die Ergebnisse sind in \autoref{img:fokus_faktor} dargestellt. Es zeigt sich, da
 
 
 
-\section{Änderung der \Gls{Verzeichnung} durch Fokussierung}
+\section{Änderung der Verzeichnung durch Fokussierung}
 
 \paragraph{These}
 Durch die Verschiebung der Linsen bei der Fokussierung verändert sich auch die \Gls{Verzeichnung} der Kamera.
@@ -134,6 +134,13 @@ Anschließend wurden die Bilder mit einem Python-Skript unter Verwendung von Ope
 \paragraph{Ergebnis}
 \todo{Fokusstack neu durchführen und Ergebnisse auswerten}
 \todo{Bild einfügen}
+
+\section{Überprüfung der Kamerasynchronität}
+\label{s:kamerasynchronitaet}
+Eine Anforderung war die simultane Auslösung aller Kameras. Um dieses zu überprüfen, wurden die Kameras auf eine Stoppuhr mit Anzeige von hunderstel Sekunden gerichtet und eine Aufnahme entsprechend der automatischen Aufnahme eines 3D-Modelles durchgeführt. Die Bilder wurden anschließend ausgewertet und hieraus das erste und letzte Bild bestimmt. Dieser Vorgang wurde dreimal wiederholt.
+
+Die Messung zeigte eine Abweichung zwischen dem ersten und letzten Bild von maximal 0,2~Sekunden. Die Sychronität der Kameras ist damit für den Anwendungsfall gegeben. Eine Aufnahme von bewegten Objekten ist damit jedoch nicht möglich. Die Abweichung ist auf die unterschiedlichen Reaktionszeiten der Kameras zurückzuführen, auch weil es sich bei dem Betriebssystem der Raspberry Pi nicht um ein Echtzeitbetriebssystem handelt. Außerdem kann die Netzwerkverbindung das Signal weiter verzögern. Die Daten an die verschiedenen Kameras werden zwar gleichzeitig abgesendet, aber durch das Zeitschlitzverfahren des WLAN werden diese nicht gleichzeitig empfangen.
+\todo{Zeitschlitz/Echtzeit Quelle}
 
 \biblio
 \end{document}
