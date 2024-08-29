@@ -18,14 +18,14 @@ Zum Vergleich standen verschiedene Testobjekte zur Verfügung. Hauptsächlich wu
         \label{img:bild_moai}
     \end{subfigure}
     \begin{subfigure}{0.32\textwidth}
-        \includegraphics[width=1\textwidth]{img/bild_testy.jpg}
-        \caption{Testy}
-        \label{img:bild_testy}
-    \end{subfigure}
-    \begin{subfigure}{0.32\textwidth}
         \includegraphics[width=1\textwidth]{img/bild_einstein}
         \caption{Einstein}
         \label{img:bild_einstein}
+    \end{subfigure}
+    \begin{subfigure}{0.32\textwidth}
+        \includegraphics[width=1\textwidth]{img/bild_testy.jpg}
+        \caption{Testy}
+        \label{img:bild_testy}
     \end{subfigure}
     \caption{Verschiedene Testobjekte}
     \label{img:bilder_testobjekte}
@@ -172,13 +172,13 @@ Die modellierte Oberfläche aus dem Streifenprojektionssystem und die Punktwolke
 \paragraph{Moai}
 Beim Moai (\autoref{img:differenz_moai_einzel}) sind die größten Fehlstellen im Bereich des Kinnes und unterhalb des Bauches zu erkennen. Abweichungen im Bereich des restlichen Körpers sind deutlich geringer und liegen im Bereich von \SI{0,21}{\milli\metre}. Sie sind auf die schlechtere Erfassung der nach unten gerichteten Flächen zurückzuführen. Diese Bildbereiche sind nur in wenigen Bildern sichtbar und können daher nicht so gut rekonstruiert werden. Weitere Abweichungen sind im Bereich der Passpunktmarken zu erkennen, hier ist unklar, welche Daten korrekt sind (vgl. \autoref{s:referenzdaten}).
 
-\paragraph{Testy}
-Das Modell des Testy (\autoref{img:differenz_testy}) ist kaum erkennbar. Die weiße und sich wiederholenden Oberfläche führte zu schlechten Ergebnissen. \todo{Text}
 
 \paragraph{Einstein}
-Das Modell von Einstein (\autoref{img:differenz_einstein}) zeigt ebenfalls größere Abweichungen im Bereich des Kinnes und des Halses. Die Abweichungen sind hier jedoch deutlich geringer. Die Passpunktmarken sind zwar auch in der Differenzdarstellung erkennbar, jedoch nicht mit so großen Abweichungen wie beim Moai.
-\todo{Text}
+Das Modell von Einstein (\autoref{img:differenz_einstein}) zeigt ebenfalls größere Abweichungen im Bereich des Kinnes und des Halses. Die Passpunktmarken sind zwar auch in der Differenzdarstellung erkennbar, jedoch nicht mit so großen Abweichungen wie beim Moai. Im Gegensatz zum Moai sind die Abweichungen im Bereich des Kopfes und der Schultern deutlich großflächiger. Gerade die großen weißen,texturarmen Flächen führen zu schlechteren Ergebnissen.
 
+
+\paragraph{Testy}
+Das Modell des Testy (\autoref{img:differenz_testy}) ist zeigt die Problematik der weißen, texturarmen Flächen. Der Körper weißt im Gegensatz zur Einstein-Büste keine Verschmutzungen auf, so dass auch hier keine zusätzliche Textur entsteht. Da dieser Testkörper auf allseitig ähnlich aussieht, ist die Zuordnung der Punkte schwierig. Die Abweichungen sind daher deutlich größer, als bei den anderen Modellen. Ein weiteres Problem ist die Größe des Körpers, er stellt das Maximum des mit dem System möglichen dar.
 
 Die Abweichungen des Moai und der Einstein-Büste liegen in der Größenordnung der in \autoref{ss:erwartete_genauigkeit} berechneten Werte und sind nur minimal schlechter, als die Genauigkeit eines 3D-Modelles des Moai, welches photogrammetrisch mit einer Spiegelreflexkamera Nikon D90 manuell aufgenommen wurde. Durch Kombinationen von anderen Perspektiven bei der manuellen Aufnahme ist hier die Abdeckung subjektiv betrachtet besser. Die Ergebnisse sind in \autoref{tab:vergleich_erg} zusammengefasst.
 
@@ -194,19 +194,19 @@ Die Abweichungen des Moai und der Einstein-Büste liegen in der Größenordnung 
         \label{img:differenz_moai_einzel}
     \end{subfigure}
     \begin{subfigure}{0.27\textwidth}
-        \includegraphics[width=1\textwidth]{img/testy_diff.png}
-        \caption{Testy}
-        \label{img:differenz_testy}
-    \end{subfigure}
-    \begin{subfigure}{0.27\textwidth}
         \includegraphics[width=1\textwidth]{img/einstein_diff.png}
         \caption{Einstein}
         \label{img:differenz_einstein}
     \end{subfigure}
+    \begin{subfigure}{0.27\textwidth}
+        \includegraphics[width=1\textwidth]{img/testy_diff.png}
+        \caption{Testy}
+        \label{img:differenz_testy}
+    \end{subfigure}
     \caption{Differenzbilder verschiedener 3D-Modelle}
     \label{img:differenz}
 \end{figure}
-\todo{Testy neu erfassen, Einstein prüfen}
+\todo{Bild Testy tauschen, noch alt}
 
 \begin{table}
     \centering
@@ -214,19 +214,22 @@ Die Abweichungen des Moai und der Einstein-Büste liegen in der Größenordnung 
     \label{tab:vergleich_erg}
     \begin{tabular}{l|r|r|r}
         \toprule
-                   & Durchschnittlicher      & Mittlerer               & Maximaler              \\
-                   & Fehler                  & Fehler                  & Fehler                 \\
+                                          & Durchschnittlicher                & Mittlerer                         & Maximaler                        \\
+                                          & Fehler                            & Fehler                            & Fehler                           \\
         %\midrule
         %Gesamt     & \SI{0,37}{\milli\metre}            & \SI{1,09}{\milli\metre}   & \SI{11,6}{\milli\metre}   \\  % Oberflächenmodell alt
         %gefiltert  & \SI{0,20}{\milli\metre}            & \SI{0,72}{\milli\metre}   & \SI{1,9}{\milli\metre}    \\
         \midrule
-        Punktwolke & \SI{0,04}{\milli\metre} & \SI{0,21}{\milli\metre} & \SI{3,3}{\milli\metre} \\  % Vertices neu
+        Moai                              & \SI{-0,024}{\milli\metre}         & \SI{0,159}{\milli\metre}          & \SI{2,57}{\milli\metre}          \\  % Vertices neu
+        ...ohne Bereiche der Marker       & \SI{-0,038}{\milli\metre}         & \SI{0,140}{\milli\metre}          & \SI{2,59}{\milli\metre}          \\  % Vertices neu
+        \textit{...manuell mit Nikon D90} & \textit{\SI{0,255}{\milli\metre}} & \textit{\SI{0,154}{\milli\metre}} & \textit{\SI{1,33}{\milli\metre}} \\
         \midrule
-        Nikon D90  & \SI{0,27}{\milli\metre} & \SI{0,19}{\milli\metre} & \SI{1,2}{\milli\metre} \\
+        Einstein                          & \SI{0,001}{\milli\metre}          & \SI{0,356}{\milli\metre}          & \SI{-3,64}{\milli\metre}         \\
+        \midrule
+        Testy                             & \SI{-0,047}{\milli\metre}         & \SI{0,644}{\milli\metre}          & \SI{11,56}{\milli\metre}         \\
         \bottomrule
     \end{tabular}
 \end{table}
-\todo{Testy/Einstein}
 
 
 \section{Nutzung eines Drehtellers}
@@ -304,6 +307,7 @@ Im Vergleich des Parameters der Richtigkeit zeigt sich ein ähnliches Bild: Auch
 Die Ergebnisse sind in \autoref{tab:vergleich_anzahl_drehteller} zusammengefasst. Zum Vergleich sind auch die Ergebnisse der Nutzung des Drehtellers mit 24 Kameras aufgeführt - einmal mit feinen Drehungen von $\frac{1}{32}$ (\autoref{img:moai_feinschritt}) und einmal mit groben Drehungen von $\frac{1}{8}$ (\autoref{img:moai_grobschritt}). \autoref{img:ueberblick_cam_anzahl} zeigt die Abweichungen der jeweiligen Punktwolken von den Referenzdaten in grafischer Form.
 
 \todo{Auf Drehungen detaillierter eingehen}
+\todo{Musterkameras beschreiben}
 
 \begin{table}
     \centering
@@ -408,14 +412,56 @@ Die Ergebnisse sind in \autoref{tab:vergleich_anzahl_drehteller} zusammengefasst
         \label{img:moai_eineEbene_mitMarkern}
     \end{subfigure}
     \begin{subfigure}{0.30\textwidth}
-        \centering{
-            \includegraphics[width=0.33\linewidth]{img/cam_anzahl/scala.png}}
+        \centering
+        \includegraphics[width=0.33\linewidth]{img/cam_anzahl/scala.png}
         \caption{Skala\\~\\~}
     \end{subfigure}
 
     \caption{Abweichungen der jeweiligen Punktwolken von den Referenzdaten}
     \label{img:ueberblick_cam_anzahl}
 \end{figure}
+
+
+\begin{figure}
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=0.95\linewidth]{img/kameraPosition/blick_von_oben_alle.png}
+        \caption{
+            24 Kameras,\\
+            $4 \times \frac{1}{32}$-Drehung (rot)\\
+            $5 \times \frac{1}{8}$-Drehung (blau)
+        }
+        \label{img:alleKameras}
+    \end{subfigure}
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=0.95\linewidth]{img/kameraPosition/blick_von_oben_zweidrittel.png}
+        \caption{
+            16 Kameras \\
+            keine Drehung \\
+            ~
+        }
+        \label{img:2von3kameras}
+    \end{subfigure}
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=0.95\linewidth]{img/kameraPosition/blick_von_oben_jedeZweite.png}
+        \caption{
+            12 Kameras, \\
+            $2 \times \frac{1}{8}$-Drehung (blau)
+        }
+        \label{img:jedeZweiteKamera}
+    \end{subfigure}
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=0.95\linewidth]{img/kameraPosition/blick_von_oben_ebene.png}
+        \caption{
+            6 Kameras, \\
+            $4 \times \frac{1}{8}$-Drehung (blau)
+        }
+        \label{img:kameras_ebene}
+    \end{subfigure}
+    \caption{Positionierung der Kameras und verwendete Positionen des Drehtellers, Blick von oben auf das System}
+    \label{img:ueberblick_cam_position}
+\end{figure}
+
+\todo{Verweis auf Bilder im Text}
 
 \section{Zusammenfassung}
 Das System erreichte die vorgesehene Genauigkeit. Die Anzahl der Kameras war gut und für die meisten getesteten Objekte ausreichend. Der Einsatz eines Drehtellers kann die Anzahl der Kameras reduzieren, jedoch ist die Verarbeitung der Daten deutlich aufwändiger. Der Einsatz des Drehtellers zur weiteren Genauigkeitssteigerung ist aber durchaus sinnvoll, wenn die Anzahl der Kameras nicht erhöht werden kann oder soll.
