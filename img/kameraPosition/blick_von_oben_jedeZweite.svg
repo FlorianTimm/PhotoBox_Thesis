@@ -27,17 +27,37 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="7.9118981"
-     inkscape:cx="314.33671"
-     inkscape:cy="340.68942"
-     inkscape:window-width="1920"
-     inkscape:window-height="1043"
+     inkscape:zoom="3.955949"
+     inkscape:cx="336.96087"
+     inkscape:cy="351.24315"
+     inkscape:window-width="1860"
+     inkscape:window-height="1011"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1" />
   <defs
      id="defs2">
+    <marker
+       style="overflow:visible"
+       id="Arrow1"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Arrow1"
+       markerWidth="4.0606604"
+       markerHeight="6.7071066"
+       viewBox="0 0 4.0606602 6.7071068"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt"
+         d="M 3,-3 0,0 3,3"
+         id="path5057"
+         transform="rotate(180,0.125,0)"
+         sodipodi:nodetypes="ccc" />
+    </marker>
     <rect
        x="247.16268"
        y="284.00374"
@@ -50,6 +70,25 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-30.204339,-65.739105)">
+    <g
+       id="g1043-8"
+       clip-path="none"
+       transform="matrix(1.4142136,-1.4142136,1.4142136,1.4142136,-246.72331,89.706996)"
+       style="stroke:#a8a8a8;stroke-opacity:1;fill:#ffffff;fill-opacity:1">
+      <g
+         inkscape:label="Clip"
+         id="g1041-7"
+         style="stroke:#a8a8a8;stroke-opacity:1;fill:#ffffff;fill-opacity:1">
+        <rect
+           style="fill:#ffffff;stroke:#a8a8a8;stroke-width:0.264583;stroke-opacity:1;fill-opacity:1"
+           id="rect165-3-9"
+           width="75"
+           height="75"
+           x="-63.148346"
+           y="138.59612"
+           transform="rotate(-45)" />
+      </g>
+    </g>
     <path
        id="path1088"
        style="fill:none;stroke:#000000;stroke-width:0.264583"
@@ -133,25 +172,6 @@
        id="path1062-1"
        style="fill:none;stroke:#a8a8a8;stroke-width:0.529166;stroke-opacity:1"
        d="M 30.733354,108.64385 73.107726,66.26947" />
-    <g
-       id="g1043-8"
-       clip-path="none"
-       transform="matrix(1.4142136,-1.4142136,1.4142136,1.4142136,-246.72331,89.706996)"
-       style="stroke:#a8a8a8;stroke-opacity:1">
-      <g
-         inkscape:label="Clip"
-         id="g1041-7"
-         style="stroke:#a8a8a8;stroke-opacity:1">
-        <rect
-           style="fill:none;stroke:#a8a8a8;stroke-width:0.264583;stroke-opacity:1"
-           id="rect165-3-9"
-           width="75"
-           height="75"
-           x="-63.148346"
-           y="138.59612"
-           transform="rotate(-45)" />
-      </g>
-    </g>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-opacity:1"
        d="m 73.369984,66.108018 16.86011,39.080222"
@@ -353,9 +373,9 @@
        transform="translate(5.1534584,3.9267964)"><tspan
          x="96.026581"
          y="141.01698"
-         id="tspan12618"><tspan
+         id="tspan1074"><tspan
            style="stroke-width:0.265"
-           id="tspan12616">Objekt</tspan></tspan></text>
+           id="tspan1072">Objekt</tspan></tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,30.204339,65.739105)"
@@ -367,7 +387,7 @@
        id="path1922" />
     <path
        style="fill:#000000;fill-opacity:1;stroke:#000dfc;stroke-width:0.465;stroke-dasharray:none;stroke-opacity:1"
-       d="m 121.26662,157.03561 -3.74752,-3.73678"
+       d="m 121.44055,156.92191 -3.74752,-3.73678"
        id="path2530-2" />
     <circle
        style="fill:none;stroke:#a8a8a8;stroke-width:0.264583;stroke-opacity:1"
@@ -375,5 +395,18 @@
        cx="106.85445"
        cy="143.12929"
        r="20" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#160aff;stroke-width:0.465;stroke-opacity:1;marker-start:url(#Arrow1)"
+       id="path14364"
+       sodipodi:type="arc"
+       sodipodi:cx="107.17645"
+       sodipodi:cy="142.38774"
+       sodipodi:rx="23"
+       sodipodi:ry="23"
+       sodipodi:start="0.78539816"
+       sodipodi:end="1.5707963"
+       sodipodi:open="true"
+       sodipodi:arc-type="arc"
+       d="m 123.43991,158.6512 a 23,23 0 0 1 -16.26346,6.73654" />
   </g>
 </svg>

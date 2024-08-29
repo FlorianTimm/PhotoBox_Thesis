@@ -50,6 +50,25 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-30.204339,-65.739105)">
+    <g
+       id="g1043-8"
+       clip-path="none"
+       transform="matrix(1.4142136,-1.4142136,1.4142136,1.4142136,-246.72331,89.706996)"
+       style="stroke:#a8a8a8;stroke-opacity:1;fill:#ffffff;fill-opacity:1">
+      <g
+         inkscape:label="Clip"
+         id="g1041-7"
+         style="stroke:#a8a8a8;stroke-opacity:1;fill:#ffffff;fill-opacity:1">
+        <rect
+           style="fill:#ffffff;stroke:#a8a8a8;stroke-width:0.264583;stroke-opacity:1;fill-opacity:1"
+           id="rect165-3-9"
+           width="75"
+           height="75"
+           x="-63.148346"
+           y="138.59612"
+           transform="rotate(-45)" />
+      </g>
+    </g>
     <path
        id="path1088"
        style="fill:none;stroke:#000000;stroke-width:0.264583"
@@ -133,25 +152,6 @@
        id="path1062-1"
        style="fill:none;stroke:#a8a8a8;stroke-width:0.529166;stroke-opacity:1"
        d="M 30.733354,108.64385 73.107726,66.26947" />
-    <g
-       id="g1043-8"
-       clip-path="none"
-       transform="matrix(1.4142136,-1.4142136,1.4142136,1.4142136,-246.72331,89.706996)"
-       style="stroke:#a8a8a8;stroke-opacity:1">
-      <g
-         inkscape:label="Clip"
-         id="g1041-7"
-         style="stroke:#a8a8a8;stroke-opacity:1">
-        <rect
-           style="fill:none;stroke:#a8a8a8;stroke-width:0.264583;stroke-opacity:1"
-           id="rect165-3-9"
-           width="75"
-           height="75"
-           x="-63.148346"
-           y="138.59612"
-           transform="rotate(-45)" />
-      </g>
-    </g>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-opacity:1"
        d="m 73.369984,66.108018 16.86011,39.080222"
@@ -359,9 +359,9 @@
        transform="translate(5.1534584,3.9267964)"><tspan
          x="96.026581"
          y="141.01698"
-         id="tspan11733"><tspan
+         id="tspan21302"><tspan
            style="stroke-width:0.265"
-           id="tspan11731">Objekt</tspan></tspan></text>
+           id="tspan21300">Objekt</tspan></tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,30.204339,65.739105)"

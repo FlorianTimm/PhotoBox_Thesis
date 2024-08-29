@@ -291,11 +291,53 @@ Die Ergebnisse sind in \autoref{tab:vergleich_drehteller} zusammengefasst.
 Die Kameras machen einen großen Teil des (Kosten-)Aufwandes zur Realisierung des Projektes aus. Es soll daher in diesem Schritt geprüft werden, ob die Anzahl der Kameras auch reduziert werden kann. Entsprechend \autoref{s:drehteller} wird auch der Einsatz des Drehtellers statt mehr Kameras geprüft.
 
 \subsection{Durchführung}
-Um abzuschätzen, wie viele Kameras für eine gute Genauigkeit notwendig sind, wurden verschiedene Konfigurationen getestet. Dazu wurde der Moai aus \autoref{s:genauigkeitsueberpruefung} verwendet und in Agisoft Metashape verschiedene Kameras deaktiviert und das 3D-Modell neu berechnet. Die Ergebnisse wurden wieder mit dem Streifenprojektionssystem ATOS 5 verglichen. Als weitere Parameter wurden die Abdeckung und die Richtigkeit der Punktwolke bestimmt.
+Um abzuschätzen, wie viele Kameras für eine gute Genauigkeit notwendig sind, wurden verschiedene Konfigurationen getestet. Dazu wurde der Moai aus \autoref{s:genauigkeitsueberpruefung} verwendet und in Agisoft Metashape verschiedene Kameras deaktiviert und das 3D-Modell neu berechnet. Die Ergebnisse wurden wieder mit dem Streifenprojektionssystem ATOS 5 verglichen. Als weitere Parameter wurden die Abdeckung und die Richtigkeit der Punktwolke bestimmt. Die Verteilung der jeweils genutzen Kameras ist in \autoref{img:ueberblick_cam_anzahl} dargestellt. Die pink dargestellten Punkte stellen jeweils die aktiven Kameras dar.
 
-Als Ausgleich für fehlenden Kameras wurde auch nochmal der Drehteller aus der vorherigen Untersuchung verwendet und geprüft, wie viele Kameras durch den Drehteller ersetzt werden können.
+Als Ausgleich für fehlenden Kameras wurde auch nochmal der Drehteller aus der vorherigen Untersuchung verwendet und geprüft, wie viele Kameras durch den Drehteller ersetzt werden können. Die verwendeten Drehungen sind der Tabelle und den Bildern jeweils in der Form [Anzahl Aufnahmen]$\times$[Betrag der Drehung] zu entnehmen. Die Drehungen sind zusätzlich auch in \autoref{img:ueberblick_cam_anzahl} dargestellt. Jeder Strich steht für eine Aufnahme mit den aktiven Kameras. Beispielsweise zeigt die Abbildung \autoref{img:jedeZweiteKamera} zwei Striche auf dem angedeuteten Drehteller. Diese entsprechen zwei Aufnahmen mit einer Drehung zwischen den beiden Aufnahmen von $\frac{1}{8}$, also hier \ang{45}.
 
 Zur Bestimmung des Maßstabes wurden die Daten automatisiert bestmöglich an die Referenzdaten angepasst. Die Passpunkte wurden daher hier nur als Verknüpfungspunkte genutzt und nicht zur Bestimmung des Maßstabes.
+
+
+
+\begin{figure}
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=0.95\linewidth]{img/kameraPosition/blick_von_oben_alle.png}
+        \caption{
+            24 Kameras,\\
+            $4 \times \frac{1}{32}$-Drehung (rot)\\
+            $5 \times \frac{1}{8}$-Drehung (blau)
+        }
+        \label{img:alleKameras}
+    \end{subfigure}
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=0.95\linewidth]{img/kameraPosition/blick_von_oben_zweidrittel.png}
+        \caption{
+            16 Kameras \\
+            keine Drehung \\
+            ~
+        }
+        \label{img:2von3kameras}
+    \end{subfigure}
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=0.95\linewidth]{img/kameraPosition/blick_von_oben_jedeZweite.png}
+        \caption{
+            12 Kameras, \\
+            $2 \times \frac{1}{8}$-Drehung (blau)
+        }
+        \label{img:jedeZweiteKamera}
+    \end{subfigure}
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=0.95\linewidth]{img/kameraPosition/blick_von_oben_ebene.png}
+        \caption{
+            6 Kameras, \\
+            $4 \times \frac{1}{8}$-Drehung (blau)
+        }
+        \label{img:kameras_ebene}
+    \end{subfigure}
+    \caption{Positionierung der Kameras und verwendete Positionen des Drehtellers, Blick von oben auf das System}
+    \label{img:ueberblick_cam_position}
+\end{figure}
+
 
 \subsection{Ergebnisse}
 Wie zu erwarten nahm die Abdeckung und die Qualität der Punktwolke ab, je weniger Kameras verwendet wurden. Bei einer Aufnahme mit allen 24 Kameras wurde die Oberfläche (ohne Boden) zu \SI{93}{\percent} abgedeckt (\autoref{img:moai_normal}). Bei einer Aufnahme mit 18 Kameras (\autoref{img:moai_2von3}) waren es nur noch \SI{68}{\percent} und bei 12 Kameras (\autoref{img:moai_jede2K}) noch \SI{54}{\percent}.  Schon bei 18 Kameras war der Moai kaum mehr zu erkennen, bei 12 war die Erkennbarkeit nicht mehr gegeben. Die Anzahl der Kameras scheint also für dieses Objekt angebracht zu sein, sofern kein Drehteller genutzt wird.
@@ -421,47 +463,6 @@ Die Ergebnisse sind in \autoref{tab:vergleich_anzahl_drehteller} zusammengefasst
     \label{img:ueberblick_cam_anzahl}
 \end{figure}
 
-
-\begin{figure}
-    \begin{subfigure}{0.48\textwidth}
-        \includegraphics[width=0.95\linewidth]{img/kameraPosition/blick_von_oben_alle.png}
-        \caption{
-            24 Kameras,\\
-            $4 \times \frac{1}{32}$-Drehung (rot)\\
-            $5 \times \frac{1}{8}$-Drehung (blau)
-        }
-        \label{img:alleKameras}
-    \end{subfigure}
-    \begin{subfigure}{0.48\textwidth}
-        \includegraphics[width=0.95\linewidth]{img/kameraPosition/blick_von_oben_zweidrittel.png}
-        \caption{
-            16 Kameras \\
-            keine Drehung \\
-            ~
-        }
-        \label{img:2von3kameras}
-    \end{subfigure}
-    \begin{subfigure}{0.48\textwidth}
-        \includegraphics[width=0.95\linewidth]{img/kameraPosition/blick_von_oben_jedeZweite.png}
-        \caption{
-            12 Kameras, \\
-            $2 \times \frac{1}{8}$-Drehung (blau)
-        }
-        \label{img:jedeZweiteKamera}
-    \end{subfigure}
-    \begin{subfigure}{0.48\textwidth}
-        \includegraphics[width=0.95\linewidth]{img/kameraPosition/blick_von_oben_ebene.png}
-        \caption{
-            6 Kameras, \\
-            $4 \times \frac{1}{8}$-Drehung (blau)
-        }
-        \label{img:kameras_ebene}
-    \end{subfigure}
-    \caption{Positionierung der Kameras und verwendete Positionen des Drehtellers, Blick von oben auf das System}
-    \label{img:ueberblick_cam_position}
-\end{figure}
-
-\todo{Verweis auf Bilder im Text}
 
 \section{Zusammenfassung}
 Das System erreichte die vorgesehene Genauigkeit. Die Anzahl der Kameras war gut und für die meisten getesteten Objekte ausreichend. Der Einsatz eines Drehtellers kann die Anzahl der Kameras reduzieren, jedoch ist die Verarbeitung der Daten deutlich aufwändiger. Der Einsatz des Drehtellers zur weiteren Genauigkeitssteigerung ist aber durchaus sinnvoll, wenn die Anzahl der Kameras nicht erhöht werden kann oder soll.
