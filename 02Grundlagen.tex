@@ -28,7 +28,7 @@ Die \gls{innereOrientierung} beschreibt die Abbildungseigenschaften der Kamera a
 
 Normalerweise wird die Kamera hierbei vereinfacht als Lochkamera unter Verwendung der Zentralperspektive betrachtet (siehe \autoref{img:optische_achse}). Als Projektionszentrum wird hierbei der Punkt beschrieben, durch den alle Bildstrahlen geradlinig laufen. Sein Lot auf dem Sensor wird als \Gls{Bildhauptpunkt} $H$ bezeichnet und beispielsweise durch seine Lage in Pixeln oder Mikrometern beschrieben. Durch eine schiefe optische Achse kann dieser vom Mittelpunkt des Sensors abweichen. Die \Gls{Kamerakonstante} $c$ beschreibt idealisiert den Abstand des Projektionszentrums zum Sensor. \citep[S. 177]{luhmann}
 
-Als \Gls{Verzeichnung} wird die Abweichung der Abbildung von der idealen Lochkamera bezeichnet. Diese kann durch die Nutzung von Linsen oder durch die Bauweise der Kamera entstehen. Die \Gls{Verzeichnung} wird in radialer und tangentialer \Gls{Verzeichnung} unterschieden. Die radiale \Gls{Verzeichnung} beschreibt die Verschiebung der Bildpunkte in radialer Richtung, die tangentialen \Gls{Verzeichnung}en die Verschiebung in tangentialer Richtung. Am wichtigsten ist hierbei die radialsymmetrische \Gls{Verzeichnung}, da diese die größte Auswirkung hat. \citep[S. 178]{luhmann}
+Als \Gls{Verzeichnung} wird die Abweichung der Abbildung von der idealen Lochkamera bezeichnet. Diese kann durch die Nutzung von Linsen oder durch die Bauweise der Kamera entstehen. Die \Gls{Verzeichnung} wird in radialer und tangentialer \Gls{Verzeichnung} unterschieden. Die radiale \Gls{Verzeichnung} beschreibt die Verschiebung der Bildpunkte in radialer Richtung, die tangentialen \Gls{Verzeichnung}en die Verschiebung in tangentialer Richtung. Am wichtigsten ist hierbei die radial-symmetrische \Gls{Verzeichnung}, da diese die größte Auswirkung hat. Sie entsteht durch den nicht symmetrischen Aufbau des Objektives um die Blende. Die radial-asymmetrische und die tangentiale \Gls{Verzeichnung} entsteht hingegen hauptsächlich aus einer Dezentrierung und Schiefstellung der Linsen zur optischen Achse. \citep[S. 178]{luhmann}
 
 Jede Einstellung der Kameraoptik verändert die \gls{innereOrientierung} und auch jede Kamera, selbst in derselben Modellreihe, muss je nach Genauigkeitsanspruch als unterschiedlich angesehen werden. Änderungen können sich beispielsweise durch Umfokussierung oder die Nutzung eines optischen Zoom ergeben, aber auch durch einen mechanisch instabilen Aufbau der Kameras. Daher sollten die Bilder normalerweise möglichst mit nur einer Kamera mit festen Einstellungen (Brennweite, Fokus, Blende, Objektiv) aufgenommen werden. Änderungen der Empfindlichkeit (ISO-Zahl) oder Belichtungszeit sind unproblematisch für die \gls{innereOrientierung}, da hierbei die Abbildungseigenschaften der Kamera nicht verändert werden. \citep[S. 176]{luhmann}
 
@@ -100,11 +100,11 @@ Als weitere Parameter spielen die \Gls{Verzeichnung}en eine Rolle. Diese kann in
 \end{align*}
 \begin{conditions}
     \Delta x' & \Gls{Verzeichnung} \\
-    \Delta x_{rad} & Radiale \Gls{Verzeichnung} \\
-    \Delta x_{tan} & Tangentiale \Gls{Verzeichnung} \\
+    \Delta x_{rad} & radial-symmetrische \Gls{Verzeichnung} \\
+    \Delta x_{tan} & tangentiale \Gls{Verzeichnung} \\
 \end{conditions}
 
-Die \Gls{Verzeichnung}en werden meist mit den Parametern $k_1$ bis $k_4$ für die radiale \Gls{Verzeichnung} und $p_1$ und $p_2$ für die tangentialen \Gls{Verzeichnung}en bezeichnet. Die Faktoren stellen dabei die Parameter einer Taylor-Reihe dar. Sie basieren auf dem Kameramodell von Brown und den von ihm in \cite[S. 859]{brown1971} vorgestellten Formeln (siehe \autoref{eq:brown_rad} und \ref{eq:brown_tan}). Diese Parameter werden so beispielsweise auch in Metashape, OpenDroneMap und OpenCV genutzt.
+Die \Gls{Verzeichnung}en werden meist mit den Parametern $k_1$ bis $k_4$ für die radial-symmetrische \Gls{Verzeichnung} und $p_1$ und $p_2$ für die tangentiale \Gls{Verzeichnung} bezeichnet. Die Faktoren stellen dabei die Parameter einer Taylor-Reihe dar. Sie basieren auf dem Kameramodell von Brown und den von ihm in \cite[S. 859]{brown1971} vorgestellten Formeln (siehe \autoref{eq:brown_rad} und \ref{eq:brown_tan}). Diese Parameter werden so beispielsweise auch in Metashape, OpenDroneMap und OpenCV genutzt.
 
 \begin{align*}
     \nlabel{eq:brown_rad}
@@ -121,7 +121,7 @@ Die \Gls{Verzeichnung}en werden meist mit den Parametern $k_1$ bis $k_4$ für di
     r                   & Abstand des Punktes zum \Gls{Bildhauptpunkt}          \\
     x', y'              & Bild-Koordinaten                                      \\
     \bar{x}, \bar{y}    & Abstand von Bildhauptpunkt in x- bzw. y-Richtung      \\
-    k_1, k_2, k_3, k_4  & Radiale \Gls{Verzeichnung}sparameter                  \\
+    k_1, k_2, k_3, k_4  & Radial-symmetrische \Gls{Verzeichnung}sparameter                  \\
     p_1, p_2            & Tangentiale \Gls{Verzeichnung}sparameter              \\
 \end{conditions}
 
