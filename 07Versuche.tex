@@ -107,15 +107,15 @@ Die erwartete Genauigkeit und auch die Auflösung der Kameras liegt demnach im B
 Zum Vergleich der Ergebnisse wurden verschiedene Parameter in den Auswertungen betrachtet. Diese sind im Folgenden kurz erläutert.
 
 \subsubsection{Quasi-wahrer Wert/Fehler}
-Die Messung mit dem Streifenprojektionssystem ist nach der Genauigkeitsabschätzung des Prototypes etwa zehnmal genauer. Daher kann das Ergebnis des Streifenprojektionssystems hier als quasi-wahrer Wert angenommen werden \cite[S. 43]{hoepcke}. Der quasi-wahre Fehler ist nach \citet[S. 44, Formel 2-2, siehe \autoref{eq:quasi_wahrer_wert}]{hoepcke} dann die Differenz zwischen quasi-wahren Wert und der Beobachtung. Im Fall dieser dreidimensionalen Messung wurde der Abstand zwischen einem Punkt der Punktwolken des Prototyps und der Oberfläche aus der Messung des Streifenprojektionssystems als quasi-wahrer Fehler angenommen. Punkte innerhalb des Objektes wurden mit einem negativen Vorzeichen versehen.
+Die Messung mit dem Streifenprojektionssystem ist nach der Genauigkeitsabschätzung des Prototyps etwa zehnmal genauer. Daher kann das Ergebnis des Streifenprojektionssystems hier als quasi-wahrer Wert angenommen werden \cite[S. 43]{hoepcke}. Der quasi-wahre Fehler ist nach \citet[S. 44, Formel 2-2, siehe \autoref{eq:quasi_wahrer_wert}]{hoepcke} dann die Differenz zwischen quasi-wahren Wert und der Beobachtung. Im Fall dieser dreidimensionalen Messung wurde der Abstand zwischen einem Punkt der Punktwolken des Prototyps und der Oberfläche aus der Messung des Streifenprojektionssystems als quasi-wahrer Fehler angenommen. Punkte innerhalb des Objektes wurden mit einem negativen Vorzeichen versehen.
 
 \begin{align*}
     \nlabel{eq:quasi_wahrer_wert}
     l + \varepsilon' & = \lambda'
 \end{align*}
 \begin{conditions}
-    l & Beobachtung \\
-    \varepsilon'   & quasi-wahrer Fehler \\
+    l & Beobachtung\\
+    \varepsilon' & quasi-wahrer Fehler\\
     \lambda' &  quasi-wahrer Wert
 \end{conditions}
 
@@ -148,13 +148,13 @@ Der maximale Fehler gibt den größten Fehler an, der in der Punktwolke auftritt
 
 
 \subsubsection{Punktanzahl}
-Die Anzahl der Punkte der Punktwolke alleine ist kein Maß für die Qualität der Punktwolke. Sie kann zwar als Indikator für die Abdeckung der Oberfläche genutzt werden, jedoch nicht für die Genauigkeit. Die Anzahl der Punkte wurde daher nur als zusätzlicher Parameter betrachtet bzw. aufgrund der einfachheit der Bestimmung als Hilfsparameter genutzt, welcher durch die beiden folgenden Parameter ergänzt wird.
+Die Anzahl der Punkte der Punktwolke alleine ist kein Maß für die Qualität der Punktwolke. Sie kann zwar als Indikator für die Abdeckung der Oberfläche genutzt werden, jedoch nicht für die Genauigkeit. Die Anzahl der Punkte wurde daher nur als zusätzlicher Parameter betrachtet bzw. aufgrund der Einfachheit der Bestimmung als Hilfsparameter genutzt, welcher durch die beiden folgenden Parameter ergänzt wird.
 
 \subsubsection{Abdeckung}
-Als weiterer Parameter wurde die Abdeckung der Objektoberfläche mit Punkten bewertet. Dazu wurden die Punktwolken auf diejenigen gefiltert, die weniger als einen Millimeter vom Modell des Streifenprojektionssystems entfernt waren. Diese wurden dann auf eine Punktdichte von \SI{1}{\milli\metre} Punktabstand reduziert und die Anzahl der Punkte gezählt. Die Anzahl dieser Punkte wurde mit der genauso bestimmten Anzahl des Referenzdatensatz in Beziehung gesetzt. Dadurch konnte die Abdeckung der Oberfläche bewertet werden. Eine Abdeckung von \SI{100}{\percent} bedeutet, dass die Punktwolke die Oberfläche des Referenzdatensatzes vollständig abdeckt. Kleinere Werte zeigen an, dass die Oberfläche nicht vollständig erfasst wurde.
+Als weiterer Parameter wurde die Abdeckung der Objektoberfläche mit Punkten bewertet. Dazu wurden die Punktwolken auf diejenigen gefiltert, die weniger als einen Millimeter vom Modell des Streifenprojektionssystems entfernt waren. Diese wurden dann auf eine Punktdichte von \SI{1}{\milli\metre} Punktabstand reduziert und die Anzahl der Punkte gezählt. Die Anzahl dieser Punkte wurde mit der genauso bestimmten Anzahl des Referenzdatensatzes in Beziehung gesetzt. Dadurch konnte die Abdeckung der Oberfläche bewertet werden. Eine Abdeckung von \SI{100}{\percent} bedeutet, dass die Punktwolke die Oberfläche des Referenzdatensatzes vollständig abdeckt. Kleinere Werte zeigen an, dass die Oberfläche nicht vollständig erfasst wurde.
 
 \subsubsection{Richtigkeit}
-Darüber hinaus wurde die Anzahl der Punkte nach der Ausdünnung bestimmt ohne Nutzung des zuvor beschriebenen Abstandsfilter. Dieser wurde dann mit der Anzahl der Punkte unter Nutzung des Abstandsfilter in Beziehung gesetzt. Dadurch konnte der Anteil der richtig liegenenden Punkte unabhängig von der Anzahl der Punkte bewertet werden. Auch hier bedeutet ein Wert von \SI{100}{\percent}, dass alle Punkte richtig bzw. maximal \SI{1}{\milli\metre} von der Oberfläche der Referenzdaten entfernt liegen. Kleinere Werte zeigen an, dass die Punktwolke Ausreißer enthält.
+Darüber hinaus wurde die Anzahl der Punkte nach der Ausdünnung bestimmt ohne Nutzung des zuvor beschriebenen Abstandsfilter. Dieser wurde dann mit der Anzahl der Punkte unter Nutzung des Abstandsfilters in Beziehung gesetzt. Dadurch konnte der Anteil der richtig liegenden Punkte unabhängig von der Anzahl der Punkte bewertet werden. Auch hier bedeutet ein Wert von \SI{100}{\percent}, dass alle Punkte richtig bzw. maximal \SI{1}{\milli\metre} von der Oberfläche der Referenzdaten entfernt liegen. Kleinere Werte zeigen an, dass die Punktwolke Ausreißer enthält.
 
 
 
@@ -164,21 +164,21 @@ Darüber hinaus wurde die Anzahl der Punkte nach der Ausdünnung bestimmt ohne N
 Um die Genauigkeit der 3D-Modell-Erzeugung zu überprüfen, wurden mehrere Prüf\-körper mit dem Prototyp vermessen. Die Ergebnisse wurden anschließend im Vergleich zu dem Streifenprojektionssystem und der Aufnahme des Moais mit einer Spiegelreflexkamera betrachtet.
 
 \subsection{Durchführung}
-Die Objekte wurden mit dem Prototypen aufgenommen und die Daten in Agisoft Metashape verarbeitet. Die Daten wurden mit den Referenzdaten des Streifenprojektionssystems und der Spiegelreflexkamera verglichen. Die Genauigkeit wurde anhand der Differenz der Punktwolken zum Oberflächenmodell des Streifenprojektionssystemes berechnet.
+Alle drei Testobjekte wurden mit dem Prototyp aufgenommen und die Daten in Agisoft Metashape verarbeitet. Die modellierte Oberfläche aus dem Streifenprojektionssystem und die Punktwolke aus dem Prototyp wurden in CloudCompare aufeinandergelegt. Hieraus wurde anschließend die Differenz und die Genauigkeit anhand dieser berechnet.
 
 \subsection{Ergebnisse}
-Die modellierte Oberfläche aus dem Streifenprojektionssystem und die Punktwolke aus dem Prototyp wurden in CloudCompare aufeinandergelegt und die Differenz berechnet. Die Visualisierung der Differenzen ist in \autoref{img:differenz} dargestellt. Es ist zu erkennen, dass einige Bereiche gar nicht erfasst bzw. deren Genauigkeit deutlich von der erwarteten abweichen.
+Die Visualisierung der Differenzen ist in \autoref{img:differenz} dargestellt. Es ist zu erkennen, dass je nach Modell einige Bereiche gar nicht erfasst bzw. deren Genauigkeit deutlich von der erwarteten abweichen.
 
 \paragraph{Moai}
 Beim Moai (\autoref{img:differenz_moai_einzel}) sind die größten Fehlstellen im Bereich des Kinnes und unterhalb des Bauches zu erkennen. Abweichungen im Bereich des restlichen Körpers sind deutlich geringer und liegen im Bereich von \SI{0,21}{\milli\metre}. Sie sind auf die schlechtere Erfassung der nach unten gerichteten Flächen zurückzuführen. Diese Bildbereiche sind nur in wenigen Bildern sichtbar und können daher nicht so gut rekonstruiert werden. Weitere Abweichungen sind im Bereich der Passpunktmarken zu erkennen, hier ist unklar, welche Daten korrekt sind (vgl. \autoref{s:referenzdaten}).
 
 
 \paragraph{Einstein}
-Das Modell von Einstein (\autoref{img:differenz_einstein}) zeigt ebenfalls größere Abweichungen im Bereich des Kinnes und des Halses. Die Passpunktmarken sind zwar auch in der Differenzdarstellung erkennbar, jedoch nicht mit so großen Abweichungen wie beim Moai. Im Gegensatz zum Moai sind die Abweichungen im Bereich des Kopfes und der Schultern deutlich großflächiger. Gerade die großen weißen,texturarmen Flächen führen zu schlechteren Ergebnissen.
+Das Modell von Einstein (\autoref{img:differenz_einstein}) zeigt ebenfalls größere Abweichungen im Bereich des Kinnes und des Halses. Die Passpunktmarken sind zwar auch in der Differenzdarstellung erkennbar, jedoch nicht mit so großen Abweichungen wie beim Moai. Im Gegensatz zum Moai sind die Abweichungen im Bereich des Kopfes und der Schultern deutlich großflächiger. Gerade die großen weißen, texturarmen Flächen führen zu schlechteren Ergebnissen.
 
 
 \paragraph{Testy}
-Das Modell des Testy (\autoref{img:differenz_testy}) ist zeigt die Problematik der weißen, texturarmen Flächen. Der Körper weißt im Gegensatz zur Einstein-Büste keine Verschmutzungen auf, so dass auch hier keine zusätzliche Textur entsteht. Da dieser Testkörper auf allseitig ähnlich aussieht, ist die Zuordnung der Punkte schwierig. Die Abweichungen sind daher deutlich größer, als bei den anderen Modellen. Ein weiteres Problem ist die Größe des Körpers, er stellt das Maximum des mit dem System möglichen dar.
+Das Modell des Testy (\autoref{img:differenz_testy}) ist zeigt die Problematik der weißen, texturarmen Flächen. Der Körper weist im Gegensatz zur Einstein-Büste keine Verschmutzungen auf, sodass auch hier keine zusätzliche Textur entsteht. Da dieser Testkörper auf allseitig ähnlich aussieht, ist die Zuordnung der Punkte schwierig. Die Abweichungen sind daher deutlich größer, als bei den anderen Modellen. Ein weiteres Problem ist die Größe des Körpers, er stellt das Maximum des mit dem System möglichen dar.
 
 Die Abweichungen des Moai und der Einstein-Büste liegen in der Größenordnung der in \autoref{ss:erwartete_genauigkeit} berechneten Werte und sind nur minimal schlechter, als die Genauigkeit eines 3D-Modelles des Moai, welches photogrammetrisch mit einer Spiegelreflexkamera Nikon D90 manuell aufgenommen wurde. Durch Kombinationen von anderen Perspektiven bei der manuellen Aufnahme ist hier die Abdeckung subjektiv betrachtet besser. Die Ergebnisse sind in \autoref{tab:vergleich_erg} zusammengefasst.
 
@@ -249,7 +249,7 @@ Hierzu wurde ein einfacher manueller Drehteller genutzt (IKEA SNUDDA). Dieser wu
 
 \subsection{Ergebnisse}
 
-In \autoref{img:drehteller_moai_fehler} ist das Differenzbild des Moai zu sehen. Es zeigt sich, dass die Genauigkeit des Modells mit Drehteller deutlich besser ist, als die des Modells ohne Drehteller (\autoref{img:differenz_moai_einzel}). Auch ist die visuelle Vollständigkeit deutlich höher, die nach unten gerichteten Flächen sind auch erfasst und passen gut zu dem Modell des Streifenprojektionssystems. Die Anzahl der Punkte hat sich nicht relevant verändert -- im Vergleich zu dem vollständigen Modell der Spiegelreflexkamera zeigt sich, dass über die Punktanzahl selbst keine sinnvollen Aussagen zur Abdeckung getroffen werden können.
+In \autoref{img:differenz_moai_drehteller} ist das Differenzbild des Moai zu sehen. Es zeigt sich, dass die Genauigkeit des Modells mit Drehteller deutlich besser ist, als die des Modells ohne Drehteller (\autoref{img:differenz_moai_einzel}). Auch ist die visuelle Vollständigkeit deutlich höher, die nach unten gerichteten Flächen sind auch erfasst und passen gut zu dem Modell des Streifenprojektionssystems. Die Anzahl der Punkte hat sich nicht relevant verändert -- im Vergleich zu dem vollständigen Modell der Spiegelreflexkamera zeigt sich, dass über die Punktanzahl selbst keine sinnvollen Aussagen zur Abdeckung getroffen werden können.
 
 Der geringe durchschnittliche Fehler ist auf die automatische Anpassung des Maßstabes zurückzuführen.
 
@@ -264,9 +264,9 @@ Die Ergebnisse sind in \autoref{tab:vergleich_drehteller} zusammengefasst.
                         & Durchschnittlicher       & Mittlerer               & Maximaler              & Punktanzahl \\
                         & Fehler                   & Fehler                  & Fehler                 &             \\
         \midrule
-        ohne Drehteller & \SI{-0,03}{\milli\metre} & \SI{0,22}{\milli\metre} & \SI{2,0}{\milli\metre} & 3,3 Mio     \\
-        mit Drehteller  & \SI{-0,03}{\milli\metre} & \SI{0,15}{\milli\metre} & \SI{1,6}{\milli\metre} & 3,4 Mio     \\
-        Nikon D90       & \SI{0,03}{\milli\metre}  & \SI{0,17}{\milli\metre} & \SI{1,2}{\milli\metre} & 0,05 Mio    \\
+        ohne Drehteller & \SI{-0,03}{\milli\metre} & \SI{0,22}{\milli\metre} & \SI{2,0}{\milli\metre} & 3,3 Mio.    \\
+        mit Drehteller  & \SI{-0,03}{\milli\metre} & \SI{0,15}{\milli\metre} & \SI{1,6}{\milli\metre} & 3,4 Mio.    \\
+        Nikon D90       & \SI{0,03}{\milli\metre}  & \SI{0,17}{\milli\metre} & \SI{1,2}{\milli\metre} & 0,05 Mio.   \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -280,18 +280,18 @@ Die Ergebnisse sind in \autoref{tab:vergleich_drehteller} zusammengefasst.
         \includegraphics[width=0.98\textwidth]{img/moai_fehler_drehteller.jpg}
     \end{subfigure}
     \caption{Differenzbild des Moai}
-    \label{img:differenz_moai}
+    \label{img:differenz_moai_drehteller}
 \end{figure}
 
 
 
 \section{Evaluation der Kameraanzahl}
 \label{s:kameraanzahl}
-\todo{ggf. Reihenfolge mit Drehteller tauschen, gesucht: unterste Grenze, Definition?}
+\todo{Ggf. Reihenfolge mit Drehteller tauschen, gesucht: unterste Grenze, Definition?}
 Die Kameras machen einen großen Teil des (Kosten-)Aufwandes zur Realisierung des Projektes aus. Es soll daher in diesem Schritt geprüft werden, ob die Anzahl der Kameras auch reduziert werden kann. Entsprechend \autoref{s:drehteller} wird auch der Einsatz des Drehtellers statt mehr Kameras geprüft.
 
 \subsection{Durchführung}
-Um abzuschätzen, wie viele Kameras für eine gute Genauigkeit notwendig sind, wurden verschiedene Konfigurationen getestet. Dazu wurde der Moai aus \autoref{s:genauigkeitsueberpruefung} verwendet und in Agisoft Metashape verschiedene Kameras deaktiviert und das 3D-Modell neu berechnet. Die Ergebnisse wurden wieder mit dem Streifenprojektionssystem ATOS 5 verglichen. Als weitere Parameter wurden die Abdeckung und die Richtigkeit der Punktwolke bestimmt. Die Verteilung der jeweils genutzen Kameras ist in \autoref{img:ueberblick_cam_anzahl} dargestellt. Die pink dargestellten Punkte stellen jeweils die aktiven Kameras dar.
+Um abzuschätzen, wie viele Kameras für eine gute Genauigkeit notwendig sind, wurden verschiedene Konfigurationen getestet. Dazu wurde der Moai aus \autoref{s:genauigkeitsueberpruefung} verwendet und in Agisoft Metashape verschiedene Kameras deaktiviert und das 3D-Modell neu berechnet. Die Ergebnisse wurden wieder mit dem Streifenprojektionssystem ATOS 5 verglichen. Als weitere Parameter wurden die Abdeckung und die Richtigkeit der Punktwolke bestimmt. Die Verteilung der jeweils genutzten Kameras ist in \autoref{img:ueberblick_cam_anzahl} dargestellt. Die pink dargestellten Punkte stellen jeweils die aktiven Kameras dar.
 
 Als Ausgleich für fehlenden Kameras wurde auch nochmal der Drehteller aus der vorherigen Untersuchung verwendet und geprüft, wie viele Kameras durch den Drehteller ersetzt werden können. Die verwendeten Drehungen sind der Tabelle und den Bildern jeweils in der Form [Anzahl Aufnahmen]$\times$[Betrag der Drehung] zu entnehmen. Die Drehungen sind zusätzlich auch in \autoref{img:ueberblick_cam_anzahl} dargestellt. Jeder Strich steht für eine Aufnahme mit den aktiven Kameras. Beispielsweise zeigt die Abbildung \autoref{img:jedeZweiteKamera} zwei Striche auf dem angedeuteten Drehteller. Diese entsprechen zwei Aufnahmen mit einer Drehung zwischen den beiden Aufnahmen von $\frac{1}{8}$, also hier \ang{45}.
 
@@ -348,12 +348,11 @@ Im Vergleich des Parameters der Richtigkeit zeigt sich ein ähnliches Bild: Auch
 
 Die Ergebnisse sind in \autoref{tab:vergleich_anzahl_drehteller} zusammengefasst. Zum Vergleich sind auch die Ergebnisse der Nutzung des Drehtellers mit 24 Kameras aufgeführt - einmal mit feinen Drehungen von $\frac{1}{32}$ (\autoref{img:moai_feinschritt}) und einmal mit groben Drehungen von $\frac{1}{8}$ (\autoref{img:moai_grobschritt}). \autoref{img:ueberblick_cam_anzahl} zeigt die Abweichungen der jeweiligen Punktwolken von den Referenzdaten in grafischer Form.
 
-\todo{Auf Drehungen detaillierter eingehen}
-\todo{Musterkameras beschreiben}
+\todo{Auf Drehungen detaillierter eingehen, Musterkameras beschreiben, bisher in nächstem Absatz}
 
 \begin{table}
     \centering
-    \caption{Ergebnisse mit verschiedenen Kameraanzahlen und Drehteller}
+    \caption{Ergebnisse mit unterschiedlicher Kameraanzahl und teilweise Nutzung eines Drehtellers}
     \label{tab:vergleich_anzahl_drehteller}
     \resizebox{\textwidth}{!}{%
         \begin{tabular}{l|l|l|l|l|l|l|l|l}

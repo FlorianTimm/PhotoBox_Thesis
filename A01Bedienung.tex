@@ -12,9 +12,9 @@
 Ziel des Systems ist es, 3D-Modelle von Objekten bis zu einer Größe von \SI{40}{\centi\metre} Durchmesser zu erstellen. Die Bedienung soll dabei möglichst einfach und selbsterklärend sein, um auch Laien die Möglichkeit zu geben, das System zu bedienen.
 
 \section{Inbetriebnahme}
-Beim Aufstellen ist darauf zu achten, dass sich keine stärkeren seitlichen Lichtquellen um das System herum befinden, wie beispielsweise Fensterflächen. Diese könnten die Belichtung der Bilder beeinflussen und so die Qualität der 3D-Modelle negativ beeinflussen. Gegebenenfalls muss für Verschattung oder Streuung gesorgt werden. \todo{überflüssig durch Stoffhülle?}
+Beim Aufstellen ist darauf zu achten, dass sich keine stärkeren seitlichen Lichtquellen um das System herum befinden, wie beispielsweise Fensterflächen. Diese könnten die Belichtung der Bilder beeinflussen und so die Qualität der 3D-Modelle negativ beeinflussen. Gegebenenfalls muss durch die Stoffhülle oder andere Maßnahmen für Verschattung oder Streuung gesorgt werden.
 
-Die Berechnung des 3D-Modelles erfolgt auf einem externen Rechner. Dafür kann wahlweise Agisoft Metashape oder OpenDroneMap (NodeODM) genutzt werden. Die entsprechende Software sowie eine Java-Laufzeitumgebung müssen auf dem Rechner installiert sein und die Bilder müssen auf diesen übertragen werden. Die Übertragung kann automatisch über eine Netzwerkverbindung oder manuell per USB-Stick erfolgen. Die mitgelieferte Verbindungssoftware muss auf dem Rechner gestartet sein (siehe \autoref{sec:SoftwareEinrichtung}).
+Die Berechnung des 3D-Modelles erfolgt auf einem externen Rechner. Dafür kann wahlweise Agisoft Metashape oder OpenDroneMap (NodeODM) genutzt werden. Die entsprechende Software sowie eine Java-Laufzeitumgebung müssen auf dem Rechner installiert sein und die Bilder müssen auf diesen übertragen werden. Die Übertragung kann automatisch über eine Netzwerkverbindung oder manuell per USB-Stick erfolgen. Für die automatische Übertragung muss die mitgelieferte Verbindungssoftware auf dem Rechner gestartet sein (siehe \autoref{sec:SoftwareEinrichtung}).
 
 Das System startet bei Anschluss an eine Stromversorgung selbstständig. Da die Gefahr besteht, dass die kamerasteuernden Raspberry Pi Zero Daten verlieren, wenn die Stromversorgung unterbrochen wird, sollte das System immer ordnungsgemäß heruntergefahren werden und auf eine zuverlässige Stromversorgung geachtet werden.
 Das Abschalten erfolgt durch langes Drücken auf den roten Taster. Das System fährt dann selbstständig herunter - erkennbar an dem Erlöschen der LEDs der Raspberry Pi Zero und der Beleuchtung - und die Stromversorgung kann getrennt werden.
@@ -56,7 +56,7 @@ Software-Updates können zu Inkompatibilitäten führen, daher sollten diese ers
 
 \section{Fehlerbehebung}
 \label{sec:Fehlerbehebung}
-\todo{nur ein Unterpunkt, weitere ergänzen}
+\todo{Nur ein Unterpunkt, weitere ergänzen}
 \subsection{Kameras sind nicht erreichbar}
 Die Kameras sind nicht erreichbar, wenn die LEDs nicht grün leuchten. Dies kann verschiedene Ursachen haben. Als Erstes sollte das System nochmal heruntergefahren werden durch einen langen Druck auf die rote Taste. Anschließend wird die Stromversorgung für einige Sekunden vollständig getrennt und wieder hergestellt. Das System sollte nun neu starten und die Kameras erreichbar sein.
 
