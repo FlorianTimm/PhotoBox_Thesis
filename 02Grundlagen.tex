@@ -5,7 +5,7 @@
 
 \chapter{Photogrammetrische Grundlagen}
 \label{c:photogrammetrie}
-Dieses Kapitel beschreibt die notwendigen Bedingungen und die Grundlagen der Rekonstruktion des Objektes als 3D-Modell. Hierfür wird Photogrammetrie in Form einer \Gls{SfM}-Pipeline genutzt. Der allgemeine Ablauf ist in \autoref{img:ablauf} dargestellt. Grau dargestellte Schritte werden nicht von der entwickelten Software aus \autoref{c:software}, sondern von externer Software durchgeführt.
+Dieses Kapitel beschreibt die notwendigen Bedingungen und die Grundlagen der Rekonstruktion des Objektes als 3D-Modell. Hierfür wird Photogrammetrie in Form einer \Glsentrylong{SfM}-Pipeline genutzt. Der allgemeine Ablauf ist in \autoref{img:ablauf} dargestellt. Grau dargestellte Schritte werden nicht von der entwickelten Software aus \autoref{c:software}, sondern von externer Software durchgeführt.
 
 Zunächst werden die Bilder aufgenommen (siehe \autoref{s:bilder}). Hierbei ist wichtig, dass sich die Bildinhalte überlappen. Die Bilder werden dann verknüpft, indem identische Punkte in den Bildern identifiziert werden  (siehe \autoref{s:verknuepfung}).
 Aus den identifizierten Punkten werden dann die Positionen und Ausrichtung der Kameras und Verknüpfungspunkte in einem lokalen Koordinatensystem ohne bekannten Maßstab berechnet. Die so erzeugten Daten werden anschließend in einer Bündelblockausgleichung gemeinsam optimiert (siehe \autoref{s:buendelblock}). Durch die Nutzung von bekannten Größen, beispielsweise kalibrierten Maßstäben, kann dieses System transformiert werden.
@@ -28,11 +28,11 @@ Die \gls{innereOrientierung} beschreibt die Abbildungseigenschaften der Kamera a
 
 Normalerweise wird die Kamera hierbei vereinfacht als Lochkamera unter Verwendung der Zentralperspektive betrachtet (siehe \autoref{img:optische_achse}). Als Projektionszentrum wird hierbei der Punkt beschrieben, durch den alle Bildstrahlen geradlinig laufen. Sein Lot auf dem Sensor wird als \Gls{Bildhauptpunkt} $H$ bezeichnet und beispielsweise durch seine Lage in Pixeln oder Mikrometern beschrieben. Durch eine schiefe optische Achse kann dieser vom Mittelpunkt des Sensors abweichen. Die \Gls{Kamerakonstante} $c$ beschreibt idealisiert den Abstand des Projektionszentrums zum Sensor. \citep[S. 177]{luhmann}
 
-Als \Gls{Verzeichnung} wird die Abweichung der Abbildung von der idealen Lochkamera bezeichnet. Diese kann durch die Nutzung von Linsen oder durch die Bauweise der Kamera entstehen. Die \Gls{Verzeichnung} wird in radialer und tangentialer \Gls{Verzeichnung} unterschieden. Die radiale \Gls{Verzeichnung} beschreibt die Verschiebung der Bildpunkte in radialer Richtung, die tangentialen \Gls{Verzeichnung}en die Verschiebung in tangentialer Richtung. Am wichtigsten ist hierbei die radial-symmetrische \Gls{Verzeichnung}, da diese die größte Auswirkung hat. Sie entsteht durch den nicht symmetrischen Aufbau des Objektives um die Blende. Die radial-asymmetrische und die tangentiale \Gls{Verzeichnung} entsteht hingegen hauptsächlich aus einer Dezentrierung und Schiefstellung der Linsen zur optischen Achse. \citep[S. 178]{luhmann}
+Als \Gls{Verzeichnung} wird die Abweichung der Abbildung von der idealen Lochkamera bezeichnet. Diese kann durch die Nutzung von Linsen oder durch die Bauweise der Kamera entstehen. Die \Gls{Verzeichnung} wird in radialer und tangentialer \Gls{Verzeichnung} unterschieden. Die radiale \Gls{Verzeichnung} beschreibt die Verschiebung der Bildpunkte in radialer Richtung, also zur Bildmitte hin. Dieser Punkt wird Symmetriepunkt genannt und muss nicht zwangsläufig mit dem Bildhauptpunkt zusammenfallen, für die Korrekturen wird dieses jedoch üblicherweise so angenommen. Die tangentiale \Gls{Verzeichnung}en die Verschiebung quer zur radialen Richtung. Am wichtigsten ist hierbei die radial-symmetrische \Gls{Verzeichnung}, da diese die größte Auswirkung hat. Sie entsteht durch den nicht symmetrischen Aufbau des Objektives vor und hinter der Blende. Die radial-asymmetrische und die tangentiale \Gls{Verzeichnung} entsteht hingegen hauptsächlich aus einer Dezentrierung und Schiefstellung der Linsen zur optischen Achse. \citep[S. 178]{luhmann}
 
-Jede Einstellung der Kameraoptik verändert die \gls{innereOrientierung} und auch jede Kamera, selbst in derselben Modellreihe, muss je nach Genauigkeitsanspruch als unterschiedlich angesehen werden. Änderungen können sich beispielsweise durch Umfokussierung oder die Nutzung eines optischen Zoom ergeben, aber auch durch einen mechanisch instabilen Aufbau der Kameras. Daher sollten die Bilder normalerweise möglichst mit nur einer Kamera mit festen Einstellungen (Brennweite, Fokus, Blende, Objektiv) aufgenommen werden. Änderungen der Empfindlichkeit (ISO-Zahl) oder Belichtungszeit sind unproblematisch für die \gls{innereOrientierung}, da hierbei die Abbildungseigenschaften der Kamera nicht verändert werden. \citep[S. 176]{luhmann}
+Jede Einstellung der Kameraoptik verändert die \gls{innereOrientierung} und auch jede Kamera, selbst in derselben Modellreihe, muss je nach Genauigkeitsanspruch als unterschiedlich angesehen werden. Änderungen können sich beispielsweise durch Umfokussierung oder die Nutzung eines optischen Zoom ergeben, aber auch durch einen mechanisch instabilen Aufbau der Kameras oder Erwärmung und der damit verbundenen Ausdehnung. Daher sollten die Bilder normalerweise möglichst mit nur einer Kamera mit festen Einstellungen (Brennweite, Fokus, Blende, Objektiv) aufgenommen werden. Änderungen der Empfindlichkeit (ISO-Zahl) oder Belichtungszeit sind unproblematisch für die \gls{innereOrientierung}, da hierbei die Abbildungseigenschaften der Kamera nicht verändert werden. \citep[S. 176]{luhmann}
 
-Die Bestimmung der inneren Orientierung, auch Kalibrierung genannt, kann wäh\-rend der Messung beispielsweise als Parameter in der Bündel\-block\-ausgleichung erfolgen. Je nach Anzahl der Kameras und Stabilität der inneren Orientierung sind hier verschiedene Varianten möglich. Bei stabilen Kameras wird ein Parameter-Satz pro Kamera für eine ganze Messreihe ausgeglichen, bei instabilen Kameras kann die Kalibrierung jedes einzelnen Bildes notwendig werden. \citep[S. 181f]{luhmann}
+Die genaue Bestimmung der inneren Orientierung, auch Kalibrierung genannt, kann wäh\-rend der Messung beispielsweise als Parameter in der Bündel\-block\-ausgleichung erfolgen. Je nach Anzahl der Kameras und Stabilität der inneren Orientierung sind hier verschiedene Varianten möglich. Bei stabilen Kameras wird ein Parameter-Satz pro Kamera für eine ganze Messreihe ausgeglichen, bei instabilen Kameras kann die Kalibrierung jedes einzelnen Bildes notwendig werden. \citep[S. 181f]{luhmann}
 
 \begin{figure}
     \centering
@@ -50,8 +50,7 @@ Die Darstellung der Rotation der Kamera als Quaternionen hat den Vorteil, dass d
 
 \subsection{Abbildungsgleichung}
 \label{ss:abbildungsgleichung}
-Die Abbildung eines Punktes auf einem Bild wird durch die Abbildungsgleichung beschrieben. Hierfür gibt es verschiedene Schreibweisen. In der Matrizenrechnung besteht diese aus der Multiplikation der homogenen Punktkoordinaten $X$ mit der Projektionsmatrix $P$ (\autoref{eq:abbildungsgleichung}). $P$ ergibt sich aus der Kalibrier- oder Kameramatrix $K$, der Rotation $R$ und dem Projektionszentrum $X_0$ (\autoref{eq:pkr}). Die Kalibriermatrix wiederum besteht aus der \Gls{Kamerakonstante} und der Lage des \Gls{Bildhauptpunkt}es (\autoref{eq:k}).
-(nach \citealp[S. 244]{hartley} und \citealp[S. 290]{luhmann})
+Die Abbildung eines Punktes auf einem Bild wird durch die Abbildungsgleichung beschrieben. Hierfür gibt es verschiedene Schreibweisen. In der Matrizenrechnung besteht diese aus der Multiplikation der homogenen Punktkoordinaten $X$ mit der Projektionsmatrix $P$ (\autoref{eq:abbildungsgleichung}). $P$ ergibt sich aus der Kalibrier- oder Kameramatrix $K$, der Rotation $R$ und dem Projektionszentrum $X_0$ (\autoref{eq:pkr}). Die Kalibriermatrix wiederum besteht aus der \Gls{Kamerakonstante} und der Lage des \Gls{Bildhauptpunkt}es (\autoref{eq:k}, nach \citealp[S. 244]{hartley} und \citealp[S. 290]{luhmann}).
 
 Die \gls{aeussereOrientierung} ist durch die Matrix $[R|X_0]$ beschrieben (\autoref{eq:r}). Diese besteht aus der Rotationsmatrix $R$ und dem Projektionszentrum $X_0$. Die Rotationsmatrix beschreibt die Ausrichtung der Kamera im Raum, das Projektionszentrum beschreibt die Position der Kamera bzw. des Projektionszentrums im Raum.
 
@@ -104,7 +103,7 @@ Als weitere Parameter spielen die \Gls{Verzeichnung}en eine Rolle. Diese kann in
     \Delta x_{tan} & tangentiale \Gls{Verzeichnung} \\
 \end{conditions}
 
-Die \Gls{Verzeichnung}en werden meist mit den Parametern $k_1$ bis $k_4$ für die radial-symmetrische \Gls{Verzeichnung} und $p_1$ und $p_2$ für die tangentiale \Gls{Verzeichnung} bezeichnet. Die Faktoren stellen dabei die Parameter einer Taylor-Reihe dar. Sie basieren auf dem Kameramodell von Brown und den von ihm in \cite[S. 859]{brown1971} vorgestellten Formeln (siehe \autoref{eq:brown_rad} und \ref{eq:brown_tan}). Diese Parameter werden so beispielsweise auch in Metashape, OpenDroneMap und OpenCV genutzt.
+Die \Gls{Verzeichnung}en werden meist mit den Parametern $k_1$ bis $k_4$ für die radial-symmetrische \Gls{Verzeichnung} und $p_1$ und $p_2$ für die tangentiale \Gls{Verzeichnung} bezeichnet. Die Faktoren stellen dabei die Parameter einer Taylor-Reihe dar. Sie basieren auf dem Kameramodell von \citet[S. 859]{brown1971} und denen von ihm vorgestellten Formeln (siehe \autoref{eq:brown_rad} und \ref{eq:brown_tan}). Diese Parameter werden so beispielsweise auch in Metashape, OpenDroneMap und OpenCV genutzt.
 
 \begin{align*}
     \nlabel{eq:brown_rad}
@@ -179,7 +178,7 @@ Die Schärfentiefe des Raspberry Pi Camera Module 3 ist in \autoref{img:sschaerf
 
 \section{Skalierung/Maßstab}
 \label{sec:massstab}
-Die Skalierung eines rein photogrammetrisch bestimmten 3D-Modelles ist nicht bekannt, da die Berechnungen nur auf Richtungen ohne Längenangaben basieren. Daher werden Referenzen in Form einer bekannten Länge benötigt, um die Skalierung zu bestimmen. Alternativ können auch Passpunkte (siehe \autoref{s:verknuepfung}) mit bekannten Koordinaten verwendet werden oder im Falle von Mehrkamerasystemen bekannte \gls{aeussereOrientierung}en der Kameras. \citep[S. 546]{luhmann}
+Die Skalierung eines rein photogrammetrisch bestimmten 3D-Modelles ist nicht bekannt, da die Berechnungen nur auf Richtungen ohne Längenangaben basieren - es ist im mathematischen Sinne ähnlich dem realen Körper. Daher werden Referenzen in Form einer bekannten Länge benötigt, um die Skalierung zu bestimmen. Alternativ können auch Passpunkte (siehe \autoref{s:verknuepfung}) mit bekannten Koordinaten verwendet werden oder im Falle von Mehrkamerasystemen bekannte \gls{aeussereOrientierung}en der Kameras. \citep[S. 546]{luhmann}
 
 
 \section{Verknüpfungs- und Passpunkte}
@@ -220,7 +219,7 @@ Nachteilig zeigte sich in den Untersuchungen, dass die Ecken nicht eindeutig ide
 
 \subsection{Merkmalsextraktion}
 \label{ss:sift}
-Ohne das Anbringen von Markern können auch Merkmale in den Bildern erkannt werden. Hierfür gibt es verschiedene Methoden, eine dieser ist \Gls{SIFT}, welche hier beispielhaft kurz dargestellt wird. Sie liefert Verknüpfungspunkte aus Mustern auf den photographierten Oberflächen. Es ist meist nicht notwendig explizit Marker an dem aufzunehmenden Objekt anzubringen, sofern seine Oberfläche nicht strukturlos ist (glatte weiße Wände etc.) oder in Bewegung ist.
+Ohne das Anbringen von Markern können auch Merkmale in den Bildern erkannt werden. Hierfür gibt es verschiedene Methoden, eine dieser ist \Gls{SIFT}, welche hier beispielhaft kurz dargestellt wird. Sie liefert Verknüpfungspunkte aus Mustern auf den photographierten Oberflächen. Es ist meist nicht notwendig explizit Marker an dem aufzunehmenden Objekt anzubringen, sofern seine Oberfläche nicht strukturlos ist (glatte weiße Wände etc.).
 
 Zur Erkennung von Merkmalen setzt \gls{SIFT} auf die Detektion von Kanten. Diese werden in verschiedenen Stufen einer Bildpyramide erkannt und ihre Extrema berechnet. Sie werden anschließend weiter ausgedünnt, beispielsweise über den Kontrast. Sofern ein möglicher Marker identifiziert wurde, wird eine Beschreibung erzeugt. Diese erfolgt  durch Analyse der Helligkeitsabweichungen zu den Nachbar-Pixeln und wird an der stärksten Abweichung ausgerichtet. Hierdurch wird die Beschreibung dann richtungsunabhängig. Mit diesen kann dann die Übereinstimmung von zwei Markern in zwei Bildern bestimmt werden, auch wenn diese zueinander gekippt oder gedreht sind.
 \citep[S. 484f]{luhmann}
@@ -266,7 +265,7 @@ Mit dem Vorwärts\-schnitt können neben markierten Verknüpfungspunkten auch di
 \label{ss:relative_orientierung}
 Wenn keine Passpunkte vorhanden sind und auch zum Beispiel durch ArUco-Marker keine lokalen Passpunkt-Koordinaten erzeugt werden können, kann die Bildorientierung auch in einem lokalen System erfolgen. Hierbei wird die relative Orientierung der Bilder zueinander bestimmt. Eines der Bilder wird als Ursprung des Systems festgelegt (Projektionszentrum in $(0,0,0)$ und die optische Achse in $z$-Richtung). Die Position und Ausrichtung des zweiten Bildes wird dann relativ zu diesem bestimmt. \citep[S. 316]{luhmann}
 
-Die klassische Variante der relativen Orientierung ist die Bestimmung der Essenziellen Matrix. Diese kann aus der inneren Orientierung und der Fundamentalmatrix berechnet werden, welche wiederum aus den Bildkoordinaten von mindestens 8 Verknüpfungspunkten berechnet werden kann. \citep[S. 328ff]{luhmann}
+Die klassische Variante der relativen Orientierung ist die Bestimmung der Essenziellen Matrix, welche identische Punkte in einem Bild mit denen in einem anderen Bild in Beziehung setzt. Diese kann aus der inneren Orientierung und der Fundamentalmatrix berechnet werden, welche wiederum aus den Bildkoordinaten von mindestens 8 Verknüpfungspunkten berechnet werden kann. \citep[S. 328ff]{luhmann}
 
 Mittels Einzelwertzerlegung kann dann aus der Essenziellen Matrix die Rotation und Translation des zweiten Bildes bestimmt werden. \citep[S. 275]{hartley}
 
@@ -297,7 +296,7 @@ Bis zu diesem Schritt besteht das Modell nur aus einzelnen Punkten, die keine Ob
 
 \autoref{img:meshing} zeigt beispielhaft eine Ecke aus einer Punktwolke vor und nach der Vermaschung. Gut zu erkennen ist, dass die Anzahl der Punkte reduziert wurde und die Oberfläche durch Dreiecke angenähert wurde, jedoch sich die äußeren Konturen nicht verändert haben.
 
-Die Screened Poisson Surface Reconstruction ist ein Verfahren, das auf der Poisson-Gleichung basiert. Diese Gleichung beschreibt die Beziehung zwischen einer Funktion. Bei der Screened Poisson Surface Reconstruction wird diese verwendet, um die Oberfläche zu glätten und zu interpolieren. Dabei werden die Punkte in eine Gitterstruktur überführt und die Oberfläche durch die Lösung der Poisson-Gleichung bestimmt. Dieser Ansatz berücksichtigt auch die Ausrichtung der Punkte, um eine genauere Rekonstruktion der Oberfläche zu erzielen. \citep{spsr}
+Die Screened Poisson Surface Reconstruction ist ein Verfahren, das auf der Poisson-Gleichung basiert. Diese Gleichung beschreibt die Beziehung zwischen einer Funktion und ihrer Ableitung. Bei der Screened Poisson Surface Reconstruction wird diese verwendet, um die Oberfläche zu glätten und zu interpolieren. Dabei werden die Punkte in eine Gitterstruktur überführt und die Oberfläche durch die Lösung der Poisson-Gleichung bestimmt. Dieser Ansatz berücksichtigt auch die Ausrichtung der Punkte, um eine genauere Rekonstruktion der Oberfläche zu erzielen. \citep{spsr}
 
 \begin{figure}
     \centering

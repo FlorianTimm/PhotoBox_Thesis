@@ -152,3 +152,4 @@ Standbys
 NodeODM
 MacOS
 jar-Datei
+Symmetriepunkt
