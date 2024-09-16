@@ -36,7 +36,7 @@ Die genaue Bestimmung der inneren Orientierung, auch Kalibrierung genannt, kann 
 
 \begin{figure}
     \centering
-    \includesvg[width=0.8\textwidth]{./img/optischeAchse}
+    \includesvg[width=0.8\textwidth]{./img/2_grundlagen/optischeAchse}
     \caption{Abbildung des Lochkamera-Modells mit Spiegelung am Projektionszentrum (rot), nach \citealt[S. 154]{hartley}, Beschriftung nach \citealt{luhmann}} %Bildunterschrift
     \label{img:optische_achse}
 \end{figure}
@@ -170,7 +170,7 @@ Die Schärfentiefe des Raspberry Pi Camera Module 3 ist in \autoref{img:sschaerf
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.9\textwidth]{./img/schaerfentiefe_plot.png}
+    \includegraphics[width=0.9\textwidth]{./img/2_grundlagen/schaerfentiefe_plot.png}
     \caption{Schärfentiefe in Abhängigkeit von der fokussierten Entfernung} %Bildunterschrift
     \label{img:sschaerfentiefe_plot} %ID fürs Bild
 \end{figure}
@@ -203,13 +203,13 @@ Nachteilig zeigte sich in den Untersuchungen, dass die Ecken nicht eindeutig ide
 \begin{figure}
     \centering
     \begin{subfigure}{0.45\textwidth}
-        \includegraphics[width=0.98\linewidth]{img/schneider.png}
+        \includegraphics[width=0.98\linewidth]{img/2_grundlagen/schneider.png}
         \centering
         \caption{\Glsentryshort{CCCT} nach \\ \cite{schneider},\\aus Agisoft Metashape} %Bildunterschrift
         \label{img:schneider} %ID fürs Bild
     \end{subfigure}
     \begin{subfigure}{0.45\textwidth}
-        \includegraphics[width=0.98\linewidth]{img/aruco.png}
+        \includegraphics[width=0.98\linewidth]{img/2_grundlagen/aruco.png}
         \centering
         \caption{ArUco-Marker,\\generiert mit \cite{opencv}\\} %Bildunterschrift
         \label{img:aruco} %ID fürs Bild
@@ -232,15 +232,15 @@ Durch die beschriebenen Verfahren und die hieraus entstandenen Verknüpfungs\-pu
 \begin{figure}
     \centering
     \begin{subfigure}{0.45\textwidth}
-        \includegraphics[width=0.9\linewidth]{img/rueckwaertsschnitt.pdf}
-        %\includesvg[height=0.9\linewidth]{./img/rueckwaertsschnitt}
+        \includegraphics[width=0.9\linewidth]{img/2_grundlagen/rueckwaertsschnitt.pdf}
+        %\includesvg[height=0.9\linewidth]{./img/2_grundlagen/rueckwaertsschnitt}
         \centering
         \caption{Rückwärtsschnitt, nach \citealt[S. 284]{luhmann}} %Bildunterschrift
         \label{img:rueckwaertsschnitt} %ID fürs Bild
     \end{subfigure}
     \begin{subfigure}{0.45\textwidth}
-        \includegraphics[width=0.9\linewidth]{img/vorwaertsschnitt.pdf}
-        %\includesvg[height=0.9\linewidth]{./img/vorwaertsschnitt}
+        \includegraphics[width=0.9\linewidth]{img/2_grundlagen/vorwaertsschnitt.pdf}
+        %\includesvg[height=0.9\linewidth]{./img/2_grundlagen/vorwaertsschnitt}
         \centering
         \caption{Vorwärtsschnitt, nach \citealt[S. 339]{luhmann}} %Bildunterschrift
         \label{img:vorwaertsschnitt} %ID fürs Bder an den Aluprofilen befestigt ist (ild
@@ -301,13 +301,13 @@ Die Screened Poisson Surface Reconstruction ist ein Verfahren, das auf der Poiss
 \begin{figure}
     \centering
     \begin{subfigure}{0.48\textwidth}
-        \includegraphics[width=0.95\linewidth]{img/points.jpg}
+        \includegraphics[width=0.95\linewidth]{img/2_grundlagen/points.jpg}
         \centering
         \caption{Ungefilterte Punktewolke} %Bildunterschrift
         \label{img:points} %ID fürs Bild
     \end{subfigure}
     \begin{subfigure}{0.48\textwidth}
-        \includegraphics[width=0.95\linewidth]{img/mesh.jpg}
+        \includegraphics[width=0.95\linewidth]{img/2_grundlagen/mesh.jpg}
         \centering
         \caption{3D-Mesh mit gefilterten Punkten} %Bildunterschrift
         \label{img:mesh} %ID fürs Bild
@@ -324,13 +324,13 @@ Vorteil der Texturierung ist, dass das Modell meist realistischer wirkt und fehl
 \begin{figure}
     \centering
     \begin{subfigure}{0.49\textwidth}
-        \includegraphics[width=1\linewidth]{img/solid.jpg}
+        \includegraphics[width=1\linewidth]{img/2_grundlagen/solid.jpg}
         \centering
         \caption{3D-Modell ohne Textur} %Bildunterschrift
         \label{img:ohne_textur} %ID fürs Bild
     \end{subfigure}
     \begin{subfigure}{0.49\textwidth}
-        \includegraphics[width=1\linewidth]{img/textur.jpg}
+        \includegraphics[width=1\linewidth]{img/2_grundlagen/textur.jpg}
         \centering
         \caption{3D-Modell mit Textur} %Bildunterschrift
         \label{img:mit_textur} %ID fürs Bild

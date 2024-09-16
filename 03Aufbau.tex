@@ -45,19 +45,19 @@ Die Anzahl der Kameras für den Prototyp wurde zusammen mit der Art des Rahmens 
 \begin{figure}
     \centering
     \begin{subfigure}{0.30\textwidth}
-        \includegraphics[height=1\linewidth]{./img/modell1.png}
+        \includegraphics[height=1\linewidth]{./img/3_aufbau/modell1.png}
         \centering
         \caption{Unter Nutzung eines Drehtellers}
         \label{img:entwurf1}
     \end{subfigure}
     \begin{subfigure}{0.30\textwidth}
-        \includegraphics[height=1\linewidth]{./img/modell2.png}
+        \includegraphics[height=1\linewidth]{./img/3_aufbau/modell2.png}
         \centering
         \caption{Rahmen mit Boden-Versteifung}
         \label{img:entwurf2}
     \end{subfigure}
     \begin{subfigure}{0.30\textwidth}
-        \includegraphics[height=1\linewidth]{./img/modell3.png}
+        \includegraphics[height=1\linewidth]{./img/3_aufbau/modell3.png}
         \centering
         \caption{Endgültiger Entwurf mit seitlichen Versteifungen}
         \label{img:entwurf3}
@@ -78,13 +78,13 @@ Es wurden verschiedene Varianten geprüft, die in \autoref{img:entwuerfe} darges
 \begin{figure}
     \centering
     \begin{subfigure}{0.45\textwidth}
-        \includegraphics[height=0.9\linewidth]{./img/aluwinkel.jpg}
+        \includegraphics[height=0.9\linewidth]{./img/3_aufbau/aluwinkel.jpg}
         \centering
         \caption{Kamera-Winkel} %Bildunterschrift
         \label{img:aluwinkel} %ID fürs Bild
     \end{subfigure}
     \begin{subfigure}{0.45\textwidth}
-        \includegraphics[height=0.8\linewidth]{./img/alurahmen.jpg}
+        \includegraphics[height=0.8\linewidth]{./img/3_aufbau/alurahmen.jpg}
         \centering
         \caption{Aluminium-Rahmen} %Bildunterschrift
         \label{img:alurahmen} %ID fürs Bder an den Aluprofilen befestigt ist (ild
@@ -100,13 +100,13 @@ Die Kameras wurden mit einem $90^\circ$-Winkel am Rahmen montiert, um diese weit
 \begin{figure}
     \centering
     \begin{subfigure}{0.45\textwidth}
-        \includegraphics[height=1.2\linewidth]{./img/beleuchtung.jpg}
+        \includegraphics[height=1.2\linewidth]{./img/3_aufbau/beleuchtung.jpg}
         \centering
         \caption{Schattenarme Beleuchtung durch LED-Streifen}
         \label{img:led_streifen}
     \end{subfigure}
     \begin{subfigure}{0.45\textwidth}
-        \includegraphics[height=1.2\linewidth]{./img/beleuchtung_farbig.jpg}
+        \includegraphics[height=1.2\linewidth]{./img/3_aufbau/beleuchtung_farbig.jpg}
         \centering
         \caption{Farbige Beleuchtung zur Statusmeldung}
         \label{img:led_farbig}
@@ -118,8 +118,25 @@ Um möglichst gute Aufnahmen zu erzeugen, sollte das Objekt ausreichend und glei
 
 Es wurde sich für einzeln steuerbare LED-Lichtstreifen als Lichtquelle entschieden (siehe \autoref{img:led_streifen}). Diese können einfach an den Aluprofilen montiert werden und ermöglichen es, einzelne Bereiche abzuschalten, beispielsweise um Blendwirkungen zu vermindern. Außerdem können hiermit auch verschiedene Lichtfarben eingestellt werden, um Statusmeldungen zu ermöglichen (siehe \autoref{img:led_farbig}) oder ggf. die Farbgebung des Objektes zu beeinflussen. Die Steuerung erfolgt über einen Raspberry Pi 4, der auch die Steuerung der Kameras übernimmt. Die LED-Streifen verfügen hierfür pro drei LEDs über einen integrierten Schaltkreis vom Typ WS2811. Dieser ermöglicht es, jedem Dreier-Verbund über ein proprietäres Steuerprotokoll eine eigene Farbe und Helligkeit zuzuweisen \citep{ws2811}. Für die Implementierung der Steuerung wurde die Bibliothek \texttt{rpi-ws281x} verwendet, die eine einfache Ansteuerung der LED-Streifen ermöglicht (siehe auch \autoref{p:ws281x}).
 
-Für diffuseres Licht von außen kann ein halbtransparenter, weißer Stoff über den Rahmen gespannt werden. Hierfür wurde aus weißem Baumwollstoff eine entsprechende Haube genäht, welche durch zwei mittels Reißverschluss verschließbaren Eingriffmöglichkeiten weiterhin das Einlegen von Objekten durch die Seite oder das Verstellen von Kameras ermöglicht. Dieser sorgt für eine gleichmäßigere Ausleuchtung durch Reflexion im Inneren, verhindert Reflexionen an Glasscheiben etc. und vermindert Blendwirkungen durch externe Lichtquellen.
+Für diffuseres Licht von außen kann ein halbtransparenter, weißer Stoff über den Rahmen gespannt werden. Hierfür wurde aus weißem Baumwollstoff eine entsprechende Haube genäht (\autoref{img:stoffhuelle}), welche durch zwei mittels Reißverschluss verschließbaren Eingriffmöglichkeiten weiterhin das Einlegen von Objekten durch die Seite oder das Verstellen von Kameras ermöglicht (\autoref{img:stoffhuelle_offen}). Dieser sorgt für eine gleichmäßigere Ausleuchtung durch Reflexion im Inneren, verhindert Reflexionen an Glasscheiben etc. und vermindert Blendwirkungen durch externe Lichtquellen.
 
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=1\linewidth]{./img/3_aufbau/stoffhuelle.jpg}
+        \centering
+        \caption{Stoffhülle}
+        \label{img:stoffhuelle}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=1\linewidth]{./img/3_aufbau/stoffhuelle_offen.jpg}
+        \centering
+        \caption{geöffnete Stoffhülle}
+        \label{img:stoffhuelle_offen}
+    \end{subfigure}
+    \caption{Stoffhülle in geschlossen und offen}
+\end{figure}
 
 \section{Kommunikation und Datenübertragung}
 Die Kommunikation zwischen den Raspberry Pi erfolgt über WLAN. Hierfür ist ein Mini-WLAN-Router mit im System verbaut worden. Vorteil dieser Lösung ist, dass hier keine weiteren Leitungen außer der Stromversorgung zu den einzelnen Raspberry Pi Zero W benötigt wird und es auch möglich wäre, die gleiche Hard- und Software für ein größeres System ohne Änderungen zu nutzen. Nachteilig ist die Verbindungsgeschwindigkeit, gerade im Hinblick auf die Synchronisierung der Kameras. Diese Problematik soll aber durch entsprechende Programmierung der Software möglichst klein gehalten werden. \todo{Prüfung und Verweis auf diese Stelle in der Auswertung}
@@ -131,7 +148,7 @@ Als weitere Datenleitungen wird eine Steuerleitung für die LED-Streifen benöti
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\textwidth]{./img/stromverteilung.jpg}
+    \includegraphics[width=0.7\textwidth]{./img/3_aufbau/stromverteilung.jpg}
     \caption{Elektroverteilung zu den einzelnen Raspberry Pi Zero} %Bildunterschrift
     \label{img:stromverteilung} %ID fürs Bild
 \end{figure}
