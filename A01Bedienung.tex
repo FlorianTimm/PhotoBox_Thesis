@@ -11,6 +11,42 @@
 \section{Anwendungsbereich}
 Ziel des Systems ist es, 3D-Modelle von Objekten bis zu einer Größe von \SI{40}{\centi\metre} Durchmesser zu erstellen. Die Bedienung soll dabei möglichst einfach und selbsterklärend sein, um auch Laien die Möglichkeit zu geben, das System zu bedienen.
 
+\section{Menü-Struktur der Weboberfläche}
+\subsection{\foreignlanguage{british}{Capture Data}}
+\begin{itemize}
+    \item \textbf{\foreignlanguage{british}{Photo}} - automatische Aufnahme eines Bildes pro Kamera
+    \item \textbf{\foreignlanguage{british}{Focus-Stack}} - automatischer Fokus-Stack mit fünf Bildern pro Kamera
+    \item \textbf{\foreignlanguage{british}{Detect ArUco}} - automatische Erkennung von ArUco-Markern
+    \item \textbf{\foreignlanguage{british}{Autofocus}} - automatische Fokussierung auszulösen
+\end{itemize}
+
+\subsection{\foreignlanguage{british}{View Data}}
+\begin{itemize}
+    \item \textbf{\foreignlanguage{british}{Overview}} - Übersicht über alle Kameras
+    \item \textbf{\foreignlanguage{british}{Preview}} - Vorschau eines Bildes und Möglichkeit, Einstellungen auszuprobieren
+    \item \textbf{\foreignlanguage{british}{Photo-Download}} - Download der Bilder
+    \item \textbf{\foreignlanguage{british}{ArUco-Marker-Coordinates}} - Anzeige und Eingabe der Koordinaten der ArUco-Marker
+    \item \textbf{\foreignlanguage{british}{Detected ArUco-Marker}} - Anzeige der Bildkoordinaten der erkannten ArUco-Marker
+\end{itemize}
+
+\subsection{\foreignlanguage{british}{Status}}
+\begin{itemize}
+    \item \textbf{\foreignlanguage{british}{Search}} - Anzeige der System-Informationen
+    \item \textbf{\foreignlanguage{british}{Test}} - Anzeige der Kamerastatus
+    \item \textbf{\foreignlanguage{british}{Light/Status}} - Umschalten zwischen Beleuchtung und Statusmeldung
+\end{itemize}
+
+\subsection{\foreignlanguage{british}{System-Control}}
+\begin{itemize}
+    \item \textbf{\foreignlanguage{british}{Configuration}} - Einstellungen für Belichtung und Beleuchtung
+    \item \textbf{\foreignlanguage{british}{Pause/Resume}} - Pausieren und Starten der Kameras
+    \item \textbf{\foreignlanguage{british}{Update}} - Update der Software
+    \item \textbf{\foreignlanguage{british}{Restart}} - Neustart der Software
+    \item \textbf{\foreignlanguage{british}{Shutdown}} - Herunterfahren des Systems
+    \item \textbf{\foreignlanguage{british}{Reboot}} - Neustart des Systems
+\end{itemize}
+
+
 \section{Inbetriebnahme}
 Beim Aufstellen ist darauf zu achten, dass sich keine stärkeren seitlichen Lichtquellen um das System herum befinden, wie beispielsweise Fensterflächen. Diese könnten die Belichtung der Bilder beeinflussen und so die Qualität der 3D-Modelle negativ beeinflussen. Gegebenenfalls muss durch die Stoffhülle oder andere Maßnahmen für Verschattung oder Streuung gesorgt werden.
 
@@ -34,8 +70,8 @@ Ab hier trennen sich die Wege je nach verwendetem System. Die Bildaufnahme erfol
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]{./img/5_software/connector_screenshot.png}
-    \caption{Screenshot der Connector-Software unter Ubuntu 24.04} %Bildunterschrift
-    \label{img:connector} %ID fürs Bild
+    \caption{Screenshot der Connector-Software unter Ubuntu 24.04}
+    \label{img:connector}
 \end{figure}
 
 \subsection{... mit Netzwerkverbindung}
@@ -56,13 +92,16 @@ Software-Updates können zu Inkompatibilitäten führen, daher sollten diese ers
 
 \section{Fehlerbehebung}
 \label{sec:Fehlerbehebung}
-\todo{Nur ein Unterpunkt, weitere ergänzen}
 \subsection{Kameras sind nicht erreichbar}
 Die Kameras sind nicht erreichbar, wenn die LEDs nicht grün leuchten. Dies kann verschiedene Ursachen haben. Als Erstes sollte das System nochmal heruntergefahren werden durch einen langen Druck auf die rote Taste. Anschließend wird die Stromversorgung für einige Sekunden vollständig getrennt und wieder hergestellt. Das System sollte nun neu starten und die Kameras erreichbar sein.
 
 Falls das noch nicht der Fall ist, hilft ein Blick in das Menü des WLAN-Routers. Hier sollten in der Übersicht aller Netzwerkgeräte die 24 Kameras, der steuernde Raspberry Pi 4 und das Gerät, über das der Zugriff erfolgt, aufgezählt sein. Falls das nicht der Fall ist, muss der fehlerhafte Raspberry Pi Zero an einem Display und einer Tastatur angeschlossen werden, um den Fehler zu finden.
 
 Falls der Raspberry Pi im Netzwerk zu finden ist, kann sich per SSH mit dem Raspberry Pi verbunden werden. Zugangsdaten sind die Übersicht am Ende zu entnehmen.
+
+\subsection{Bilder zu hell/zu dunkel}
+Je nach Umgebungslicht können die Bilder zu dunkel oder zu hell sein. Im Normalfall sollte die Grundeinstellung mit einem Belichtungswert von +1 zu guten Ergebnissen führen. Falls dies nicht der Fall ist, kann dieses unter \textit{\foreignlanguage{british}{Configuration}} umgestellt werden. Hier kann der Belichtungswert oder die Helligkeit und Lichtfarbe verändert werden.
+
 
 \section{Zugangsdaten}
 

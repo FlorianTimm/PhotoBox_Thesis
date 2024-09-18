@@ -25,14 +25,24 @@ Es wurden Bilder von einem Siemensstern unter verschiedenen Belichtungssituation
 
 \paragraph{Ergebnis}
 
-Der Unschärfekreis war durchschnittlich $28$\,\gls{px} groß. Dies entspricht einer Linienauflösung von 292 Linien pro Millimeter, die Linienbreite beträgt \SI{0,0034}{\milli\metre} beziehungsweise $2,44$\,\gls{px}. Die Linienauflösung ist mit etwa \SI{80}{\percent} der Sensorauflösung sehr hoch. Die Linienbreite in Pixeln entsprach der zum Vergleich genutzten Spiegelreflexkamera. Sie kann im Maximalfall (beste Auflösung) $2$\,\gls{px} betragen, entsprechend je eines weißen und schwarzen Pixels pro Linie.
+Der Unschärfekreis war durchschnittlich $28$\,\gls{px} groß (\autoref{img:siemens_beschriftet}). Dies entspricht einer Linienauflösung von 292 Linien pro Millimeter, die Linienbreite beträgt \SI{0,0034}{\milli\metre} beziehungsweise $2,44$\,\gls{px}. Die Linienauflösung ist mit etwa \SI{80}{\percent} der Sensorauflösung sehr hoch. Die Linienbreite in Pixeln entsprach der zum Vergleich genutzten Spiegelreflexkamera. Sie kann im Maximalfall (beste Auflösung) $2$\,\gls{px} betragen, entsprechend je eines weißen und schwarzen Pixels pro Linie.
 
-\todo{Siemenssternbild beschriften}
+
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\textwidth]{./img/4_voruntersuchung/siemens.jpg}
-    \caption{Siemensstern} %Bildunterschrift
-    \label{img:siemens} %ID fürs Bild
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[height=0.9\linewidth]{./img/4_voruntersuchung/siemens.jpg}
+        \centering
+        \caption{100\%}
+        \label{img:siemens}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[height=0.9\linewidth]{./img/4_voruntersuchung/siemens_beschriftet.jpg}
+        \centering
+        \caption{800\%}
+        \label{img:siemens_beschriftet}
+    \end{subfigure}
+    \caption{Siemensstern}
 \end{figure}
 
 
@@ -61,8 +71,8 @@ Die Änderungen der Parameter wurden in einem Versuch beobachtet. Hierzu wurde d
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]{./img/4_voruntersuchung/charuco.png}
-    \caption{ChArUco-Board mit Fokus auf \SI{5}{}\,\Gls{dpt}} %Bildunterschrift
-    \label{img:charuco} %ID fürs Bild
+    \caption{ChArUco-Board mit Fokus auf \SI{5}{}\,\Gls{dpt}}
+    \label{img:charuco}
 \end{figure}
 
 \paragraph{Ergebnis}
@@ -71,8 +81,8 @@ Die Ergebnisse sind in \autoref{img:fokus_faktor} dargestellt. Es zeigt sich, da
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]{./img/4_voruntersuchung/fokus_faktor_diagramm_box.pdf}
-    \caption{Box-Whisker-Plot der relativen Veränderung der \Gls{Kamerakonstante} normalisiert auf eine Fokusdistanz von \SI{20}{\centi\metre} (\SI{5}{\glsentryshort{dpt}})} %Bildunterschrift
-    \label{img:fokus_faktor} %ID fürs Bild
+    \caption{Box-Whisker-Plot der relativen Veränderung der \Gls{Kamerakonstante} normalisiert auf eine Fokusdistanz von \SI{20}{\centi\metre} (\SI{5}{\glsentryshort{dpt}})}
+    \label{img:fokus_faktor}
 \end{figure}
 
 
@@ -125,11 +135,13 @@ Mittels eines Pythonskriptes wurden die notwendigen Fokusschritte berechnet, dam
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]{./img/4_voruntersuchung/fokusstack_plot.png}
-    \caption{Notwendige Fokusschritte, um den Bereich von \SI{10}{\centi\metre} bis \SI{1}{\metre} scharf abzubilden} %Bildunterschrift
-    \label{img:fokusstack_plot} %ID fürs Bild
+    \caption{Notwendige Fokusschritte, um den Bereich von \SI{10}{\centi\metre} bis \SI{1}{\metre} scharf abzubilden}
+    \label{img:fokusstack_plot}
 \end{figure}
 
 Anschließend wurden die Bilder mit einem Python-Skript unter Verwendung von OpenCV automatisiert zu je einem Bild pro Kamera bestehend aus allen scharf dargestellten Bereichen zusammengerechnet. Dazu wurde jeweils die notwendige Transformation mittels \Gls{SIFT} (\autoref{ss:sift}) und \Gls{Homografie} berechnet. Die fertigen Bilder wurden dann in Agisoft Metashape zur Berechnung eines 3D-Modells genutzt. Die Daten wurden dann, wie bereits in den vorherigen Untersuchungen beschrieben, mit denen des Streifenprojektionssystems verglichen.
+
+\todo{Bilder von Fokusstacking einfügen}
 
 \paragraph{Ergebnis}
 Die Genauigkeit der Passpunkt in Agisoft Metashape bei der Bildverknüpfung ließ zuerst ein erwartetes, besseres Ergebnis vermuten. Jedoch waren die Ergebnisse des 3D-Modelles nicht so wie erhofft, die Qualität des 3D-Modells war schlechter als bei einer einzelnen Aufnahme. Die Flächen des Testy waren kaum mehr vorhanden. Nur mit sehr viel manueller Nacharbeit wurde überhaupt ein erkennbares Ergebnis erzielt. Die Ursache hierfür ist nicht bekannt, aber es wird vermutet, dass die automatische Zusammenrechnung der Bilder zu vielen Artefakten in den Bildern geführt hat, sodass die Bilder dann von der \Gls{SfM}-Software nicht genau genug verknüpft werden konnten. Auch unter Nutzung von kommerziellen Programmen wie Helicon Focus (verwendet von \cite{focusstack_sfm}) und Zerene Stacker waren die Ergebnisse nicht viel besser. Es wurde daher entschieden, den Ansatz erst einmal nicht weiterzuverfolgen.

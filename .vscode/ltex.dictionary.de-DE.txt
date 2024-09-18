@@ -153,3 +153,6 @@ NodeODM
 MacOS
 jar-Datei
 Symmetriepunkt
+Zerene
+Stacker
+Helicon
