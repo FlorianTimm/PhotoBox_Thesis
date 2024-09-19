@@ -63,7 +63,23 @@ Die Software zur Steuerung der Kameras und zur Übertragung der Bilder auf den R
 Die letzten Koordinaten der Passpunkte werden im System gespeichert - daher sollten diese möglichst nicht verändert werden. Falls diese dennoch verändert werden, kann das System einzelne Veränderungen berechnen und nutzen. Bei Änderung einer Vielzahl muss das System jedoch extern neu kalibriert werden, beispielsweise durch Bilder mit einer externen Kamera, wodurch dann die Koordinaten der Passpunkte neu bestimmt werden können. Eine Kalibrierung mit Bordmitteln ist nicht möglich.
 
 \section{Durchführung}
-Das System wird gestartet, indem die Stromversorgung hergestellt wird. Die Kameras starten selbstständig und die Beleuchtung wird eingeschaltet. Nach kurzer Zeit sollten kurz alle LEDs grün leuchten. Falls nicht, sind einige Kameras nicht erreichbar. Problemlösungen werden im \autoref{sec:Fehlerbehebung} behandelt.
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=1\textwidth]{img/9_anleitung/innensechs.jpg}
+        \caption{Nutzung eines Innensechskantschlüssels zur Ausrichtung der Kameras}
+        \label{img:innensechs}
+    \end{subfigure}
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=1\textwidth]{img/9_anleitung/taster.jpg}
+        \caption{Drucktaster zur Steuerung des Systems, z.B. für die Bildaufnahme}
+        \label{img:taster}
+    \end{subfigure}
+    \caption{Anschlüsse des Systems}
+\end{figure}
+
+Das System wird gestartet, indem die Stromversorgung hergestellt wird. Die Kameras starten selbstständig und die Beleuchtung wird eingeschaltet. Nach kurzer Zeit sollten kurz alle LEDs grün leuchten. Falls nicht, sind einige Kameras nicht erreichbar. Problemlösungen werden im \autoref{sec:Fehlerbehebung} behandelt. Die Kameras können ggf. durch Nutzung einen Innensechskantschlüssels neu ausgerichtet werden. Die Kameras sollten dabei auf das Objekt ausgerichtet werden (\autoref{img:innensechs}).
 Das Objekt wird mittig, ggf. auf einer Erhöhung im Rahmen positioniert.
 Ab hier trennen sich die Wege je nach verwendetem System. Die Bildaufnahme erfolgt in allen Fällen durch kurzen Druck auf den grünen Taster.
 
@@ -77,10 +93,10 @@ Ab hier trennen sich die Wege je nach verwendetem System. Die Bildaufnahme erfol
 \subsection{... mit Netzwerkverbindung}
 Der zu verwendende Rechner wird mit dem System per WLAN (bevorzugt) oder Netzwerkkabel verbunden. Die Verbindungssoftware wird gestartet und die IP-Adresse des Systems angegeben. Standardmäßig lautet diese im WLAN 10.0.1.1, per Netzwerkkabel muss die IP von einem DHCP-Server festgelegt werden, beispielsweise in dem der angeschlossene Rechner als DHCP-Server konfiguriert wird. Unter Gnome ist dieses beispielsweise möglich, indem in den Netzwerkeinstellungen die Internetverbindung des PC freigegeben wird.
 Anschließend wird die zu nutzende Software ausgewählt und die Verbindung hergestellt.
-Nun können die Bilder aufgenommen werden (grüne Taste). Die Bilder werden auf den Rechner übertragen und dort in der ausgewählten Software weiterverarbeitet. Der Fortschritt ist in der rechten Hälfte der Verbindungssoftware zu erkennen.
+Nun können die Bilder aufgenommen werden (grüne Taste, \autoref{img:taster}). Die Bilder werden auf den Rechner übertragen und dort in der ausgewählten Software weiterverarbeitet. Der Fortschritt ist in der rechten Hälfte der Verbindungssoftware zu erkennen.
 
 \subsection{... ohne Netzwerkverbindung}
-Alternativ können die Bilder auch ohne angeschlossenen PC aufgenommen werden und später weiter verarbeitet werden. Die Bilder werden in allen Fällen auf dem Raspberry Pi 4, der die gesamte Steuerung übernimmt, gespeichert. Die Bilder können dann von der Website des Raspberry Pi heruntergeladen werden. Auch ist es möglich, einen USB-Stick in den USB-Port des Raspberry Pi 4 vor der Bildaufnahme zu stecken. Die Bilder werden dann auch auf den USB-Stick kopiert.
+Alternativ können die Bilder auch ohne angeschlossenen PC aufgenommen werden und später weiter verarbeitet werden. Die Bilder werden in allen Fällen auf dem Raspberry Pi 4, der die gesamte Steuerung übernimmt, gespeichert. Die Bilder können dann von der Website des Raspberry Pi heruntergeladen werden. Auch ist es möglich, einen USB-Stick in den USB-Port des Raspberry Pi 4 vor der Bildaufnahme zu stecken (\autoref{img:usbstick}). Die Bilder werden dann auch auf den USB-Stick kopiert.
 
 Die Verbindungssoftware unterstützt auch das Laden der Bilder aus einem lokalen Ordner, beispielsweise aus der ZIP der Website oder dem Ordner auf dem USB-Stick. Somit kann dann der weitere Workflow analog zum Workflow mit Netzwerkverbindung durchgeführt und die Bilder weiter verarbeitet werden.
 
@@ -88,7 +104,22 @@ Die Verbindungssoftware unterstützt auch das Laden der Bilder aus einem lokalen
 Die Bilder können in der ausgewählten Software weiterverarbeitet werden. Die genaue Vorgehensweise hängt von der Software ab. In Metashape wird beispielsweise ein Workflow durchgeführt, in dem die Bilder importiert, die Kameras kalibriert, die Passpunkte gesetzt und die Modelle berechnet werden. In OpenDroneMap wird ein Prozess gestartet, der die Bilder importiert, die Modelle berechnet und die Modelle exportiert. Für weitere Informationen hierzu ist die entsprechende Bedienungsanleitung der Software zu konsultieren.
 
 \section{Wartung}
-Software-Updates können zu Inkompatibilitäten führen, daher sollten diese erstmal auf einem zusätzlichen Raspberry Pi ausprobiert werden, bevor diese auf dem System ausgerollt werden.
+Software-Updates können zu Inkompatibilitäten führen, daher sollten diese erstmal auf einem zusätzlichen Raspberry Pi ausprobiert werden, bevor diese auf dem System ausgerollt werden. Sofern ein Software-Update durchgeführt werden soll, kann das System per RJ45-Kabel über den Router (\autoref{img:rj45}) mit dem Internet verbunden werden. Anschließend kann das Update der Software über die Weboberfläche durchgeführt werden. Ein Betriebssystemupdate kann per SSH-Verbindung zum Raspberry Pi 4 durchgeführt werden. Hierfür sind die Zugangsdaten am Ende des Dokuments zu finden.
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=1\textwidth]{img/9_anleitung/rj45.jpg}
+        \caption{Anschluss RJ45-Kabel zur Verbindung mit dem Internet oder einem PC}
+        \label{img:rj45}
+    \end{subfigure}
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=1\textwidth]{img/9_anleitung/usbstick.jpg}
+        \caption{Anschluss eines USB-Stick zur Datenübertragung}
+        \label{img:usbstick}
+    \end{subfigure}
+    \caption{Anschlüsse des Systems}
+\end{figure}
 
 \section{Fehlerbehebung}
 \label{sec:Fehlerbehebung}

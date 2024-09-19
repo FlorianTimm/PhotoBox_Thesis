@@ -12,7 +12,7 @@ Aus den identifizierten Punkten werden dann die Positionen und Ausrichtung der K
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\textwidth]{./img/uml/uml_ablauf.pdf}
+    \includegraphics[width=1\textwidth]{./img/uml/uml_ablauf.pdf}
     \caption{Ablauf der Bildverknüpfung mittels \acrfull{SfM}, nach \citealt[S. 492]{luhmann}}
     \label{img:ablauf}
 \end{figure}
@@ -20,17 +20,17 @@ Aus den identifizierten Punkten werden dann die Positionen und Ausrichtung der K
 
 \section{Abbildung}
 \label{s:abbildung}
-Grundlage der Photogrammetrie ist die Abbildungsgleichung. Diese beschreibt die Abbildung eines Punktes im Raum auf dem Sensor beziehungsweise dem Film. Umgekehrt kann mit ihrer Hilfe aus der Position eines Punktes in einem Bild, ähnlich einer Messung mit einem Theodolit, die Richtung des Punktes in Relation zu der Kamera bestimmt werden. Die Abbildungsgleichung ist abhängig von der inneren und äußeren Orientierung der Kamera. Die \gls{innereOrientierung} beschreibt die Abbildungseigenschaften der Kamera, die \gls{aeussereOrientierung} die Position und Ausrichtung der Kamera. Im Folgenden wird zuerst auf die innere und \gls{aeussereOrientierung} eingegangen, bevor die Abbildungsgleichung vorgestellt wird.
+Grundlage der Photogrammetrie ist die Abbildungsgleichung. Diese beschreibt die Abbildung eines Punktes im Raum auf dem Sensor beziehungsweise dem Film. Umgekehrt kann mit ihrer Hilfe aus der Position eines Punktes in einem Bild, ähnlich einer Messung mit einem Theodolit, die Richtung des Punktes in Relation zu der Kamera bestimmt werden. Die Abbildungsgleichung ist abhängig von der inneren und äußeren Orientierung der Kamera. Die \gls{innereOrientierung} beschreibt die Abbildungseigenschaften der Kamera, die \gls{aeussereOrientierung} die Position und Ausrichtung der Kamera. Im Folgenden wird zuerst auf die innere und \gls{aeussereOrientierung} eingegangen, bevor die Abbildungsgleichung selbst vorgestellt wird.
 
 \subsection{Innere Orientierung}
 \label{s:innereorientierung}
-Die \gls{innereOrientierung} beschreibt die Abbildungseigenschaften der Kamera auf mathematische Weise. Wichtigste Parameter sind hierbei die Lage des \Gls{Bildhauptpunkt}es und die Kamerakonstante. Außerdem zählen hierzu auch die Parameter, die die \Gls{Verzeichnung} beschreiben. \citep[S. 179f]{luhmann}
+Die \gls{innereOrientierung} beschreibt die Abbildungseigenschaften der Kamera auf mathematische Weise. Parameter sind hierbei die Lage des \Gls{Bildhauptpunkt}es, die Kamerakonstante sowie die Parameter, die die \Gls{Verzeichnung} beschreiben. \citep[S. 179f]{luhmann}
 
 Normalerweise wird die Kamera hierbei vereinfacht als Lochkamera unter Verwendung der Zentralperspektive betrachtet (siehe \autoref{img:optische_achse}). Als Projektionszentrum wird hierbei der Punkt beschrieben, durch den alle Bildstrahlen geradlinig laufen. Sein Lot auf dem Sensor wird als \Gls{Bildhauptpunkt} $H$ bezeichnet und beispielsweise durch seine Lage in Pixeln oder Mikrometern beschrieben. Durch eine schiefe optische Achse kann dieser vom Mittelpunkt des Sensors abweichen. Die \Gls{Kamerakonstante} $c$ beschreibt idealisiert den Abstand des Projektionszentrums zum Sensor. \citep[S. 177]{luhmann}
 
-Als \Gls{Verzeichnung} wird die Abweichung der Abbildung von der idealen Lochkamera bezeichnet. Diese kann durch die Nutzung von Linsen oder durch die Bauweise der Kamera entstehen. Die \Gls{Verzeichnung} wird in radialer und tangentialer \Gls{Verzeichnung} unterschieden. Die radiale \Gls{Verzeichnung} beschreibt die Verschiebung der Bildpunkte in radialer Richtung, also zur Bildmitte hin. Dieser Punkt wird Symmetriepunkt genannt und muss nicht zwangsläufig mit dem Bildhauptpunkt zusammenfallen, für die Korrekturen wird dieses jedoch üblicherweise so angenommen. Die tangentiale \Gls{Verzeichnung}en die Verschiebung quer zur radialen Richtung. Am wichtigsten ist hierbei die radial-symmetrische \Gls{Verzeichnung}, da diese die größte Auswirkung hat. Sie entsteht durch den nicht symmetrischen Aufbau des Objektives vor und hinter der Blende. Die radial-asymmetrische und die tangentiale \Gls{Verzeichnung} entsteht hingegen hauptsächlich aus einer Dezentrierung und Schiefstellung der Linsen zur optischen Achse. \citep[S. 178]{luhmann}
+Als \Gls{Verzeichnung} wird die Abweichung der Abbildung von der idealen Lochkamera bezeichnet. Diese kann durch die Nutzung von Linsen oder durch die Bauweise der Kamera entstehen. Die \Gls{Verzeichnung} wird in radialer und tangentialer \Gls{Verzeichnung} unterschieden. Die radiale \Gls{Verzeichnung} beschreibt die Verschiebung der Bildpunkte zur Bildmitte hin. Dieser Punkt wird Symmetriepunkt genannt und muss nicht zwangsläufig mit dem Bildhauptpunkt zusammenfallen, für die Korrekturen wird dieses jedoch üblicherweise so angenommen. Die tangentiale \Gls{Verzeichnung} beschreibt die Verschiebung quer zur radialen Richtung. Am wichtigsten ist hierbei die radial-symmetrische \Gls{Verzeichnung}, da diese die größte Auswirkung hat. Sie entsteht durch den nicht symmetrischen Aufbau des Objektives vor und hinter der Blende. Die radial-asymmetrische und die tangentiale \Gls{Verzeichnung}en entstehen hauptsächlich aus einer Dezentrierung und Schiefstellung der Linsen zur optischen Achse. \citep[S. 178]{luhmann}
 
-Jede Einstellung der Kameraoptik verändert die \gls{innereOrientierung} und auch jede Kamera, selbst in derselben Modellreihe, muss je nach Genauigkeitsanspruch als unterschiedlich angesehen werden. Änderungen können sich beispielsweise durch Umfokussierung oder die Nutzung eines optischen Zoom ergeben, aber auch durch einen mechanisch instabilen Aufbau der Kameras oder Erwärmung und der damit verbundenen Ausdehnung. Daher sollten die Bilder normalerweise möglichst mit nur einer Kamera mit festen Einstellungen (Brennweite, Fokus, Blende, Objektiv) aufgenommen werden. Änderungen der Empfindlichkeit (ISO-Zahl) oder Belichtungszeit sind unproblematisch für die \gls{innereOrientierung}, da hierbei die Abbildungseigenschaften der Kamera nicht verändert werden. \citep[S. 176]{luhmann}
+Jede Einstellung der Kameraoptik verändert die \gls{innereOrientierung} und auch jede Kamera, selbst in derselben Modellreihe, unterscheidet sich in ihren Parametern. Änderungen können sich beispielsweise durch Umfokussierung oder die Nutzung eines optischen Zoom ergeben, aber auch durch einen mechanisch instabilen Aufbau der Kameras oder Erwärmung und der damit verbundenen Ausdehnung. Daher sollten die Bilder normalerweise möglichst mit nur einer Kamera mit festen Einstellungen (Brennweite, Fokus, Blende, Objektiv) aufgenommen werden. Änderungen der Empfindlichkeit (ISO-Zahl) oder Belichtungszeit sind unproblematisch für die \gls{innereOrientierung}, da hierbei die Abbildungseigenschaften der Kamera nicht verändert werden. \citep[S. 176]{luhmann}
 
 Die genaue Bestimmung der inneren Orientierung, auch Kalibrierung genannt, kann wäh\-rend der Messung beispielsweise als Parameter in der Bündel\-block\-ausgleichung erfolgen. Je nach Anzahl der Kameras und Stabilität der inneren Orientierung sind hier verschiedene Varianten möglich. Bei stabilen Kameras wird ein Parameter-Satz pro Kamera für eine ganze Messreihe ausgeglichen, bei instabilen Kameras kann die Kalibrierung jedes einzelnen Bildes notwendig werden. \citep[S. 181f]{luhmann}
 
@@ -44,7 +44,7 @@ Die genaue Bestimmung der inneren Orientierung, auch Kalibrierung genannt, kann 
 
 \subsection{Äußere Orientierung}
 \label{s:aeussereorientierung}
-Die \gls{aeussereOrientierung} beschreibt die Lage der Kamera im Raum und ihre Ausrichtung. Sie wird durch die Position des Projektionszentrums und die Richtung der optischen Achse beschrieben. Die Position wird durch die Koordinaten des Projektionszentrums in einem Koordinatensystem -- in der Nahbereichsphotogrammetrie oft einem lokalen -- beschrieben. Die Richtung der optischen Achse wird mit der Rotation der Kamera beschrieben, beispielsweise durch eine Rotationsmatrix, eulersche Winkel oder Quaternionen. Durch die Nutzung von Passpunkten oder bekannten Koordinaten der Kamera kann die \gls{aeussereOrientierung} bestimmt werden. \citep[S. 273ff]{luhmann}
+Die \gls{aeussereOrientierung} beschreibt die Lage der Kamera im Raum und ihre Ausrichtung. Sie wird durch die Position des Projektionszentrums und die Richtung der optischen Achse beschrieben. Die Position wird hierbei durch 3D-Koordinaten beschrieben, in Nahbereichphotogrammetrie oft in einem lokalen System. Die Richtung der optischen Achse wird mit der Rotation der Kamera zu diesem Koordinatensystem beschrieben, beispielsweise durch eine Rotationsmatrix, eulersche Winkel oder Quaternionen. Durch die Nutzung von Passpunkten oder bekannten Koordinaten der Kamera kann die \gls{aeussereOrientierung} bestimmt werden. \citep[S. 273ff]{luhmann}
 
 Die Darstellung der Rotation der Kamera als Quaternionen hat den Vorteil, dass diese dann mit nur vier Parametern in eine Bündelblockausgleichung eingeht. Bei der Nutzung der Rotationsmatrix hätte man hier neun bzw. acht unabhängige Parameter. Die Nutzung von eulerschen Winkeln hat den Nachteil, dass hier ein sogenannter Gimbal-Lock auftreten kann, bei dem zwei Achsen zusammenfallen und die Rotation nicht mehr eindeutig bestimmt werden kann. \citep[S. 63]{luhmann}
 
@@ -90,7 +90,7 @@ Die \gls{aeussereOrientierung} ist durch die Matrix $[R|X_0]$ beschrieben (\auto
 
 Grundlage dieser Formel ist das Lochkamera-Modell (siehe \autoref{img:optische_achse}). Dabei wird rechnerisch das Bild an dem Projektionszentrum in den Objektraum gespiegelt (rot im Bild). Dadurch kann mit einem aufrechten Bild gerechnet werden.
 
-Als weitere Parameter spielen die \Gls{Verzeichnung}en eine Rolle. Diese kann in die Abbildungsgleichung integriert werden, in dem $x'$ durch $\Delta x'$ korrigiert wird. \citep[S. 277]{luhmann}
+Als weitere Parameter spielt die \Gls{Verzeichnung} eine Rolle. Diese können in die Abbildungsgleichung integriert werden, in dem $x'$ durch $\Delta x'$ korrigiert wird. \citep[S. 277]{luhmann}
 
 \begin{align*}
     \nlabel{abbildungsgleichung_verzeichnung}
@@ -103,7 +103,7 @@ Als weitere Parameter spielen die \Gls{Verzeichnung}en eine Rolle. Diese kann in
     \Delta x_{tan} & tangentiale \Gls{Verzeichnung} \\
 \end{conditions}
 
-Die \Gls{Verzeichnung}en werden meist mit den Parametern $k_1$ bis $k_4$ für die radial-symmetrische \Gls{Verzeichnung} und $p_1$ und $p_2$ für die tangentiale \Gls{Verzeichnung} bezeichnet. Die Faktoren stellen dabei die Parameter einer Taylor-Reihe dar. Sie basieren auf dem Kameramodell von \citet[S. 859]{brown1971} und denen von ihm vorgestellten Formeln (siehe \autoref{eq:brown_rad} und \ref{eq:brown_tan}). Diese Parameter werden so beispielsweise auch in Metashape, OpenDroneMap und OpenCV genutzt.
+Die \Gls{Verzeichnung} wird meist mit den Parametern $k_1$ bis $k_4$ für die radial-symmetrische \Gls{Verzeichnung} und $p_1$ und $p_2$ für die tangentiale \Gls{Verzeichnung} bezeichnet. Die Faktoren stellen dabei die Parameter einer Taylor-Reihe dar. Sie basieren auf dem Kameramodell von \citet[S. 859]{brown1971} und denen von ihm vorgestellten Formeln (siehe \autoref{eq:brown_rad} und \ref{eq:brown_tan}). Diese Parameter werden so beispielsweise auch in Photogrammetrie- und Computer-Vison-Software wie Agisoft Metashape, OpenDroneMap und OpenCV genutzt.
 
 \begin{align*}
     \nlabel{eq:brown_rad}
