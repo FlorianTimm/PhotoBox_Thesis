@@ -16,7 +16,7 @@ Es hat sich gezeigt, dass es möglich ist ein photogrammetrisches Messsystem auf
 
 % Ausblick
 
-Die Arbeit zeigt wie auch andere Arbeiten in diesem Themengebiet das Potenzial der Photogrammetrie zur automatischen Erzeugung von 3D-Modellen. Gerade durch die stetige Weiterentwicklung der Auswertesoftware und der Hardware wird es in Zukunft möglich sein, noch genauere und schnellere 3D-Modelle zu erstellen. Dadurch werden sich sehr wahrscheinlich noch weitere Anwendungsfelder für die Photogrammetrie ergeben.
+Die Arbeit zeigt wie auch andere Arbeiten in diesem Themengebiet das Potenzial der Photogrammetrie zur automatischen Erzeugung von 3D-Modellen. Gerade durch die stetige Weiterentwicklung der Auswertesoftware und der Hardware wird es in Zukunft möglich sein, noch genauere und schnellere 3D-Modelle zu erstellen. Dadurch werden sich sehr wahrscheinlich noch weitere Anwendungsfelder für die Photogrammetrie ergeben. Projekte wie KulturGutRetter \citep{kulturgutretter} nutzen bereits ähnliche Ansätze zur schnellen fotografischen Dokumentation von mobilen Kulturgütern. Hier wäre es nur noch ein kleiner Schritt, statt eines einzelnen Bildes gleich Daten für die dreidimensionale Rekonstruktion zu erfassen.
 
 % Optimierungen
 Der in dieser Arbeit entwickelte Prototyp zeigt zwar das Potenzial der Photogrammetrie mit einem solchen Kamera- und Passpunktrahmen, jedoch gibt es noch einige Optimierungsmöglichkeiten. Im aktuellen Entwicklungsstand ist das System aber schon gut für Ausbildungszwecke geeignet, da es die Funktionsweise der Photogrammetrie gut veranschaulicht und viele Eingriffsmöglichkeiten bietet. Durch die Verwendung von Python sollte eine einfache Anpassung des Systems an spezielle Anforderungen möglich sein.
@@ -30,6 +30,8 @@ Die Verwendung des Raspberry Pi 4 als Schnittstelle vereinfacht zwar die Bedienu
 Ein weiterer Punkt ist die Verwendung des Moduls 3 Wide statt des Moduls 3 Normal. Dieses hat einen geringeren Mindestabstand zum Objekt und könnte so bei gleichem Montagerahmen größere Objekte erfassen. Nachteilig wäre hierbei jedoch, dass ein noch größerer Tiefenschärfebereich notwendig wäre - also dann auch Fokusstacking notwendig wäre. Zu Beginn des Projekts war die Verfügbarkeit des Moduls 3 Wide noch nicht gegeben, sodass das Modul 3 Normal verwendet wurde. Außerdem hatte die Nutzung von Fokusstacking bisher nicht zu den gewünschten Ergebnissen geführt.
 
 Zur besseren Erfassung von Objekten mit einheitlicher Textur könnte die Verwendung eines LED-Beamers mit Musterprojektion helfen. Hierdurch wäre es der Software möglich, auch Punkte auf der Oberfläche dieser Objekte zu bestimmen. Die Steuerung des Beamers könnte über den Raspberry Pi 4 erfolgen.
+
+%Abschluss
 
 Insgesamt zeigt sich, dass die Nutzung der Raspberry Pi Camera Module an einem festen Rahmen schon in dieser Entwicklungsstufe gute Ergebnisse liefert bei sehr kurzen personellen Aufwand bei der Erfassung. Das System bietet an einigen Stellen noch Optimierungsmöglichkeiten, die beispielsweise zur besseren Erfassung von größeren oder texturarmeren Objekten führen kann.
 

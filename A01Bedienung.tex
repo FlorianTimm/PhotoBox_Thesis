@@ -6,7 +6,7 @@
 \chapter{Bedienungsanleitung}
 \label{ch:Bedienungsanleitung}
 
-\todo{Bilder aus Blender-Modell/Kamerabilder einfügen}
+\todo{Titelbild?}
 
 \section{Anwendungsbereich}
 Ziel des Systems ist es, 3D-Modelle von Objekten bis zu einer Größe von \SI{40}{\centi\metre} Durchmesser zu erstellen. Die Bedienung soll dabei möglichst einfach und selbsterklärend sein, um auch Laien die Möglichkeit zu geben, das System zu bedienen.
@@ -76,7 +76,7 @@ Die letzten Koordinaten der Passpunkte werden im System gespeichert - daher soll
         \caption{Drucktaster zur Steuerung des Systems, z.B. für die Bildaufnahme}
         \label{img:taster}
     \end{subfigure}
-    \caption{Anschlüsse des Systems}
+    \caption{Bedienelemente des Systems}
 \end{figure}
 
 Das System wird gestartet, indem die Stromversorgung hergestellt wird. Die Kameras starten selbstständig und die Beleuchtung wird eingeschaltet. Nach kurzer Zeit sollten kurz alle LEDs grün leuchten. Falls nicht, sind einige Kameras nicht erreichbar. Problemlösungen werden im \autoref{sec:Fehlerbehebung} behandelt. Die Kameras können ggf. durch Nutzung einen Innensechskantschlüssels neu ausgerichtet werden. Die Kameras sollten dabei auf das Objekt ausgerichtet werden (\autoref{img:innensechs}).
@@ -101,7 +101,14 @@ Alternativ können die Bilder auch ohne angeschlossenen PC aufgenommen werden un
 Die Verbindungssoftware unterstützt auch das Laden der Bilder aus einem lokalen Ordner, beispielsweise aus der ZIP der Website oder dem Ordner auf dem USB-Stick. Somit kann dann der weitere Workflow analog zum Workflow mit Netzwerkverbindung durchgeführt und die Bilder weiter verarbeitet werden.
 
 \section{Weiterverarbeitung}
-Die Bilder können in der ausgewählten Software weiterverarbeitet werden. Die genaue Vorgehensweise hängt von der Software ab. In Metashape wird beispielsweise ein Workflow durchgeführt, in dem die Bilder importiert, die Kameras kalibriert, die Passpunkte gesetzt und die Modelle berechnet werden. In OpenDroneMap wird ein Prozess gestartet, der die Bilder importiert, die Modelle berechnet und die Modelle exportiert. Für weitere Informationen hierzu ist die entsprechende Bedienungsanleitung der Software zu konsultieren.
+Die Bilder können in der ausgewählten Software weiterverarbeitet werden. Die genaue Vorgehensweise hängt von der Software ab und wird in diesem Abschnitt grob erläutert. Für weitere Informationen hierzu ist die entsprechende Bedienungsanleitung der Software zu konsultieren.
+
+\subsection{Agisoft Metashape}
+Sofern in der Schnittstellen-Software aktiviert, wird in Metashape ein Workflow durchgeführt, in dem die Bilder importiert, die Kameras kalibriert, die Passpunkte gesetzt, die Modelle berechnet und exportiert werden. Sofern die Funktion nicht aktiviert wird, wird nur ein Projekt angelegt und die Bilder und Passpunkte importiert. Die weitere Verarbeitung kann dann manuell erfolgen. Hierbei ist darauf zu achten, die Passpunkte zu aktivieren, damit deren Koordinate übernommen wird und der korrekte Maßstab des Modells gewährleistet ist.
+
+\subsection{OpenDroneMap}
+In OpenDroneMap wird ein Prozess gestartet, der die Bilder importiert, die Modelle berechnet und die Modelle exportiert. Hier sind keine weiteren Eingriffe notwendig und möglich. 
+
 
 \section{Wartung}
 Software-Updates können zu Inkompatibilitäten führen, daher sollten diese erstmal auf einem zusätzlichen Raspberry Pi ausprobiert werden, bevor diese auf dem System ausgerollt werden. Sofern ein Software-Update durchgeführt werden soll, kann das System per RJ45-Kabel über den Router (\autoref{img:rj45}) mit dem Internet verbunden werden. Anschließend kann das Update der Software über die Weboberfläche durchgeführt werden. Ein Betriebssystemupdate kann per SSH-Verbindung zum Raspberry Pi 4 durchgeführt werden. Hierfür sind die Zugangsdaten am Ende des Dokuments zu finden.

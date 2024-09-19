@@ -4,10 +4,14 @@
 
 
 \chapter{Aufbau des Messsystems}
+\label{c:aufbau}
+\todo{prüfen}
+Entsprechend der im \autoref{c:photogrammetrie} beschriebenen Anforderungen an ein photogrammetrisches Messsystem wurden die Komponenten ausgewählt.
+
 Die Kameras sollten eine hohe geometrische Auflösung und möglichst stabile \gls{innereOrientierung} aufweisen. Außerdem sollen sie während einer Messkampagne nicht in ihrer Lage zueinander verändert werden, damit die \gls{aeussereOrientierung} größtenteils gleich bleibt. Daher ist ein stabiler Rahmen notwendig, an welchem die Kameras verdrehsicher angebracht werden können. Kleinere Restfehler in den Orientierungen können mit der Bündelblockausgleichung ausgeglichen werden.
 Um Ungenauigkeiten durch Bewegungen zu verhindern, müssen die Kameras möglichst zeitgleich auslösen. Daher ist eine gemeinsame Steuerung und Kommunikation zwischen den Kameras notwendig. Außerdem sollen alle Bilder auf das Steuerungssystem übertragen werden, hierfür wird eine Form der Datenübertragung benötigt. Damit die Bilder möglichst schattenfrei ausgeleuchtet werden, muss eine Beleuchtung mit eingeplant werden. Außerdem muss die Stromversorgung der einzelnen Kameras sichergestellt sein.
 
-Diese Anforderungen werden in den folgenden Abschnitten genauer erläutert.
+In diesem Kapitel wird der Aufbau des Messsystems beschrieben und die Auswahl der Komponenten begründet.
 
 \section{Kameras}
 \label{s:kameras}
