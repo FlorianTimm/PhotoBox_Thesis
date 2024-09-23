@@ -191,13 +191,13 @@ Es gibt verschiedenste Formen von Markern, die automatisch erfasst werden könne
 Vorteilhaft ist jedoch die Verwendung von codierten Zielmarken. Hier können die Punkte direkt zugeordnet werden, sodass keine weitere Filterung und Berechnung zur Zuordnung notwendig ist. \citep[S.535ff]{luhmann}
 
 \subsubsection{Zielmarken nach Schneider}
-Eine Form der codierten Zielmarken sind die Marker nach Schneider. Diese bestehen aus mehreren konzentrischen Kreisen (\autoref{img:schneider}) und werden entsprechend auch als \Gls{CCCT} bezeichnet \citep{ccct}. Die Mitte des Markers wird durch den gemeinsamen Mittelpunkt der Kreise definiert \citep{schneider}. Vorteilhaft ist, dass die Marker auch bei unscharfen Bildern erkannt werden können und ihr Zentrum manuell identifiziert werden kann, beispielsweise zum Aufmaß mit einem Tachymeter. Sie haben sich daher als Standardmarker in der Photogrammetrie etabliert. Sie werden beispielsweise von Agisoft Metashape verwendet.
+Eine Form der codierten Zielmarken sind die Marker nach Schneider. Diese bestehen aus mehreren konzentrischen Kreisen (\autoref{img:schneider}) und werden entsprechend auch als \Gls{CCCT} bezeichnet \citep{ccct}. Die Mitte des Markers wird durch den gemeinsamen Mittelpunkt der Kreise definiert \citep{schneider}. Vorteilhaft ist, dass die Marker auch bei unscharfen Bildern erkannt werden können und ihr Zentrum manuell identifiziert werden kann, beispielsweise zum Aufmaß mit einem Tachymeter. Sie haben sich daher als Standardmarker in der Photogrammetrie etabliert und werden beispielsweise von Agisoft Metashape verwendet.
 
 
 \subsubsection{ArUco-Marker}
 Eine andere Variante der codierten Verknüpfungspunkte sind die sogenannten ArUco-Marker (\autoref{img:aruco}). Diese werden häufig für die Orientierung bei Augmented-Reality-An\-wend\-ungen genutzt. Jede Ecke kann hierbei automatisch im Subpixelbereich identifiziert werden, sodass ein erkannter Marker vier Verknüpfungspunkte liefern kann. Wenn deren (lokale) Koordinaten und die \gls{innereOrientierung} bekannt sind, kann mit nur einem Marker die \gls{aeussereOrientierung} bestimmt werden. \citep[S. 545]{luhmann}
 
-Nachteilig zeigte sich in den Untersuchungen, dass die Ecken nicht eindeutig identifiziert werden können, wenn die Aufnahme unscharf ist. Durch ihre Verwendung in Augmented-Reality-Anwendungen sind auch viele kostenfreie Bibliotheken für ihre Erkennung verfügbar. Beispielsweise kann OpenCV ArUco-Marker identifizieren \citep{opencv}.
+Nachteilig zeigte sich in den Untersuchungen des Fokus (\autoref{sec:fokus}), dass die Ecken nicht eindeutig identifiziert werden können, wenn die Aufnahme unscharf ist. Durch ihre Verwendung in Augmented-Reality-Anwendungen sind auch viele kostenfreie Bibliotheken für ihre Erkennung verfügbar, sodass beispielsweise \cite{opencv} ArUco-Marker identifizieren kann.
 
 
 \begin{figure}
@@ -219,14 +219,14 @@ Nachteilig zeigte sich in den Untersuchungen, dass die Ecken nicht eindeutig ide
 
 \subsection{Merkmalsextraktion}
 \label{ss:sift}
-Ohne das Anbringen von Markern können auch Merkmale in den Bildern erkannt werden. Hierfür gibt es verschiedene Methoden, eine dieser ist \Gls{SIFT}, welche hier beispielhaft kurz dargestellt wird. Sie liefert Verknüpfungspunkte aus Mustern auf den photographierten Oberflächen. Es ist meist nicht notwendig explizit Marker an dem aufzunehmenden Objekt anzubringen, sofern seine Oberfläche nicht strukturlos ist (glatte weiße Wände etc.).
+Auch ohne das Anbringen von Markern können Verknüpfungspunkte erzeugt werden. Hierfür wird Merkmalsextraktion verwendet, beispielsweise \Gls{SIFT}, welches hier stellvertretend kurz vorgestellt wird. Es liefert Verknüpfungspunkte aus Mustern auf den photographierten Oberflächen. Es ist meist nicht notwendig explizit Marker an dem aufzunehmenden Objekt anzubringen, sofern seine Oberfläche nicht strukturlos ist (glatte weiße Wände etc.).
 
-Zur Erkennung von Merkmalen setzt \gls{SIFT} auf die Detektion von Kanten. Diese werden in verschiedenen Stufen einer Bildpyramide erkannt und ihre Extrema berechnet. Sie werden anschließend weiter ausgedünnt, beispielsweise über den Kontrast. Sofern ein möglicher Marker identifiziert wurde, wird eine Beschreibung erzeugt. Diese erfolgt  durch Analyse der Helligkeitsabweichungen zu den Nachbar-Pixeln und wird an der stärksten Abweichung ausgerichtet. Hierdurch wird die Beschreibung dann richtungsunabhängig. Mit diesen kann dann die Übereinstimmung von zwei Markern in zwei Bildern bestimmt werden, auch wenn diese zueinander gekippt oder gedreht sind.
+Zur Erkennung von Merkmalen setzt \gls{SIFT} auf die Detektion von Kanten. Diese werden in verschiedenen Stufen einer Bildpyramide erkannt und ihre Extrema berechnet. Sie werden anschließend weiter ausgedünnt, beispielsweise über den Kontrast. Sofern ein möglicher Marker identifiziert wurde, wird eine Beschreibung erzeugt. Diese erfolgt  durch Analyse der Helligkeitsabweichungen zu den Nachbar-Pixeln und wird an der stärksten Abweichung ausgerichtet. Hierdurch wird die Beschreibung dann richtungsunabhängig. Mit den Beschreibungen kann dann die Übereinstimmung von zwei Markern in zwei Bildern identifiziert werden, auch wenn diese zueinander gekippt oder gedreht sind.
 \citep[S. 484f]{luhmann}
 
 \section{Verknüpfung von Bildern}
 \label{s:photogramm}
-Durch die beschriebenen Verfahren und die hieraus entstandenen Verknüpfungs\-punkte können die Bilder miteinander verknüpft werden. Da die Kamerapositionen am Rahmen veränderlich sind und die Montage auch keine ausreichend genaue Fixierung garantiert, können die bekannten Positionen aus vorherigen Messungen maximal als Näherungswerte genutzt werden. Die genaue Bestimmung der Position und Ausrichtung - die \gls{aeussereOrientierung} - muss daher mindestens für die verschobenen oder gedrehten Kameras neu berechnet werden. Gleiches gilt für neue Verknüpfungspunkte, für die noch keine Koordinate bekannt ist. Die beiden Verfahren, die so zur Verknüpfung der Bilder beitragen, werden im Folgenden vorgestellt. Für einige Experimente wurde auch die relative Orientierung genutzt, die auch hier vorgestellt wird.
+Durch die beschriebenen Verfahren und die hieraus entstandenen Verknüpfungs\-punkte können die Bilder miteinander verknüpft werden. Da die Kamerapositionen am Rahmen veränderlich sind und die Montage auch keine ausreichend genaue Fixierung garantiert, können die bekannten Positionen aus vorherigen Messungen maximal als Näherungswerte genutzt werden. Die genaue Bestimmung der Position und Ausrichtung - die \gls{aeussereOrientierung} - muss daher mindestens für die verschobenen oder gedrehten Kameras neu berechnet werden. Gleiches gilt für neue Verknüpfungspunkte, für die noch keine Koordinate bekannt ist. Die verwendeten Methoden, die so zur Verknüpfung der Bilder beitragen, werden im Folgenden vorgestellt: der Rückwärts-, der Vorwärtsschnitt und die relative Orientierung.
 
 
 \begin{figure}
@@ -235,14 +235,14 @@ Durch die beschriebenen Verfahren und die hieraus entstandenen Verknüpfungs\-pu
         \includegraphics[width=0.9\linewidth]{img/2_grundlagen/rueckwaertsschnitt.pdf}
         %\includesvg[height=0.9\linewidth]{./img/2_grundlagen/rueckwaertsschnitt}
         \centering
-        \caption{Rückwärtsschnitt, nach \citealt[S. 284]{luhmann}}
+        \caption{Rückwärtsschnitt, nach \\ \citealt[S. 284]{luhmann}}
         \label{img:rueckwaertsschnitt}
     \end{subfigure}
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[width=0.9\linewidth]{img/2_grundlagen/vorwaertsschnitt.pdf}
         %\includesvg[height=0.9\linewidth]{./img/2_grundlagen/vorwaertsschnitt}
         \centering
-        \caption{Vorwärtsschnitt, nach \citealt[S. 339]{luhmann}}
+        \caption{Vorwärtsschnitt, nach \\ \citealt[S. 339]{luhmann}}
         \label{img:vorwaertsschnitt} %ID fürs Bder an den Aluprofilen befestigt ist (ild
     \end{subfigure}
     \caption{Geometrische Grundlagen des Rückwärtsschnitt und Vorwärtsschnitt}
@@ -259,11 +259,11 @@ Durch die Nutzung des RANSAC-Ansatzes können veränderte Passpunkte identifizie
 \subsection{Vorwärtsschnitt}
 Um wiederum aus einem Stereopaar mit bekannter innerer und äußerer Orientierung Punktkoordinaten zu berechnen, wird der Vorwärtsschnitt genutzt. \autoref{img:vorwaertsschnitt} zeigt die geometrischen Grundlagen des Vorwärtsschnitts. Es werden die Bildkoordinaten der Punkte $P_1$ und $P_2$ benötigt, die im Bild sichtbar sind. Die Position des Punktes $P$ wird dann berechnet. Wie bereits erwähnt (\autoref{s:abbildung}), kann jeder Punkt im Bild durch die \gls{innereOrientierung} als Horizontal- und Vertikalrichtungsmessung interpretiert werden. Durch die \gls{aeussereOrientierung} kann diese dann ins übergeordnete System überführt werden. Hieraus ergibt sich dann zur Berechnung der Position $P$ ein räumlicher Schnitt zweier (windschiefer) Geraden \citep[S. 95]{luhmann}.
 
-Mit dem Vorwärts\-schnitt können neben markierten Verknüpfungspunkten auch die Neupunkte, die mittels SIFT oder ähnlichen Bild\-erkennungs\-algorithmen erkannt wurden, berechnet werden. Dadurch kann eine dünne Punktwolke erzeugt werden, welche dann bei der Bündelblockausgleichung genutzt werden kann. Da die Berechnung bereits bei Bildkoordinaten aus zwei Bildern überbestimmt ist und oft Punkte in mehr Bildern abgebildet sind, bietet sich die Nutzung der Ausgleichung auch schon bei der Bestimmung an. \citep[S. 385]{luhmann}
+Mit dem Vorwärts\-schnitt können neben markierten Verknüpfungspunkten auch die Neupunkte, die mittels SIFT oder ähnlichen Bild\-erkennungs\-algorithmen erkannt wurden, berechnet werden. Dadurch kann eine dünne Punktwolke erzeugt werden, welche dann bei der Bündelblockausgleichung (\autoref{s:buendelblock}) genutzt werden kann. Da die Berechnung bereits bei Bildkoordinaten aus zwei Bildern überbestimmt ist und oft Punkte in mehr Bildern abgebildet sind, bietet sich die Nutzung einer Ausgleichung auch schon bei der Bestimmung an. \citep[S. 385]{luhmann}
 
 \subsection{Relative Orientierung}
 \label{ss:relative_orientierung}
-Wenn keine Passpunkte vorhanden sind und auch zum Beispiel durch ArUco-Marker keine lokalen Passpunkt-Koordinaten erzeugt werden können, kann die Bildorientierung auch in einem lokalen System erfolgen. Hierbei wird die relative Orientierung der Bilder zueinander bestimmt. Eines der Bilder wird als Ursprung des Systems festgelegt (Projektionszentrum in $(0,0,0)$ und die optische Achse in $z$-Richtung). Die Position und Ausrichtung des zweiten Bildes wird dann relativ zu diesem bestimmt. \citep[S. 316]{luhmann}
+Wenn keine Passpunkte vorhanden sind und auch durch zum Beispiel ArUco-Marker keine lokalen Passpunkt-Koordinaten erzeugt werden können, kann die Bildorientierung auch in einem lokalen System erfolgen. Hierbei wird die relative Orientierung der Bilder zueinander bestimmt. Eines der Bilder wird als Ursprung des Systems festgelegt (Projektionszentrum in $(0,0,0)$ und die optische Achse in $z$-Richtung). Die Position und Ausrichtung des zweiten Bildes wird dann relativ zu diesem bestimmt. \citep[S. 316]{luhmann}
 
 Die klassische Variante der relativen Orientierung ist die Bestimmung der Essenziellen Matrix, welche identische Punkte in einem Bild mit denen in einem anderen Bild in Beziehung setzt. Diese kann aus der inneren Orientierung und der Fundamentalmatrix berechnet werden, welche wiederum aus den Bildkoordinaten von mindestens 8 Verknüpfungspunkten berechnet werden kann. \citep[S. 328ff]{luhmann}
 
@@ -289,7 +289,6 @@ Neben der Optimierung der Parameter hat die Bündelblockausgleichung auch den Vo
 \section{Multi-View-Stereo}
 Die dünne Punktwolke aus dem Vorwärtsschnitt und der anschließenden Bündel\-block\-ausgleichung kann durch das Multi-View-Stereo-Verfahren zu einem 3D-Modell erweitert werden. Hierbei werden jeweils Bildpaare gebildet und die Disparitäten, also die Verschiebung des Objektes in der Abbildung, bestimmt. Diese sind abhängig von der Entfernung des Objektes. Bei einem unendlich weit entfernten Objekt tritt keine Disparität auf \citep[S. 313]{luhmann}. Die Disparitäten können dann in Tiefeninformationen umgerechnet, gemittelt und zu einem Tiefenbild zusammengefasst werden. \citep[S. 505]{luhmann}
 %\citep[S. 51]{opendronemap}
-\todo{Details zu Multi-View-Stereo}
 
 \section{Mesh-Generierung}
 Bis zu diesem Schritt besteht das Modell nur aus einzelnen Punkten, die keine Oberfläche ergeben. Um ein geschlossenes 3D-Modell zu erhalten, muss eine Oberfläche generiert werden. Hierfür wird ein Mesh-Generierungsverfahren genutzt, welches die Punktwolke in Dreiecke unterteilt. Es gibt verschiedene Verfahren, die sich in der Art der Unterteilung und ihrem Umgang mit Einzelpunkten unterscheiden. Meistens wird hierbei die Punktwolke auch gefiltert, um Ausreißer und nicht notwendige Punkte zu entfernen. OpenDroneMap nutzt beispielsweise die Screened Poisson Surface Reconstruction zur Vermaschung und Filterung. \citep[S. 52f]{opendronemap}
@@ -319,7 +318,9 @@ Die Screened Poisson Surface Reconstruction ist ein Verfahren, das auf der Poiss
 \section{Texturierung}
 Abschließend wird das Modell texturiert. Hierfür werden die Bilder, die zur Erstellung des Modells genutzt wurden, auf das Modell projiziert. Außerdem werden Helligkeits- und Farbunterschiede der Bilder ausgeglichen. \citep[S. 54f]{opendronemap}
 
-Vorteil der Texturierung ist, dass das Modell meist realistischer wirkt und fehlenden Informationen, beispielsweise fehlende Punkte, überdeckt werden können. Nachteilig ist, dass die Texturierung hierdurch auch Informationen verdeckt. So kann bei einem nur schattierten Modell die Struktur des 3D-Modelles deutlich besser erkannt werden \citep[S. 702]{luhmann}. Beispielhaft ist dieses in \autoref{img:texturierung} an dem später auch für die Überprüfungen (\autoref{c:versuche}) verwendeten Testkörper dargestellt. Dieser hat beispielsweise auf der Rückseite (rechts im Bild) einige Einkerbungen. Diese sind im texturierten Modell nicht mehr sichtbar, im schattierten, jedoch nicht texturierten Modell sind sie deutlich erkennbar.
+Vorteil der Texturierung ist, dass das Modell meist realistischer wirkt und fehlende Informationen, beispielsweise fehlende Punkte, überdeckt werden können. Nachteilig ist, dass die Texturierung hierdurch auch Informationen verdeckt. So kann bei einem nur schattierten Modell die Struktur des 3D-Modelles deutlich besser erkannt werden \citep[S. 702]{luhmann}. Beispielhaft ist dieses in \autoref{img:texturierung} an dem später auch für die Überprüfungen (\autoref{c:versuche}) verwendeten Testkörper dargestellt. Dieser hat beispielsweise auf der Rückseite (rechts im Bild) einige Einkerbungen, welche im texturierten Modell (\autoref{img:mit_textur}) kaum erkennbar sind. Im ausschließlich schattierten Modell (\autoref{img:ohne_textur}) sind diese hingegen deutlich sichtbar.
+
+
 
 \begin{figure}
     \centering
