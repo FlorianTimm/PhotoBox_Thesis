@@ -25,7 +25,7 @@ Es wurden Bilder von einem Siemensstern unter verschiedenen Belichtungssituation
 
 \paragraph{Ergebnis}
 
-Der Unschärfekreis war durchschnittlich $28$\,\gls{px} groß (\autoref{img:siemens_beschriftet}). Dies entspricht einer Linienauflösung von 292 Linien pro Millimeter, die Linienbreite beträgt \SI{0,0034}{\milli\metre} beziehungsweise $2,44$\,\gls{px}. Die Linienauflösung ist mit etwa \SI{80}{\percent} der Sensorauflösung sehr hoch. Die Linienbreite in Pixeln entsprach der zum Vergleich genutzten Spiegelreflexkamera. Sie kann im Maximalfall (beste Auflösung) $2$\,\gls{px} betragen, entsprechend je eines weißen und schwarzen Pixels pro Linie.
+Der Unschärfekreis war durchschnittlich $28$\,\gls{px} groß (siehe \autoref{img:siemens_beschriftet}). Dies entspricht einer Linienauflösung von 292 Linien pro Millimeter, die Linienbreite beträgt \SI{0,0034}{\milli\metre} beziehungsweise $2,44$\,\gls{px}. Die Linienauflösung ist mit etwa \SI{80}{\percent} der Sensorauflösung sehr hoch. Die Linienbreite in Pixeln entsprach der zum Vergleich genutzten Spiegelreflexkamera. Sie kann im Maximalfall (beste Auflösung) $2$\,\gls{px} betragen, entsprechend je eines weißen und schwarzen Pixels pro Linie.
 
 
 \begin{figure}
@@ -53,7 +53,7 @@ Der Unschärfekreis war durchschnittlich $28$\,\gls{px} groß (\autoref{img:siem
 Die \Gls{Kamerakonstante} einer Kamera ändert sich durch die Fokussierung. Bei gleich eingestellter Objektdistanz ist die \Gls{Kamerakonstante} näherungsweise gleich.
 
 \paragraph{Ziel}
-\citet[S. 59]{kraus} gibt eine Formel (siehe \autoref{eq:kraus_fokus}) für die \Gls{Bildweite} $b$ in Abhängigkeit der Gegenstandsweite $g$ an. Näherungsweise entspricht die \Gls{Bildweite} der \Gls{Kamerakonstante} \citep[S. 59]{kraus}. Die Nutzung der Formel als Näherungswert soll überprüft werden und eine optimierte Formel für die Raspberry-Pi-Kamera ermittelt werden.
+\citet[S. 59]{kraus} gibt eine Formel (\autoref{eq:kraus_fokus}) für die \Gls{Bildweite} $b$ in Abhängigkeit der Gegenstandsweite $g$ an. Näherungsweise entspricht die \Gls{Bildweite} der \Gls{Kamerakonstante} \citep[S. 59]{kraus}. Die Nutzung der Formel als Näherungswert soll überprüft werden und eine optimierte Formel für die Raspberry-Pi-Kamera ermittelt werden.
 
 \begin{align*}
     \nlabel{eq:kraus_fokus}
@@ -139,7 +139,7 @@ Mittels eines Pythonskriptes wurden die notwendigen Fokusschritte berechnet, dam
     \label{img:fokusstack_plot}
 \end{figure}
 
-Anschließend wurden die Bilder mit einem Python-Skript unter Verwendung von OpenCV automatisiert zu je einem Bild pro Kamera, bestehend aus allen scharf dargestellten Bereichen, zusammengerechnet. Dazu wurde jeweils die notwendige Transformation mittels \Gls{SIFT} (\autoref{ss:sift}) und \Gls{Homografie} berechnet. Die fertigen Bilder wurden in Agisoft Metashape zur Berechnung eines 3D-Modells genutzt. Die Daten wurden dann, wie bereits in den vorherigen Untersuchungen beschrieben, mit denen des Streifenprojektionssystems verglichen.
+Anschließend wurden die Bilder mit einem Python-Skript unter Verwendung von OpenCV automatisiert zu je einem Bild pro Kamera, bestehend aus allen scharf dargestellten Bereichen, zusammengerechnet. Dazu wurde jeweils die notwendige Transformation mittels \Gls{SIFT} (siehe \autoref{ss:sift}) und \Gls{Homografie} berechnet. Die fertigen Bilder wurden in Agisoft Metashape zur Berechnung eines 3D-Modells genutzt. Die Daten wurden dann, wie bereits in den vorherigen Untersuchungen beschrieben, mit denen des Streifenprojektionssystems verglichen.
 
 \todo{Bilder von Fokusstacking einfügen}
 

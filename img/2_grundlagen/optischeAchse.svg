@@ -9,6 +9,9 @@
    id="svg5"
    inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    sodipodi:docname="optischeAchse.svg"
+   inkscape:export-filename="optischeAchse.pdf"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -25,9 +28,9 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="1.9779745"
-     inkscape:cx="306.12124"
-     inkscape:cy="198.43532"
-     inkscape:window-width="1854"
+     inkscape:cx="298.79051"
+     inkscape:cy="199.44645"
+     inkscape:window-width="1860"
      inkscape:window-height="1011"
      inkscape:window-x="0"
      inkscape:window-y="0"
@@ -66,8 +69,8 @@
        d="M 13.200903,106.13878 H 196.48317"
        id="path113" />
     <path
-       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.26448;stroke-opacity:1"
-       d="M 13.419976,142.01123 H 196.7026"
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.240325;stroke-opacity:1"
+       d="M 13.419976,142.18863 H 164.75319"
        id="path113-6" />
     <path
        style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-opacity:1"
@@ -102,6 +105,14 @@
        d="M 57.185932,143.74454 V 140.6934"
        id="path2556-7" />
     <path
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.290583;stroke-opacity:1"
+       d="m 153.76341,144.13134 v -3.68025"
+       id="path2556-7-3" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-opacity:1"
+       d="M 164.53617,143.71124 V 140.6601"
+       id="path2556-7-6" />
+    <path
        style="fill:none;fill-opacity:1;stroke:#ff0000;stroke-width:0.264583;stroke-opacity:1"
        d="m 56.942392,137.46381 v -3.05114"
        id="path2556-3" />
@@ -119,7 +130,7 @@
          id="tspan2637"
          style="stroke-width:0.264583"
          x="14.194179"
-         y="104.03017">H</tspan><tspan
+         y="104.03017">H'</tspan><tspan
          sodipodi:role="line"
          style="stroke-width:0.264583"
          x="14.194179"
@@ -133,11 +144,11 @@
        id="text2639-9"><tspan
          sodipodi:role="line"
          id="tspan2637-1"
-         style="stroke-width:0.264583;stroke:#ff0000;stroke-opacity:1"
+         style="stroke:#ff0000;stroke-width:0.264583;stroke-opacity:1"
          x="102.09767"
-         y="104.94119">H</tspan><tspan
+         y="104.94119">H'</tspan><tspan
          sodipodi:role="line"
-         style="stroke-width:0.264583;stroke:#ff0000;stroke-opacity:1"
+         style="stroke:#ff0000;stroke-width:0.264583;stroke-opacity:1"
          x="102.09767"
          y="108.90994"
          id="tspan2641-2" /></text>
@@ -183,7 +194,7 @@
          sodipodi:role="line"
          id="tspan8728"
          x="58.084167"
-         y="104.24052">X0</tspan></text>
+         y="104.24052">O'</tspan></text>
     <path
        style="fill:none;fill-opacity:1;stroke:#ff0000;stroke-width:0.264583;stroke-opacity:1"
        d="M 57.011753,135.86058 H 100.6708"
