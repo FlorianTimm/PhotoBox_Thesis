@@ -44,7 +44,7 @@ Die genaue Bestimmung der inneren Orientierung, auch Kalibrierung genannt, kann 
 
 \subsection{Äußere Orientierung}
 \label{s:aeussereorientierung}
-Die \gls{aeussereOrientierung} beschreibt die Lage der Kamera im Raum und ihre Ausrichtung. Sie wird durch die Position des Projektionszentrums und die Richtung der optischen Achse beschrieben. Die Position wird hierbei durch 3D-Koordinaten beschrieben, in Nahbereichphotogrammetrie oft in einem lokalen System. Die Richtung der optischen Achse wird mit der Rotation der Kamera zu diesem Koordinatensystem beschrieben, beispielsweise durch eine Rotationsmatrix, eulersche Winkel oder Quaternionen. Durch die Nutzung von Passpunkten oder bekannten Koordinaten der Kamera kann die \gls{aeussereOrientierung} bestimmt werden. \citep[S. 273ff]{luhmann}
+Die \gls{aeussereOrientierung} beschreibt die Lage der Kamera im Raum und ihre Ausrichtung. Sie wird durch die Position des Projektionszentrums und die Richtung der optischen Achse beschrieben. Die Position wird hierbei durch 3D-Koordinaten beschrieben, in der Nahbereichsphotogrammetrie oft in einem lokalen System. Die Richtung der optischen Achse wird mit der Rotation der Kamera zu diesem Koordinatensystem beschrieben, beispielsweise durch eine Rotationsmatrix, eulersche Winkel oder Quaternionen. Durch die Nutzung von Passpunkten oder bekannten Koordinaten der Kamera kann die \gls{aeussereOrientierung} bestimmt werden. \citep[S. 273ff]{luhmann}
 
 Die Darstellung der Rotation der Kamera als Quaternionen hat den Vorteil, dass diese dann mit nur vier Parametern in eine Bündelblockausgleichung eingeht. Bei der Nutzung der Rotationsmatrix hätte man hier neun bzw. acht unabhängige Parameter. Die Nutzung von eulerschen Winkeln hat den Nachteil, dass hier ein sogenannter Gimbal-Lock auftreten kann, bei dem zwei Achsen zusammenfallen und die Rotation nicht mehr eindeutig bestimmt werden kann. \citep[S. 63]{luhmann}
 
@@ -178,7 +178,7 @@ Die Schärfentiefe des Raspberry Pi Camera Module 3 ist in \autoref{img:sschaerf
 
 \section{Skalierung/Maßstab}
 \label{sec:massstab}
-Die Skalierung eines rein photogrammetrisch bestimmten 3D-Modelles ist nicht bekannt, da die Berechnungen nur auf Richtungen ohne Längenangaben basieren - es ist im mathematischen Sinne ähnlich \todo{Glossar} dem realen Körper. Daher werden Referenzen in Form einer bekannten Länge benötigt, um die Skalierung zu bestimmen. Alternativ können auch Passpunkte (siehe \autoref{s:verknuepfung}) mit bekannten Koordinaten verwendet werden oder im Falle von Mehrkamerasystemen bekannte \gls{aeussereOrientierung}en der Kameras. \citep[S. 546]{luhmann}
+Die Skalierung eines rein photogrammetrisch bestimmten 3D-Modelles ist nicht bekannt, da die Berechnungen nur auf Richtungen ohne Längenangaben basieren - es ist im mathematischen Sinne \gls{aehnlich} dem realen Körper. Daher werden Referenzen in Form einer bekannten Länge benötigt, um die Skalierung zu bestimmen. Alternativ können auch Passpunkte (siehe \autoref{s:verknuepfung}) mit bekannten Koordinaten verwendet werden oder im Falle von Mehrkamerasystemen bekannte \gls{aeussereOrientierung}en der Kameras. \citep[S. 546]{luhmann}
 
 
 \section{Verknüpfungs- und Passpunkte}
@@ -205,7 +205,7 @@ Nachteilig zeigte sich in den Untersuchungen des Fokus (\autoref{sec:fokus}), da
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[width=0.98\linewidth]{img/2_grundlagen/schneider.png}
         \centering
-        \caption{\Glsentryshort{CCCT} nach \\ \cite{schneider},\\aus Agisoft Metashape}
+        \caption{\acrshort{CCCT} nach \\ \cite{schneider},\\aus Agisoft Metashape}
         \label{img:schneider}
     \end{subfigure}
     \begin{subfigure}{0.45\textwidth}
