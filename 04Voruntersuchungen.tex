@@ -16,7 +16,7 @@ Die Angabe der Auflösung in Pixeln täuscht bei günstigen Kameras über die ta
 Die tatsächliche Auflösung der Kamera soll ermittelt werden. Hierbei spielt neben der reinen Anzahl der \acrfull{px} auch die Qualität des Objektives der Kameras eine Rolle.
 
 \paragraph{Vorgehen}
-Es wurden Bilder von einem Siemensstern unter verschiedenen Belichtungssituationen und Entfernungen aufgenommen (Beispielaufnahme siehe \autoref{img:siemens}). Anschließend wurde die Größe des Unschärfekreises ermittelt und die Linienauflösung und -größe hieraus nach \cite[S. 161]{luhmann} berechnet. Zum Vergleich wurden die Bilder auch mit einer hochwertigeren Kamera aufgenommen (Spiegelreflexkamera Canon EOS 77D mit EF-S 18-55 mm 1:4-5.6 IS STM).
+Es wurden Bilder von einem Siemensstern unter verschiedenen Belichtungssituationen und Entfernungen aufgenommen (Beispielaufnahme siehe \autoref{img:siemens}). Anschließend wurde die Größe des Unschärfekreises ermittelt und die Linienauflösung und -größe hieraus nach \citet[S. 161]{luhmann} berechnet. Zum Vergleich wurden die Bilder auch mit einer hochwertigeren Kamera aufgenommen (Spiegelreflexkamera Canon EOS 77D mit EF-S 18-55 mm 1:4-5.6 IS STM).
 
 \begin{align*}
     \text{[Auflösungsvermögen]} & = \frac{\text{[Anzahl Segmente]}}{\pi \cdot \text{[Durchmesser Unschärfekreis]}} \\
@@ -33,13 +33,13 @@ Der Unschärfekreis war durchschnittlich $28$\,\gls{px} groß (siehe \autoref{im
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[height=0.9\linewidth]{./img/4_voruntersuchung/siemens.jpg}
         \centering
-        \caption{100\%}
+        \caption{\SI{100}{\percent}}
         \label{img:siemens}
     \end{subfigure}
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[height=0.9\linewidth]{./img/4_voruntersuchung/siemens_beschriftet.jpg}
         \centering
-        \caption{800\%}
+        \caption{\SI{800}{\percent}}
         \label{img:siemens_beschriftet}
     \end{subfigure}
     \caption{Siemensstern}
@@ -53,7 +53,7 @@ Der Unschärfekreis war durchschnittlich $28$\,\gls{px} groß (siehe \autoref{im
 Die \Gls{Kamerakonstante} einer Kamera ändert sich durch die Fokussierung. Bei gleich eingestellter Objektdistanz ist die \Gls{Kamerakonstante} näherungsweise gleich.
 
 \paragraph{Ziel}
-\citet[S. 59]{kraus} gibt eine Formel (\autoref{eq:kraus_fokus}) für die \Gls{Bildweite} $b$ in Abhängigkeit der Gegenstandsweite $g$ an. Näherungsweise entspricht die \Gls{Bildweite} der \Gls{Kamerakonstante} \citep[S. 59]{kraus}. Die Nutzung der Formel als Näherungswert soll überprüft werden und eine optimierte Formel für die Raspberry-Pi-Kamera ermittelt werden.
+\citet[S. 59]{kraus} gibt eine Formel (\autoref{eq:kraus_fokus}) für die \Gls{Bildweite} $b$ in Abhängigkeit der Gegenstandsweite $g$ an. Näherungsweise entspricht die \Gls{Bildweite} der \Gls{Kamerakonstante} \citep[vgl.][S. 59]{kraus}. Die Nutzung der Formel als Näherungswert soll überprüft werden und eine optimierte Formel für die Raspberry-Pi-Kamera ermittelt werden.
 
 \begin{align*}
     \nlabel{eq:kraus_fokus}
@@ -142,7 +142,7 @@ Mittels eines Pythonskriptes wurden die notwendigen Fokusschritte berechnet, dam
 Anschließend wurden die Bilder mit einem Python-Skript unter Verwendung von OpenCV automatisiert zu je einem Bild pro Kamera, bestehend aus allen scharf dargestellten Bereichen, zusammengerechnet. Dazu wurde jeweils die notwendige Transformation mittels \Gls{SIFT} (siehe \autoref{ss:sift}) und \Gls{Homografie} berechnet. Die fertigen Bilder wurden in Agisoft Metashape zur Berechnung eines 3D-Modells genutzt. Die Daten wurden dann, wie bereits in den vorherigen Untersuchungen beschrieben, mit denen des Streifenprojektionssystems verglichen.
 
 \paragraph{Ergebnis}
-Die Genauigkeit der Passpunkte bei der Bildverknüpfung in Agisoft Metashape ließ zuerst ein gutes Ergebnis vermuten. Jedoch waren die Ergebnisse des 3D-Modelles nicht so wie erhofft, die Qualität des 3D-Modells war schlechter als bei einer einzelnen Aufnahme. Die Flächen des Testy waren kaum mehr vorhanden. Nur mit sehr viel manueller Nacharbeit wurde überhaupt ein erkennbares Ergebnis erzielt. Die Ursache hierfür ist nicht bekannt, aber es wird vermutet, dass die automatische Zusammenrechnung der Bilder zu vielen Artefakten in den Bildern geführt hat, sodass die Bilder dann von der \Gls{SfM}-Software nicht genau genug verknüpft werden konnten. Auch unter Nutzung von kommerziellen Programmen wie Helicon Focus  \citep[verwendet von][]{focusstack_sfm} und Zerene Stacker waren die Ergebnisse nicht viel besser. Es wurde daher entschieden, den Ansatz hier nicht weiterzuverfolgen.
+Die Genauigkeit der Passpunkte bei der Bildverknüpfung in Agisoft Metashape ließ zuerst ein gutes Ergebnis vermuten. Jedoch waren die Ergebnisse des 3D-Modelles nicht so wie erhofft, die Qualität des 3D-Modells war schlechter als bei einer einzelnen Aufnahme. Die Flächen des Testy waren kaum mehr vorhanden. Nur mit sehr viel manueller Nacharbeit wurde überhaupt ein erkennbares Ergebnis erzielt. Die Ursache hierfür ist nicht bekannt, aber es wird vermutet, dass die automatische Zusammenrechnung der Bilder zu vielen Artefakten in den Bildern geführt hat, sodass die Bilder dann von der \Gls{SfM}-Software nicht genau genug verknüpft werden konnten. Auch unter Nutzung von kommerziellen Programmen wie Helicon Focus \citep[verwendet von]{focusstack_sfm} und Zerene Stacker waren die Ergebnisse nicht viel besser. Es wurde daher entschieden, den Ansatz hier nicht weiterzuverfolgen.
 
 \section{Überprüfung der Kamerasynchronität}
 \label{s:kamerasynchronitaet}
