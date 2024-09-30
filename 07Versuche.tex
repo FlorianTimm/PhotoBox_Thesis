@@ -8,7 +8,7 @@ Nach Abschluss der Konstruktion und des Aufbaus des Prototyps, wurden verschiede
 
 \section{Referenzdaten}
 \label{s:referenzdaten}
-Zum Vergleich standen verschiedene Testobjekte zur Verfügung. Hauptsächlich wurde ein etwa \SI{14}{\centi\metre} hohes Modell einer Moai-Statue der Osterinsel verwendet, da dieses Objekt eine gute Textur und viele Details aufweist (siehe \autoref{img:bild_moai}). Neben einem texturierten Spielzeugdino standen noch zwei weiße Gipsmodelle zur Verfügung: Ein Abdruck einer Büste Einsteins  (siehe \autoref{img:bild_einstein}) und ein kerzenartiges Testobjekt, im folgenden Testy genannt (siehe \autoref{img:bild_testy}). Alle Objekte wurden bereits in anderen Projekten an der HafenCity Universität verwendet \citep[z.\,B.][]{kersten_scanner} und sind mit mehreren verschiedenen Systemen vermessen worden. 
+Zum Vergleich standen verschiedene Testobjekte zur Verfügung. Hauptsächlich wurde ein etwa \SI{14}{\centi\metre} hohes Modell einer Moai-Statue der Osterinsel verwendet, da dieses Objekt eine gute Textur und viele Details aufweist (siehe \autoref{img:bild_moai}). Neben einem texturierten Spielzeugdino standen noch zwei weiße Gipsmodelle zur Verfügung: Ein Abdruck einer Büste Einsteins  (siehe \autoref{img:bild_einstein}) und ein kerzenartiges Testobjekt, im folgenden Testy genannt (siehe \autoref{img:bild_testy}). Alle Objekte wurden bereits in anderen Projekten an der HafenCity Universität verwendet \citep[z.\,B.][]{kersten_scanner} und sind mit mehreren verschiedenen Systemen vermessen worden.
 
 \begin{figure}
     \centering
@@ -121,7 +121,7 @@ Die Messung mit dem Streifenprojektionssystem ist nach der Genauigkeitsabschätz
 
 \subsubsection{Durchschnittlicher Fehler / Mittelwert des quasi-wahren Fehlers}
 
-Der durchschnittliche Fehler ist der Mittelwert des Betrages des quasi-wahren Fehlers \citep[S.44, Gleichung 2-4, siehe \autoref{eq:durchschnittlicher_fehler}]{hoepcke}. Er gibt an, wie stark die Punktwolke von der Referenz abweicht. Der Mittelwert des quasi-wahren Fehlers ist eher unüblich\todo{Erläutern, warum?} (\autoref{eq:mittelwert_quasi_wahrer_fehler}). Da hier das Vorzeichen mitberücksichtigt wird, gibt er an, ob die Punktwolke systematisch zu groß oder zu klein ist, also ob die Realisierung des Maßstabes ungenau war.
+Der durchschnittliche Fehler ist der Mittelwert des Betrages des quasi-wahren Fehlers \citep[S.44, Gleichung 2-4, siehe \autoref{eq:durchschnittlicher_fehler}]{hoepcke}. Er gibt an, wie stark die Punktwolke von der Referenz abweicht. Der Mittelwert des quasi-wahren Fehlers (\autoref{eq:mittelwert_quasi_wahrer_fehler}) ist eher unüblich, da sich hier positive und negative Abweichungen aufheben. Da das Vorzeichen mitberücksichtigt wird, zeigt dieser, ob die Punktwolke systematisch zu groß oder zu klein ist, also ob die Realisierung des Maßstabes ungenau war.
 
 \begin{align*}
     \nlabel{eq:durchschnittlicher_fehler}
@@ -285,8 +285,7 @@ Die Ergebnisse sind in \autoref{tab:vergleich_drehteller} zusammengefasst.
 
 \section{Evaluation der Kameraanzahl}
 \label{s:kameraanzahl}
-\todo{gesucht: unterste Grenze, Definition?}
-Die Kameras machen einen großen Teil des (Kosten-)Aufwandes zur Realisierung des Projektes aus. Es soll daher in diesem Schritt geprüft werden, ob die Anzahl der Kameras auch reduziert werden kann. Entsprechend \autoref{s:drehteller} wird auch der Einsatz des Drehtellers statt mehr Kameras geprüft.
+Die Kameras machen einen großen Teil des (Kosten-)Aufwandes zur Realisierung des Projektes aus. Es soll daher in diesem Schritt geprüft werden, ob die Anzahl der Kameras auch reduziert werden kann und die mindestens für die Testobjekte notwendige Anzahl bestimmt werden. Entsprechend \autoref{s:drehteller} wird auch der Einsatz des Drehtellers statt mehr Kameras geprüft.
 
 \subsection{Durchführung}
 Um abzuschätzen, wie viele Kameras für eine gute Genauigkeit notwendig sind, wurden verschiedene Konfigurationen getestet. Dazu wurde der Moai aus \autoref{s:genauigkeitsueberpruefung} verwendet und in Agisoft Metashape verschiedene Kameras deaktiviert und das 3D-Modell neu berechnet. Die Ergebnisse wurden wieder mit dem Streifenprojektionssystem ATOS 5 verglichen. Als weitere Parameter wurden die Abdeckung und die Richtigkeit der Punktwolke bestimmt. Die Verteilung der jeweils genutzten Kameras ist in \autoref{img:ueberblick_cam_anzahl} dargestellt. Die pink dargestellten Punkte stellen jeweils die aktiven Kameras dar.
@@ -315,6 +314,7 @@ Zur Bestimmung des Maßstabes wurden die Daten automatisiert bestmöglich an die
         }
         \label{img:2von3kameras}
     \end{subfigure}
+    \par\bigskip
     \begin{subfigure}{0.48\textwidth}
         \includegraphics[width=0.95\linewidth]{img/7_versuche/kameraPosition/blick_von_oben_jedeZweite.png}
         \caption{
@@ -334,7 +334,6 @@ Zur Bestimmung des Maßstabes wurden die Daten automatisiert bestmöglich an die
     \caption{Positionierung der Kameras und verwendete Positionen des Drehtellers, Blick von oben auf das System}
     \label{img:ueberblick_cam_position}
 \end{figure}
-\todo{Abstand Bilder}
 
 
 \subsection{Ergebnisse}
@@ -460,8 +459,9 @@ Die Ergebnisse sind in \autoref{tab:vergleich_anzahl_drehteller} zusammengefasst
 
 
 \section{Zusammenfassung}
-Das System erreichte die vorgesehene Genauigkeit. Die Anzahl der Kameras war für die meisten getesteten Objekte ausreichend. Experimente mit weniger Kameras führten schnell zu einer zu schwachen Abdeckung des Objektes und somit zu fehlenden Bereichen in der Punktwolke. Der Einsatz eines Drehtellers kann die Anzahl der Kameras reduzieren, jedoch ist die Verarbeitung der Daten deutlich aufwändiger. Der Einsatz des Drehtellers zur weiteren Genauigkeitssteigerung ist aber durchaus sinnvoll, wenn die Anzahl der Kameras nicht erhöht werden kann oder soll.
-\todo{weiter}
+Das System erreichte die vorgesehene Genauigkeit - sie lag je nach Testobjekt bei \SI{0,1}{\milli\metre} - \SI{0,5}{\milli\metre}.
+Die Anzahl von 24 Kameras war für die meisten getesteten Objekte ausreichend. Experimente mit weniger Kameras führten schnell zu einer schwachen Abdeckung des Objektes und somit zu fehlenden Bereichen in der Punktwolke. Der Einsatz eines Drehtellers kann die Anzahl der notwendigen Kameras reduzieren, jedoch ist die Verarbeitung der Daten deutlich aufwändiger. Der Einsatz des Drehtellers zur weiteren Genauigkeitssteigerung ist aber durchaus sinnvoll, wenn die Anzahl der Kameras nicht erhöht werden kann oder soll.
+
 
 \biblio
 \end{document}

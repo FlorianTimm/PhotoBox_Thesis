@@ -6,7 +6,12 @@
 \chapter{Bedienungsanleitung}
 \label{ch:Bedienungsanleitung}
 
-\todo{Titelbild?}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1\textwidth]{./img/9_anleitung/komponenten.pdf}
+    \caption{Überblick über das System und seine Komponenten (vereinfachtes Rendering)}
+    \label{img:komponenten}
+\end{figure}
 
 \section{Anwendungsbereich}
 Ziel des Systems ist es, 3D-Modelle von Objekten bis zu einer Größe von \SI{40}{\centi\metre} Durchmesser zu erstellen. Die Bedienung soll dabei möglichst einfach und selbsterklärend sein, um auch Laien die Möglichkeit zu geben, das System zu bedienen.
@@ -17,7 +22,7 @@ Ziel des Systems ist es, 3D-Modelle von Objekten bis zu einer Größe von \SI{40
     \item \textbf{\foreignlanguage{british}{Photo}} - automatische Aufnahme eines Bildes pro Kamera
     \item \textbf{\foreignlanguage{british}{Focus-Stack}} - automatischer Fokus-Stack mit fünf Bildern pro Kamera
     \item \textbf{\foreignlanguage{british}{Detect ArUco}} - automatische Erkennung von ArUco-Markern
-    \item \textbf{\foreignlanguage{british}{Autofocus}} - automatische Fokussierung auszulösen
+    \item \textbf{\foreignlanguage{british}{Autofocus}} - automatische Fokussierung auslösen
 \end{itemize}
 
 \subsection{\foreignlanguage{british}{View Data}}
@@ -48,7 +53,7 @@ Ziel des Systems ist es, 3D-Modelle von Objekten bis zu einer Größe von \SI{40
 
 
 \section{Inbetriebnahme}
-Beim Aufstellen ist darauf zu achten, dass sich keine stärkeren seitlichen Lichtquellen um das System herum befinden, wie beispielsweise Fensterflächen. Diese könnten die Belichtung der Bilder beeinflussen und so die Qualität der 3D-Modelle negativ beeinflussen. Gegebenenfalls muss durch die Stoffhülle oder andere Maßnahmen für Verschattung oder Streuung gesorgt werden.
+Beim Aufstellen ist darauf zu achten, dass sich keine stärkeren seitlichen Lichtquellen um das System herum befinden, wie beispielsweise Fensterflächen. Diese könnten die Belichtung der Bilder beeinflussen und so die Qualität der 3D-Modelle negativ beeinflussen. Gegebenenfalls muss durch die Stoffhülle oder andere Maßnahmen für Verschattung oder Streuung des Lichtes gesorgt werden.
 
 Die Berechnung des 3D-Modelles erfolgt auf einem externen Rechner. Dafür kann wahlweise Agisoft Metashape oder OpenDroneMap (NodeODM) genutzt werden. Die entsprechende Software sowie eine Java-Laufzeitumgebung müssen auf dem Rechner installiert sein und die Bilder müssen auf diesen übertragen werden. Die Übertragung kann automatisch über eine Netzwerkverbindung oder manuell per USB-Stick erfolgen. Für die automatische Übertragung muss die mitgelieferte Verbindungssoftware auf dem Rechner gestartet sein (siehe \autoref{sec:SoftwareEinrichtung}).
 
@@ -57,7 +62,7 @@ Das Abschalten erfolgt durch langes Drücken auf den roten Taster. Das System f�
 
 \section{Software-Einrichtung}
 \label{sec:SoftwareEinrichtung}
-Die Software zur Steuerung der Kameras und zur Übertragung der Bilder auf den Rechner ist in Java geschrieben. Sie kann unter Linux, Windows und MacOS genutzt werden. Auf dem Rechner muss entsprechend eine Java-Laufzeitumgebung installiert sein. Für die Nutzung von Metashape muss eine Lizenz vorhanden sein und im selben Order wie die ausführbare jar-Datei abgelegt werden. Für OpenDroneMap muss die Software in Form von NodeODM auf dem Rechner installiert sein. Alternativ kann OpenDroneMap auch auf einem externen Rechner installiert sein, der über das Netzwerk erreichbar ist.
+Die Software zur Steuerung der Kameras und zur Übertragung der Bilder auf den Rechner ist in Java geschrieben. Sie kann unter Linux, Windows und MacOS genutzt werden. Auf dem Rechner muss entsprechend eine Java-Laufzeitumgebung installiert sein. Für die Nutzung von Metashape muss eine Lizenz vorhanden sein und im selben Ordner wie die ausführbare jar-Datei abgelegt werden. Für OpenDroneMap muss die Software in Form von NodeODM auf dem Rechner installiert sein. Alternativ kann OpenDroneMap auch auf einem externen Rechner installiert sein, der über das Netzwerk erreichbar ist.
 
 \section{Kalibrierung}
 Die letzten Koordinaten der Passpunkte werden im System gespeichert - daher sollten diese möglichst nicht verändert werden. Falls diese dennoch verändert werden, kann das System einzelne Veränderungen berechnen und nutzen. Bei Änderung einer Vielzahl muss das System jedoch extern neu kalibriert werden, beispielsweise durch Bilder mit einer externen Kamera, wodurch dann die Koordinaten der Passpunkte neu bestimmt werden können. Eine Kalibrierung mit Bordmitteln ist nicht möglich.
@@ -67,21 +72,19 @@ Die letzten Koordinaten der Passpunkte werden im System gespeichert - daher soll
 \begin{figure}
     \centering
     \begin{subfigure}{0.48\textwidth}
-        \includegraphics[width=1\textwidth]{img/9_anleitung/innensechs.jpg}
-        \caption{Nutzung eines Innensechskantschlüssels zur Ausrichtung der Kameras}
+        \includegraphics[width=0.95\textwidth]{img/9_anleitung/innensechs.jpg}
+        \caption{Nutzung eines Innensechskant-\\schlüssels zur Ausrichtung der\\Kameras}
         \label{img:innensechs}
     \end{subfigure}
     \begin{subfigure}{0.48\textwidth}
-        \includegraphics[width=1\textwidth]{img/9_anleitung/taster.jpg}
-        \caption{Drucktaster zur Steuerung des Systems, z.\,B. für die Bildaufnahme}
+        \includegraphics[width=0.95\textwidth]{img/9_anleitung/taster.jpg}
+        \caption{Drucktaster zur Steuerung des\\Systems, z.\,B. für die  Bildaufnahme\\~}
         \label{img:taster}
     \end{subfigure}
     \caption{Bedienelemente des Systems}
 \end{figure}
 
-Das System wird gestartet, indem die Stromversorgung hergestellt wird. Die Kameras starten selbstständig und die Beleuchtung wird eingeschaltet. Nach kurzer Zeit sollten kurz alle LEDs grün leuchten. Falls nicht, sind einige Kameras nicht erreichbar. Problemlösungen werden im \autoref{sec:Fehlerbehebung} behandelt. Die Kameras können ggf. durch Nutzung einen Innensechskantschlüssels neu ausgerichtet werden. Die Kameras sollten dabei auf das Objekt ausgerichtet werden (siehe \autoref{img:innensechs}).
-Das Objekt wird mittig, ggf. auf einer Erhöhung im Rahmen positioniert.
-Ab hier trennen sich die Wege je nach verwendetem System. Die Bildaufnahme erfolgt in allen Fällen durch kurzen Druck auf den grünen Taster.
+Das System wird gestartet, indem die Stromversorgung hergestellt wird. Die Kameras starten selbstständig und die Beleuchtung wird eingeschaltet. Nach kurzer Zeit sollten kurz alle LEDs grün leuchten. Falls nicht, sind einige Kameras nicht erreichbar. Problemlösungen werden im \autoref{sec:Fehlerbehebung} behandelt. Die Kameras können ggf. durch Nutzung einen Innensechskantschlüssels neu ausgerichtet werden (siehe \autoref{img:innensechs}). Eine Bestimmung der neuen Positionen erfolgt selbstständig aus den Passpunkten. Das Objekt wird mittig, ggf. auf einer Erhöhung im Rahmen positioniert. Ab hier trennen sich die Wege je nach verwendetem System. Die Bildaufnahme erfolgt in allen Fällen durch kurzen Druck auf den grünen Taster.
 
 \begin{figure}
     \centering
@@ -104,10 +107,20 @@ Die Verbindungssoftware unterstützt auch das Laden der Bilder aus einem lokalen
 Die Bilder können in der ausgewählten Software weiterverarbeitet werden. Die genaue Vorgehensweise hängt von der Software ab und wird in diesem Abschnitt grob erläutert. Für weitere Informationen hierzu ist die entsprechende Bedienungsanleitung der Software zu konsultieren.
 
 \subsection{Agisoft Metashape}
-Sofern in der Schnittstellen-Software aktiviert, wird in Metashape ein Workflow durchgeführt, in dem die Bilder importiert, die Kameras kalibriert, die Passpunkte gesetzt, die Modelle berechnet und exportiert werden. Sofern die Funktion nicht aktiviert wird, wird nur ein Projekt angelegt und die Bilder und Passpunkte importiert. Die weitere Verarbeitung kann dann manuell erfolgen. Hierbei ist darauf zu achten, die Passpunkte zu aktivieren, damit deren Koordinate übernommen wird und der korrekte Maßstab des Modells gewährleistet ist.
+Sofern in der Schnittstellen-Software aktiviert, wird in Metashape ein Workflow durchgeführt, in dem die Bilder importiert, die Kameras kalibriert, die Passpunkte gesetzt, die Modelle berechnet und exportiert werden. Sofern die Funktion nicht aktiviert wird, wird nur ein Projekt angelegt und die Bilder und Passpunkte importiert. Die weitere Verarbeitung kann dann manuell erfolgen. Hierbei ist darauf zu achten, die Passpunkte zu aktivieren, damit deren Koordinate übernommen wird und der korrekte Maßstab des Modells gewährleistet ist. Anschließend müssten die entsprechenden Schritte manuell durchgeführt werden.
+
+\begin{enumerate}
+    \item Haken bei allen Passpunkten und Kameras setzen
+    \item \textit{Ablauf / Fotos ausrichten}
+    \item Bereich des Modells festlegen
+    \item \textit{Ablauf / Punktwolke erzeugen}
+    \item ggf. \textit{Ablauf / Mesh erzeugen}
+    \item ggf. \textit{Ablauf / Textur erzeugen}
+    \item \textit{Exportieren / Modell exportieren} oder \textit{Punktwolke exportieren}
+\end{enumerate}
 
 \subsection{OpenDroneMap}
-In OpenDroneMap wird ein Prozess gestartet, der die Bilder importiert, die Modelle berechnet und die Modelle exportiert. Hier sind keine weiteren Eingriffe notwendig und möglich. 
+In OpenDroneMap wird ein Prozess gestartet, der die Bilder importiert, die Modelle berechnet und die Modelle exportiert. Hier sind keine weiteren Eingriffe notwendig und möglich.
 
 
 \section{Wartung}
@@ -116,13 +129,13 @@ Software-Updates können zu Inkompatibilitäten führen, daher sollten diese ers
 \begin{figure}
     \centering
     \begin{subfigure}{0.48\textwidth}
-        \includegraphics[width=1\textwidth]{img/9_anleitung/rj45.jpg}
-        \caption{Anschluss eines RJ45-Kabels zur Verbindung mit dem Internet oder einem PC}
+        \includegraphics[width=0.95\textwidth]{img/9_anleitung/rj45.jpg}
+        \caption{Anschluss eines RJ45-Kabels zur\\Verbindung mit dem Internet\\oder einem PC}
         \label{img:rj45}
     \end{subfigure}
     \begin{subfigure}{0.48\textwidth}
-        \includegraphics[width=1\textwidth]{img/9_anleitung/usbstick.jpg}
-        \caption{Anschluss eines USB-Sticks zur Datenübertragung}
+        \includegraphics[width=0.95\textwidth]{img/9_anleitung/usbstick.jpg}
+        \caption{Anschluss eines USB-Sticks\\ zur Datenübertragung\\~}
         \label{img:usbstick}
     \end{subfigure}
     \caption{Anschlüsse des Systems}
@@ -157,5 +170,5 @@ Je nach Umgebungslicht können die Bilder zu dunkel oder zu hell sein. Im Normal
     \hline
 \end{tabular}
 
-%\biblio
+\biblio
 \end{document}

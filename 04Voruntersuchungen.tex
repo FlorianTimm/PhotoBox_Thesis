@@ -13,7 +13,7 @@ Vor und während des Aufbaues des eigentlichen Messsystems wurden einige Vorunte
 Die Angabe der Auflösung in Pixeln täuscht bei günstigen Kameras über die tatsächliche Auflösung hinweg.
 
 \paragraph{Ziel}
-Die tatsächliche Auflösung der Kamera soll ermittelt werden. Hierbei spielt neben der reinen Anzahl der Pixel auch die Qualität des Objektives der Kameras eine Rolle.
+Die tatsächliche Auflösung der Kamera soll ermittelt werden. Hierbei spielt neben der reinen Anzahl der \acrfull{px} auch die Qualität des Objektives der Kameras eine Rolle.
 
 \paragraph{Vorgehen}
 Es wurden Bilder von einem Siemensstern unter verschiedenen Belichtungssituationen und Entfernungen aufgenommen (Beispielaufnahme siehe \autoref{img:siemens}). Anschließend wurde die Größe des Unschärfekreises ermittelt und die Linienauflösung und -größe hieraus nach \cite[S. 161]{luhmann} berechnet. Zum Vergleich wurden die Bilder auch mit einer hochwertigeren Kamera aufgenommen (Spiegelreflexkamera Canon EOS 77D mit EF-S 18-55 mm 1:4-5.6 IS STM).
@@ -66,12 +66,12 @@ Die \Gls{Kamerakonstante} einer Kamera ändert sich durch die Fokussierung. Bei 
 \end{conditions}
 
 \paragraph{Vorgehen}
-Die Änderungen der Parameter wurden in einem Versuch beobachtet. Hierzu wurde der Raspberry Pi Zero mit montierter Kamera fest vor einem ChArUco-Kalibriermuster platziert. Das Kalibriermuster besteht aus einer Kombination von ArUco-Markern und einem Schachbrettmuster (siehe \autoref{img:charuco}). Durch das Schachbrettmuster ermöglicht es auch bei unscharfen Bildern eine gute automatische Erkennung der zu beobachtenden Punkte. Es wurden je 11 Bilder mit unterschiedlichen Fokussierungen von \SI{2}{\metre} bis  \SI{10}{\centi\metre} aufgenommen. Dieser Vorgang wurde insgesamt viermal wiederholt, um auch die Wiederholungsgenauigkeit zu ermitteln. Die Bilder wurden anschließend mit einem Python-Script unter Nutzung von OpenCV ausgewertet. Hierbei wurde die relative Veränderung der \Gls{Kamerakonstante} ermittelt und mit dem erwarteten Wert verglichen. Die relativen Änderungen wurden auf eine Fokusdistanz von \SI{20}{\centi\metre}, entsprechend einer Fokussierung von \SI{5}{}\,\Gls{dpt}, normiert. Es wurden relative Angaben genutzt, da noch keine genaue Kenntnis über die tatsächliche \Gls{Kamerakonstante} bestand. 
+Die Änderungen der Parameter wurden in einem Versuch beobachtet. Hierzu wurde der Raspberry Pi Zero mit montierter Kamera fest vor einem ChArUco-Kalibriermuster platziert. Das Kalibriermuster besteht aus einer Kombination von ArUco-Markern und einem Schachbrettmuster (siehe \autoref{img:charuco}). Durch das Schachbrettmuster ermöglicht es auch bei unscharfen Bildern eine gute automatische Erkennung der zu beobachtenden Punkte. Es wurden je 11 Bilder mit unterschiedlichen Fokussierungen von \SI{2}{\metre} bis  \SI{10}{\centi\metre} aufgenommen. Dieser Vorgang wurde insgesamt viermal wiederholt, um auch die Wiederholungsgenauigkeit zu ermitteln. Die Bilder wurden anschließend mit einem Python-Script unter Nutzung von OpenCV ausgewertet. Hierbei wurde die relative Veränderung der \Gls{Kamerakonstante} ermittelt und mit dem erwarteten Wert verglichen. Die relativen Änderungen wurden auf eine Fokusdistanz von \SI{20}{\centi\metre}, entsprechend einer Fokussierung von \SI{5}{}\,\gls{dpt}, normiert. Es wurden relative Angaben genutzt, da noch keine genaue Kenntnis über die tatsächliche \Gls{Kamerakonstante} bestand.
 
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]{./img/4_voruntersuchung/charuco.png}
-    \caption{ChArUco-Board mit Fokus auf \SI{5}{}\,\Gls{dpt}}
+    \caption{ChArUco-Board mit Fokus auf \SI{5}{}\,\gls{dpt}}
     \label{img:charuco}
 \end{figure}
 
@@ -149,7 +149,6 @@ Die Genauigkeit der Passpunkte bei der Bildverknüpfung in Agisoft Metashape lie
 Eine Anforderung war die simultane Auslösung aller Kameras. Um dieses zu überprüfen, wurden die Kameras auf eine Stoppuhr mit Anzeige von Hundertstel Sekunden gerichtet und eine Aufnahme entsprechend der automatischen Aufnahme eines 3D-Modelles durchgeführt. Die Bilder wurden anschließend ausgewertet und hieraus das erste und letzte Bild bestimmt. Dieser Vorgang wurde dreimal wiederholt.
 
 Die Messung zeigte eine Abweichung zwischen dem ersten und letzten Bild von maximal \SI{0,2}{Sekunden}. Die Synchronität der Kameras ist damit für den Anwendungsfall gegeben. Eine Aufnahme von bewegten Objekten ist damit jedoch nicht möglich. Die Abweichung ist auf die unterschiedlichen Reaktionszeiten der Kameras zurückzuführen. Ursächlich hierfür ist unter anderem, dass es sich bei dem Betriebssystem der Raspberry Pi nicht um ein Echtzeitbetriebssystem handelt und durch das Multitasking des Prozessors Ausführungen um eine unbestimmte Zeit verzögert werden können. Außerdem kann die Netzwerkverbindung das Signal weiter verzögern. Die Daten werden zwar gleichzeitig an die verschiedenen Kameras abgesendet, aber da auch das WLAN ein Zeitschlitzverfahren nutzt, werden diese nicht gleichzeitig übertragen.
-\todo{Zeitschlitz/Echtzeit Quelle}
 
 \biblio
 \end{document}
