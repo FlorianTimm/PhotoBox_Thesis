@@ -219,7 +219,7 @@ Nachteilig zeigte sich in den Untersuchungen des Fokus (siehe \autoref{sec:fokus
 
 \subsection{Merkmalsextraktion}
 \label{ss:sift}
-Auch ohne das Anbringen von Markern können Verknüpfungspunkte erzeugt werden. Hierfür wird Merkmalsextraktion verwendet, beispielsweise \Gls{SIFT}, welches hier stellvertretend kurz vorgestellt wird. Es liefert Verknüpfungspunkte aus Mustern auf den photographierten Oberflächen. Es ist meist nicht notwendig explizit Marker an dem aufzunehmenden Objekt anzubringen, sofern seine Oberfläche nicht strukturlos ist (glatte weiße Wände etc.).
+Auch ohne das Anbringen von Markern können Verknüpfungspunkte erzeugt werden. Hierfür wird Merkmalsextraktion verwendet, beispielsweise \Gls{SIFT}, welches hier stellvertretend kurz vorgestellt wird. Es liefert Verknüpfungspunkte aus Mustern auf den photographierten Oberflächen. Es ist meist nicht notwendig, explizit Marker an dem aufzunehmenden Objekt anzubringen, sofern seine Oberfläche nicht strukturlos ist (glatte weiße Wände etc.).
 
 Zur Erkennung von Merkmalen setzt \gls{SIFT} auf die Detektion von Kanten. Diese werden in verschiedenen Stufen einer Bildpyramide erkannt und ihre Extrema berechnet. Sie werden anschließend weiter ausgedünnt, beispielsweise über den Kontrast. Sofern ein möglicher Marker identifiziert wurde, wird eine Beschreibung erzeugt. Diese erfolgt  durch Analyse der Helligkeitsabweichungen zu den Nachbar-Pixeln und wird an der stärksten Abweichung ausgerichtet. Hierdurch wird die Beschreibung dann richtungsunabhängig. Mit den Beschreibungen kann dann die Übereinstimmung von zwei Markern in zwei Bildern identifiziert werden, auch wenn diese zueinander gekippt oder gedreht sind.
 \citep[vgl.][S. 484f]{luhmann}
@@ -243,7 +243,7 @@ Durch die beschriebenen Verfahren und die hieraus entstandenen Verknüpfungs\-pu
         \caption{Vorwärtsschnitt, nach \\ \citealt[S. 339]{luhmann}}
         \label{img:vorwaertsschnitt}
     \end{subfigure}
-    \caption{Geometrische Grundlagen des Rückwärtsschnitt und Vorwärtsschnitt}
+    \caption{Geometrische Grundlagen des Rückwärts- und Vorwärtsschnittes}
 \end{figure}
 
 
@@ -252,7 +252,7 @@ Sofern Koordinaten von Passpunkten bekannt sind, können die Positionen und Ausr
 
 Durch die Nutzung des RANSAC-Ansatzes können veränderte Passpunkte identifiziert und als Ausreißer markiert werden. Hierzu werden mehrere Stichproben der Punkte gewählt, die Berechnung durchgeführt und die Lösung gewählt, zu denen die meisten Punkte passen. \citep[vgl.][S. 134]{luhmann}
 
-\autoref{img:rueckwaertsschnitt} zeigt die geometrischen Grundlagen des Rückwärtsschnitts. Es müssen mindestens 3 Passpunkte ($P_1 - - P_3$) mit Koordinaten bekannt und im Bild sichtbar sein. Außerdem muss die \gls{innereOrientierung} bei Verwendung von nur drei Passpunkten bekannt sein. Die Position der Punkte $P'_1 - - P'_3$ wird dann bestimmt und ergibt im Beispiel 6 Koordinatenkomponenten (jeweils $x'$ und $y'$). Durch Berechnungen -- auf die hier nicht weiter eingegangen und auf entsprechende Literatur verwiesen wird -- kann dann die Position (drei Parameter) und Ausrichtung (drei Parameter) der Kamera bestimmt werden. \citep[vgl.][S. 284]{luhmann}
+\autoref{img:rueckwaertsschnitt} zeigt die geometrischen Grundlagen des Rückwärtsschnittes. Es müssen mindestens 3 Passpunkte ($P_1 - - P_3$) mit Koordinaten bekannt und im Bild sichtbar sein. Außerdem muss die \gls{innereOrientierung} bei Verwendung von nur drei Passpunkten bekannt sein. Die Position der Punkte $P'_1 - - P'_3$ wird dann bestimmt und ergibt im Beispiel 6 Koordinatenkomponenten (jeweils $x'$ und $y'$). Durch Berechnungen -- auf die hier nicht weiter eingegangen und auf entsprechende Literatur verwiesen wird -- kann dann die Position (drei Parameter) und Ausrichtung (drei Parameter) der Kamera bestimmt werden. \citep[vgl.][S. 284]{luhmann}
 
 \subsection{Vorwärtsschnitt}
 Um wiederum aus einem Stereopaar mit bekannter innerer und äußerer Orientierung Punktkoordinaten zu berechnen, wird der Vorwärtsschnitt genutzt. \autoref{img:vorwaertsschnitt} zeigt die geometrischen Grundlagen des Vorwärtsschnitts. Es werden die Bildkoordinaten der Punkte $P_1$ und $P_2$ benötigt, die im Bild sichtbar sind. Die Position des Punktes $P$ wird dann berechnet. Wie bereits in \autoref{s:abbildung} erwähnt, kann jeder Punkt im Bild durch die \gls{innereOrientierung} als Horizontal- und Vertikalrichtungsmessung interpretiert werden. Durch die \gls{aeussereOrientierung} kann diese dann ins übergeordnete System überführt werden. Hieraus ergibt sich dann zur Berechnung der Position $P$ ein räumlicher Schnitt zweier (windschiefer) Geraden \citep[vgl.][S. 95]{luhmann}.
@@ -300,7 +300,7 @@ Die Screened Poisson Surface Reconstruction ist ein Verfahren, das auf der Poiss
     \begin{subfigure}{0.48\textwidth}
         \includegraphics[width=0.95\linewidth]{img/2_grundlagen/points.jpg}
         \centering
-        \caption{Ungefilterte Punktewolke}
+        \caption{Ungefilterte Punktwolke}
         \label{img:points}
     \end{subfigure}
     \begin{subfigure}{0.48\textwidth}
