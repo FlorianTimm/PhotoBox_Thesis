@@ -20,7 +20,7 @@ Aus den identifizierten Punkten werden dann die Positionen und Ausrichtung der K
 
 \section{Abbildung}
 \label{s:abbildung}
-Grundlage der Photogrammetrie ist die Abbildungsgleichung. Diese beschreibt die Abbildung eines Punktes im Raum auf dem Sensor beziehungsweise dem Film. Umgekehrt kann mit ihrer Hilfe aus der Position eines Punktes in einem Bild, ähnlich einer Messung mit einem Theodolit, die Richtung des Punktes in Relation zu der Kamera bestimmt werden. Die Abbildungsgleichung ist abhängig von der inneren und äußeren Orientierung der Kamera. Die \gls{innereOrientierung} beschreibt die Abbildungseigenschaften der Kamera, die \gls{aeussereOrientierung} die Position und Ausrichtung der Kamera. Im Folgenden wird zuerst auf die innere und \gls{aeussereOrientierung} eingegangen, bevor die Abbildungsgleichung selbst vorgestellt wird.
+Grundlage der Photogrammetrie ist die Abbildungsgleichung. Diese beschreibt die Abbildung eines Punktes im Raum auf dem Sensor beziehungsweise dem Film. Umgekehrt kann mit ihrer Hilfe aus der Position eines Punktes in einem Bild, ähnlich einer Messung mit einem Theodolit, die Richtung des Punktes in Relation zu der Kamera bestimmt werden. Die Abbildungsgleichung ist abhängig von der inneren und äußeren Orientierung der Kamera. Die \gls{innereOrientierung} beschreibt die Abbildungseigenschaften der Kamera, die \gls{aeussereOrientierung} die Position und Ausrichtung der Kamera\todo{Verweis}. Im Folgenden wird zuerst auf die innere und \gls{aeussereOrientierung} eingegangen, bevor die Abbildungsgleichung selbst vorgestellt wird.
 
 \subsection{Innere Orientierung}
 \label{s:innereorientierung}
@@ -132,7 +132,7 @@ Die \Gls{Verzeichnung} wird meist mit den Parametern $k_1$ bis $k_4$ für die ra
 Die Berechnung der Position eines Objektes im Bild ist nur möglich, sofern der Punkt in mindestens einem weiteren Bild abgebildet ist. Die Genauigkeit der Berechnung ist vom Schnittwinkel dieser beiden Strahlen abhängig. Um möglichst gute Grundlagen zur Ver\-fügung zu haben und die innere und \gls{aeussereOrientierung} möglichst gut berechnen zu können, müssen diese Bilder einige Bedingungen erfüllen - auf diese wird hier eingegangen.
 
 \subsection{Überlappung und Bildinhalte}
-Da die Bilder durch identische Punkte verbunden werden, müssen sich die Bildinhalte überlappen und gemeinsame Punkte in den Bildern identifiziert werden. Die automatische Detektion von identischen Punkten ist auf verschiedene Weisen möglich: Entweder durch die Nutzung von codierten und uncodierten Passpunkten oder über eine Merkmalsextraktion. Für letzteres muss die Oberfläche genügend Textur bzw. Struktur aufweisen. Detailliert wird in \autoref{s:verknuepfung} hierauf eingegangen. \citep[vgl.][S. 478]{luhmann}
+Da die Bilder durch identische Punkte verbunden werden, müssen sich die Bildinhalte überlappen und gemeinsame Punkte in den Bildern identifiziert werden. Die au\-to\-ma\-tische Detektion von identischen Punkten ist auf verschiedene Weisen möglich: Entweder durch die Nutzung von codierten und uncodierten Passpunkten oder über eine Merk\-mals\-ex\-trak\-tion. Für letzteres muss die Oberfläche genügend Textur bzw. Struktur aufweisen. Detailliert wird in \autoref{s:verknuepfung} hierauf eingegangen. \citep[vgl.][S. 478]{luhmann}
 
 \subsection{Position und Ausrichtung der Kamera}
 Damit die Schnitte der Bildstrahlen optimal sind und die Berechnung der Tiefeninformationen möglichst genau ist, müssen die Kameras möglichst gleichmäßig um das Objekt verteilt sein.
@@ -183,11 +183,11 @@ Die Skalierung eines rein photogrammetrisch bestimmten 3D-Modelles ist nicht bek
 
 \section{Verknüpfungs- und Passpunkte}
 \label{s:verknuepfung}
-Um die einzelnen Bilder verknüpfen zu können, werden identische Punkte zwischen zwei oder mehr Bildern benötigt. Diese können klassisch manuell erfasst werden, jedoch ist dieses schon bei kleineren Projekten sehr zeitaufwändig. Daher wird meist die Möglichkeit genutzt, automatisch Verknüpfungspunkte zu erzeugen. Hierfür gibt es unterschiedliche Methoden, die im Folgenden vorgestellt werden.
+Um die einzelnen Bilder verknüpfen zu können, werden identische Punkte zwischen zwei oder mehr Bildern benötigt. Diese können klassisch manuell erfasst werden, jedoch ist dieses schon bei kleineren Projekten sehr zeitaufwändig. Daher wird meist die Möglichkeit genutzt, au\-to\-ma\-tisch Verknüpfungspunkte zu erzeugen. Hierfür gibt es unterschiedliche Methoden, die im Folgenden vorgestellt werden.
 
 
 \subsection{Zielmarker}
-Es gibt verschiedenste Formen von Markern, die automatisch erfasst werden können. Grob unterschieden werden kann in codierte und nicht codierte Zielmarker. Beispiele für nicht codierte sind beispielsweise einfache kreisförmige Klebepunkte oder Marker, die aus Linien bestehen und ihren Mittelpunkt durch dessen Schnitt definieren.
+Es gibt verschiedenste Formen von Markern, die au\-to\-ma\-tisch erfasst werden können. Grob unterschieden werden kann in codierte und nicht codierte Zielmarker. Beispiele für nicht codierte sind beispielsweise einfache kreisförmige Klebepunkte oder Marker, die aus Linien bestehen und ihren Mittelpunkt durch dessen Schnitt definieren.
 Vorteilhaft ist jedoch die Verwendung von codierten Zielmarken. Hier können die Punkte direkt zugeordnet werden, sodass keine weitere Filterung und Berechnung zur Zuordnung notwendig ist. \citep[vgl.][S.535ff]{luhmann}
 
 \subsubsection{Zielmarken nach Schneider}
@@ -195,7 +195,7 @@ Eine Form der codierten Zielmarken sind die Marker nach Schneider. Diese bestehe
 
 
 \subsubsection{ArUco-Marker}
-Eine andere Variante der codierten Verknüpfungspunkte sind die sogenannten ArUco-Marker (siehe \autoref{img:aruco}). Diese werden häufig für die Orientierung bei Augmented-Reality-An\-wend\-ungen genutzt. Jede Ecke kann hierbei automatisch im Subpixelbereich identifiziert werden, sodass ein erkannter Marker vier Verknüpfungspunkte liefern kann. Wenn deren (lokale) Koordinaten und die \gls{innereOrientierung} bekannt sind, kann mit nur einem Marker die \gls{aeussereOrientierung} bestimmt werden. \citep[vgl.][S. 545]{luhmann}
+Eine andere Variante der codierten Verknüpfungspunkte sind die sogenannten ArUco-Marker (siehe \autoref{img:aruco}). Diese werden häufig für die Orientierung bei Augmented-Reality-An\-wend\-ungen genutzt. Jede Ecke kann hierbei au\-to\-ma\-tisch im Subpixelbereich identifiziert werden, sodass ein erkannter Marker vier Verknüpfungspunkte liefern kann. Wenn deren (lokale) Koordinaten und die \gls{innereOrientierung} bekannt sind, kann mit nur einem Marker die \gls{aeussereOrientierung} bestimmt werden. \citep[vgl.][S. 545]{luhmann}
 
 Nachteilig zeigte sich in den Untersuchungen des Fokus (siehe \autoref{sec:fokus}), dass die Ecken nicht eindeutig identifiziert werden können, wenn die Aufnahme unscharf ist. Durch ihre Verwendung in Augmented-Reality-Anwendungen sind auch viele kostenfreie Bibliotheken für ihre Erkennung verfügbar, sodass beispielsweise \citet{opencv} ArUco-Marker identifizieren kann.
 
