@@ -50,6 +50,9 @@
   \hyphenchar\font=`\-% allowing hyphenation
 }
 
+
+\usepackage{tablefootnote} % for table footnotes
+
 \usepackage{array,tabularx,calc}
 
 \newlength{\conditionwd}
@@ -69,8 +72,8 @@
 \hbadness=1000000
 
 % Hurenkinder und Schusterjungen verhindern
-\clubpenalties 4 10000 10000 1000 1000
-\widowpenalties 4 10000 10000 1000 1000
+\clubpenalties 5 10000 10000 10000 1000 1000
+\widowpenalties 5 10000 10000 10000 1000 1000
 \displaywidowpenalty=10000
 
 
