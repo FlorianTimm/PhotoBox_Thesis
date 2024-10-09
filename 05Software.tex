@@ -178,8 +178,7 @@ Die Klassen sind in \autoref{img:uml_connector} dargestellt. \texttt{Connector} 
 Neben der eigentlichen Programmierung erfolgten noch verschiedene Konfigurationen, um das System zu betreiben. Diese sollen hier kurz vorgestellt werden.
 
 \paragraph{WLAN-Router}
-Der WLAN-Router wurde so konfiguriert, dass er ein WPA2-ver\-schlüssel\-tes WLAN-Netzwerk aussendet. Außerdem wurde er als DHCP-Server eingerichtet, der den angeschlossenen Geräten au\-to\-ma\-tisch eine IP-Adresse zuweist. Die IP-Adressen der Raspberry Pi wurden fest vergeben, um die Kommunikation zu erleichtern. Der Router wurde so konfiguriert, dass er die Kommunikation zwischen den Raspberry Pi einem per Kabel angeschlossenen Desktop-PC zulässt, aber auch eine per Netzwerk-Kabel angeschlossene Internetverbindung durchleitet.
-\todo{optionale Kabelverbindung}
+Der WLAN-Router wurde so konfiguriert, dass er ein WPA2-ver\-schlüssel\-tes WLAN-Netzwerk aussendet. Außerdem wurde er als DHCP-Server eingerichtet, der den angeschlossenen Geräten au\-to\-ma\-tisch eine IP-Adresse zuweist. Die IP-Adressen der Raspberry Pi wurden fest vergeben, um die Kommunikation zu erleichtern. Der Router wurde so konfiguriert, dass er optional die Kommunikation zwischen den Raspberry Pi einem per Kabel angeschlossenen Desktop-PC zulässt, aber auch eine per Netzwerk-Kabel angeschlossene Internetverbindung durchleitet.
 
 \paragraph{Raspberry Pi 4}
 Der Raspberry Pi 4 wurde so konfiguriert, dass er au\-to\-ma\-tisch das Skript \texttt{Master} startet. Hierzu wurde ein \texttt{systemd}-Service erstellt, der das Skript beim Systemstart ausführt. Vorher wird bei Vorliegen einer Internetverbindung geprüft, ob das Git-Repository eine neue Version der Software zur Verfügung stellt. Falls dieses der Fall ist, wird dieses heruntergeladen und installiert.
