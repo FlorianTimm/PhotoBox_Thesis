@@ -69,7 +69,7 @@ Die letzten Koordinaten der Passpunkte werden im System gespeichert - daher soll
 
 \section{Durchführung}
 
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \begin{subfigure}{0.48\textwidth}
         \includegraphics[width=0.95\textwidth]{img/9_anleitung/innensechs.jpg}
@@ -86,7 +86,7 @@ Die letzten Koordinaten der Passpunkte werden im System gespeichert - daher soll
 
 Das System wird gestartet, indem die Stromversorgung hergestellt wird. Die Kameras starten selbstständig und die Beleuchtung wird eingeschaltet. Nach kurzer Zeit sollten kurz alle LEDs grün leuchten. Falls nicht, sind einige Kameras nicht erreichbar. Problemlösungen werden im \autoref{sec:Fehlerbehebung} behandelt. Die Kameras können ggf. durch Nutzung einen Innensechskantschlüssels neu ausgerichtet werden (siehe \autoref{img:innensechs}). Eine Bestimmung der neuen Positionen erfolgt selbstständig aus den Passpunkten. Das Objekt wird mittig, ggf. auf einer Erhöhung im Rahmen positioniert. Ab hier trennen sich die Wege je nach verwendetem System. Die Bildaufnahme erfolgt in allen Fällen durch kurzen Druck auf den grünen Taster.
 
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=1\textwidth]{./img/5_software/connector_screenshot.png}
     \caption{Screenshot der Connector-Software unter Ubuntu 24.04}
@@ -94,7 +94,7 @@ Das System wird gestartet, indem die Stromversorgung hergestellt wird. Die Kamer
 \end{figure}
 
 \subsection{... mit Netzwerkverbindung}
-Der zu verwendende Rechner wird mit dem System per WLAN (bevorzugt) oder Netzwerkkabel verbunden. Die Verbindungssoftware wird gestartet und die IP-Adresse des Systems angegeben. Standardmäßig lautet diese im WLAN 10.0.1.1, per Netzwerkkabel muss die IP von einem DHCP-Server festgelegt werden, beispielsweise in dem der angeschlossene Rechner als DHCP-Server konfiguriert wird. Unter Gnome ist dieses beispielsweise möglich, indem in den Netzwerkeinstellungen die Internetverbindung des PC freigegeben wird.
+Der zu verwendende Rechner wird mit dem System per WLAN (bevorzugt) oder Netzwerkleitung verbunden. Die Verbindungssoftware wird gestartet und die IP-Adresse des Systems angegeben. Standardmäßig lautet diese im WLAN 10.0.1.1, per Netzwerkleitung muss die IP von einem DHCP-Server festgelegt werden, beispielsweise in dem der angeschlossene Rechner als DHCP-Server konfiguriert wird. Unter Gnome ist dieses beispielsweise möglich, indem in den Netzwerkeinstellungen die Internetverbindung des PC freigegeben wird.
 Anschließend wird die zu nutzende Software ausgewählt und die Verbindung hergestellt.
 Nun können die Bilder aufgenommen werden (grüne Taste, \autoref{img:taster}). Die Bilder werden auf den Rechner übertragen und dort in der ausgewählten Software weiterverarbeitet. Der Fortschritt ist in der rechten Hälfte der Verbindungssoftware zu erkennen.
 
@@ -124,13 +124,13 @@ In OpenDroneMap wird ein Prozess gestartet, der die Bilder importiert, die Model
 
 
 \section{Wartung}
-Software-Updates können zu Inkompatibilitäten führen, daher sollten diese erstmal auf einem zusätzlichen Raspberry Pi ausprobiert werden, bevor diese auf dem System ausgerollt werden. Sofern ein Software-Update durchgeführt werden soll, kann das System per RJ45-Kabel über den Router (siehe \autoref{img:rj45}) mit dem Internet verbunden werden. Anschließend kann das Update der Software über die Weboberfläche durchgeführt werden. Ein Betriebssystemupdate kann per SSH-Verbindung zum Raspberry Pi 4 durchgeführt werden. Hierfür sind die Zugangsdaten am Ende des Dokuments zu finden.
+Software-Updates können zu Inkompatibilitäten führen, daher sollten diese erstmal auf einem zusätzlichen Raspberry Pi ausprobiert werden, bevor diese auf dem System ausgerollt werden. Sofern ein Software-Update durchgeführt werden soll, kann das System per RJ45-Stecker über den Router (siehe \autoref{img:rj45}) mit dem Internet verbunden werden. Anschließend kann das Update der Software über die Weboberfläche durchgeführt werden. Ein Betriebssystemupdate kann per SSH-Verbindung zum Raspberry Pi 4 durchgeführt werden. Hierfür sind die Zugangsdaten am Ende des Dokuments zu finden.
 
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \begin{subfigure}{0.48\textwidth}
         \includegraphics[width=0.95\textwidth]{img/9_anleitung/rj45.jpg}
-        \caption{Anschluss eines RJ45-Kabels zur\\Verbindung mit dem Internet\\oder einem PC}
+        \caption{Anschluss eines RJ45-Steckers zur\\Verbindung mit dem Internet\\oder einem PC}
         \label{img:rj45}
     \end{subfigure}
     \begin{subfigure}{0.48\textwidth}

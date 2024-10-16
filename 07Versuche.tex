@@ -10,7 +10,7 @@ Nach Abschluss der Konstruktion und des Aufbaus des Prototyps, wurden verschiede
 \label{s:referenzdaten}
 Zum Vergleich standen verschiedene Testobjekte zur Verfügung. Hauptsächlich wurde ein etwa \SI{14}{\centi\metre} hohes Modell einer Moai-Statue der Osterinsel verwendet, da dieses Objekt eine gute Textur und viele Details aufweist (siehe \autoref{img:bild_moai}). Neben einem texturierten Spielzeugdino standen noch zwei weiße Gipsmodelle zur Verfügung: Ein Abdruck einer Büste Einsteins  (siehe \autoref{img:bild_einstein}, \SI{15}{\centi\metre}) und ein kerzenartiges Testobjekt, im folgenden Testy genannt (siehe \autoref{img:bild_testy}, \SI{38}{\centi\metre}). Alle Objekte wurden bereits in anderen Projekten an der HafenCity Universität verwendet \citep[vgl. z.\,B.][]{kersten_scanner} und sind mit mehreren verschiedenen Systemen vermessen worden.
 
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \begin{subfigure}{0.32\textwidth}
         \includegraphics[width=1\textwidth]{img/7_versuche/bild_moai.jpg}
@@ -164,7 +164,7 @@ Darüber hinaus wurde die Anzahl der Punkte nach der Ausdünnung bestimmt ohne N
 Um die Genauigkeit der 3D-Modell-Erzeugung zu überprüfen, wurden mehrere Prüf\-körper mit dem Prototyp vermessen. Die Ergebnisse wurden anschließend im Vergleich zu dem Streifenprojektionssystem und der Aufnahme des Moais mit einer Spiegelreflexkamera betrachtet.
 
 \subsection{Durchführung}
-Alle drei Testobjekte wurden mit dem Prototyp aufgenommen und die Daten in Agisoft Metashape verarbeitet. Die modellierte Oberfläche aus dem Streifenprojektionssystem und die Punktwolke aus dem Prototyp wurden in CloudCompare aufeinandergelegt. Hieraus wurde anschließend die Differenz und die Genauigkeit anhand dieser berechnet.
+Alle drei Testobjekte wurden mit dem Prototyp aufgenommen und die Daten in Agisoft Metashape verarbeitet. Die modellierte Oberfläche aus dem Streifenprojektionssystem und die Punktwolke aus dem Prototyp wurden in CloudCompare aufeinandergelegt. Hieraus wurde anschließend die Differenz und die Genauigkeit berechnet.
 
 \subsection{Ergebnisse}
 Die Visualisierung der Differenzen ist in \autoref{img:differenz} dargestellt. Es ist zu erkennen, dass je nach Modell einige Bereiche gar nicht erfasst bzw. deren Genauigkeit deutlich von der erwarteten abweichen.
@@ -173,16 +173,7 @@ Die Visualisierung der Differenzen ist in \autoref{img:differenz} dargestellt. E
 Beim Moai (siehe \autoref{img:differenz_moai_einzel}) sind die größten Fehlstellen im Bereich des Kinnes und unterhalb des Bauches zu erkennen. Abweichungen im Bereich des restlichen Körpers sind deutlich geringer und liegen im Bereich von \SI{0,21}{\milli\metre}. Sie sind auf die schlechtere Erfassung der nach unten gerichteten Flächen zurückzuführen. Diese Bildbereiche sind nur in wenigen Bildern sichtbar und können daher nicht so gut rekonstruiert werden. Weitere Abweichungen sind im Bereich der Passpunktmarken zu erkennen, hier ist unklar, welche Daten korrekt sind (vgl. \autoref{s:referenzdaten}).
 
 
-\paragraph{Einstein}
-Das Modell von Einstein (siehe \autoref{img:differenz_einstein}) zeigt ebenfalls größere Abweichungen im Bereich des Kinnes und des Halses. Die Passpunktmarken sind zwar auch in der Differenzdarstellung erkennbar, jedoch nicht mit so großen Abweichungen wie beim Moai. Im Gegensatz zum Moai sind die Abweichungen im Bereich des Kopfes und der Schultern deutlich großflächiger. Gerade die großen weißen, texturarmen Flächen führen jedoch zu schlechteren Ergebnissen.
-
-
-\paragraph{Testy}
-Das Modell des Testy (siehe \autoref{img:differenz_testy}) zeigt ebenfalls die Problematik der weißen, texturarmen Flächen. Der Körper weist im Gegensatz zur Einstein-Büste keine Verschmutzungen auf, sodass auch hier keine zusätzliche Textur entsteht. Da dieser Testkörper allseitig ähnlich aussieht, ist die Zuordnung der Punkte schwierig. Die Abweichungen sind daher deutlich größer, als bei den anderen Modellen. Ein weiteres Problem ist die Größe des Körpers, er stellt mit \SI{38}{\centi\metre} Höhe fast das Maximum des mit dem System möglichen dar.
-
-Die Abweichungen des Moai und der Einstein-Büste liegen in der Größenordnung der in \autoref{ss:erwartete_genauigkeit} berechneten Werte und sind nur minimal schlechter, als die Genauigkeit eines 3D-Modelles des Moai, welches photogrammetrisch mit einer Spiegelreflexkamera Nikon D90 manuell aufgenommen wurde. Durch Kombinationen von anderen Perspektiven bei der manuellen Aufnahme ist hier die Abdeckung subjektiv betrachtet besser. Die Ergebnisse sind in \autoref{tab:vergleich_erg} zusammengefasst.
-
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \begin{subfigure}{0.11\textwidth}
         \includegraphics[width=0.98\textwidth]{img/7_versuche/cam_anzahl/scala.png}
@@ -207,7 +198,17 @@ Die Abweichungen des Moai und der Einstein-Büste liegen in der Größenordnung 
     \label{img:differenz}
 \end{figure}
 
-\begin{table}
+\paragraph{Einstein}
+Das Modell von Einstein (siehe \autoref{img:differenz_einstein}) zeigt ebenfalls größere Abweichungen im Bereich des Kinnes und des Halses. Die Passpunktmarken sind zwar auch in der Differenzdarstellung erkennbar, jedoch nicht mit so großen Abweichungen wie beim Moai. Im Gegensatz zum Moai sind die Abweichungen im Bereich des Kopfes und der Schultern deutlich großflächiger. Gerade die großen weißen, texturarmen Flächen führen zu schlechteren Ergebnissen.
+
+
+\paragraph{Testy}
+Das Modell des Testy (siehe \autoref{img:differenz_testy}) zeigt ebenfalls die Problematik der weißen, texturarmen Flächen. Der Körper weist im Gegensatz zur Einstein-Büste keine Verschmutzungen auf, sodass auch hier keine zusätzliche Textur entsteht. Da dieser Testkörper allseitig ähnlich aussieht, ist die Zuordnung der Punkte schwierig. Die Abweichungen sind daher deutlich größer, als bei den anderen Modellen. Ein weiteres Problem ist die Größe des Körpers, er stellt mit \SI{38}{\centi\metre} Höhe fast das Maximum des mit dem System erfassbaren dar.
+
+Die Abweichungen des Moai und der Einstein-Büste liegen in der Größenordnung der in \autoref{ss:erwartete_genauigkeit} berechneten Werte und sind nur minimal schlechter, als die Genauigkeit eines 3D-Modelles des Moai, welches photogrammetrisch mit einer Spiegelreflexkamera Nikon D90 manuell aufgenommen wurde. Durch Kombinationen von anderen Perspektiven bei der manuellen Aufnahme ist hier die Abdeckung subjektiv betrachtet besser. Die Ergebnisse sind in \autoref{tab:vergleich_erg} zusammengefasst.
+
+
+\begin{table}[htbp]
     \centering
     \caption{Ergebnisse der Genauigkeitsüberprüfung}
     \label{tab:vergleich_erg}
@@ -238,7 +239,7 @@ Statt die reelle Zahl der Kameras zu erhöhen, kann auch ein Drehteller genutzt 
 \subsection{Durchführung}
 Hierzu wurde ein einfacher manueller Drehteller genutzt (IKEA SNUDDA). Dieser wurde mit Passpunkten beklebt und weist ansonsten eine texturreiche Naturholzoberfläche auf (siehe \autoref{img:drehteller_moai}). Die Daten wurden in Metashape weiterverarbeitet und die einzelnen Aufnahmeschritte über die Passpunkte und die Punktwolke zusammengerechnet. Die Ergebnisse wurden mit denen des Streifenprojektionssystems und den Aufnahmen ohne Drehteller verglichen.
 
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{img/7_versuche/drehteller_moai.jpg}
     \caption{Drehteller mit Moai-Figur im Prototypen (aufgenommen von einem der verbauten Raspberry Camera Module 3)}
@@ -249,11 +250,21 @@ Hierzu wurde ein einfacher manueller Drehteller genutzt (IKEA SNUDDA). Dieser wu
 
 In \autoref{img:differenz_moai_drehteller} ist das Differenzbild des Moai zu sehen. Es zeigt sich, dass die Genauigkeit des Modells mit Drehteller deutlich besser ist, als die des Modells ohne Drehteller (siehe \autoref{img:differenz_moai_einzel}). Auch ist die visuelle Vollständigkeit deutlich höher, die nach unten gerichteten Flächen sind ebenfalls erfasst und passen gut zu dem Modell des Streifenprojektionssystems. Die Anzahl der Punkte hat sich nicht relevant verändert -- im Vergleich zu dem vollständigen Modell der Spiegelreflexkamera zeigt sich, dass über die Punktanzahl selbst keine sinnvollen Aussagen zur Abdeckung getroffen werden können.
 
-Der geringe durchschnittliche Fehler ist auf die au\-to\-ma\-tische Anpassung des Maßstabes zurückzuführen.
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}{0.10\textwidth}
+        \includegraphics[width=0.98\textwidth]{img/7_versuche/cam_anzahl/scala.png}
+    \end{subfigure}
+    \begin{subfigure}{0.85\textwidth}
+        \includegraphics[width=0.98\textwidth]{img/7_versuche/moai_fehler_drehteller.jpg}
+    \end{subfigure}
+    \caption{Differenzbild des Moai}
+    \label{img:differenz_moai_drehteller}
+\end{figure}
 
-Die Ergebnisse sind in \autoref{tab:vergleich_drehteller} zusammengefasst.
+Der geringe durchschnittliche Fehler ist auf die au\-to\-ma\-tische Anpassung des Maßstabes zurückzuführen. Die Ergebnisse sind in \autoref{tab:vergleich_drehteller} zusammengefasst.
 
-\begin{table}
+\begin{table}[htbp]
     \centering
     \caption{Ergebnisse der unter Anpassung des Maßstabes durchgeführten Genauigkeitsüberprüfung}
     \label{tab:vergleich_drehteller}
@@ -269,19 +280,6 @@ Die Ergebnisse sind in \autoref{tab:vergleich_drehteller} zusammengefasst.
     \end{tabular}
 \end{table}
 
-\begin{figure}
-    \centering
-    \begin{subfigure}{0.10\textwidth}
-        \includegraphics[width=0.98\textwidth]{img/7_versuche/cam_anzahl/scala.png}
-    \end{subfigure}
-    \begin{subfigure}{0.85\textwidth}
-        \includegraphics[width=0.98\textwidth]{img/7_versuche/moai_fehler_drehteller.jpg}
-    \end{subfigure}
-    \caption{Differenzbild des Moai}
-    \label{img:differenz_moai_drehteller}
-\end{figure}
-
-
 
 \section{Evaluation der Kameraanzahl}
 \label{s:kameraanzahl}
@@ -290,12 +288,10 @@ Die Kameras machen einen großen Teil des (Kosten-)Aufwandes zur Realisierung de
 \subsection{Durchführung}
 Um abzuschätzen, wie viele Kameras für eine gute Genauigkeit notwendig sind, wurden verschiedene Konfigurationen getestet. Dazu wurde der Moai aus \autoref{s:genauigkeitsueberpruefung} verwendet und in Agisoft Metashape verschiedene Kameras deaktiviert und das 3D-Modell neu berechnet. Die Ergebnisse wurden wieder mit dem Streifenprojektionssystem ATOS 5 verglichen. Als weitere Parameter wurden die Abdeckung und die Richtigkeit der Punktwolke bestimmt. Die Verteilung der jeweils genutzten Kameras ist in \autoref{img:ueberblick_cam_anzahl} dargestellt. Die pink dargestellten Punkte stellen jeweils die aktiven Kameras dar.
 
-Als Ausgleich für fehlende Kameras wurde auch nochmal der Drehteller aus der vorherigen Untersuchung verwendet und geprüft, wie viele Kameras durch den Drehteller ersetzt werden können. Die verwendeten Drehungen sind der Tabelle und den Bildern jeweils in der Form [Anzahl Aufnahmen]$\times$[Betrag der Drehung] zu entnehmen. Die Drehungen sind zusätzlich auch in \autoref{img:ueberblick_cam_anzahl} dargestellt. Jeder Strich steht für eine Aufnahme mit den aktiven Kameras. Beispielsweise zeigt die Abbildung \autoref{img:jedeZweiteKamera} zwei Striche auf dem angedeuteten Drehteller. Diese entsprechen zwei Aufnahmen mit einer Drehung zwischen den beiden Aufnahmen von $\frac{1}{8}$, also hier \ang{45}.
-
-Zur Bestimmung des Maßstabes wurden die Daten automatisiert bestmöglich an die Referenzdaten angepasst. Die Passpunkte wurden daher hier nur als Verknüpfungspunkte genutzt und nicht zur Bestimmung des Maßstabes.
+Als Ausgleich für fehlende Kameras wurde auch nochmal der Drehteller aus der vorherigen Untersuchung verwendet und geprüft, wie viele Kameras durch den Drehteller ersetzt werden können. Die verwendeten Drehungen sind der Tabelle und den Bildern jeweils in der Form [Anzahl Aufnahmen]$\times$[Betrag der Drehung] zu entnehmen. Die Drehungen sind zusätzlich auch in \autoref{img:ueberblick_cam_position} dargestellt. Jeder Strich steht für eine Aufnahme mit den aktiven Kameras. Beispielsweise zeigt die Abbildung \autoref{img:jedeZweiteKamera} zwei Striche auf dem angedeuteten Drehteller. Diese entsprechen zwei Aufnahmen mit einer Drehung zwischen den beiden Aufnahmen von $\frac{1}{8}$, also hier \ang{45}.
 
 
-\begin{figure}
+\begin{figure}[bp]
     \begin{subfigure}{0.48\textwidth}
         \includegraphics[width=0.95\linewidth]{img/7_versuche/kameraPosition/blick_von_oben_alle.png}
         \caption{
@@ -335,6 +331,7 @@ Zur Bestimmung des Maßstabes wurden die Daten automatisiert bestmöglich an die
     \label{img:ueberblick_cam_position}
 \end{figure}
 
+Zur Bestimmung des Maßstabes wurden die Daten automatisiert bestmöglich an die Referenzdaten angepasst. Die Passpunkte wurden daher hier nur als Verknüpfungspunkte genutzt und nicht zur Bestimmung des Maßstabes.
 
 \subsection{Ergebnisse}
 Wie zu erwarten nahm die Abdeckung und die Qualität der Punktwolke ab, je weniger Kameras verwendet wurden. Bei einer Aufnahme mit allen 24 Kameras wurde die Oberfläche (ohne Boden) zu \SI{93}{\percent} abgedeckt (siehe \autoref{img:moai_normal}). Bei einer Aufnahme mit 18 Kameras (siehe \autoref{img:moai_2von3}) waren es nur noch \SI{68}{\percent} und bei 12 Kameras (siehe \autoref{img:moai_jede2K}) noch \SI{54}{\percent}.  Schon bei 18 Kameras war der Moai kaum mehr zu erkennen, bei 12 war die Erkennbarkeit nicht mehr gegeben. Die Anzahl der Kameras scheint also für dieses Objekt angebracht zu sein, sofern kein Drehteller genutzt wird.
@@ -345,7 +342,7 @@ Im Vergleich des Parameters der Richtigkeit zeigt sich ein ähnliches Bild: Auch
 
 Die Ergebnisse sind in \autoref{tab:vergleich_anzahl_drehteller} zusammengefasst. Zum Vergleich sind auch die Ergebnisse der Nutzung des Drehtellers mit 24 Kameras aufgeführt - einmal mit feinen Drehungen von $\frac{1}{32}$ (siehe \autoref{img:moai_feinschritt}) und einmal mit groben Drehungen von $\frac{1}{8}$ (siehe \autoref{img:moai_grobschritt}). \autoref{img:ueberblick_cam_anzahl} zeigt die Abweichungen der jeweiligen Punktwolken von den Referenzdaten in grafischer Form.
 
-\begin{table}
+\begin{table}[htbp]
     \centering
     \caption{Ergebnisse mit unterschiedlicher Kameraanzahl und teilweise Nutzung eines Drehtellers}
     \label{tab:vergleich_anzahl_drehteller}
@@ -366,7 +363,7 @@ Die Ergebnisse sind in \autoref{tab:vergleich_anzahl_drehteller} zusammengefasst
 \end{table}
 
 
-\begin{figure}
+\begin{figure}[p]
     \centering
     \begin{subfigure}{0.30\textwidth}
         \includegraphics[width=1\linewidth]{img/7_versuche/cam_anzahl/normal.png}

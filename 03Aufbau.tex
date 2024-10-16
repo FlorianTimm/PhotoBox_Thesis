@@ -18,7 +18,7 @@ Als Kameras wurde das Raspberry Pi Camera Module 3 verwendet, welches jeweils vo
 
 Andere Kameramodule für den Raspberry Pi wurden in \autoref{tab:vergleich_kameras} verglichen. Das Camera Module v1 entfiel als Möglichkeit, da die Kamera einen Mindestabstand von einem Meter benötigt. Hiermit müsste der Aufnahmebereich für die Objekte auf über zwei Meter vergrößert werden. Die HQ- und GS-Kameras haben kein Objektiv mitgeliefert, sodass hier die Kosten für ein Objektiv hinzukommen würden. Das Camera Module v2 hat eine geringere Auflösung und auch eine geringere Bildqualität bei gleichem Preis wie das Modul 3. Außerdem ist die Fokussierung nur manuell möglich, was die Automatisierung desselben verhindert. Das Camera Module 3 Wide hat zwar ein größeres Sichtfeld, jedoch damit auch eine geringere Auflösung auf dem Objekt. Vorteil ist der geringe Mindestabstand. Da das Camera Module 3 besser verfügbar und etwas günstiger war, wurde sich für dieses Modell entschieden, was einen guten Kompromiss aus Auflösung, Bildqualität und Preis darstellt.
 
-\begin{table}
+\begin{table}[htbp]
     \centering
     \caption{Vergleich der möglichen Kameramodule für den Raspberry Pi \citep{raspicamdatasheet}}
     \label{tab:vergleich_kameras}
@@ -38,14 +38,19 @@ Andere Kameramodule für den Raspberry Pi wurden in \autoref{tab:vergleich_kamer
 
 Nachteil und Vorteil zugleich ist, dass die Kamera über einen Autofokus verfügt, der aber auch elektronisch gesteuert manuell fokussieren kann. Dieser verschlechtert die Stabilität der inneren Orientierung und wurde daher im \autoref{c:voruntersuchungen} analysiert. Da die Bilder im Makrobereich zwischen \SI{0,1}{} und \SI{1}{\metre} aufgenommen werden und die Kameras keine Veränderung der Blende ermöglichen, ist die Schärfentiefe vergleichsweise niedrig. Hierauf wurde in den Untersuchungen in \autoref{sec:fokusstacking} genauer eingegangen.
 
-Ein weiterer Vorteil der Lösung mit einzelnen Raspberry Pi besteht darin, dass hierdurch bereits die einzelnen Kameraeinheiten parallel zur Datenübertragung Aufgaben wie das Identifizieren von Passpunkten übernehmen können. Durch die Parallelisierung dieses Schrittes ist eine Reduktion der Berechnungszeit zwischen den Aufnahmen zu erwarten. Zudem ermöglicht die Nutzung von kabellosen Netzwerkverbindungen zur Steuerung eine Skalierung des Systems sowohl hinsichtlich der Anzahl der Kameras als auch der Abstände zwischen den Kameras.
+Ein weiterer Vorteil der Lösung mit einzelnen Raspberry Pi besteht darin, dass hierdurch bereits die einzelnen Kameraeinheiten parallel zur Datenübertragung Aufgaben wie das Identifizieren von Passpunkten übernehmen können. Durch die Parallelisierung dieses Schrittes ist eine Reduktion der Berechnungszeit zwischen den Aufnahmen zu erwarten. Zudem ermöglicht die Nutzung von leitungslosen Netzwerkverbindungen zur Steuerung eine Skalierung des Systems sowohl hinsichtlich der Anzahl der Kameras als auch der Abstände zwischen den Kameras.
 
-Die Anzahl der Kameras für den Prototyp wurde zusammen mit der Art des Rahmens (siehe \autoref{s:rahmen}) definiert. Hierzu wurde der Rahmen mit seinen Kameras in der 3D-Visualisierungssoftware Blender modelliert und einzelne Bilder der möglichen Kamera-Positionen gerendert. Im Anschluss wurden die Bilder in Agisoft Metashape zur Berechnung eines 3D-Modells verwendet. Dabei wurde evaluiert, ob die Berechnung möglich ist und wie gut die Abdeckung des Testobjektes ist. Das virtuelle Modell des Systems wurde darüber hinaus genutzt, um Visualisierungen für die Bedienungsanleitung zu erstellen (siehe \autoref{ch:Bedienungsanleitung}). Eine Verwendung in der Websoftware zur visuellen Überprüfung der berechneten Kamera-Positionen wurde geprüft, aber nicht umgesetzt, da die Erkennbarkeit schlechter als erwartet war.
+Die Anzahl der Kameras für den Prototyp wurde zusammen mit der Art des Rahmens (siehe \autoref{s:rahmen}) definiert. Hierzu wurde der Rahmen mit seinen Kameras in der 3D-Visualisierungssoftware Blender modelliert und einzelne Bilder der möglichen Kamera-Positionen gerendert. Im Anschluss wurden die Bilder in Agisoft Metashape zur Berechnung eines 3D-Modells verwendet. Dabei wurde evaluiert, ob die Berechnung möglich ist und wie gut die Abdeckung des Testobjektes ist. Das virtuelle Modell des Systems wurde darüber hinaus genutzt, um Visualisierungen für die Bedienungsanleitung zu erstellen (siehe \autoref{ch:Bedienungsanleitung}). Eine Verwendung in der Websoftware zur visuellen Überprüfung der berechneten Kamera-Positionen wurde geprüft, aber nicht umgesetzt, da die Erkennbarkeit schlechter als erwartet und somit der Mehrwert gering war.
 
 \section{Rahmen}
 \label{s:rahmen}
 
-\begin{figure}
+Der Rahmen muss möglichst stabil sein, damit die Kameras sich nicht in ihrer Lage verändern können. Jedoch sollte das System weiterhin transportabel - also nicht zu schwer - und veränderbar bleiben, um beispielsweise Kameras für Messreihen in ihrer Lage zu verändern. Der Aufbau aus genormten Bauteilen bietet sich an, um hier ggf. den Nachbau einfach ermöglichen zu können. Außerdem sollte der Rahmen auch demontierbar sein, damit er transportiert werden kann.
+
+Als mögliche Materialien kamen Holz, Stahl und Aluminium infrage. Aufgrund der einfachen Bearbeitung und der Standardisierung wurde sich für Aluminiumprofile entschieden. Diese gibt es in verschiedenen Ausführungen mit Nuten an den Seitenflächen, sodass eine einfache Montage, aber ebenso eine Demontage zu Transportzwecken, möglich wird. Außerdem sind diese sehr stabil bei leichtem Gewicht.
+
+
+\begin{figure}[htbp]
     \centering
     \begin{subfigure}{0.30\textwidth}
         \includegraphics[height=1\linewidth]{./img/3_aufbau/modell1.png}
@@ -69,16 +74,10 @@ Die Anzahl der Kameras für den Prototyp wurde zusammen mit der Art des Rahmens 
     \label{img:entwuerfe}
 \end{figure}
 
-
-Der Rahmen muss möglichst stabil sein, damit die Kameras sich nicht in ihrer Lage verändern können. Jedoch sollte das System weiterhin transportabel - also nicht zu schwer - und veränderbar bleiben, um beispielsweise Kameras für Messreihen in ihrer Lage zu verändern. Der Aufbau aus genormten Bauteilen bietet sich an, um hier ggf. den Nachbau einfach ermöglichen zu können. Außerdem sollte der Rahmen auch demontierbar sein, damit er transportiert werden kann.
-
-Als mögliche Materialien kamen Holz, Stahl und Aluminium infrage. Aufgrund der einfachen Bearbeitung und der Standardisierung wurde sich für Aluminiumprofile entschieden. Diese gibt es in verschiedenen Ausführungen mit Nuten an den Seitenflächen, sodass eine einfache Montage, aber ebenso eine Demontage zu Transportzwecken, möglich wird. Außerdem sind diese sehr stabil bei leichtem Gewicht.
-
-
 Es wurden verschiedene Varianten geprüft, die in \autoref{img:entwuerfe} dargestellt sind. Der erste Entwurf (siehe \autoref{img:entwurf1}) sah weniger Kameras und die zwingende Nutzung eines Drehtellers vor, dies wurde jedoch verworfen, weil dieser nicht der Anforderung einer schnellen Erfassung entsprochen hätte und auch der Anforderung der kurzen Einarbeitungszeit widersprechen würde. Der zweite Entwurf (siehe \autoref{img:entwurf2}) sah bereits die Nutzung von 8 Kamera-Hauptrichtungen vor, was für gute Schnittwinkel sorgt. Für die Aussteifung wurde hier ein Boden vorgesehen. Dies ist jedoch nachteilig, da das System dann beispielsweise nicht mehr über große, nicht bewegliche Objekte herüber gestülpt werden könnte. Gerade bei empfindlichen Objekten wäre dies aber vorteilhaft. In der dritten Variante (siehe \autoref{img:entwurf3}) wurde dann die Versteifung in den Seitenwänden umgesetzt. Durch die Konstruktion mit Eckwürfeln sowie der Bildung von dreieckigen Strukturen und dem Einbau von eckaussteifenden Platten mit Scheibenwirkung, wurde die Stabilität der Verbindungen erhöht. \autoref{img:alurahmen} zeigt den fertigen Rahmen vor Einbau der Platten und der Technik.
 
 
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \begin{subfigure}{0.38\textwidth}
         \includegraphics[height=6.5cm]{./img/3_aufbau/aluwinkel.jpg}
@@ -100,7 +99,7 @@ Die Kameras wurden mit einem $90^\circ$-Winkel am Rahmen montiert, um diese weit
 
 \section{Beleuchtung}
 
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[height=1.2\linewidth]{./img/3_aufbau/beleuchtung.jpg}
@@ -124,7 +123,7 @@ Es wurde sich für einzeln steuerbare LED-Lichtstreifen als Lichtquelle entschie
 Für diffuseres Licht von außen kann ein halbtransparenter, weißer Stoff über den Rahmen gespannt werden. Hierfür wurde aus weißem Baumwollstoff eine entsprechende Haube genäht (siehe \autoref{img:stoffhuelle}), welche durch zwei mittels Reißverschluss verschließbaren Eingriffmöglichkeiten weiterhin das Einlegen von Objekten durch die Seite oder das Verstellen von Kameras ermöglicht (siehe \autoref{img:stoffhuelle_offen}). Diese sorgt für eine gleichmäßigere Ausleuchtung durch Reflexion im Inneren, verhindert Reflexionen an Glasscheiben etc. und vermindert Blendwirkungen durch externe Lichtquellen.
 
 
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[height=5.2cm]{./img/3_aufbau/stoffhuelle.jpg}
@@ -144,13 +143,12 @@ Für diffuseres Licht von außen kann ein halbtransparenter, weißer Stoff über
 \section{Kommunikation und Datenübertragung}
 Die Kommunikation zwischen den Raspberry-Pi-Computern erfolgt über WLAN. Hierfür ist ein Mini-WLAN-Router mit im System verbaut worden. Vorteil dieser Lösung ist, dass hier keine weiteren Leitungen außer der Stromversorgung zu den einzelnen Raspberry Pi Zero W benötigt werden und es auch möglich wäre, die gleiche Hard- und Software für ein größeres System ohne Änderungen zu nutzen. Nachteilig ist die Verbindungsgeschwindigkeit, gerade im Hinblick auf die Synchronisierung der Kameras. Diese Problematik soll aber durch entsprechende Programmierung der Software möglichst klein gehalten werden.
 
-Als weitere Datenleitung wird eine Steuerleitung für die LED-Streifen benötigt. Über diese erfolgt die Steuerung der einzelnen LED-Gruppen. Hier wurde der gleiche Klingeldraht verwendet, der auch für die Stromversorgung (siehe \autoref{sec:strom}) verwendet wird. Sie ist in \autoref{img:schema_energie} in Orange dargestellt.
-
+Als weitere Datenleitung wird eine Steuerleitung für die LED-Streifen benötigt. Über diese werden die einzelnen LED-Gruppen angesteuert. Hier wird die gleiche Zwillingslitze wie für die Stromversorgung (siehe \autoref{sec:strom}) verwendet. Die Leitung ist in \autoref{img:schema_energie} in \autoref{sec:strom} grün dargestellt.
 
 \section{Stromversorgung}
 \label{sec:strom}
 
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.7\textwidth]{./img/3_aufbau/stromverteilung.jpg}
     \caption{Elektroverteilung zu den einzelnen Raspberry Pi Zero}
@@ -159,17 +157,17 @@ Als weitere Datenleitung wird eine Steuerleitung für die LED-Streifen benötigt
 
 Alle Raspberry-Pi-Computern werden mit \SI{5}{\volt} betrieben. Der Raspberry Pi Zero W mit Kamera hatte dabei in Messungen einen maximalen Stromverbrauch von \SI{270}{\milli\ampere} aufgezeigt, der Raspberry Pi 4 kann bis zu \SI{1,5}{\ampere} unter Last verbrauchen. Hieraus ergibt sich ein Gesamtstromverbrauch von maximal rund \SI{8}{\ampere}. Für den Raspberry Pi 4 wurde ein eigenes 15-Watt-Netzteil eingeplant und für die 24 Raspberry Pi Zero W ein gemeinsames 35-Watt-Netzteil. Versuche zeigten jedoch, dass der Stromverbrauch kurzfristig höher ausfallen kann, sodass die Raspberry Pi Zero W, die am meisten von Spannungsabfällen betroffen sind, zum Absturz gebracht wurden, wenn alle Kameras gleichzeitig auslösten. Nachdem die Last sicherheitshalber auf zwei weitere Netzteile verteilt wurde, lief das System zuverlässig.
 
-Als Kabelmaterial wurde Klingeldraht mit \SI{0,75}{\cubic\milli\metre} verwendet. Der relativ hohe Kabelquerschnitt soll für einen geringen Spannungsabfall sorgen. Durch die Verwendung von mehreren Netzteilen ist dieser jedoch nun nicht mehr notwendig. Hier würde sich nun ein geringerer Querschnitt anbieten, auch um eine einfachere Verbindung zu den Raspberry Pi Zero W zu ermöglichen. Diese wurden aufseiten der Zero W verlötet und in den Verteilerdosen mit Federkraftklemmen verbunden (siehe \autoref{img:stromverteilung}).
+Als Leitungsmaterial wurde Zwillingslitze mit \SI{0,75}{\square\milli\metre} verwendet. Der relativ hohe Leitungsquerschnitt soll für einen geringen Spannungsabfall sorgen. Durch die Verwendung von mehreren Netzteilen ist dieser jedoch nun nicht mehr notwendig. Hier würde sich nun ein geringerer Querschnitt anbieten, auch um eine einfachere Verbindung zu den Raspberry Pi Zero W zu ermöglichen. Diese wurden aufseiten der Zero W verlötet und in den Verteilerdosen mit Federkraftklemmen verbunden (siehe \autoref{img:stromverteilung}).
 
-Die Stromversorgung der Beleuchtung erfolgt über ein 12-Volt-Netzteil mit \SI{3,5}{\ampere} Ausgangsleistung. Auch hier wurde Klingeldraht zur Verteilung zwischen den einzelnen Holmen genutzt.
+Die Stromversorgung der Beleuchtung erfolgt über ein 12-Volt-Netzteil mit \SI{3,5}{\ampere} Ausgangsleistung. Auch hier wurde Zwillingslitze zur Verteilung zwischen den einzelnen Holmen genutzt.
 
 Der WLAN-Router wird auch mittels 5-Volt-Gleichspannung betrieben. Hier war ein entsprechendes USB-Netzteil mitgeliefert.
 
-Alle Netzteile werden von einer zentralen Steckdosenleiste mit 230-Volt-Netzspannung versorgt. Sie sind für eine Wechselspannung zwischen $100$ und \SI{230}{\volt} ausgelegt, sodass mit einem entsprechenden Adapter auch eine Nutzung in anderen Ländern möglich wäre. Die gesamte Energieverteilung ist der \autoref{img:schema_energie} zu entnehmen. Rote Verbindungen stellen hierbei 12-Volt-Leitungen dar, blaue 5-Volt-Leitungen und magentafarbene die 230-Volt-Leitungen. Orange Verbindungen sind Datenleitungen (Steuerleitung LED-Streifen).
+Alle Netzteile werden von einer zentralen Steckdosenleiste mit 230-Volt-Netzspannung versorgt. Sie sind für eine Wechselspannung zwischen $100$ und \SI{230}{\volt} ausgelegt, sodass mit einem entsprechenden Adapter auch eine Nutzung in anderen Ländern möglich wäre. Die gesamte Energieverteilung ist der \autoref{img:schema_energie} zu entnehmen. Rote Verbindungen stellen hierbei 12-Volt-Leitungen dar, blaue 5-Volt-Leitungen und schwarze die 230-Volt-Leitungen. Grüne Verbindungen sind Datenleitungen (Steuerleitung LED-Streifen).
 
-\begin{figure}
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=1.\textwidth]{./img/uml/uml_energie.pdf}
+    \includegraphics[width=1.0\textwidth]{./img/uml/uml_energie.pdf}
     \caption{Schematische Darstellung der Energieversorgung (blau: \SI{5}{\volt}; rot: \SI{12}{\volt}; schwarz: \SI{230}{\volt}; grün: Daten)}
     \label{img:schema_energie}
 \end{figure}
@@ -180,7 +178,7 @@ Der Titel dieser Arbeit verweist bereits darauf, dass eine kostengünstige Lösu
 
 Den größten Teil der Kosten machen die Kameras und die zugehörigen Raspberry-Pi-Computer aus. Wie schon in \autoref{s:kameras} erwähnt, kostet ein Kameramodul etwa 30 Euro. Hierzu kommen noch 18 Euro für den Raspberry Pi Zero W. Mit Gehäuse und Speicherkarte ergeben sich so rund 60 Euro pro Kamera. Für den Prototypen wurden 24 Kameras verwendet, somit entfallen hierauf grob 1.400 Euro und damit über drei Viertel der Gesamtkosten. Die Anzahl der Kameras wird daher auch in \autoref{s:kameraanzahl} auf sein Einsparpotenzial hin untersucht.
 
-Andere elektronische Bauteile verursachten Kosten von rund 200 Euro. Hierzu zählen der Raspberry Pi 4, die Netzteile, der WLAN-Router, die LED-Streifen und die Kabel. Der Rahmen aus Aluminiumprofilen mit Schrauben und Kabelhalterungen kostete rund 150 Euro. Für die Stoffhülle wurden etwa 20 Euro ausgegeben.
+Andere elektronische Bauteile verursachten Kosten von rund 200 Euro. Hierzu zählen der Raspberry Pi 4, die Netzteile, der WLAN-Router, die LED-Streifen und die Leitungen. Der Rahmen aus Aluminiumprofilen mit Schrauben und Leitungshalterungen kostete rund 150 Euro. Für die Stoffhülle wurden etwa 20 Euro ausgegeben.
 
 Ein nicht zu unterschätzender weiterer Kostenfaktor ist die für den Bau benötigte Zeit. Für den Prototypen wurden, zusammengerechnet rund 2-3 Wochen benötigt. Diese Zeit könnte durch Nutzung von mehr fertigen Bauteilen oder Automatisierung verkürzt werden, dieses würde jedoch wieder höhere Materialkosten zur Folge haben. Auch die Softwareentwicklung, die hier nicht berücksichtigt wurde, verursacht Kosten, die jedoch nicht direkt in die Hardwarekosten einfließen und eher einmaliger Natur sind (Pflegeaufwand ist jedoch zu berücksichtigen).
 

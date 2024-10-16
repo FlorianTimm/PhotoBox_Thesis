@@ -23,7 +23,7 @@ Der in dieser Arbeit entwickelte Prototyp zeigt zwar das Potenzial der Photogram
 
 Versuche mit einem Drehteller haben gezeigt, dass gerade komplexere Objekte von ein oder zwei zusätzlichen Aufnahmen stark profitieren. Hier könnte die Vorausgleichung der Kameras so angepasst werden, dass nach einer Drehung die vorberechneten Koordinaten der Kameras sich auf den Drehteller beziehen, sich also mit dem Teller drehen. Ein weiterer Schritt in diese Richtung wäre die Nutzung eines motorisierten Drehtellers, der die Drehung au\-to\-ma\-tisch durchführt. Im einfachsten Fall würde die Drehung ein an den Raspberry Pi angeschlossener Schrittmotor übernehmen. Der genaue Betrag der Drehung könnte dann über kodierte Passpunkte photogrammetrisch bestimmt werden.
 
-Die Verwendung von WLAN zur Datenübertragung hat sich als nicht optimal herausgestellt. Die Übertragungsgeschwindigkeit ist bei dieser Anzahl an Teilnehmern im Netzwerk gering, sodass die Übertragung der Bilder lange dauert. Eine Übertragung über LAN wäre hier effektiver, jedoch wäre der Verkabelungsaufwand deutlich höher und die Mobilität des Systems eingeschränkt. Da die Raspberry Pi Zero W über keinen RJ45-Anschluss verfügt, müsste ein zusätzlicher Adapter verwendet werden.
+Die Verwendung von WLAN zur Datenübertragung hat sich als nicht optimal herausgestellt. Die Übertragungsgeschwindigkeit ist bei dieser Anzahl an Teilnehmern im Netzwerk gering, sodass die Übertragung der Bilder lange dauert. Eine Übertragung über LAN wäre hier effektiver, jedoch wäre der Verdrahtungsaufwand deutlich höher und die Mobilität des Systems eingeschränkt. Da die Raspberry Pi Zero W über keinen RJ45-Anschluss verfügt, müsste ein zusätzlicher Adapter verwendet werden.
 
 Die Verwendung des Raspberry Pi 4 als Schnittstelle vereinfacht zwar die Bedienung und ermöglicht die Verwendung des Systems ohne externe Hardware, jedoch ist die Leistung des Raspberry Pi 4 für die Verarbeitung der Bilder zum 3D-Modell nicht ausreichend. Bei der Verwendung eines externen Rechners könnte hier eine Desktop-Software alle Aufgaben übernehmen, die dieser ausführt. Neben der Kostenersparnis würde dieses auch die räumliche Skalierbarkeit des Systems erhöhen und die Komplexität verringern. Eine andere Variante hiervon wäre die direkte Kommunikation des Systems mit einem Server mit OpenDroneMap, sodass die Bilder direkt auf dem Server verarbeitet werden. Hier wäre dann kein leistungsstarker Rechner vor Ort notwendig, dafür jedoch eine stabile Internetverbindung.
 
@@ -33,7 +33,7 @@ Zur besseren Erfassung von Objekten mit einheitlicher Textur könnte die Verwend
 
 %Abschluss
 
-Insgesamt zeigt sich, dass die Nutzung der Raspberry Pi Camera Module an einem festen Rahmen schon in dieser Entwicklungsstufe gute Ergebnisse liefert bei sehr kurzen personellen Aufwand bei der Erfassung. Das System bietet an einigen Stellen noch Optimierungsmöglichkeiten, die beispielsweise zur besseren Erfassung von größeren oder texturarmen Objekten führen kann.
+Das System bietet an einigen Stellen noch Optimierungsmöglichkeiten, die beispielsweise zur besseren Erfassung von größeren oder texturarmen Objekten führen kann. Insgesamt zeigt sich, dass die Nutzung der Raspberry Pi Camera Module an einem festen Rahmen schon in dieser Entwicklungsstufe gute Ergebnisse liefert bei sehr kurzem personellen Aufwand bei der Erfassung.
 
 
 \biblio

@@ -7,16 +7,15 @@
 \label{c:photogrammetrie}
 Dieses Kapitel beschreibt die notwendigen Bedingungen und die Grundlagen der Rekonstruktion des Objektes als 3D-Modell. Hierfür wird Photogrammetrie in Form einer \Glsentrylong{SfM}-Pipeline genutzt. Der allgemeine Ablauf ist in \autoref{img:ablauf} dargestellt. Grau dargestellte Schritte werden nicht von der entwickelten Software aus \autoref{c:software}, sondern von externer Software durchgeführt.
 
-Zunächst werden die Bilder aufgenommen (siehe \autoref{s:bilder}). Hierbei ist wichtig, dass sich die Bildinhalte überlappen. Die Bilder werden dann verknüpft, indem identische Punkte in den Bildern identifiziert werden  (siehe \autoref{s:verknuepfung}).
-Aus den identifizierten Punkten werden dann die Positionen und Ausrichtung der Kameras und Verknüpfungspunkte in einem lokalen Koordinatensystem ohne bekannten Maßstab berechnet. Die so erzeugten Daten werden anschließend in einer Bündelblockausgleichung gemeinsam optimiert (siehe \autoref{s:buendelblock}). Durch die Nutzung von bekannten Größen, beispielsweise kalibrierten Maßstäben, kann dieses System transformiert werden.
-
-\begin{figure}
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=1\textwidth]{./img/uml/uml_ablauf.pdf}
+    \includegraphics[width=0.9\textwidth]{./img/uml/uml_ablauf.pdf}
     \caption{Ablauf der Bildverknüpfung mittels \acrfull{SfM}, nach \citealt[S. 492]{luhmann}}
     \label{img:ablauf}
 \end{figure}
 
+Zunächst werden die Bilder aufgenommen (siehe \autoref{s:bilder}). Hierbei ist wichtig, dass sich die Bildinhalte überlappen. Die Bilder werden dann verknüpft, indem identische Punkte in den Bildern identifiziert werden  (siehe \autoref{s:verknuepfung}).
+Aus den identifizierten Punkten werden dann die Positionen und Ausrichtung der Kameras und Verknüpfungspunkte in einem lokalen Koordinatensystem ohne bekannten Maßstab berechnet. Die so erzeugten Daten werden anschließend in einer Bündelblockausgleichung gemeinsam optimiert (siehe \autoref{s:buendelblock}). Durch die Nutzung von bekannten Größen, beispielsweise kalibrierten Maßstäben, kann dieses System transformiert werden.
 
 \section{Abbildung}
 \label{s:abbildung}
@@ -28,19 +27,18 @@ Die \gls{innereOrientierung} beschreibt die Abbildungseigenschaften der Kamera a
 
 Normalerweise wird die Kamera hierbei vereinfacht als Lochkamera unter Verwendung der Zentralperspektive betrachtet (siehe \autoref{img:optische_achse}). Als Projektionszentrum $O'$ wird hierbei der Punkt beschrieben, durch den alle Bildstrahlen geradlinig laufen. Sein Lot auf dem Sensor wird als \Gls{Bildhauptpunkt} $H'$ bezeichnet und beispielsweise durch seine Lage in Pixeln oder Mikrometern beschrieben. Durch eine schiefe optische Achse kann dieser vom Mittelpunkt des Sensors abweichen. Die \Gls{Kamerakonstante} $c$ beschreibt idealisiert den Abstand des Projektionszentrums zum Sensor. \citep[vgl.][S. 177]{luhmann}
 
-Als \Gls{Verzeichnung} wird die Abweichung der Abbildung von der idealen Lochkamera bezeichnet. Diese kann durch die Nutzung von Linsen oder durch die Bauweise der Kamera entstehen. Die \Gls{Verzeichnung} wird in radialer und tangentialer \Gls{Verzeichnung} unterschieden. Die radiale \Gls{Verzeichnung} beschreibt die Verschiebung der Bildpunkte zur Bildmitte hin. Dieser Punkt wird Symmetriepunkt genannt und muss nicht zwangsläufig mit dem Bildhauptpunkt zusammenfallen, für die Korrekturen wird dieses jedoch üblicherweise so angenommen. Die tangentiale \Gls{Verzeichnung} beschreibt die Verschiebung quer zur radialen Richtung. Am wichtigsten ist hierbei die radial-symmetrische \Gls{Verzeichnung}, da diese die größte Auswirkung hat. Sie entsteht durch den nicht symmetrischen Aufbau des Objektives vor und hinter der Blende. Die radial-asymmetrische und die tangentiale \Gls{Verzeichnung}en entstehen hauptsächlich aus einer Dezentrierung und Schiefstellung der Linsen zur optischen Achse. \citep[vgl.][S. 178]{luhmann}
-
-Jede Einstellung der Kameraoptik verändert die \gls{innereOrientierung} und jede Kamera, selbst in derselben Modellreihe, unterscheidet sich in ihren Parametern. Änderungen können sich beispielsweise durch Umfokussierung oder die Nutzung eines optischen Zoom ergeben, als auch durch einen mechanisch instabilen Aufbau der Kameras oder Erwärmung und der damit verbundenen Ausdehnung. Daher sollten die Bilder normalerweise möglichst mit nur einer Kamera mit festen Einstellungen (Brennweite, Fokus, Blende, Objektiv) aufgenommen werden. Änderungen der Empfindlichkeit (ISO-Zahl) oder Belichtungszeit sind unproblematisch für die \gls{innereOrientierung}, da hierbei die Abbildungseigenschaften der Kamera nicht verändert werden. \citep[vgl.][S. 176]{luhmann}
-
-Die genaue Bestimmung der inneren Orientierung, auch Kalibrierung genannt, kann wäh\-rend der Messung beispielsweise als Parameter in der Bündel\-block\-ausgleichung erfolgen. Je nach Anzahl der Kameras und Stabilität der inneren Orientierung sind hier verschiedene Varianten möglich. Bei stabilen Kameras wird ein Parameter-Satz pro Kamera für eine ganze Messreihe ausgeglichen, bei instabilen Kameras kann die Kalibrierung jedes einzelnen Bildes notwendig werden. \citep[vgl.][S. 181f]{luhmann}
-
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{./img/2_grundlagen/optischeAchse.pdf}
     \caption{Abbildung des Lochkamera-Modells mit Spiegelung am Projektionszentrum (rot), nach \citet[S. 154]{hartley}, Beschriftung nach \citet[S. 177]{luhmann}}
     \label{img:optische_achse}
 \end{figure}
 
+Als \Gls{Verzeichnung} wird die Abweichung der Abbildung von der idealen Lochkamera bezeichnet. Diese kann durch die Nutzung von Linsen oder durch die Bauweise der Kamera entstehen. Die \Gls{Verzeichnung} wird in radialer und tangentialer \Gls{Verzeichnung} unterschieden. Die radiale \Gls{Verzeichnung} beschreibt die Verschiebung der Bildpunkte zur Bildmitte hin. Dieser Punkt wird Symmetriepunkt genannt und muss nicht zwangsläufig mit dem Bildhauptpunkt zusammenfallen, für die Korrekturen wird dieses jedoch üblicherweise so angenommen. Die tangentiale \Gls{Verzeichnung} beschreibt die Verschiebung quer zur radialen Richtung. Am wichtigsten ist hierbei die radial-symmetrische \Gls{Verzeichnung}, da diese die größte Auswirkung hat. Sie entsteht durch den nicht symmetrischen Aufbau des Objektives vor und hinter der Blende. Die radial-asymmetrische und die tangentiale \Gls{Verzeichnung}en entstehen hauptsächlich aus einer Dezentrierung und Schiefstellung der Linsen zur optischen Achse. \citep[vgl.][S. 178]{luhmann}
+
+Jede Einstellung der Kameraoptik verändert die \gls{innereOrientierung} und jede Kamera, selbst in derselben Modellreihe, unterscheidet sich in ihren Parametern. Änderungen können sich beispielsweise durch Umfokussierung oder die Nutzung eines optischen Zoom ergeben, als auch durch einen mechanisch instabilen Aufbau der Kameras oder Erwärmung und der damit verbundenen Ausdehnung. Daher sollten die Bilder normalerweise möglichst mit nur einer Kamera mit festen Einstellungen (Brennweite, Fokus, Blende, Objektiv) aufgenommen werden. Änderungen der Empfindlichkeit (ISO-Zahl) oder Belichtungszeit sind unproblematisch für die \gls{innereOrientierung}, da hierbei die Abbildungseigenschaften der Kamera nicht verändert werden. \citep[vgl.][S. 176]{luhmann}
+
+Die genaue Bestimmung der inneren Orientierung, auch Kalibrierung genannt, kann wäh\-rend der Messung beispielsweise als Parameter in der Bündel\-block\-ausgleichung erfolgen. Je nach Anzahl der Kameras und Stabilität der inneren Orientierung sind hier verschiedene Varianten möglich. Bei stabilen Kameras wird ein Parameter-Satz pro Kamera für eine ganze Messreihe ausgeglichen, bei instabilen Kameras kann die Kalibrierung jedes einzelnen Bildes notwendig werden. \citep[vgl.][S. 181f]{luhmann}
 
 \subsection{Äußere Orientierung}
 \label{s:aeussereorientierung}
@@ -103,7 +101,7 @@ Als weitere Parameter spielt die \Gls{Verzeichnung} eine Rolle. Diese können in
     \Delta x_{tan} & tangentiale \Gls{Verzeichnung} \\
 \end{conditions}
 
-Die \Gls{Verzeichnung} wird meist mit den Parametern $k_1$ bis $k_4$ für die radial-symmetrische \Gls{Verzeichnung} und $p_1$ und $p_2$ für die tangentiale \Gls{Verzeichnung} bezeichnet. Die Faktoren stellen dabei die Parameter einer Taylor-Reihe dar. Sie basieren auf dem Kameramodell von \citet[S. 859]{brown1971} und denen von ihm vorgestellten Formeln (\autoref{eq:brown_rad} und \ref{eq:brown_tan}). Diese Parameter werden so beispielsweise auch in Photogrammetrie- und Computer-Vision-Software wie Agisoft Metashape, OpenDroneMap und OpenCV genutzt.
+Die \Gls{Verzeichnung} wird meist mit den Parametern $k_1$ bis $k_4$ für die radial-symmetrische \Gls{Verzeichnung} und $p_1$ und $p_2$ für die tangentiale \Gls{Verzeichnung} bezeichnet. Die Faktoren stellen dabei die Parameter einer Taylor-Reihe dar. Sie basieren auf dem Kameramodell von \citet[S. 859]{brown1971} und denen von ihm vorgestellten Formeln (\autoref{eq:brown_rad} und \ref{eq:brown_tan}).
 
 \begin{align*}
     \nlabel{eq:brown_rad}
@@ -124,7 +122,7 @@ Die \Gls{Verzeichnung} wird meist mit den Parametern $k_1$ bis $k_4$ für die ra
     p_1, p_2            & Tangentiale \Gls{Verzeichnung}sparameter              \\
 \end{conditions}
 
-
+Diese Parameter werden so beispielsweise auch in Photogrammetrie- und Computer-Vision-Software wie Agisoft Metashape, OpenDroneMap und OpenCV genutzt.
 
 \section{Bilder}
 \label{s:bilder}
@@ -136,7 +134,7 @@ Da die Bilder durch identische Punkte verbunden werden, müssen sich die Bildinh
 
 \subsection{Position und Ausrichtung der Kamera}
 Damit die Schnitte der Bildstrahlen optimal sind und die Berechnung der Tiefeninformationen möglichst genau ist, müssen die Kameras möglichst gleichmäßig um das Objekt verteilt sein.
-Bilder, die vom gleichen Standpunkt aufgenommen wurden, sind oft nur ungenau verknüpfbar. Daher empfiehlt es sich, Bilder aus verschiedensten Richtungen zu machen, also bei der manuellen Photographie um das Objekt herumzugehen - eine Mehrbildaufnahme im Rundum-Verband zu erzeugen. \citep[vgl.][S. 170]{luhmann}
+Bilder, die vom gleichen Standpunkt aufgenommen wurden, sind oft nur ungenau verknüpfbar. Daher empfiehlt es sich, Bilder aus verschiedensten Richtungen zu machen, also bei der manuellen Photographie um das Objekt herumzugehen und eine Mehrbildaufnahme im Rundum-Verband zu erzeugen. \citep[vgl.][S. 170]{luhmann}
 
 Entsprechend müssen die Kameras gleichmäßig um das Objekt verteilt positioniert werden und dabei auch an die Form des Objektes wie Einschnitte anpassbar sein.
 
@@ -166,9 +164,9 @@ Der Schärfebereich ergibt sich aus der Größe des tolerierbaren Unschärfekrei
     f   & Brennweite
 \end{conditions}
 
-Die Schärfentiefe des Raspberry Pi Camera Module 3 ist in \autoref{img:sschaerfentiefe_plot} für einen Unschärfekreis von drei Pixeln dargestellt (Plot der \autoref{eq:schaerfebereich}). Es zeigt sich, dass die Schärfentiefe im  verwendeten Makrobereich relativ klein ist. Problematisch ist dies vor allem bei größeren Objekten, die hierdurch näher an die Kameras rücken, aber durch ihre Größe eine größere Schärfentiefe benötigen. Ein Lösungsansatz durch Kombination mehrere Aufnahmen wird in \autoref{sec:fokusstacking} untersucht.
+Die Schärfentiefe des Raspberry Pi Camera Module 3 ist in \autoref{img:sschaerfentiefe_plot} für einen Unschärfekreis von drei Pixeln dargestellt (Plot der \autoref{eq:schaerfebereich}). Es zeigt sich, dass die Schärfentiefe im  verwendeten Makrobereich relativ klein ist. Problematisch ist dies vor allem bei größeren Objekten, die hierdurch näher an die Kameras rücken, aber durch ihre Größe eine größere Schärfentiefe benötigen. Ein Lösungsansatz durch Kombination mehrerer Aufnahmen wird in \autoref{sec:fokusstacking} untersucht.
 
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\textwidth]{./img/2_grundlagen/schaerfentiefe_plot.png}
     \caption{Schärfentiefe in Abhängigkeit von der fokussierten Entfernung}
@@ -194,13 +192,7 @@ Vorteilhaft ist jedoch die Verwendung von codierten Zielmarken. Hier können die
 Eine Form der codierten Zielmarken sind die Marker nach Schneider. Diese bestehen aus mehreren konzentrischen Kreisen (siehe \autoref{img:schneider}) und werden entsprechend als \Gls{CCCT} bezeichnet \citep[vgl.][]{ccct}. Die Mitte des Markers wird durch den gemeinsamen Mittelpunkt der Kreise definiert \citep[vgl.][]{schneider}. Vorteilhaft ist, dass die Marker auch bei unscharfen Bildern erkannt werden können und ihr Zentrum manuell identifiziert werden kann, beispielsweise zum Aufmaß mit einem Tachymeter. Sie haben sich daher als Standardmarker in der Photogrammetrie etabliert und werden beispielsweise von Agisoft Metashape verwendet.
 
 
-\subsubsection{ArUco-Marker}
-Eine andere Variante der codierten Verknüpfungspunkte sind die sogenannten ArUco-Marker (siehe \autoref{img:aruco}). Diese werden häufig für die Orientierung bei Augmented-Reality-An\-wend\-ungen genutzt. Jede Ecke kann hierbei au\-to\-ma\-tisch im Subpixelbereich identifiziert werden, sodass ein erkannter Marker vier Verknüpfungspunkte liefern kann. Wenn deren (lokale) Koordinaten und die \gls{innereOrientierung} bekannt sind, kann mit nur einem Marker die \gls{aeussereOrientierung} bestimmt werden. \citep[vgl.][S. 545]{luhmann}
-
-Nachteilig zeigte sich in den Untersuchungen des Fokus (siehe \autoref{sec:fokus}), dass die Ecken nicht eindeutig identifiziert werden können, wenn die Aufnahme unscharf ist. Durch ihre Verwendung in Augmented-Reality-Anwendungen sind auch viele kostenfreie Bibliotheken für ihre Erkennung verfügbar, sodass beispielsweise \citet{opencv} ArUco-Marker identifizieren kann.
-
-
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[width=0.98\linewidth]{img/2_grundlagen/schneider.png}
@@ -217,9 +209,15 @@ Nachteilig zeigte sich in den Untersuchungen des Fokus (siehe \autoref{sec:fokus
     \caption{Codierte Passpunkte}
 \end{figure}
 
+\subsubsection{ArUco-Marker}
+Eine andere Variante der codierten Verknüpfungspunkte sind die sogenannten ArUco-Marker (siehe \autoref{img:aruco}). Diese werden häufig für die Orientierung bei Augmented-Reality-An\-wend\-ungen genutzt. Jede Ecke kann hierbei au\-to\-ma\-tisch im Subpixelbereich identifiziert werden, sodass ein erkannter Marker vier Verknüpfungspunkte liefern kann. Wenn deren (lokale) Koordinaten und die \gls{innereOrientierung} bekannt sind, kann mit nur einem Marker die \gls{aeussereOrientierung} bestimmt werden. \citep[vgl.][S. 545]{luhmann}
+
+Nachteilig zeigte sich in den Untersuchungen des Fokus (siehe \autoref{sec:fokus}), dass die Ecken nicht eindeutig identifiziert werden können, wenn die Aufnahme unscharf ist. Durch ihre Verwendung in Augmented-Reality-Anwendungen sind auch viele kostenfreie Bibliotheken für ihre Erkennung verfügbar, sodass beispielsweise \citet{opencv} ArUco-Marker identifizieren kann.
+
+
 \subsection{Merkmalsextraktion}
 \label{ss:sift}
-Auch ohne das Anbringen von Markern können Verknüpfungspunkte erzeugt werden. Hierfür wird Merkmalsextraktion verwendet, beispielsweise \Gls{SIFT}, welches hier stellvertretend kurz vorgestellt wird. Es liefert Verknüpfungspunkte aus Mustern auf den photographierten Oberflächen. Es ist meist nicht notwendig, explizit Marker an dem aufzunehmenden Objekt anzubringen, sofern seine Oberfläche nicht strukturlos ist (glatte weiße Wände etc.).
+Auch ohne das Anbringen von Markern können Verknüpfungspunkte erzeugt werden. Hierfür wird Merk\-mals\-ex\-trak\-tion verwendet, beispielsweise \Gls{SIFT}, welches hier stellvertretend kurz vorgestellt wird. Es liefert Verknüpfungspunkte aus Mustern auf den photographierten Oberflächen. Es ist meist nicht notwendig, explizit Marker an dem aufzunehmenden Objekt anzubringen, sofern seine Oberfläche nicht strukturlos ist (glatte weiße Wände etc.).
 
 Zur Erkennung von Merkmalen setzt \gls{SIFT} auf die Detektion von Kanten. Diese werden in verschiedenen Stufen einer Bildpyramide erkannt und ihre Extrema berechnet. Sie werden anschließend weiter ausgedünnt, beispielsweise über den Kontrast. Sofern ein möglicher Marker identifiziert wurde, wird eine Beschreibung erzeugt. Diese erfolgt  durch Analyse der Helligkeitsabweichungen zu den Nachbar-Pixeln und wird an der stärksten Abweichung ausgerichtet. Hierdurch wird die Beschreibung dann richtungsunabhängig. Mit den Beschreibungen kann dann die Übereinstimmung von zwei Markern in zwei Bildern identifiziert werden, auch wenn diese zueinander gekippt oder gedreht sind.
 \citep[vgl.][S. 484f]{luhmann}
@@ -228,8 +226,14 @@ Zur Erkennung von Merkmalen setzt \gls{SIFT} auf die Detektion von Kanten. Diese
 \label{s:photogramm}
 Durch die beschriebenen Verfahren und die hieraus entstandenen Verknüpfungs\-punkte können die Bilder miteinander verknüpft werden. Da die Kamerapositionen am Rahmen veränderlich sind und die Montage auch keine ausreichend genaue Fixierung garantiert, können die bekannten Positionen aus vorherigen Messungen maximal als Näherungswerte genutzt werden. Die genaue Bestimmung der Position und Ausrichtung - die \gls{aeussereOrientierung} - muss daher mindestens für die verschobenen oder gedrehten Kameras neu berechnet werden. Gleiches gilt für neue Verknüpfungspunkte, für die noch keine Koordinate bekannt ist. Die verwendeten Methoden, die so zur Verknüpfung der Bilder beitragen, werden im Folgenden vorgestellt: der Rückwärts-, der Vorwärtsschnitt und die relative Orientierung.
 
+\subsection{Rückwärtsschnitt}
+Sofern Koordinaten von Passpunkten bekannt sind, können die Positionen und Ausrichtungen der Kameras berechnet werden. Hierfür wird der sogenannte Rückwärtsschnitt genutzt. Die Berechnung erfolgt auf Basis der Abbildungsgleichung, die die Position eines Punktes in einem Bild in Beziehung zur Kamera setzt. Für die Berechnung selbst gibt es verschiedene Methoden. Verwendet wurde hier der von OpenCV genutzte Ansatz von \citet{Lepetit2008} in Kombination mit einem RANSAC-Ansatz.
 
-\begin{figure}
+Durch die Nutzung des RANSAC-Ansatzes können veränderte Passpunkte identifiziert und als Ausreißer markiert werden. Hierzu werden mehrere Stichproben der Punkte gewählt, die Berechnung durchgeführt und die Lösung gewählt, zu denen die meisten Punkte passen. \citep[vgl.][S. 134]{luhmann}
+
+\autoref{img:rueckwaertsschnitt} zeigt die geometrischen Grundlagen des Rückwärtsschnittes. Es müssen mindestens 3 Passpunkte ($P_1 - - P_3$) mit Koordinaten bekannt und im Bild sichtbar sein. Außerdem muss die \gls{innereOrientierung} bei Verwendung von nur drei Passpunkten bekannt sein. Die Position der Punkte $P'_1 - - P'_3$ wird dann bestimmt und ergibt im Beispiel 6 Koordinatenkomponenten (jeweils $x'$ und $y'$). Durch Berechnungen -- auf die hier nicht weiter eingegangen und auf entsprechende Literatur verwiesen wird -- kann dann die Position (drei Parameter) und Ausrichtung (drei Parameter) der Kamera bestimmt werden. \citep[vgl.][S. 284]{luhmann}
+
+\begin{figure}[htbp]
     \centering
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[width=0.9\linewidth]{img/2_grundlagen/rueckwaertsschnitt.pdf}
@@ -245,14 +249,6 @@ Durch die beschriebenen Verfahren und die hieraus entstandenen Verknüpfungs\-pu
     \end{subfigure}
     \caption{Geometrische Grundlagen des Rückwärts- und Vorwärtsschnittes}
 \end{figure}
-
-
-\subsection{Rückwärtsschnitt}
-Sofern Koordinaten von Passpunkten bekannt sind, können die Positionen und Ausrichtungen der Kameras berechnet werden. Hierfür wird der sogenannte Rückwärtsschnitt genutzt. Die Berechnung erfolgt auf Basis der Abbildungsgleichung, die die Position eines Punktes in einem Bild in Beziehung zur Kamera setzt. Für die Berechnung selbst gibt es verschiedene Methoden. Verwendet wurde hier der von OpenCV genutzte Ansatz von \citet{Lepetit2008} in Kombination mit einem RANSAC-Ansatz.
-
-Durch die Nutzung des RANSAC-Ansatzes können veränderte Passpunkte identifiziert und als Ausreißer markiert werden. Hierzu werden mehrere Stichproben der Punkte gewählt, die Berechnung durchgeführt und die Lösung gewählt, zu denen die meisten Punkte passen. \citep[vgl.][S. 134]{luhmann}
-
-\autoref{img:rueckwaertsschnitt} zeigt die geometrischen Grundlagen des Rückwärtsschnittes. Es müssen mindestens 3 Passpunkte ($P_1 - - P_3$) mit Koordinaten bekannt und im Bild sichtbar sein. Außerdem muss die \gls{innereOrientierung} bei Verwendung von nur drei Passpunkten bekannt sein. Die Position der Punkte $P'_1 - - P'_3$ wird dann bestimmt und ergibt im Beispiel 6 Koordinatenkomponenten (jeweils $x'$ und $y'$). Durch Berechnungen -- auf die hier nicht weiter eingegangen und auf entsprechende Literatur verwiesen wird -- kann dann die Position (drei Parameter) und Ausrichtung (drei Parameter) der Kamera bestimmt werden. \citep[vgl.][S. 284]{luhmann}
 
 \subsection{Vorwärtsschnitt}
 Um wiederum aus einem Stereopaar mit bekannter innerer und äußerer Orientierung Punktkoordinaten zu berechnen, wird der Vorwärtsschnitt genutzt. \autoref{img:vorwaertsschnitt} zeigt die geometrischen Grundlagen des Vorwärtsschnitts. Es werden die Bildkoordinaten der Punkte $P_1$ und $P_2$ benötigt, die im Bild sichtbar sind. Die Position des Punktes $P$ wird dann berechnet. Wie bereits in \autoref{s:abbildung} erwähnt, kann jeder Punkt im Bild durch die \gls{innereOrientierung} als Horizontal- und Vertikalrichtungsmessung interpretiert werden. Durch die \gls{aeussereOrientierung} kann diese dann ins übergeordnete System überführt werden. Hieraus ergibt sich dann zur Berechnung der Position $P$ ein räumlicher Schnitt zweier (windschiefer) Geraden \citep[vgl.][S. 95]{luhmann}.
@@ -293,9 +289,7 @@ Bis zu diesem Schritt besteht das Modell nur aus einzelnen Punkten, die keine Ob
 
 \autoref{img:meshing} zeigt beispielhaft eine Ecke aus einer Punktwolke vor und nach der Vermaschung. Gut zu erkennen ist, dass die Anzahl der Punkte reduziert wurde und die Oberfläche durch Dreiecke angenähert wurde, jedoch sich die äußeren Konturen nicht verändert haben.
 
-Die Screened Poisson Surface Reconstruction ist ein Verfahren, das auf der Poisson-Gleichung basiert. Diese Gleichung beschreibt die Beziehung zwischen einer Funktion und ihrer Ableitung. Bei der Screened Poisson Surface Reconstruction wird diese verwendet, um die Oberfläche zu glätten und zu interpolieren. Dabei werden die Punkte in eine Gitterstruktur überführt und die Oberfläche durch die Lösung der Poisson-Gleichung bestimmt. Dieser Ansatz berücksichtigt auch die Ausrichtung der Punkte, um eine genauere Rekonstruktion der Oberfläche zu erzielen. \citep[vgl.][]{spsr}
-
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \begin{subfigure}{0.48\textwidth}
         \includegraphics[width=0.95\linewidth]{img/2_grundlagen/points.jpg}
@@ -313,14 +307,15 @@ Die Screened Poisson Surface Reconstruction ist ein Verfahren, das auf der Poiss
     \label{img:meshing}
 \end{figure}
 
+Die Screened Poisson Surface Reconstruction ist ein Verfahren, das auf der Poisson-Gleichung basiert. Diese Gleichung beschreibt die Beziehung zwischen einer Funktion und ihrer Ableitung. Bei der Screened Poisson Surface Reconstruction wird diese verwendet, um die Oberfläche zu glätten und zu interpolieren. Dabei werden die Punkte in eine Gitterstruktur überführt und die Oberfläche durch die Lösung der Poisson-Gleichung bestimmt. Dieser Ansatz berücksichtigt auch die Ausrichtung der Punkte, um eine genauere Rekonstruktion der Oberfläche zu erzielen. \citep[vgl.][]{spsr}
+
+
 \section{Texturierung}
 Abschließend wird das Modell texturiert. Hierfür werden die Bilder, die zur Erstellung des Modells genutzt wurden, auf das Modell projiziert. Außerdem werden Helligkeits- und Farbunterschiede der Bilder ausgeglichen. \citep[vgl.][S. 54f]{opendronemap}
 
 Vorteil der Texturierung ist, dass das Modell meist realistischer wirkt und fehlende Informationen, beispielsweise fehlende Punkte, überdeckt werden können. Nachteilig ist, dass die Texturierung hierdurch auch Informationen verdeckt. So kann bei einem nur schattierten Modell die Struktur des 3D-Modelles deutlich besser erkannt werden \citep[vgl.][S. 702]{luhmann}. Beispielhaft ist dieses in \autoref{img:texturierung} an dem später auch für die Überprüfungen (siehe \autoref{c:versuche}) verwendeten Testkörper dargestellt. Dieser hat beispielsweise auf der Rückseite (rechts im Bild) einige Einkerbungen, welche im texturierten Modell (siehe \autoref{img:mit_textur}) kaum erkennbar sind. Im ausschließlich schattierten Modell (siehe \autoref{img:ohne_textur}) sind diese hingegen deutlich sichtbar.
 
-
-
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \begin{subfigure}{0.49\textwidth}
         \includegraphics[width=1\linewidth]{img/2_grundlagen/solid.jpg}

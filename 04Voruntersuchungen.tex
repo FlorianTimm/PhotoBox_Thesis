@@ -28,7 +28,7 @@ Es wurden Bilder von einem Siemensstern unter verschiedenen Belichtungssituation
 Der Unschärfekreis war durchschnittlich $28$\,\gls{px} groß (siehe \autoref{img:siemens_beschriftet}). Dies entspricht einer Linienauflösung von 292 Linien pro Millimeter, die Linienbreite beträgt \SI{0,0034}{\milli\metre} beziehungsweise $2,44$\,\gls{px}. Die Linienauflösung ist mit etwa \SI{80}{\percent} der Sensorauflösung sehr hoch. Die Linienbreite in Pixeln entsprach der zum Vergleich genutzten Spiegelreflexkamera. Sie kann im Maximalfall (beste Auflösung) $2$\,\gls{px} betragen, entsprechend je eines weißen und schwarzen Pixels pro Linie.
 
 
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[height=0.9\linewidth]{./img/4_voruntersuchung/siemens.jpg}
@@ -68,7 +68,7 @@ Die \Gls{Kamerakonstante} einer Kamera ändert sich durch die Fokussierung. Bei 
 \paragraph{Vorgehen}
 Die Änderungen der Parameter wurden in einem Versuch beobachtet. Hierzu wurde der Raspberry Pi Zero mit montierter Kamera fest vor einem ChArUco-Kalibriermuster platziert. Das Kalibriermuster besteht aus einer Kombination von ArUco-Markern und einem Schachbrettmuster (siehe \autoref{img:charuco}). Durch das Schachbrettmuster ermöglicht es auch bei unscharfen Bildern eine gute au\-to\-ma\-tische Erkennung der zu beobachtenden Punkte. Es wurden je 11 Bilder mit unterschiedlichen Fokussierungen von \SI{2}{\metre} bis  \SI{10}{\centi\metre} aufgenommen. Dieser Vorgang wurde insgesamt viermal wiederholt, um auch die Wiederholungsgenauigkeit zu ermitteln. Die Bilder wurden anschließend mit einem Python-Script unter Nutzung von OpenCV ausgewertet. Hierbei wurde die relative Veränderung der \Gls{Kamerakonstante} ermittelt und mit dem erwarteten Wert verglichen. Die relativen Änderungen wurden auf eine Fokusdistanz von \SI{20}{\centi\metre}, entsprechend einer Fokussierung von \SI{5}{}\,\gls{dpt}, normiert. Es wurden relative Angaben genutzt, da noch keine genaue Kenntnis über die tatsächliche \Gls{Kamerakonstante} bestand.
 
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=1\textwidth]{./img/4_voruntersuchung/charuco.png}
     \caption{ChArUco-Board mit Fokus auf \SI{5}{}\,\gls{dpt}}
@@ -78,7 +78,7 @@ Die Änderungen der Parameter wurden in einem Versuch beobachtet. Hierzu wurde d
 \paragraph{Ergebnis}
 Die Ergebnisse sind in einem Box-Whisker-Plot in \autoref{img:fokus_faktor} dargestellt. Es zeigt sich, dass die Änderungen der \Gls{Kamerakonstante} durch die Fokussierung linear zu der Dioptrienzahl (Kehrwert der Gegenstandsweite) sind. Ein lineares Verhältnis ergibt sich auch mit der im Datenblatt angegebenen \Gls{Brennweite} von \SI{4,74}{\milli\metre}, jedoch eine etwas flachere Gerade (blau). Die ausgleichende Gerade (rot) ergab eine \Gls{Brennweite} von \SI{6,97}{\milli\metre} (\Gls{Kamerakonstante} bei Fokussierung auf unendlich bzw. \SI{0}{\gls{dpt}}). Die Abweichung von \SI{2,23}{\milli\metre} entspricht einer Abweichung von \SI{47}{\percent}, was als unrealistisch hoch eingeschätzt wird. Hier scheinen sich weitere Effekte bemerkbar zu machen, die noch nicht berücksichtigt wurden. Es wurde daher auch die \Gls{Verzeichnung} weiter untersucht.
 
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=1\textwidth]{./img/4_voruntersuchung/fokus_faktor_diagramm_box.pdf}
     \caption{Box-Whisker-Plot der relativen Veränderung der \Gls{Kamerakonstante} normalisiert auf eine Fokusdistanz von \SI{20}{\centi\metre} (\SI{5}{\glsentryshort{dpt}})}
@@ -115,7 +115,7 @@ Es wird vermutet, dass die geringe Schärfentiefe (siehe \autoref{s:schaerfe}) d
 \paragraph{Vorgehen}
 Mittels eines Pythonskriptes wurden die notwendigen Fokusschritte berechnet, damit der Bereich von \SI{10}{\centi\metre} bis \SI{1}{\metre} scharf abgebildet wird. Hierbei wurden die Werte so bestimmt, dass jeweils die hintere Schärfegrenze $a_h$ einer Aufnahme der vorderen $a_v$ des nächsten Bildes entspricht. Im Gegensatz zu den Berechnungen in \autoref{s:schaerfe} wurde hier ein Unschärfekreis von $6$\,\gls{px} akzeptiert, da ansonsten die Anzahl der notwendigen Aufnahmen zu groß geworden wäre. Die berechneten Werte mit ihren Grenzen sind in \autoref{tab:fokusstack} aufgelistet und in \autoref{img:fokusstack_plot} dargestellt -- die blauen Striche stellen hierbei die Abdeckung einer Aufnahme dar.
 
-\begin{table}
+\begin{table}[htbp]
     \centering
     \caption{Notwendige Fokusschritte für den Bereich von $0,1$ bis \SI{1}{\metre}} %Tabellenüberschrift
     \label{tab:fokusstack}
@@ -132,7 +132,7 @@ Mittels eines Pythonskriptes wurden die notwendigen Fokusschritte berechnet, dam
     \end{tabular}
 \end{table}
 
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=1\textwidth]{./img/4_voruntersuchung/fokusstack_plot.png}
     \caption{Notwendige Fokusschritte, um den Bereich von \SI{10}{\centi\metre} bis \SI{1}{\metre} scharf abzubilden}

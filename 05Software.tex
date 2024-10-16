@@ -21,7 +21,7 @@ Die notwendigen Anforderungen an das System wurden aus \autoref{c:einleitung} un
 
 Entsprechend der benötigten Schritte aus \autoref{c:photogrammetrie} und \autoref{img:ablauf} wurden die Anwendungsfälle, die die Benutzeroberfläche ermöglichen soll, im Anwendungsfall-Dia\-gramm in \autoref{img:anwendungsfall} zusammengetragen. Entsprechend der Anforderung einer einfach gehaltenen Bedienung des Systems, ist die Anzahl der verschiedenen Anwendungsfälle gering. Hauptanwendungsfall ist die Erzeugung eines 3D-Modelles, welches in mehrere Unterfälle unterteilt ist, je nach verwendeter \Gls{SfM}-Software. Es soll aber auch möglich sein, Teilschritte dieser Anwendungsfälle wie das Aufnehmen der Bilder, das Identifizieren der Passpunkte oder das Verbinden der Kameras manuell auszulösen.
 
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=1\textwidth]{./img/uml/uml_usecases.pdf}
     \caption{Anwendungsfall-Diagramm}
@@ -62,7 +62,7 @@ Aus den für die Berechnungen des 3D-Modelles benötigten Daten wurde das Domän
 
 Zur Berechnung eines 3D-Modells werden die inneren und äußeren Orientierungen der Kameras benötigt (vgl. \autoref{c:photogrammetrie}). Da die \gls{innereOrientierung} der Kameras instabil ist, reichen hier Näherungswerte. Entsprechend wurde diese nicht wie üblich pro Kamera, sondern nur pro Modell festgehalten. Die Klasse \textit{CameraModel} hat daher neben dem Namen Attribute für die Parameter der inneren Orientierung in Form einer Geradengleichung abhängig von der Fokussierung. Jede Kamera hat dann (pro Messung) eine Position  \textit{Point3D} und drei Drehwinkel, hierdurch wird die \gls{aeussereOrientierung} im Modell abgebildet. Um die Passpunktpositionen festzuhalten, wird das Objekt \textit{PasspointPosition} verwendet. Dieses speichert die Position des Passpunktes in den Bildern der Kameras als \textit{Point2D} und die Position im Raum als \textit{Passpoint}. Außerdem verweist die Klasse auf das entsprechende Bild \textit{Image}, welches wiederum auf die Kamera \textit{Camera} verweist. Die Klasse \textit{Image} hält des Weiteren die Attribute für den Dateinamen und die genutzte Fokussierung.
 
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=1\textwidth]{./img/uml/uml_domain.pdf}
     \caption{Domänen-Klassendiagramm}
@@ -73,12 +73,13 @@ Zur Berechnung eines 3D-Modells werden die inneren und äußeren Orientierungen 
 Die Kommunikation innerhalb des Systems ist in dem Ablaufdiagramm in \autoref{img:uml_sequence_capture} dargestellt. Eine Auslösung der Kamera erfolgt über den Software-Button in der Desktop-Software, dem Webinterface oder über einen Taster. Optional werden die Belichtungen der Kameras synchronisiert und anschließend die Aufnahmen erzeugt. Die Raspberry Pi Zero W senden die Aufnahmen und die gefundenen ArUco-Marker an den Raspberry Pi 4. Dieser berechnet die Kamerapositionen und speichert die Daten. Die Desktop-Software kann die Daten dann herunterladen und an die \Gls{SfM}-Software übergeben, welche ein 3D-Modell erzeugt. Auf die Details der einzelnen Module wird in \autoref{sec:Implementierung} eingegangen.
 
 
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=1\textwidth]{./img/uml/uml_sequence_capture.pdf}
     \caption{Ablaufdiagramm zur Kommunikation bei der Aufnahme eines 3D-Modelles}
     \label{img:uml_sequence_capture}
 \end{figure}
+\todo{Schriftgröße}
 
 
 \section{Implementierung}
@@ -97,7 +98,7 @@ Es wurde, wenn möglich, auf fertige Python-Bibliotheken zurückgegriffen. Hierd
 ist eine Bibliothek für Bildbearbeitung und maschinelles Sehen. Sie ist weit verbreitet und bietet viele photogrammetrische Funktionen. Hiermit wurde beispielsweise die Detektion von Markern durchgeführt und die Näherungswerte der Kameras berechnet.
 
 \paragraph{SciPy}
-stellt Methoden für wissenschaftliche Berechnungen bereit, beispielsweise für verschiedene Formen von Ausgleichungsrechnungen. Sie wurde für die Berechnung der Bündelblockausgleichung verwendet. Der manuelle Ansatz mit Formeln aus \citet[S. 349ff]{luhmann} unter Nutzung von nur von NumPy war sehr ressourcenlastig. Mit Unterstützung von SciPy und der Projektionsgleichung konnte die Berechnungsdauer stark dezimiert werden.
+stellt Methoden für wissenschaftliche Berechnungen bereit, beispielsweise für verschiedene Formen von Ausgleichungsrechnungen. Sie wurde für die Berechnung der Bündelblockausgleichung verwendet. Der manuelle Ansatz mit Formeln aus \citet[S. 349ff]{luhmann} unter Nutzung von NumPy alleine war sehr ressourcenlastig. Mit Unterstützung von SciPy und unter Verwendung der Projektionsgleichung konnte die Berechnungsdauer stark dezimiert werden.
 
 \paragraph{NumPy}
 bietet Datenstrukturen für Matrizen und Vektoren sowie effiziente Berechnungen mit diesen. Sie wurde beispielsweise für die Berechnung der Kamerapositionen und die Bündelblockausgleichung genutzt. Außerdem ist NumPy Grundlage für OpenCV und SciPy.
@@ -113,7 +114,7 @@ ermöglicht die Steuerung der RGB-LEDs. Hierzu wird das in \citet{ws2811} beschr
 \subsubsection{Allgemeine Module}
 In \autoref{img:uml_common} werden Klassen dargestellt, die in allen Modulen genutzt werden. Diese sind verantwortlich für allgemeine Funktionen wie das Logging und das Auslesen der Konfiguration. Die Klasse \texttt{Config} liest die Konfiguration aus einer Datei aus und stellt diese zur Verfügung. \texttt{Logger} ermöglicht das Loggen von Informationen und Fehlern in einer Textdatei, in den Systemprotokollen und/oder die Ausgabe auf dem Terminal bei manuellem Start. Die Klassen \texttt{CamSettings} und \texttt{ArucoMarkerPos} sind Datenklassen, die die Einstellungen der Kameras und die Position der ArUco-Marker speichern. Diese Daten werden zwischen der Master-Steuerung und der Kamera-Steuerung ausgetauscht -- hierdurch wird sichergestellt, dass das erwartete Datenmodell auf beiden Seiten gleich ist. \texttt{CamSettings} werden dabei vom Raspberry Pi 4 an die Raspberry Pi Zero W gesendet, um die Kameras zu konfigurieren. \texttt{ArucoMarkerPos} werden von den Raspberry Pi Zero W an den Raspberry Pi 4 gesendet, um die Position der identifizierten ArUco-Marker zu übertragen.
 
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=1\textwidth]{./img/uml/uml_common_classdiagramm.pdf}
     \caption{Klassen des Common-Package}
@@ -127,19 +128,20 @@ Auf einem Raspberry Pi 4 läuft die Gesamt\-steuerung des Systems. Dieses stellt
 
 Das Skript \texttt{Master} wird au\-to\-ma\-tisch bei Systemstart über \texttt{systemd} als Daemon -- als im Hintergrund und dauerhaft laufender Service \citep[vgl.][S. 369]{negus2020linux} -- gestartet. Hier ist die Webschnittstelle implementiert. Sie ermöglicht die komplette Steuerung, das Konfigurieren sowie das Anzeigen und Herunterladen der Bilder. Das Skript instanziiert außerdem die Klasse \texttt{Control}, welche die hauptsächliche Steuerung übernimmt und den Kern des Systems darstellt.
 
-Die Steuerung per Taster implementiert die Klasse \texttt{ButtonControl}. Sie ermöglicht einfache Aufgaben wie das Suchen von Kameras, das Aufnehmen von Bilder und die Aktivierung des Standbys bzw. das Herunterfahren des Systems auch ohne PC durchzuführen (\autoref{e:button}). Die Klasse \texttt{DesktopControlThread} startet, wie der Name bereits vermuten lässt, als eigenständiger Thread und stellt eine \Gls{Socket}-Verbindung zur Kommunikation mit der Desktop-Software und die Steuerung hierüber bereit. Einen weiteren Thread stellt \texttt{CameraControlThread} zur Verfügung. Dieser überwacht das Netzwerk auf Nachrichten der Kameras und initiiert die entsprechenden Schritte. Die eigentlichen Verarbeitungsschritte werden in der Klasse \texttt{Control} durchgeführt. Auch für diese Aufgaben werden zum Teil eigene Threads gestartet, damit die Verarbeitung parallel erfolgen kann. Beispielsweise wird der Download der Bilder und die Berechnung von Kamerapositionen in eigenen Threads durchgeführt.
+Die Steuerung per Taster implementiert die Klasse \texttt{ButtonControl}. Sie ermöglicht einfache Aufgaben wie das Suchen von Kameras, das Aufnehmen von Bildern und die Aktivierung des Standbys bzw. das Herunterfahren des Systems auch ohne PC durchzuführen (\autoref{e:button}). Die Klasse \texttt{DesktopControlThread} startet, wie der Name bereits vermuten lässt, als eigenständiger Thread und stellt eine \Gls{Socket}-Verbindung zur Kommunikation mit der Desktop-Software und die Steuerung hierüber bereit. Einen weiteren Thread stellt \texttt{CameraControlThread} zur Verfügung. Dieser überwacht das Netzwerk auf Nachrichten der Kameras und initiiert die entsprechenden Schritte. Die eigentlichen Verarbeitungsschritte werden in der Klasse \texttt{Control} durchgeführt. Auch für diese Aufgaben werden zum Teil eigene Threads gestartet, damit die Verarbeitung parallel erfolgen kann. Beispielsweise wird der Download der Bilder und die Berechnung von Kamerapositionen in eigenen Threads durchgeführt.
 
-Die \texttt{Control}-Klasse steuert die Aufnahme, sammelt die Daten der einzelnen Kameras und stellt diese zur Weiterverarbeitung zur Verfügung. Sie sendet eingehende Aufträge als Broadcast-Nachrichten in das Netzwerk an die Raspberry Pi Zero W mit den Kameras, die dann beispielsweise Bilder aufnehmen. Hierdurch wird die nahezu zeitgleiche Auslösung gewährleistet (\autoref{e:zeitgleich}), die bei einer einzelnen Ansteuerung als Schleife nicht möglich wäre. Zur Vereinheitlichung der Belichtung kann eine Funktion aktiviert werden, sodass erst einmal die Belichtung von jeder Kamera berechnet und diese dann von der \texttt{Control}-Klasse gemittelt wird. Dadurch werden dann alle Bilder mit der gleichen Einstellung aufgenommen, sodass keine Helligkeitsunterschiede zwischen den Aufnahmen bestehen (\autoref{e:licht}).
+Die \texttt{Control}-Klasse steuert die Aufnahme, sammelt die Daten der einzelnen Kameras und stellt diese zur Weiterverarbeitung zur Verfügung. Sie sendet eingehende Aufträge als Broadcast-Nachrichten in das Netzwerk an die Raspberry Pi Zero W mit den Kameras, die dann beispielsweise Bilder aufnehmen. Hierdurch wird die nahezu zeitgleiche Auslösung gewährleistet (\autoref{e:zeitgleich}), die bei einer einzelnen Ansteuerung als Schleife nicht möglich wäre. Zur Vereinheitlichung der Belichtung kann eine Funktion aktiviert werden, sodass erst einmal die Belichtung von jeder Kamera berechnet und diese dann von der \texttt{Control}-Klasse gemittelt wird. Dadurch werden alle Bilder mit der gleichen Einstellung aufgenommen, sodass keine Helligkeitsunterschiede zwischen den Aufnahmen bestehen (\autoref{e:licht}).
 Nach der Aufnahme der Bilder und der Erkennung der ArUco-Marker werden die Daten von den Raspberry Pi Zero W an den Raspberry Pi 4 übertragen. Aus den ArUco-Markern wird die \gls{aeussereOrientierung} der Kameras als Näherungswerte bestimmt (\autoref{e:passpunkte}). Die Daten werden anschließend in einem Archiv gespeichert (\autoref{e:intspeicher}).
 
 Die Datenübertragung an die Desktop-Software erfolgt über die \Gls{REST}-Schnittstelle, die wieder vom \texttt{Master}-Skript bereitgestellt wird. Alternativ kann auch ein USB-Stick an dem Raspberry Pi angesteckt werden (\autoref{e:usbspeicher}) oder die Daten über die Weboberfläche manuell heruntergeladen werden. Dazu wird bei der Verarbeitung der Daten geprüft, ob ein USB-Stick angeschlossen ist. Falls dieses der Fall ist, wird dieser gemountet, die Daten kopiert und der Stick wieder ausgehängt, damit dieser (fast) jederzeit getrennt werden kann. Das Datenformat auf dem USB-Stick und in den Archiv-Dateien aus der Weboberfläche entspricht dem, welches die Desktop-Software anlegt. So kann diese die Daten dann auch einladen und weiterverarbeiten.
 
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=1\textwidth]{./img/uml/uml_master_classdiagramm.pdf}
     \caption{Klassen des Master-Package}
     \label{img:master}
 \end{figure}
+\todo{Schriftgröße}
 
 
 \subsubsection{Kamera-Steuerung}
@@ -147,7 +149,7 @@ Die Raspberry Pi Zero W übernehmen die Steuerung der Kameras. Hierfür wurde ei
 
 Das Skript \texttt{Camera} wird au\-to\-ma\-tisch bei Systemstart über \texttt{systemd} als Daemon gestartet. Es erzeugt dann über Flask eine einfache Weboberfläche, über die die Kameras konfiguriert und die Bilder betrachtet werden können. Außerdem stellt das Skript auch die \Gls{REST}-Schnittstelle bereit, über das die Bilder und gefundenen Passpunkte abgerufen werden können. Die Klasse \texttt{CameraControl} wird vom Skript instanziiert und übernimmt die eigentliche Steuerung. Sie nimmt die Konfiguration entgegen und setzt diese um. Sie überwacht das Netzwerk auf Broadcast-Nachrichten der Master-Steuerung und initiiert die entsprechenden Schritte.  Über die gleiche \Gls{Socket}-Verbindung meldet sie auch den Status an die Master-Steuerung, beispielsweise wenn Bilder aufgenommen wurden oder die Erkennung der Passpunkte abgeschlossen ist. Die Klasse \texttt{CameraInterface} wird von \texttt{CameraControl} aufgerufen, bildet ein Adapter für das Kameramodul und kapselt so die Hardwaresteuerung. Sie nimmt die Bilder auf und speichert diese. Gegebenenfalls leitet sie die Bilder an \texttt{CameraAruco}-Klasse weiter, damit diese in einem eigenen Thread die ArUco-Marker identifizieren kann (\autoref{e:passpunkte}).
 
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=1\textwidth]{./img/uml/uml_camera_classdiagramm.pdf}
     \caption{Klassen des Camera-Package}
@@ -156,29 +158,31 @@ Das Skript \texttt{Camera} wird au\-to\-ma\-tisch bei Systemstart über \texttt{
 
 
 \subsection{Desktop-Schnittstelle (Java)}
-Die Desktop-Schnittstelle dient zur Steuerung des Systems und zur au\-to\-ma\-tischen Über\-tragung der Daten an die \Gls{SfM}-Software (\autoref{e:sfmsoftware}). Sie wurde in Java geschrieben, um eine einfache Nutzung auf verschiedenen Betriebssystemen zu ermöglichen. Die \Gls{API} für Java der \Gls{SfM}-Software Agisoft Metashape kann im Gegensatz zur Python-\Gls{API} ohne Installation verwendet werden. Die Software kommuniziert mit dem Raspberry Pi 4 hauptsächlich über eine \Gls{Socket}-Verbindung, wobei jedoch die Datenübertragung der Bilder vom Raspberry Pi 4 zur Desktop-Software über die \Gls{REST}-Schnittstelle erfolgt. Neben der Übertragung der Bilder an die \Gls{SfM}-Software ermöglicht die Software das Starten von Aufnahmen. Ein Screenshot der Benutzeroberfläche ist in \autoref{img:screenshot_connector} dargestellt. Die Schnittstellen-Software unterstützt als \Gls{SfM}-Software aktuell Agisoft Metashape und OpenDroneMap, jedoch ist die Schnittstelle so gestaltet, dass auch andere Software ergänzt werden könnte.
+Die Desktop-Schnittstelle dient zur Steuerung des Systems und zur au\-to\-ma\-tischen Über\-tragung der Daten an die \Gls{SfM}-Software (\autoref{e:sfmsoftware}). Sie wurde in Java geschrieben, um eine einfache Nutzung auf verschiedenen Betriebssystemen zu ermöglichen. Das \Gls{API} für Java der \Gls{SfM}-Software Agisoft Metashape kann im Gegensatz zum Python-\Gls{API} ohne Installation verwendet werden. Die Software kommuniziert mit dem Raspberry Pi 4 hauptsächlich über eine \Gls{Socket}-Verbindung, wobei jedoch die Datenübertragung der Bilder vom Raspberry Pi 4 zur Desktop-Software über die \Gls{REST}-Schnittstelle erfolgt. Neben der Übertragung der Bilder an die \Gls{SfM}-Software ermöglicht die Software das Starten von Aufnahmen. Ein Screenshot der Benutzeroberfläche ist in \autoref{img:screenshot_connector} dargestellt. Die Schnittstellen-Software unterstützt als \Gls{SfM}-Software aktuell Agisoft Metashape und OpenDroneMap, jedoch ist die Schnittstelle so gestaltet, dass auch andere Software ergänzt werden könnte.
 
-Die Klassen sind in \autoref{img:uml_connector} dargestellt. \texttt{Connector} stellt hierbei den Einstiegspunkt dar. Die Klasse instanziiert die Benutzeroberfläche \texttt{ConnectorGui} und übernimmt die Steuerung der Software. Die Klasse \texttt{PhotoBoxClient} wird beim Klick auf Verbinden von \texttt{Connector} gestartet und übernimmt die Kommunikation mit dem Raspberry Pi 4. Sie sendet die Steuerbefehle und empfängt die Daten. Außerdem wird eine Klasse, die das Interface \texttt{SfmClient} implementiert aufgerufen. Diese Klasse stellt die Schnittstelle zur \Gls{SfM}-Software dar. Hierbei wird je nach Auswahl der Software \texttt{MetashapeClient}, \texttt{OpenDroneMapClient} oder \texttt{DownloadClient} instanziiert. Diese Klasse übernimmt die Kommunikation mit der entsprechenden \Gls{SfM}-Software und übergibt die Daten. \texttt{DownloadClient} stellt einen Sonderfall dar, hier werden die Daten nur gespeichert, um sie später weiterverarbeiten zu können.
-
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=1\textwidth]{./img/5_software/connector_screenshot.png}
     \caption{Screenshot der Connector-Software beispielhaft unter Ubuntu 24.04}
     \label{img:screenshot_connector}
 \end{figure}
 
-\begin{figure}
+Die Klassen sind in \autoref{img:uml_connector} dargestellt. \texttt{Connector} stellt hierbei den Einstiegspunkt dar. Die Klasse instanziiert die Benutzeroberfläche \texttt{ConnectorGui} und übernimmt die Steuerung der Software. Die Klasse \texttt{PhotoBoxClient} wird beim Klick auf Verbinden von \texttt{Connector} gestartet und übernimmt die Kommunikation mit dem Raspberry Pi 4. Sie sendet die Steuerbefehle und empfängt die Daten. Außerdem wird eine Klasse, die das Interface \texttt{SfmClient} implementiert, aufgerufen. Diese Klasse stellt die Schnittstelle zur \Gls{SfM}-Software dar. Hierbei wird je nach Auswahl der Software \texttt{MetashapeClient}, \texttt{OpenDroneMapClient} oder \texttt{DownloadClient} instanziiert. Diese Klasse übernimmt die Kommunikation mit der entsprechenden \Gls{SfM}-Software und übergibt die Daten. \texttt{DownloadClient} stellt einen Sonderfall dar, hier werden die Daten nur gespeichert, um sie später weiterverarbeiten zu können.
+
+
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=1\textwidth]{./img/uml/uml_connector_classdiagramm.pdf}
     \caption{Connector-Package}
     \label{img:uml_connector}
 \end{figure}
+\todo{Schriftgröße}
 
 \subsection{Konfiguration}
 Neben der eigentlichen Programmierung erfolgten noch verschiedene Konfigurationen, um das System zu betreiben. Diese sollen hier kurz vorgestellt werden.
 
 \paragraph{WLAN-Router}
-Der WLAN-Router wurde so konfiguriert, dass er ein WPA2-ver\-schlüssel\-tes WLAN-Netzwerk aussendet. Außerdem wurde er als DHCP-Server eingerichtet, der den angeschlossenen Geräten au\-to\-ma\-tisch eine IP-Adresse zuweist. Die IP-Adressen der Raspberry Pi wurden fest vergeben, um die Kommunikation zu erleichtern. Der Router wurde so konfiguriert, dass er optional die Kommunikation zwischen den Raspberry Pi einem per Kabel angeschlossenen Desktop-PC zulässt, aber auch eine per Netzwerk-Kabel angeschlossene Internetverbindung durchleitet.
+Der WLAN-Router wurde so konfiguriert, dass er ein WPA2-ver\-schlüssel\-tes WLAN-Netzwerk aussendet. Außerdem wurde er als DHCP-Server eingerichtet, der den angeschlossenen Geräten au\-to\-ma\-tisch eine IP-Adresse zuweist. Die IP-Adressen der Raspberry Pi wurden fest vergeben, um die Kommunikation zu erleichtern. Der Router wurde so konfiguriert, dass er optional die Kommunikation zwischen den Raspberry Pi und einem per Leitung angeschlossenen Desktop-PC zulässt, aber auch eine per Netzwerkleitung angeschlossene Internetverbindung durchleitet.
 
 \paragraph{Raspberry Pi 4}
 Der Raspberry Pi 4 wurde so konfiguriert, dass er au\-to\-ma\-tisch das Skript \texttt{Master} startet. Hierzu wurde ein \texttt{systemd}-Service erstellt, der das Skript beim Systemstart ausführt. Vorher wird bei Vorliegen einer Internetverbindung geprüft, ob das Git-Repository eine neue Version der Software zur Verfügung stellt. Falls dieses der Fall ist, wird dieses heruntergeladen und installiert.
