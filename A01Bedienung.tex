@@ -57,8 +57,8 @@ Beim Aufstellen ist darauf zu achten, dass sich keine stärkeren seitlichen Lich
 
 Die Berechnung des 3D-Modelles erfolgt auf einem externen Rechner. Dafür kann wahlweise Agisoft Metashape oder OpenDroneMap (NodeODM) genutzt werden. Die entsprechende Software sowie eine Java-Laufzeitumgebung müssen auf dem Rechner installiert sein und die Bilder müssen auf diesen übertragen werden. Die Übertragung kann au\-to\-ma\-tisch über eine Netzwerkverbindung oder manuell per USB-Stick erfolgen. Für die au\-to\-ma\-tische Übertragung muss die mitgelieferte Verbindungssoftware auf dem Rechner gestartet sein (siehe \autoref{sec:SoftwareEinrichtung}).
 
-Das System startet bei Anschluss an eine Stromversorgung selbstständig. Da die Gefahr besteht, dass die kamerasteuernden Raspberry Pi Zero Daten verlieren, wenn die Stromversorgung unterbrochen wird, sollte das System immer ordnungsgemäß heruntergefahren werden und auf eine zuverlässige Stromversorgung geachtet werden.
-Das Abschalten erfolgt durch langes Drücken auf den roten Taster. Das System fährt dann selbstständig herunter - erkennbar an dem Erlöschen der LEDs der Raspberry Pi Zero und der Beleuchtung - und die Stromversorgung kann getrennt werden.
+Das System startet bei Anschluss an eine elektrische Energieversorgung selbstständig. Da die Gefahr besteht, dass die kamerasteuernden Raspberry Pi Zero Daten verlieren, wenn die Energieversorgung unterbrochen wird, sollte das System immer ordnungsgemäß heruntergefahren werden und auf eine zuverlässige Versorgung geachtet werden.
+Das Abschalten erfolgt durch langes Drücken auf den roten Taster. Das System fährt dann selbstständig herunter - erkennbar an dem Erlöschen der LEDs der Raspberry Pi Zero und der Beleuchtung - und die Energieversorgung kann getrennt werden.
 
 \section{Software-Einrichtung}
 \label{sec:SoftwareEinrichtung}
@@ -84,7 +84,7 @@ Die letzten Koordinaten der Passpunkte werden im System gespeichert - daher soll
     \caption{Bedienelemente des Systems}
 \end{figure}
 
-Das System wird gestartet, indem die Stromversorgung hergestellt wird. Die Kameras starten selbstständig und die Beleuchtung wird eingeschaltet. Nach kurzer Zeit sollten kurz alle LEDs grün leuchten. Falls nicht, sind einige Kameras nicht erreichbar. Problemlösungen werden im \autoref{sec:Fehlerbehebung} behandelt. Die Kameras können ggf. durch Nutzung einen Innensechskantschlüssels neu ausgerichtet werden (siehe \autoref{img:innensechs}). Eine Bestimmung der neuen Positionen erfolgt selbstständig aus den Passpunkten. Das Objekt wird mittig, ggf. auf einer Erhöhung im Rahmen positioniert. Ab hier trennen sich die Wege je nach verwendetem System. Die Bildaufnahme erfolgt in allen Fällen durch kurzen Druck auf den grünen Taster.
+Das System wird gestartet, indem die Energieversorgung hergestellt wird. Die Kameras starten selbstständig und die Beleuchtung wird eingeschaltet. Nach kurzer Zeit sollten kurz alle LEDs grün leuchten. Falls nicht, sind einige Kameras nicht erreichbar. Problemlösungen werden im \autoref{sec:Fehlerbehebung} behandelt. Die Kameras können ggf. durch Nutzung einen Innensechskantschlüssels neu ausgerichtet werden (siehe \autoref{img:innensechs}). Eine Bestimmung der neuen Positionen erfolgt selbstständig aus den Passpunkten. Das Objekt wird mittig, ggf. auf einer Erhöhung im Rahmen positioniert. Ab hier trennen sich die Wege je nach verwendetem System. Die Bildaufnahme erfolgt in allen Fällen durch kurzen Druck auf den grünen Taster.
 
 \begin{figure}[htbp]
     \centering
@@ -144,7 +144,7 @@ Software-Updates können zu Inkompatibilitäten führen, daher sollten diese ers
 \section{Fehlerbehebung}
 \label{sec:Fehlerbehebung}
 \subsection{Kameras sind nicht erreichbar}
-Die Kameras sind nicht erreichbar, wenn die LEDs nicht grün leuchten. Dies kann verschiedene Ursachen haben. Als Erstes sollte das System nochmal heruntergefahren werden durch einen langen Druck auf die rote Taste. Anschließend wird die Stromversorgung für einige Sekunden vollständig getrennt und wieder hergestellt. Das System sollte nun neu starten und die Kameras erreichbar sein.
+Die Kameras sind nicht erreichbar, wenn die LEDs nicht grün leuchten. Dies kann verschiedene Ursachen haben. Als Erstes sollte das System nochmal heruntergefahren werden durch einen langen Druck auf die rote Taste. Anschließend wird die Energieversorgung für einige Sekunden vollständig getrennt und wieder hergestellt. Das System sollte nun neu starten und die Kameras erreichbar sein.
 
 Falls das noch nicht der Fall ist, hilft ein Blick in das Menü des WLAN-Routers. Hier sollten in der Übersicht aller Netzwerkgeräte die 24 Kameras, der steuernde Raspberry Pi 4 und das Gerät, über das der Zugriff erfolgt, aufgezählt sein. Falls das nicht der Fall ist, muss der fehlerhafte Raspberry Pi Zero an einem Display und einer Tastatur angeschlossen werden, um den Fehler zu finden.
 

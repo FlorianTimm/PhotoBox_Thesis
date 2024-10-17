@@ -8,7 +8,7 @@
 Entsprechend der im \autoref{c:photogrammetrie} beschriebenen Anforderungen an ein photogrammetrisches Messsystem wurden die Komponenten ausgewählt.
 
 Die Kameras sollten eine hohe geometrische Auflösung und möglichst stabile \gls{innereOrientierung} aufweisen. Außerdem sollen sie während einer Messkampagne nicht in ihrer Lage zueinander verändert werden, damit die \gls{aeussereOrientierung} größtenteils gleich bleibt. Daher ist ein stabiler Rahmen notwendig, an welchem die Kameras verdrehsicher angebracht werden können. Kleinere Restfehler in den Orientierungen können mit der Bündelblockausgleichung ausgeglichen werden.
-Um Ungenauigkeiten durch Bewegungen zu verhindern, müssen die Kameras möglichst zeitgleich auslösen. Daher ist eine gemeinsame Steuerung und Kommunikation zwischen den Kameras notwendig. Außerdem sollen alle Bilder auf das Steuerungssystem übertragen werden, hierfür wird eine Form der Datenübertragung benötigt. Damit die Bilder möglichst schattenfrei ausgeleuchtet werden, muss eine Beleuchtung mit eingeplant werden. Außerdem muss die Stromversorgung der einzelnen Kameras sichergestellt sein.
+Um Ungenauigkeiten durch Bewegungen zu verhindern, müssen die Kameras möglichst zeitgleich auslösen. Daher ist eine gemeinsame Steuerung und Kommunikation zwischen den Kameras notwendig. Außerdem sollen alle Bilder auf das Steuerungssystem übertragen werden, hierfür wird eine Form der Datenübertragung benötigt. Damit die Bilder möglichst schattenfrei ausgeleuchtet werden, muss eine Beleuchtung mit eingeplant werden. Außerdem muss die Energieversorgung der einzelnen Kameras sichergestellt sein.
 
 In diesem Kapitel wird der Aufbau des Messsystems beschrieben und die Auswahl der Komponenten begründet.
 
@@ -141,25 +141,25 @@ Für diffuseres Licht von außen kann ein halbtransparenter, weißer Stoff über
 \end{figure}
 
 \section{Kommunikation und Datenübertragung}
-Die Kommunikation zwischen den Raspberry-Pi-Computern erfolgt über WLAN. Hierfür ist ein Mini-WLAN-Router mit im System verbaut worden. Vorteil dieser Lösung ist, dass hier keine weiteren Leitungen außer der Stromversorgung zu den einzelnen Raspberry Pi Zero W benötigt werden und es auch möglich wäre, die gleiche Hard- und Software für ein größeres System ohne Änderungen zu nutzen. Nachteilig ist die Verbindungsgeschwindigkeit, gerade im Hinblick auf die Synchronisierung der Kameras. Diese Problematik soll aber durch entsprechende Programmierung der Software möglichst klein gehalten werden.
+Die Kommunikation zwischen den Raspberry-Pi-Computern erfolgt über WLAN. Hierfür ist ein Mini-WLAN-Router mit im System verbaut worden. Vorteil dieser Lösung ist, dass hier keine weiteren Leitungen außer der Energieversorgung zu den einzelnen Raspberry Pi Zero W benötigt werden und es auch möglich wäre, die gleiche Hard- und Software für ein größeres System ohne Änderungen zu nutzen. Nachteilig ist die Verbindungsgeschwindigkeit, gerade im Hinblick auf die Synchronisierung der Kameras. Diese Problematik soll aber durch entsprechende Programmierung der Software möglichst klein gehalten werden.
 
-Als weitere Datenleitung wird eine Steuerleitung für die LED-Streifen benötigt. Über diese werden die einzelnen LED-Gruppen angesteuert. Hier wird die gleiche Zwillingslitze wie für die Stromversorgung (siehe \autoref{sec:strom}) verwendet. Die Leitung ist in \autoref{img:schema_energie} in \autoref{sec:strom} grün dargestellt.
+Als weitere Datenleitung wird eine Steuerleitung für die LED-Streifen benötigt. Über diese werden die einzelnen LED-Gruppen angesteuert. Hier wird die gleiche Zwillingslitze wie für die Energieverteilung (siehe \autoref{sec:strom}) verwendet. Die Leitung ist in \autoref{img:schema_energie} in \autoref{sec:strom} grün dargestellt.
 
-\section{Stromversorgung}
+\section{Energieverteilung}
 \label{sec:strom}
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.7\textwidth]{./img/3_aufbau/stromverteilung.jpg}
-    \caption{Elektroverteilung zu den einzelnen Raspberry Pi Zero}
+    \caption{Energieverteilung zu den einzelnen Raspberry Pi Zero}
     \label{img:stromverteilung}
 \end{figure}
 
-Alle Raspberry-Pi-Computern werden mit \SI{5}{\volt} betrieben. Der Raspberry Pi Zero W mit Kamera hatte dabei in Messungen einen maximalen Stromverbrauch von \SI{270}{\milli\ampere} aufgezeigt, der Raspberry Pi 4 kann bis zu \SI{1,5}{\ampere} unter Last verbrauchen. Hieraus ergibt sich ein Gesamtstromverbrauch von maximal rund \SI{8}{\ampere}. Für den Raspberry Pi 4 wurde ein eigenes 15-Watt-Netzteil eingeplant und für die 24 Raspberry Pi Zero W ein gemeinsames 35-Watt-Netzteil. Versuche zeigten jedoch, dass der Stromverbrauch kurzfristig höher ausfallen kann, sodass die Raspberry Pi Zero W, die am meisten von Spannungsabfällen betroffen sind, zum Absturz gebracht wurden, wenn alle Kameras gleichzeitig auslösten. Nachdem die Last sicherheitshalber auf zwei weitere Netzteile verteilt wurde, lief das System zuverlässig.
+Alle Raspberry-Pi-Computern werden mit \SI{5}{\volt} betrieben. Der Raspberry Pi Zero W mit Kamera hatte dabei in Messungen einen maximalen Stromverbrauch von \SI{270}{\milli\ampere} aufgezeigt, der Raspberry Pi 4 kann bis zu \SI{1,5}{\ampere} unter Last verbrauchen. Hieraus ergibt sich ein Gesamtstromverbrauch von maximal rund \SI{8}{\ampere}. Für den Raspberry Pi 4 wurde ein eigenes 15-Watt-Netzteil eingeplant und für die 24 Raspberry Pi Zero W ein gemeinsames 35-Watt-Netzteil. Versuche zeigten jedoch, dass der Leistungsbedarf kurzfristig höher ausfallen kann, sodass die Raspberry Pi Zero W, die am meisten von Spannungsabfällen betroffen sind, zum Absturz gebracht wurden, wenn alle Kameras gleichzeitig auslösten. Nachdem die Last sicherheitshalber auf zwei weitere Netzteile verteilt wurde, lief das System zuverlässig.
 
 Als Leitungsmaterial wurde Zwillingslitze mit \SI{0,75}{\square\milli\metre} verwendet. Der relativ hohe Leitungsquerschnitt soll für einen geringen Spannungsabfall sorgen. Durch die Verwendung von mehreren Netzteilen ist dieser jedoch nun nicht mehr notwendig. Hier würde sich nun ein geringerer Querschnitt anbieten, auch um eine einfachere Verbindung zu den Raspberry Pi Zero W zu ermöglichen. Diese wurden aufseiten der Zero W verlötet und in den Verteilerdosen mit Federkraftklemmen verbunden (siehe \autoref{img:stromverteilung}).
 
-Die Stromversorgung der Beleuchtung erfolgt über ein 12-Volt-Netzteil mit \SI{3,5}{\ampere} Ausgangsleistung. Auch hier wurde Zwillingslitze zur Verteilung zwischen den einzelnen Holmen genutzt.
+Die Energieversorgung der Beleuchtung erfolgt über ein 12-Volt-Netzteil mit \SI{3,5}{\ampere} Ausgangsleistung. Auch hier wurde Zwillingslitze zur Verteilung zwischen den einzelnen Holmen genutzt.
 
 Der WLAN-Router wird auch mittels 5-Volt-Gleichspannung betrieben. Hier war ein entsprechendes USB-Netzteil mitgeliefert.
 
@@ -168,7 +168,7 @@ Alle Netzteile werden von einer zentralen Steckdosenleiste mit 230-Volt-Netzspan
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=1.0\textwidth]{./img/uml/uml_energie.pdf}
-    \caption{Schematische Darstellung der Energieversorgung (blau: \SI{5}{\volt}; rot: \SI{12}{\volt}; schwarz: \SI{230}{\volt}; grün: Daten)}
+    \caption{Schematische Darstellung der Energieverteilung (blau: \SI{5}{\volt}; rot: \SI{12}{\volt}; schwarz: \SI{230}{\volt}; grün: Daten)}
     \label{img:schema_energie}
 \end{figure}
 
