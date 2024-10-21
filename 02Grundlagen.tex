@@ -147,7 +147,7 @@ Da die Objekte und die Kameras sich während der Aufnahme nicht bewegen, kann di
 \label{s:schaerfe}
 Um genaue Punktwolken erzeugen zu können, muss das Objekt scharf abgebildet werden. Die Kameras müssen dafür entsprechend fokussiert sein. Jedoch wird durch die Fokussierung auch die \gls{innereOrientierung} verändert. Normalerweise wird daher auf eine Umfokussierung verzichtet und mittels der Blende (kleine Blendenöffnung) die Schärfentiefe erhöht, sodass ein großer Bereich scharf abgebildet wird. Dieses ist aber bei vielen einfachen Kameras wie dem verwendeten Raspberry Pi Camera Module 3 nicht möglich.
 
-Der Schärfebereich ergibt sich aus der Größe des tolerierbaren Unschärfekreis auf dem Sensor. Bei digitalen Kameras wird dieser durch die Pixelgröße bestimmt. Nach \citet[S. 148f]{luhmann} berechnet sich die Schärfentiefe nach folgender Formel:
+Der Schärfebereich ergibt sich aus der Größe des tolerierbaren Unschärfekreises auf dem Sensor. Bei digitalen Kameras wird dieser durch die Pixelgröße bestimmt. Nach \citet[S. 148f]{luhmann} berechnet sich die Schärfentiefe nach folgender Formel:
 
 \begin{align*}
     \nlabel{eq:schaerfebereich}
@@ -253,7 +253,7 @@ Durch die Nutzung des RANSAC-Ansatzes können veränderte Passpunkte identifizie
 \subsection{Vorwärtsschnitt}
 Um wiederum aus einem Stereopaar mit bekannter innerer und äußerer Orientierung Punktkoordinaten zu berechnen, wird der Vorwärtsschnitt genutzt. \autoref{img:vorwaertsschnitt} zeigt die geometrischen Grundlagen des Vorwärtsschnitts. Es werden die Bildkoordinaten der Punkte $P_1$ und $P_2$ benötigt, die im Bild sichtbar sind. Die Position des Punktes $P$ wird dann berechnet. Wie bereits in \autoref{s:abbildung} erwähnt, kann jeder Punkt im Bild durch die \gls{innereOrientierung} als Horizontal- und Vertikalrichtungsmessung interpretiert werden. Durch die \gls{aeussereOrientierung} kann diese dann ins übergeordnete System überführt werden. Hieraus ergibt sich dann zur Berechnung der Position $P$ ein räumlicher Schnitt zweier (windschiefer) Geraden \citep[vgl.][S. 95]{luhmann}.
 
-Mit dem Vorwärts\-schnitt können neben markierten Verknüpfungspunkten auch die Neupunkte, die mittels SIFT oder ähnlichen Bild\-erkennungs\-algorithmen erkannt wurden, berechnet werden. Dadurch kann eine dünne Punktwolke erzeugt werden, welche dann bei der Bündelblockausgleichung (siehe \autoref{s:buendelblock}) genutzt werden kann. Da die Berechnung bereits bei Bildkoordinaten aus zwei Bildern überbestimmt ist und oft Punkte in mehr Bildern abgebildet sind, bietet sich die Nutzung einer Ausgleichung auch schon bei der Bestimmung an. \citep[vgl.][S. 385]{luhmann}
+Mit dem Vorwärts\-schnitt können neben markierten Verknüpfungspunkten auch die Neupunkte, die mittels SIFT oder ähnlicher Bild\-erkennungs\-algorithmen erkannt wurden, berechnet werden. Dadurch kann eine dünne Punktwolke erzeugt werden, welche dann bei der Bündelblockausgleichung (siehe \autoref{s:buendelblock}) genutzt werden kann. Da die Berechnung bereits bei Bildkoordinaten aus zwei Bildern überbestimmt ist und oft Punkte in mehr Bildern abgebildet sind, bietet sich die Nutzung einer Ausgleichung auch schon bei der Bestimmung an. \citep[vgl.][S. 385]{luhmann}
 
 \subsection{Relative Orientierung}
 \label{ss:relative_orientierung}
