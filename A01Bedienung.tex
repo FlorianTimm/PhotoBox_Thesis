@@ -55,7 +55,7 @@ Ziel des Systems ist es, 3D-Modelle von Objekten bis zu einer Größe von \SI{40
 \section{Inbetriebnahme}
 Beim Aufstellen ist darauf zu achten, dass sich keine stärkeren seitlichen Lichtquellen um das System herum befinden, wie beispielsweise Fensterflächen. Diese könnten die Belichtung der Bilder beeinflussen und so die Qualität der 3D-Modelle negativ beeinflussen. Gegebenenfalls muss durch die Stoffhülle oder andere Maßnahmen für Verschattung oder Streuung des Lichtes gesorgt werden.
 
-Die Berechnung des 3D-Modelles erfolgt auf einem externen Rechner. Dafür kann wahlweise Agisoft Metashape oder OpenDroneMap (NodeODM) genutzt werden. Die entsprechende Software sowie eine Java-Laufzeitumgebung müssen auf dem Rechner installiert sein und die Bilder müssen auf diesen übertragen werden. Die Übertragung kann au\-to\-ma\-tisch über eine Netzwerkverbindung oder manuell per USB-Stick erfolgen. Für die au\-to\-ma\-tische Übertragung muss die mitgelieferte Verbindungssoftware auf dem Rechner gestartet sein (siehe \autoref{sec:SoftwareEinrichtung}).
+Die Berechnung des 3D-Modells erfolgt auf einem externen Rechner. Dafür kann wahlweise Agisoft Metashape oder OpenDroneMap (NodeODM) genutzt werden. Die entsprechende Software sowie eine Java-Laufzeitumgebung müssen auf dem Rechner installiert sein und die Bilder müssen auf diesen übertragen werden. Die Übertragung kann au\-to\-ma\-tisch über eine Netzwerkverbindung oder manuell per USB-Stick erfolgen. Für die au\-to\-ma\-tische Übertragung muss die mitgelieferte Verbindungssoftware auf dem Rechner gestartet sein (siehe \autoref{sec:SoftwareEinrichtung}).
 
 Das System startet bei Anschluss an eine elektrische Energieversorgung selbstständig. Da die Gefahr besteht, dass die kamerasteuernden Raspberry Pi Zero Daten verlieren, wenn die Energieversorgung unterbrochen wird, sollte das System immer ordnungsgemäß heruntergefahren werden und auf eine zuverlässige Versorgung geachtet werden.
 Das Abschalten erfolgt durch langes Drücken auf den roten Taster. Das System fährt dann selbstständig herunter - erkennbar an dem Erlöschen der LEDs der Raspberry Pi Zero und der Beleuchtung - und die Energieversorgung kann getrennt werden.
@@ -94,7 +94,7 @@ Das System wird gestartet, indem die Energieversorgung hergestellt wird. Die Kam
 \end{figure}
 
 \subsection{... mit Netzwerkverbindung}
-Der zu verwendende Rechner wird mit dem System per WLAN (bevorzugt) oder Netzwerkleitung verbunden. Die Verbindungssoftware wird gestartet und die IP-Adresse des Systems angegeben. Standardmäßig lautet diese im WLAN 10.0.1.1, per Netzwerkleitung muss die IP von einem DHCP-Server festgelegt werden, beispielsweise in dem der angeschlossene Rechner als DHCP-Server konfiguriert wird. Unter Gnome ist dieses beispielsweise möglich, indem in den Netzwerkeinstellungen die Internetverbindung des PC freigegeben wird.
+Der zu verwendende Rechner wird mit dem System per WLAN (bevorzugt) oder Netzwerkleitung verbunden. Die Verbindungssoftware wird gestartet und die IP-Adresse des Systems angegeben. Standardmäßig lautet diese im WLAN 10.0.1.1, per Netzwerkleitung muss die IP von einem DHCP-Server festgelegt werden, beispielsweise in dem der angeschlossene Rechner als DHCP-Server konfiguriert wird. Unter Gnome ist dies beispielsweise möglich, indem in den Netzwerkeinstellungen die Internetverbindung des PCs freigegeben wird.
 Anschließend wird die zu nutzende Software ausgewählt und die Verbindung hergestellt.
 Nun können die Bilder aufgenommen werden (grüne Taste, \autoref{img:taster}). Die Bilder werden auf den Rechner übertragen und dort in der ausgewählten Software weiterverarbeitet. Der Fortschritt ist in der rechten Hälfte der Verbindungssoftware zu erkennen.
 
@@ -107,16 +107,16 @@ Die Verbindungssoftware unterstützt auch das Laden der Bilder aus einem lokalen
 Die Bilder können in der ausgewählten Software weiterverarbeitet werden. Die genaue Vorgehensweise hängt von der Software ab und wird in diesem Abschnitt grob erläutert. Für weitere Informationen hierzu ist die entsprechende Bedienungsanleitung der Software zu konsultieren.
 
 \subsection{Agisoft Metashape}
-Sofern in der Schnittstellen-Software aktiviert, wird in Metashape ein Workflow durchgeführt, in dem die Bilder importiert, die Kameras kalibriert, die Passpunkte gesetzt, die Modelle berechnet und exportiert werden. Sofern die Funktion nicht aktiviert wird, wird nur ein Projekt angelegt und die Bilder und Passpunkte importiert. Die weitere Verarbeitung kann dann manuell erfolgen. Hierbei ist darauf zu achten, die Passpunkte zu aktivieren, damit deren Koordinate übernommen wird und der korrekte Maßstab des Modells gewährleistet ist. Anschließend müssten die entsprechenden Schritte manuell durchgeführt werden.
+Sofern in der Schnittstellen-Software aktiviert, wird in Metashape ein Workflow durchgeführt, in dem die Bilder importiert, die Kameras kalibriert, die Passpunkte gesetzt, die Modelle berechnet und exportiert werden. Sofern die Funktion nicht aktiviert wird, wird nur ein Projekt angelegt und die Bilder und Passpunkte importiert. Die weitere Verarbeitung kann dann manuell erfolgen. Hierbei ist darauf zu achten, die Passpunkte zu aktivieren, damit deren Koordinaten übernommen werden und der korrekte Maßstab des Modells gewährleistet ist. Anschließend müssten die entsprechenden Schritte manuell durchgeführt werden.
 
 \begin{enumerate}
     \item Haken bei allen Passpunkten und Kameras setzen
-    \item \textit{Ablauf / Fotos ausrichten}
+    \item \textit{Ablauf / Fotos ausrichten...}
     \item Bereich des Modells festlegen
-    \item \textit{Ablauf / Punktwolke erzeugen}
-    \item ggf. \textit{Ablauf / Mesh erzeugen}
-    \item ggf. \textit{Ablauf / Textur erzeugen}
-    \item \textit{Exportieren / Modell exportieren} oder \textit{Punktwolke exportieren}
+    \item \textit{Ablauf / Punktwolke erzeugen...}
+    \item ggf. \textit{Ablauf / Mesh erzeugen...}
+    \item ggf. \textit{Ablauf / Textur erzeugen...}
+    \item \textit{Exportieren / Modell exportieren...} oder \textit{Punktwolke exportieren...}
 \end{enumerate}
 
 \subsection{OpenDroneMap}
@@ -144,7 +144,7 @@ Software-Updates können zu Inkompatibilitäten führen, daher sollten diese ers
 \section{Fehlerbehebung}
 \label{sec:Fehlerbehebung}
 \subsection{Kameras sind nicht erreichbar}
-Die Kameras sind nicht erreichbar, wenn die LEDs nicht grün leuchten. Dies kann verschiedene Ursachen haben. Als Erstes sollte das System nochmal heruntergefahren werden durch einen langen Druck auf die rote Taste. Anschließend wird die Energieversorgung für einige Sekunden vollständig getrennt und wieder hergestellt. Das System sollte nun neu starten und die Kameras erreichbar sein.
+Die Kameras sind nicht erreichbar, wenn die LEDs nicht grün leuchten. Dies kann verschiedene Ursachen haben. Als erste Maßnahme sollte das System nochmal heruntergefahren werden durch einen langen Druck auf die rote Taste. Anschließend wird die Energieversorgung für einige Sekunden vollständig getrennt und wieder hergestellt. Das System sollte nun neu starten und die Kameras erreichbar sein.
 
 Falls das noch nicht der Fall ist, hilft ein Blick in das Menü des WLAN-Routers. Hier sollten in der Übersicht aller Netzwerkgeräte die 24 Kameras, der steuernde Raspberry Pi 4 und das Gerät, über das der Zugriff erfolgt, aufgezählt sein. Falls das nicht der Fall ist, muss der fehlerhafte Raspberry Pi Zero an einem Display und einer Tastatur angeschlossen werden, um den Fehler zu finden.
 

@@ -5,7 +5,7 @@
 
 \chapter{Photogrammetrische Grundlagen}
 \label{c:photogrammetrie}
-Dieses Kapitel beschreibt die notwendigen Bedingungen und die Grundlagen der Rekonstruktion des Objekts als 3D-Modell. Hierfür wird Photogrammetrie in Form einer \Glsentrylong{SfM}-Pipeline genutzt. Der allgemeine Ablauf ist in \autoref{img:ablauf} dargestellt. Grau dargestellte Schritte werden nicht von der entwickelten Software aus \autoref{c:software}, sondern von externer Software durchgeführt.
+Dieses Kapitel beschreibt die notwendigen Bedingungen und die Grundlagen der Rekonstruktion des Objektes als 3D-Modell. Hierfür wird Photogrammetrie in Form einer \Glsentrylong{SfM}-Pipeline genutzt. Der allgemeine Ablauf ist in \autoref{img:ablauf} dargestellt. Grau dargestellte Schritte werden nicht von der entwickelten Software aus \autoref{c:software}, sondern von externer Software durchgeführt.
 
 \begin{figure}[htbp]
     \centering
@@ -34,7 +34,7 @@ Normalerweise wird die Kamera hierbei vereinfacht als Lochkamera unter Verwendun
     \label{img:optische_achse}
 \end{figure}
 
-Als \Gls{Verzeichnung} wird die Abweichung der Abbildung von der idealen Lochkamera bezeichnet. Diese kann durch die Nutzung von Linsen oder durch die Bauweise der Kamera entstehen. Die \Gls{Verzeichnung} wird in radialer und tangentialer \Gls{Verzeichnung} unterschieden. Die radiale \Gls{Verzeichnung} beschreibt die Verschiebung der Bildpunkte zur Bildmitte hin. Dieser Punkt wird Symmetriepunkt genannt und muss nicht zwangsläufig mit dem Bildhauptpunkt zusammenfallen, für die Korrekturen wird dieses jedoch üblicherweise so angenommen. Die tangentiale \Gls{Verzeichnung} beschreibt die Verschiebung quer zur radialen Richtung. Am wichtigsten ist hierbei die radial-symmetrische \Gls{Verzeichnung}, da diese die größte Auswirkung hat. Sie entsteht durch den nicht symmetrischen Aufbau des Objektivs vor und hinter der Blende. Die radial-asymmetrische und die tangentiale \Gls{Verzeichnung}en entstehen hauptsächlich aus einer Dezentrierung und Schiefstellung der Linsen zur optischen Achse. \citep[vgl.][S. 178]{luhmann}
+Als \Gls{Verzeichnung} wird die Abweichung der Abbildung von der idealen Lochkamera bezeichnet. Diese kann durch die Nutzung von Linsen oder durch die Bauweise der Kamera entstehen. Die \Gls{Verzeichnung} wird in radialer und tangentialer \Gls{Verzeichnung} unterschieden. Die radiale \Gls{Verzeichnung} beschreibt die Verschiebung der Bildpunkte zur Bildmitte hin. Dieser Punkt wird Symmetriepunkt genannt und muss nicht zwangsläufig mit dem Bildhauptpunkt zusammenfallen, für die Korrekturen wird dies jedoch üblicherweise so angenommen. Die tangentiale \Gls{Verzeichnung} beschreibt die Verschiebung quer zur radialen Richtung. Am wichtigsten ist hierbei die radial-symmetrische \Gls{Verzeichnung}, da diese die größte Auswirkung hat. Sie entsteht durch den nicht symmetrischen Aufbau des Objektivs vor und hinter der Blende. Die radial-asymmetrische und die tangentiale \Gls{Verzeichnung}en entstehen hauptsächlich aus einer Dezentrierung und Schiefstellung der Linsen zur optischen Achse. \citep[vgl.][S. 178]{luhmann}
 
 Jede Einstellung der Kameraoptik verändert die \gls{innereOrientierung} und jede Kamera, selbst in derselben Modellreihe, unterscheidet sich in ihren Parametern. Änderungen können sich sowohl durch Umfokussierung oder die Nutzung eines optischen Zoom ergeben, als auch durch einen mechanisch instabilen Aufbau der Kameras oder Erwärmung und der damit verbundenen Ausdehnung. Daher sollten die Bilder normalerweise möglichst mit nur einer Kamera mit festen Einstellungen (Brennweite, Fokus, Blende, Objektiv) aufgenommen werden. Änderungen der Empfindlichkeit (ISO-Zahl) oder Belichtungszeit sind unproblematisch für die \gls{innereOrientierung}, da hierbei die Abbildungseigenschaften der Kamera nicht verändert werden. \citep[vgl.][S. 176]{luhmann}
 
@@ -176,7 +176,7 @@ Die Schärfentiefe des Raspberry Pi Camera Module 3 ist in \autoref{img:sschaerf
 
 \section{Skalierung/Maßstab}
 \label{sec:massstab}
-Die Skalierung eines rein photogrammetrisch bestimmten 3D-Modelles ist nicht bekannt, da die Berechnungen nur auf Richtungen ohne Längenangaben basieren - es ist im mathematischen Sinne \gls{aehnlich} dem realen Körper. Daher werden Referenzen in Form einer bekannten Länge benötigt, um die Skalierung zu bestimmen. Alternativ können auch Passpunkte (siehe \autoref{s:verknuepfung}) mit bekannten Koordinaten verwendet werden oder im Falle von Mehrkamerasystemen bekannte \gls{aeussereOrientierung}en der Kameras. \citep[vgl.][S. 546]{luhmann}
+Die Skalierung eines rein photogrammetrisch bestimmten 3D-Modells ist nicht bekannt, da die Berechnungen nur auf Richtungen ohne Längenangaben basieren - es ist im mathematischen Sinne \gls{aehnlich} dem realen Körper. Daher werden Referenzen in Form einer bekannten Länge benötigt, um die Skalierung zu bestimmen. Alternativ können auch Passpunkte (siehe \autoref{s:verknuepfung}) mit bekannten Koordinaten verwendet werden oder im Falle von Mehrkamerasystemen bekannte \gls{aeussereOrientierung}en der Kameras. \citep[vgl.][S. 546]{luhmann}
 
 
 \section{Verknüpfungs- und Passpunkte}
@@ -281,7 +281,7 @@ Neben der Optimierung der Parameter hat die Bündelblockausgleichung auch den Vo
 
 
 \section{Multi-View-Stereo}
-Die dünne Punktwolke aus dem Vorwärtsschnitt und der anschließenden Bündel\-block\-ausgleichung kann durch das Multi-View-Stereo-Verfahren zu einem 3D-Modell erweitert werden. Hierbei werden jeweils Bildpaare gebildet und die Disparitäten, also die Verschiebung des Objekts in der Abbildung, bestimmt. Diese sind abhängig von der Entfernung des Objektes. Bei einem unendlich weit entfernten Objekt tritt keine Disparität auf \citep[vgl.][S. 313]{luhmann}. Die Disparitäten können dann in Tiefeninformationen umgerechnet, gemittelt und zu einem Tiefenbild zusammengefasst werden. \citep[vgl.][S. 505]{luhmann}
+Die dünne Punktwolke aus dem Vorwärtsschnitt und der anschließenden Bündel\-block\-ausgleichung kann durch das Multi-View-Stereo-Verfahren zu einem 3D-Modell erweitert werden. Hierbei werden jeweils Bildpaare gebildet und die Disparitäten, also die Verschiebung des Objektes in der Abbildung, bestimmt. Diese sind abhängig von der Entfernung des Objektes. Bei einem unendlich weit entfernten Objekt tritt keine Disparität auf \citep[vgl.][S. 313]{luhmann}. Die Disparitäten können dann in Tiefeninformationen umgerechnet, gemittelt und zu einem Tiefenbild zusammengefasst werden. \citep[vgl.][S. 505]{luhmann}
 %\citep[vgl.][S. 51]{opendronemap}
 
 \section{Mesh-Generierung}
@@ -313,7 +313,7 @@ Die Screened Poisson Surface Reconstruction ist ein Verfahren, das auf der Poiss
 \section{Texturierung}
 Abschließend wird das Modell texturiert. Hierfür werden die Bilder, die zur Erstellung des Modells genutzt wurden, auf das Modell projiziert. Außerdem werden Helligkeits- und Farbunterschiede der Bilder ausgeglichen. \citep[vgl.][S. 54f]{opendronemap}
 
-Vorteil der Texturierung ist, dass das Modell meist realistischer wirkt und fehlende Informationen, beispielsweise fehlende Punkte, überdeckt werden können. Nachteilig ist, dass die Texturierung hierdurch auch Informationen verdeckt. So kann bei einem nur schattierten Modell die Struktur des 3D-Modelles deutlich besser erkannt werden \citep[vgl.][S. 702]{luhmann}. Beispielhaft ist dieses in \autoref{img:texturierung} an dem später auch für die Überprüfungen (siehe \autoref{c:versuche}) verwendeten Testkörper dargestellt. Dieser hat auf der Rückseite (rechts im Bild) einige Einkerbungen, welche im texturierten Modell (siehe \autoref{img:mit_textur}) kaum erkennbar sind. Im ausschließlich schattierten Modell (siehe \autoref{img:ohne_textur}) sind diese hingegen deutlich sichtbar.
+Vorteil der Texturierung ist, dass das Modell meist realistischer wirkt und fehlende Informationen, beispielsweise fehlende Punkte, überdeckt werden können. Nachteilig ist, dass die Texturierung hierdurch auch Informationen verdeckt. So kann bei einem nur schattierten Modell die Struktur des 3D-Modells deutlich besser erkannt werden \citep[vgl.][S. 702]{luhmann}. Beispielhaft ist dieses in \autoref{img:texturierung} an dem später auch für die Überprüfungen (siehe \autoref{c:versuche}) verwendeten Testkörper dargestellt. Dieser hat auf der Rückseite (rechts im Bild) einige Einkerbungen, welche im texturierten Modell (siehe \autoref{img:mit_textur}) kaum erkennbar sind. Im ausschließlich schattierten Modell (siehe \autoref{img:ohne_textur}) sind diese hingegen deutlich sichtbar.
 
 \begin{figure}[htbp]
     \centering

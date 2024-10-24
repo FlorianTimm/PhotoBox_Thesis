@@ -5,7 +5,7 @@
 
 \chapter{Voruntersuchungen}
 \label{c:voruntersuchungen}
-Vor und während des Aufbaues des eigentlichen Messsystems wurden einige Voruntersuchungen durchgeführt. Diese dienten dazu, die Machbarkeit des Systems zu prüfen und die notwendigen Schritte zu ermitteln und zu optimieren. Hauptsächlich ging es hierbei um die Ermittlung der Kamerakonstanten und der \Gls{Verzeichnung} der Kamera. Auch die Möglichkeit der Erstellung eines 3D-Modells durch Fokusstacking wurde untersucht. Die einzelnen Untersuchungen werden im Folgenden kurz vorgestellt.
+Vor und während des Aufbaus des eigentlichen Messsystems wurden einige Voruntersuchungen durchgeführt. Diese dienten dazu, die Machbarkeit des Systems zu prüfen und die notwendigen Schritte zu ermitteln und zu optimieren. Hauptsächlich ging es hierbei um die Ermittlung der Kamerakonstanten und der \Gls{Verzeichnung} der Kamera. Auch die Möglichkeit der Erstellung eines 3D-Modells durch Fokusstacking wurde untersucht. Die einzelnen Untersuchungen werden im Folgenden kurz vorgestellt.
 
 \section{Überprüfung der Kameraauflösung}
 
@@ -13,7 +13,7 @@ Vor und während des Aufbaues des eigentlichen Messsystems wurden einige Vorunte
 Die Angabe der Auflösung in Pixeln täuscht bei günstigen Kameras über die tatsächliche Auflösung hinweg.
 
 \paragraph{Ziel}
-Die tatsächliche Auflösung der Kamera soll ermittelt werden. Hierbei spielt neben der reinen Anzahl der \acrfull{px} auch die Qualität des Objektives der Kameras eine Rolle.
+Die tatsächliche Auflösung der Kamera soll ermittelt werden. Hierbei spielt neben der reinen Anzahl der \acrfull{px} auch die Qualität des Objektivs der Kameras eine Rolle.
 
 \paragraph{Vorgehen}
 Es wurden Bilder von einem Siemensstern unter verschiedenen Belichtungssituationen und Entfernungen aufgenommen (Beispielaufnahme siehe \autoref{img:siemens}). Anschließend wurde die Größe des Unschärfekreises ermittelt und die Linienauflösung und -größe hieraus nach \citet[S. 161]{luhmann} berechnet. Zum Vergleich wurden die Bilder auch mit einer hochwertigeren Kamera aufgenommen (Spiegelreflexkamera Canon EOS 77D mit EF-S 18-55 mm 1:4-5.6 IS STM).
@@ -53,7 +53,7 @@ Der Unschärfekreis war durchschnittlich $28$\,\gls{px} groß (siehe \autoref{im
 Die \Gls{Kamerakonstante} einer Kamera ändert sich durch die Fokussierung. Bei gleich eingestellter Objektdistanz ist die \Gls{Kamerakonstante} näherungsweise gleich.
 
 \paragraph{Ziel}
-\citet[S. 59]{kraus} gibt die \autoref{eq:kraus_fokus} für die \Gls{Bildweite} $b$ in Abhängigkeit der Gegenstandsweite $g$ an. Näherungsweise entspricht die \Gls{Bildweite} der \Gls{Kamerakonstante} \citep[vgl.][S. 59]{kraus}. Die Nutzung der Formel als Näherungswert soll überprüft werden und eine optimierte Formel für die Raspberry-Pi-Kamera ermittelt werden.
+\citet[S. 59]{kraus} gibt die \autoref{eq:kraus_fokus} für die \Gls{Bildweite} $b$ in Abhängigkeit der Gegenstandsweite $g$ an. Näherungsweise entspricht die \Gls{Bildweite} der \Gls{Kamerakonstante} \citep[vgl.][S. 59]{kraus}. Die Nutzung der Formel als Näherungswert soll überprüft werden und eine optimierte Formel für die Raspberry-Pi-Kameras ermittelt werden.
 
 \begin{align*}
     \nlabel{eq:kraus_fokus}
@@ -66,7 +66,7 @@ Die \Gls{Kamerakonstante} einer Kamera ändert sich durch die Fokussierung. Bei 
 \end{conditions}
 
 \paragraph{Vorgehen}
-Die Änderungen der Parameter wurden in einem Versuch beobachtet. Hierzu wurde der Raspberry Pi Zero mit montierter Kamera fest vor einem ChArUco-Kalibriermuster platziert. Das Kalibriermuster besteht aus einer Kombination von ArUco-Markern und einem Schachbrettmuster (siehe \autoref{img:charuco}). Durch das Schachbrettmuster ermöglicht es auch bei unscharfen Bildern eine gute au\-to\-ma\-tische Erkennung der zu beobachtenden Punkte. Es wurden je 11 Bilder mit unterschiedlichen Fokussierungen von \SI{2}{\metre} bis  \SI{10}{\centi\metre} aufgenommen. Dieser Vorgang wurde insgesamt viermal wiederholt, um auch die Wiederholungsgenauigkeit zu ermitteln. Die Bilder wurden anschließend mit einem Python-Script unter Nutzung von OpenCV ausgewertet. Hierbei wurde die relative Veränderung der \Gls{Kamerakonstante} ermittelt und mit dem erwarteten Wert verglichen. Die relativen Änderungen wurden auf eine Fokusdistanz von \SI{20}{\centi\metre}, entsprechend einer Fokussierung von \SI{5}{}\,\gls{dpt}, normiert. Es wurden relative Angaben genutzt, da noch keine genaue Kenntnis über die tatsächliche \Gls{Kamerakonstante} bestand.
+Die Änderungen der Parameter wurden in einem Versuch beobachtet. Hierzu wurde der Raspberry Pi Zero mit montierter Kamera fest vor einem ChArUco-Kalibriermuster platziert. Das Kalibriermuster besteht aus einer Kombination von ArUco-Markern und einem Schachbrettmuster (siehe \autoref{img:charuco}). Durch das Schachbrettmuster ermöglicht es auch bei unscharfen Bildern eine gute au\-to\-ma\-tische Erkennung der zu beobachtenden Punkte. Es wurden je 11 Bilder mit unterschiedlichen Fokussierungen von \SI{2}{\metre} bis  \SI{10}{\centi\metre} aufgenommen. Dieser Vorgang wurde insgesamt viermal wiederholt, um auch die Wiederholungsgenauigkeit zu ermitteln. Die Bilder wurden anschließend mit einem Python-Skript unter Nutzung von OpenCV ausgewertet. Hierbei wurde die relative Veränderung der \Gls{Kamerakonstante} ermittelt und mit dem erwarteten Wert verglichen. Die relativen Änderungen wurden auf eine Fokusdistanz von \SI{20}{\centi\metre}, entsprechend einer Fokussierung von \SI{5}{}\,\gls{dpt}, normiert. Es wurden relative Angaben genutzt, da noch keine genaue Kenntnis über die tatsächliche \Gls{Kamerakonstante} bestand.
 
 \begin{figure}[htbp]
     \centering
@@ -99,7 +99,7 @@ Die Veränderung der \Gls{Verzeichnung} und eine entsprechende Korrekturformel s
 Der Versuchsaufbau aus \autoref{sec:fokus} zur Bestimmung der relativen Änderung der \Gls{Kamerakonstante} blieb bestehen. Es wurden jedoch zusätzlich die \Gls{Verzeichnung}en der Bilder ermittelt. Die \Gls{Verzeichnung} wurde mit OpenCV ermittelt und mit der erwarteten \Gls{Verzeichnung} verglichen.
 
 \paragraph{Ergebnis}
-Die Ergebnisse waren nicht zufriedenstellend. Es zeigte sich, dass die \Gls{Verzeichnung} mit nur einer Aufnahme pro Fokussierung nicht ausreichend genau modelliert werden konnte. Es wurde dieses daher erst bei der Kamerakalibrierung weiter untersucht (siehe \autoref{ch:kalibrierung}).
+Die Ergebnisse waren nicht zufriedenstellend. Es zeigte sich, dass die \Gls{Verzeichnung} mit nur einer Aufnahme pro Fokussierung nicht ausreichend genau modelliert werden konnte. Dieses wurde daher erst bei der Kamerakalibrierung weiter untersucht (siehe \autoref{ch:kalibrierung}).
 
 
 \section{3D-Modell aus Fokusstacking}
@@ -110,10 +110,10 @@ Die Ergebnisse waren nicht zufriedenstellend. Es zeigte sich, dass die \Gls{Verz
 Die Schärfentiefe der Kameras ist gering. Durch Fokusstacking kann ein besseres 3D-Modell erstellt werden.
 
 \paragraph{Ziel}
-Es wird vermutet, dass die geringe Schärfentiefe (siehe \autoref{s:schaerfe}) die Qualität der 3D-Modelle begrenzt. Daher soll geprüft werden, ob durch Fokusstacking die Qualität des 3D-Modell verbessert werden kann.
+Es wird vermutet, dass die geringe Schärfentiefe (siehe \autoref{s:schaerfe}) die Qualität der 3D-Modelle begrenzt. Daher soll geprüft werden, ob durch Fokusstacking die Qualität des 3D-Modells verbessert werden kann.
 
 \paragraph{Vorgehen}
-Mittels eines Pythonskriptes wurden die notwendigen Fokusschritte berechnet, damit der Bereich von \SI{10}{\centi\metre} bis \SI{1}{\metre} scharf abgebildet wird. Hierbei wurden die Werte so bestimmt, dass jeweils die hintere Schärfegrenze $a_h$ einer Aufnahme der vorderen $a_v$ des nächsten Bildes entspricht. Im Gegensatz zu den Berechnungen in \autoref{s:schaerfe} wurde hier ein Unschärfekreis von $6$\,\gls{px} akzeptiert, da ansonsten die Anzahl der notwendigen Aufnahmen zu groß geworden wäre. Die berechneten Werte mit ihren Grenzen sind in \autoref{tab:fokusstack} aufgelistet und in \autoref{img:fokusstack_plot} dargestellt -- die blauen Striche stellen hierbei die Abdeckung einer Aufnahme dar.
+Mittels eines Python-Skriptes wurden die notwendigen Fokusschritte berechnet, damit der Bereich von \SI{10}{\centi\metre} bis \SI{1}{\metre} scharf abgebildet wird. Hierbei wurden die Werte so bestimmt, dass jeweils die hintere Schärfegrenze $a_h$ einer Aufnahme der vorderen $a_v$ des nächsten Bildes entspricht. Im Gegensatz zu den Berechnungen in \autoref{s:schaerfe} wurde hier ein Unschärfekreis von $6$\,\gls{px} akzeptiert, da ansonsten die Anzahl der notwendigen Aufnahmen zu groß geworden wäre. Die berechneten Werte mit ihren Grenzen sind in \autoref{tab:fokusstack} aufgelistet und in \autoref{img:fokusstack_plot} dargestellt -- die blauen Striche stellen hierbei die Abdeckung einer Aufnahme dar.
 
 \begin{table}[htbp]
     \centering
@@ -142,11 +142,11 @@ Mittels eines Pythonskriptes wurden die notwendigen Fokusschritte berechnet, dam
 Anschließend wurden die Bilder mit einem Python-Skript unter Verwendung von OpenCV automatisiert zu je einem Bild pro Kamera, bestehend aus allen scharf dargestellten Bereichen, zusammengerechnet. Dazu wurde jeweils die notwendige Transformation mittels \Gls{SIFT} (siehe \autoref{ss:sift}) und \Gls{Homografie} berechnet. Die fertigen Bilder wurden in Agisoft Metashape zur Berechnung eines 3D-Modells genutzt. Wie bereits in den vorherigen Untersuchungen beschrieben, wurden die Daten mit denen des Streifenprojektionssystems verglichen.
 
 \paragraph{Ergebnis}
-Die Genauigkeit der Passpunkte bei der Bildverknüpfung in Agisoft Metashape ließ zuerst ein gutes Ergebnis vermuten. Jedoch waren die Ergebnisse des 3D-Modelles nicht so wie erhofft, die Qualität des 3D-Modells war schlechter als bei einer einzelnen Aufnahme. Die Flächen des Testobjekts (Testy, siehe \autoref{s:referenzdaten}) waren kaum mehr vorhanden. Nur mit sehr viel manueller Nacharbeit wurde überhaupt ein erkennbares Ergebnis erzielt. Die Ursache hierfür ist nicht bekannt, aber es wird vermutet, dass die au\-to\-ma\-tische Zusammenrechnung der Bilder zu vielen Artefakten in den Bildern geführt hat, sodass die Bilder dann von der \Gls{SfM}-Software nicht genau genug verknüpft werden konnten. Auch unter Nutzung von kommerziellen Programmen wie Helicon Focus \citep[verwendet von]{focusstack_sfm} und Zerene Stacker waren die Ergebnisse nicht viel besser. Es wurde daher entschieden, den Ansatz hier nicht weiterzuverfolgen.
+Die Genauigkeit der Passpunkte bei der Bildverknüpfung in Agisoft Metashape ließ zuerst ein gutes Ergebnis vermuten. Jedoch waren die Ergebnisse des 3D-Modells nicht so wie erhofft, die Qualität des 3D-Modells war schlechter als bei einer einzelnen Aufnahme. Die Flächen des Testobjektes (Testy, siehe \autoref{s:referenzdaten}) waren kaum mehr vorhanden. Nur mit sehr viel manueller Nacharbeit wurde überhaupt ein erkennbares Ergebnis erzielt. Die Ursache hierfür ist nicht bekannt, aber es wird vermutet, dass die au\-to\-ma\-tische Zusammenrechnung der Bilder zu vielen Artefakten in den Bildern geführt hat, sodass die Bilder dann von der \Gls{SfM}-Software nicht genau genug verknüpft werden konnten. Auch unter Nutzung von kommerziellen Programmen wie Helicon Focus \citep[verwendet von][]{focusstack_sfm} und Zerene Stacker waren die Ergebnisse nicht viel besser. Es wurde daher entschieden, den Ansatz hier nicht weiterzuverfolgen.
 
 \section{Überprüfung der Kamerasynchronität}
 \label{s:kamerasynchronitaet}
-Eine Anforderung war die simultane Auslösung aller Kameras. Um dieses zu überprüfen, wurden die Kameras auf eine Stoppuhr mit Anzeige von Hundertstel Sekunden gerichtet und eine Aufnahme entsprechend der au\-to\-ma\-tischen Aufnahme eines 3D-Modelles durchgeführt. Die Bilder wurden anschließend ausgewertet und hieraus das erste und letzte Bild bestimmt. Dieser Vorgang wurde dreimal wiederholt.
+Eine Anforderung war die simultane Auslösung aller Kameras. Um dies zu überprüfen, wurden die Kameras auf eine Stoppuhr mit Anzeige von hundertstel Sekunden gerichtet und eine Aufnahme entsprechend der au\-to\-ma\-tischen Aufnahme eines 3D-Modells durchgeführt. Die Bilder wurden anschließend ausgewertet und hieraus das erste und letzte Bild bestimmt. Dieser Vorgang wurde dreimal wiederholt.
 
 Die Messung zeigte eine Abweichung zwischen dem ersten und letzten Bild von maximal \SI{0,2}{Sekunden}. Die Synchronität der Kameras ist damit für den Anwendungsfall gegeben. Eine Aufnahme von bewegten Objekten ist damit jedoch nicht möglich. Die Abweichung ist auf die unterschiedlichen Reaktionszeiten der Kameras zurückzuführen. Ursächlich hierfür ist unter anderem, dass es sich bei dem Betriebssystem der Raspberry-Pi-Computer nicht um ein Echtzeitbetriebssystem handelt und durch das Multitasking des Prozessors Ausführungen um eine unbestimmte Zeit verzögert werden können. Außerdem kann die Netzwerkverbindung das Signal weiter verzögern. Die Daten werden zwar gleichzeitig an die verschiedenen Kameras abgesendet, aber da auch das WLAN ein Zeitschlitzverfahren nutzt, werden diese nicht gleichzeitig übertragen.
 

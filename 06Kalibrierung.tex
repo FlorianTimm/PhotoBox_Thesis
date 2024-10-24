@@ -27,7 +27,7 @@ Die eigentliche Bestimmung der inneren Orientierung erfolgt im Betrieb in Form e
 
 \paragraph{Vorgehen}
 
-Es wurden mit fünf verschiedenen Fokussierungen mit jeweils 24 Rasp\-berry-Pi-Kameras Bilder aufgenommen und die Bilder in Agisoft Metashape mittels ArUco-Markern orientiert, dessen Position aus \autoref{sec:passpunkt_bestimmung} bekannt ist. Außerdem wurden etwa 100 Schneider-Marker im Bildbereich der Kameras verteilt und als Verknüpfungspunkte benutzt. Es wurden jeweils in Metashape alle Bilder mit der gleichen Fokussierung als eine Kamera angenommen und die \gls{innereOrientierung} bestimmt. Anschließend wurden alle Kameras nochmal einzeln ausgeglichen. Dieses zweistufige Vorgehen bewirkt, dass die Näherungswerte schrittweise verbessert werden. Ein einstufiges Vorgehen ohne Näherungswerte führte zu falschen Werten. Die \gls{innereOrientierung} (vgl. \autoref{s:innereorientierung}) wurde in Form von Brennweite, \Gls{Bildhauptpunkt}verschiebung und \Gls{Verzeichnung} ermittelt und die Ergebnisse wurden in einem Box-Whisker-Plot dargestellt und eine ausgleichende Gerade ermittelt.
+Es wurden mit fünf verschiedenen Fokussierungen mit jeweils 24 Rasp\-berry-Pi-Kameras Bilder aufgenommen und die Bilder in Agisoft Metashape mittels ArUco-Markern orientiert, dessen Position aus \autoref{sec:passpunkt_bestimmung} bekannt ist. Außerdem wurden etwa 100 Schneider-Marker im Bildbereich der Kameras verteilt und als Verknüpfungspunkte benutzt. Es wurden in Metashape jeweils alle Bilder mit der gleichen Fokussierung als eine Kamera angenommen und die \gls{innereOrientierung} bestimmt. Anschließend wurden alle Kameras nochmal einzeln ausgeglichen. Dieses zweistufige Vorgehen bewirkt, dass die Näherungswerte schrittweise verbessert werden. Ein einstufiges Vorgehen ohne Näherungswerte führte zu falschen Werten. Die \gls{innereOrientierung} (vgl. \autoref{s:innereorientierung}) wurde in Form von Brennweite, \Gls{Bildhauptpunkt}verschiebung und \Gls{Verzeichnung} ermittelt, die Ergebnisse in einem Box-Whisker-Plot dargestellt und eine ausgleichende Gerade berechnet.
 
 \paragraph{Ergebnis}
 
@@ -45,7 +45,7 @@ Die Ergebnisse sind in \autoref{img:naeherungswerte} dargestellt. Wie auch schon
 \begin{comment}
 \section{Farbkalibrierung}
 
-Für die korrekte Texturierung des 3D-Modelles sollte die Farbe möglichst korrekt sein. Da das System aber nicht von Fremdlichtquellen abgeschirmt ist, soll dies nur verhindern, dass die Farbe schon ohne Fremdlicht falsch sind. Daher wurde mit dem System eine Farbkalibriertafel fotografiert und die Farbwerte ausgewertet. Hiermit lassen sich dann die Farben der Kameras korrigieren. \citep[vgl.][S. 431f]{luhmann}
+Für die korrekte Texturierung des 3D-Modells sollte die Farbe möglichst korrekt sein. Da das System aber nicht von Fremdlichtquellen abgeschirmt ist, soll dies nur verhindern, dass die Farbe schon ohne Fremdlicht falsch sind. Daher wurde mit dem System eine Farbkalibriertafel fotografiert und die Farbwerte ausgewertet. Hiermit lassen sich dann die Farben der Kameras korrigieren. \citep[vgl.][S. 431f]{luhmann}
 \end{comment}
 
 \biblio

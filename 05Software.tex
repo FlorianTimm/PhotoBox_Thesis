@@ -6,7 +6,7 @@
 \chapter{Software-Entwicklung}
 \label{c:software}
 
-Für die Steuerung der Kameras und die anschließende Berechnung des 3D-Modelles muss eine Steuerungssoftware für das Kamerasystem und eine entsprechende Schnittstelle zu einer \Gls{SfM}-Software geschaffen werden. Die Entwicklung erfolgte hauptsächlich in Python in Form von Prototyping. Dieses Kapitel beschreibt die Anforderungen an die Software (siehe \autoref{sec:Anforderungsanalyse}) und die zu implementierenden Anwendungsfälle (siehe \autoref{sec:Anwendungsfallmodellierung}). Abschließend wird die Implementation (siehe \autoref{sec:Implementierung}) erarbeitet.
+Für die Steuerung der Kameras und die anschließende Berechnung des 3D-Modells muss eine Steuerungssoftware für das Kamerasystem und eine entsprechende Schnittstelle zu einer \Gls{SfM}-Software geschaffen werden. Die Entwicklung erfolgte hauptsächlich in Python in Form von Prototyping. Dieses Kapitel beschreibt die Anforderungen an die Software (siehe \autoref{sec:Anforderungsanalyse}) und die zu implementierenden Anwendungsfälle (siehe \autoref{sec:Anwendungsfallmodellierung}). Abschließend wird die Implementation (siehe \autoref{sec:Implementierung}) erarbeitet.
 
 Der Quellcode ist dem Git-Repository unter \url{https://github.com/FlorianTimm/PhotoBox} zu entnehmen. Die Software wurde unter der MIT-Lizenz veröffentlicht, sodass sie frei genutzt und weiterentwickelt werden kann.
 
@@ -19,7 +19,7 @@ Die notwendigen Anforderungen an das System wurden aus \autoref{c:einleitung} un
 \subsection{Anwendungsfallmodellierung}
 \label{sec:Anwendungsfallmodellierung}
 
-Entsprechend der benötigten Schritte aus \autoref{c:photogrammetrie} und \autoref{img:ablauf} wurden die Anwendungsfälle, die die Benutzeroberfläche ermöglichen soll, im Anwendungsfall-Dia\-gramm in \autoref{img:anwendungsfall} zusammengetragen. Entsprechend der Anforderung einer einfach gehaltenen Bedienung des Systems, ist die Anzahl der verschiedenen Anwendungsfälle gering. Hauptanwendungsfall ist die Erzeugung eines 3D-Modelles, welches in mehrere Unterfälle unterteilt ist, je nach verwendeter \Gls{SfM}-Software. Es soll aber auch möglich sein, Teilschritte dieser Anwendungsfälle wie das Aufnehmen der Bilder, das Identifizieren der Passpunkte oder das Verbinden der Kameras manuell auszulösen.
+Entsprechend der benötigten Schritte aus \autoref{c:photogrammetrie} und \autoref{img:ablauf} wurden die Anwendungsfälle, die die Benutzeroberfläche ermöglichen soll, im Anwendungsfall-Dia\-gramm in \autoref{img:anwendungsfall} zusammengetragen. Entsprechend der Anforderung einer einfach gehaltenen Bedienung des Systems, ist die Anzahl der verschiedenen Anwendungsfälle gering. Hauptanwendungsfall ist die Erzeugung eines 3D-Modells, welches in mehrere Unterfälle unterteilt ist, je nach verwendeter \Gls{SfM}-Software. Es soll aber auch möglich sein, Teilschritte dieser Anwendungsfälle wie das Aufnehmen der Bilder, das Identifizieren der Passpunkte oder das Verbinden der Kameras manuell auszulösen.
 
 \begin{figure}[htbp]
     \centering
@@ -31,7 +31,7 @@ Entsprechend der benötigten Schritte aus \autoref{c:photogrammetrie} und \autor
 
 \subsection{Funktionale Anforderungen}
 \begin{enumerate}[label=F\arabic*]
-    \item \label{e:zeitgleich} Die Kameras sollen zeitgleich auslösbar sein. Es soll möglichst ver\-zögerungs\-frei ausgelöst werden.
+    \item \label{e:zeitgleich} Die Kameras sollen zeitgleich und möglichst ver\-zögerungs\-frei auslösbar sein.
     \item \label{e:button} Die Steuerung soll unabhängig von anderen Geräten möglich sein, beispielsweise per Tastensteuerung.
     \item \label{e:status} Der Status des Systems soll einfach erkennbar sein - auch ohne Anschluss eines Computers.
     \item \label{e:passpunkte} Es sollen Passpunkte au\-to\-ma\-tisch gefunden und für die Bestimmung der äußeren Orientierung genutzt werden.
@@ -44,7 +44,7 @@ Entsprechend der benötigten Schritte aus \autoref{c:photogrammetrie} und \autor
 \begin{enumerate}[label=S\arabic*]
     \item \label{e:intspeicher} Die Daten sollen intern gespeichert werden.
     \item \label{e:usbspeicher} Eine Speicherung auf tragbaren Speichermedien wie USB-Sticks soll möglich sein.
-    \item \label{e:sfmsoftware} Eine direkte Übertragung an \Gls{SfM}-Software soll möglich sein.
+    \item \label{e:sfmsoftware} Eine direkte Übertragung an eine \Gls{SfM}-Software soll möglich sein.
 \end{enumerate}
 
 \subsection{Nicht-funktionale Anforderungen}
@@ -58,9 +58,9 @@ Entsprechend der benötigten Schritte aus \autoref{c:photogrammetrie} und \autor
 Der Anwendungsentwurf legt die grundlegenden Strukturen der Software fest. Hierbei wird festgelegt, welche Module benötigt werden und wie diese miteinander kommunizieren. Diese Struktur wird einmalig festgelegt und bildet die Grundlage für die Implementierung.
 
 \subsection{Domänen-Klassendiagramm}
-Aus den für die Berechnungen des 3D-Modelles benötigten Daten wurde das Domänen-Klassendiagramm aus \autoref{img:dokladia} erzeugt. Dieses zeigt vor allem die Abhängigkeiten der einzelnen Datensätze untereinander. Es bildet hiermit die Grundlage für die Datenschnittstellen der einzelnen Komponenten zueinander und den jeweils benötigten Datensätzen.
+Aus den für die Berechnungen des 3D-Modells benötigten Daten wurde das Domänen-Klassendiagramm aus \autoref{img:dokladia} erzeugt. Dieses zeigt vor allem die Abhängigkeiten der einzelnen Datensätze untereinander. Es bildet hiermit die Grundlage für die Datenschnittstellen der einzelnen Komponenten zueinander und den jeweils benötigten Datensätzen.
 
-Zur Berechnung eines 3D-Modells werden die inneren und äußeren Orientierungen der Kameras benötigt (vgl. \autoref{c:photogrammetrie}). Da die \gls{innereOrientierung} der Kameras instabil ist, reichen hier Näherungswerte. Entsprechend wurde diese nicht wie üblich pro Kamera, sondern nur pro Modell festgehalten. Die Klasse \textit{CameraModel} hat daher neben dem Namen Attribute für die Parameter der inneren Orientierung in Form einer Geradengleichung abhängig von der Fokussierung. Jede Kamera hat dann (pro Messung) eine Position  \textit{Point3D} und drei Drehwinkel, hierdurch wird die \gls{aeussereOrientierung} im Modell abgebildet. Um die Passpunktpositionen festzuhalten, wird das Objekt \textit{PasspointPosition} verwendet. Dieses speichert die Position des Passpunktes in den Bildern der Kameras als \textit{Point2D} und die Position im Raum als \textit{Passpoint}. Außerdem verweist die Klasse auf das entsprechende Bild \textit{Image}, welches wiederum auf die Kamera \textit{Camera} verweist. Die Klasse \textit{Image} hält des Weiteren die Attribute für den Dateinamen und die genutzte Fokussierung.
+Zur Berechnung eines 3D-Modells werden die innere und äußere Orientierung der Kameras benötigt (vgl. \autoref{c:photogrammetrie}). Da die \gls{innereOrientierung} der Kameras instabil ist, reichen hier Näherungswerte. Entsprechend wurde diese nicht wie üblich pro Kamera, sondern nur pro Modell festgehalten. Die Klasse \texttt{CameraModel} hat daher neben dem Namen Attribute für die Parameter der inneren Orientierung in Form einer Geradengleichung abhängig von der Fokussierung. Jede Kamera hat dann (pro Messung) eine Position  (\texttt{Point3D}) und drei Drehwinkel, hierdurch wird die \gls{aeussereOrientierung} im Modell abgebildet. Um die Passpunktpositionen festzuhalten, wird das Objekt \texttt{PasspointPosition} verwendet. Dieses speichert die Position des Passpunktes in den Bildern der Kameras als \texttt{Point2D} und die Position im Raum als \texttt{Passpoint}. Außerdem verweist die Klasse auf das entsprechende Bild (\texttt{Image}), welches wiederum auf die Kamera (\texttt{Camera}) verweist. Die Klasse \texttt{Image} hält des Weiteren die Attribute für den Dateinamen und die genutzte Fokussierung.
 
 \begin{figure}[htbp]
     \centering
@@ -76,7 +76,7 @@ Die Kommunikation innerhalb des Systems ist in dem Ablaufdiagramm in \autoref{im
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=1\textwidth]{./img/uml/uml_sequence_capture.pdf}
-    \caption{Ablaufdiagramm zur Kommunikation bei der Aufnahme eines 3D-Modelles}
+    \caption{Ablaufdiagramm zur Kommunikation bei der Aufnahme eines 3D-Modells}
     \label{img:uml_sequence_capture}
 \end{figure}
 
@@ -87,8 +87,8 @@ Die Kommunikation innerhalb des Systems ist in dem Ablaufdiagramm in \autoref{im
 Die Programmierung des Systems erfolgte iterativ. Einzelne Arbeitspakete wurden in einem Jupyter-Notebook ausprobiert und dann, wenn dieser Schritt erfolgreich war, in den Gesamtworkflow integriert - teilweise sind diese im \autoref{c:voruntersuchungen} beschrieben. Größtenteils wurde der Python-Code objektorientiert und typisiert geschrieben. Die Teile, die auf einem Desktoprechner ausgeführt werden sollen, wurden in Java geschrieben, da hier später die Einrichtung auf verschiedenen Rechnern und Plattformen einfacher ist.
 
 
-\subsection{Module auf den Raspberry Pi (Python)}
-Die Software auf den Raspberry Pi wurde in Python geschrieben. Hierbei wurde darauf geachtet, dass die Module möglichst unabhängig voneinander sind und nur über definierte Schnittstellen kommunizieren.
+\subsection{Module auf den Raspberry-Pi-Computern (Python)}
+Die Software auf den Raspberry-Pi-Computern wurde in Python geschrieben. Hierbei wurde darauf geachtet, dass die Module möglichst unabhängig voneinander sind und nur über definierte Schnittstellen kommunizieren.
 
 \subsubsection{Bibliotheken}
 Es wurde, wenn möglich, auf fertige Python-Bibliotheken zurückgegriffen. Hierdurch sollte der Programmieraufwand verringert und auf bereits getesteten Code gesetzt werden. Außerdem greifen viele der Bibliotheken wie OpenCV oder NumPy auf hardwarenahe Berechnungen zurück, sodass der Geschwindigkeitsnachteil von Python nicht weiter ins Gewicht fällt. Die wichtigsten Bibliotheken sind:
