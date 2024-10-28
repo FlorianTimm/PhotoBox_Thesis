@@ -12,6 +12,8 @@
 \usepackage[dvipsnames,table,xcdraw]{xcolor}
 \usepackage[toc,page]{appendix}
 \usepackage[printonlyused]{acronym}
+
+\usepackage{pdfpages}
 %\usepackage[scaled]{berasans}
 %\renewcommand*\familydefault{\sfdefault}  %% Only if the base font of the document is to be sans serif
 
@@ -109,7 +111,7 @@
 
 \usepackage{subfiles}
 
-\title{Aufbau eines photogrammetrischen Messsystems unter Verwendung von Raspberry-Pi-Kameras als Low-Cost-Sensoren}
+\title{Aufbau eines photogrammetrischen Messsystems mit Raspberry-Pi-Kameras als Low-Cost-Sensoren für die Aufnahme von kleinen Objekten}
 \author{Florian Timm}
 \date{November 2024}
 
@@ -132,16 +134,15 @@
             \end{tabular}
         \end{tabular}\\\vspace{4cm}
 
-        {\huge\bfseries Aufbau eines\\photogrammetrischen Messsystems\\unter Verwendung von\\Raspberry-Pi-Kameras als\\Low-Cost-Sensoren\\}~\vspace{0.5cm}\\
+        {\huge\bfseries Aufbau eines\\photogrammetrischen Messsystems\\mit Raspberry-Pi-Kameras als\\Low-Cost-Sensoren\\}
+        {\LARGE\bfseries für die Aufnahme von kleinen Objekten\\}~\vspace{0.5cm}\\
 
         {\large\bfseries Geodäsie und Geoinformatik\\Masterthesis\\Sommersemester 2024}\vspace{2cm}\\
         {\large Florian Timm}
 
         % hspace und vspace bedeutet horizontaler bzw. vertikaler Abstand
         \vspace{3cm}
-        Abgabedatum: 07. November 2024\\
-        Entwurf - Stand: \today~\thistime
-        \todo{entfernen}
+        Abgabedatum: 28. Oktober 2024
     \end{center}
     \setcounter{page}{0} % Seitenzahl wird auf 0 gesetzt 
 \end{titlepage}
@@ -236,21 +237,7 @@ Sofern keine andere Quelle in der Bildunterschrift genannt wird, handelt es sich
 
 \clearpage
 \thispagestyle{empty}
-\noindent\textbf{\large Erklärung}\\
-Ich versichere, dass ich die vorliegende Thesis mit dem Titel\\
-\\
-Aufbau eines photogrammetrischen Messsystems unter Verwendung von Raspberry-Pi-Kameras als Low-Cost-Sensoren\\
-\\
-selbstständig und ohne unzulässige fremde Hilfe erbracht habe.\\
-\\
-Ich habe keine anderen als die angegebenen Quellen und Hilfsmittel benutzt sowie wörtliche und
-sinngemäße Zitate kenntlich gemacht. Die Arbeit hat in gleicher oder ähnlicher Form
-noch keiner Prüfungsbehörde vorgelegen.
-\\
-\\
-\\
-\noindent{\underline{Hamburg, den 07. November. 2024\hspace{9cm}}}\\
-\noindent{\small Ort, Datum \hspace{4.5cm} Florian Timm}
 
+\includepdf{img/eidesstattliche_erklaerung.pdf}
 
 \end{document}
